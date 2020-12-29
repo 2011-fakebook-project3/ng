@@ -1,0 +1,102 @@
+
+variables:
+  appDir: / 
+
+trigger:
+  branches:
+   include: 
+     - master
+  paths:
+    include:
+      - az-pipeline-angular.yml
+    #exclude:
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+
+# stages:
+#   - stage: install
+    
+#     jobs:
+#       - job: install
+#         steps:
+#         - task: NodeTool@0
+#           inputs:
+#             versionSpec: '10.x'
+#           displayName: 'Setup Environment'
+
+#         - script: npm install
+#           displayName: 'Install Dependencies'
+#           workingDirectory: $(appDir)
+
+#         - script: npx ng build --prod
+#           displayName: 'Build'
+#           workingDirectory: $(appDir)
+        
+
+#         - task: ArchiveFiles@2
+#           inputs:
+#             rootFolderOrFile: '$(appDir)/dist/ng' #
+#             includeRootFolder: false
+#             archiveType: 'zip'
+#             archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+#             replaceExistingArchive: true
+#         - task: PublishBuildArtifacts@1
+#           inputs:
+#             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#             ArtifactName: 'drop'
+#             publishLocation: 'Container'
+      
+
+##### SonarCloud ##########
+
+
+# - task: SonarCloudPrepare@1
+#   displayName: sonarcloud prepare
+#   inputs:
+#     SonarCloud: 'ng'
+#     organization: '2011-fakebook-project3'
+#     scannerMode: 'CLI'
+#     configMode: 'manual'
+#     cliProjectKey: 'ng'
+#     cliProjectName: 'ng'
+#     cliProjectVersion: '1.0.0'
+#     cliSources: '$(appDir)/src'
+#     extraProperties: |
+#       'sonar.coverage.exclusions=**/*.spec.ts'
+#       'sonar.exclusions=**/lib/**'
+#       'sonar.cs.opencover.reportsPaths = $(Agent.TempDirectory)/**/coverage.opencover.xml'
+
+# - task: SonarCloudAnalyze@1
+#   displayName: sonarcloud run
+
+# - task: SonarCloudPublish@1
+#   displayName: sonarcloud publish
+#   inputs:
+#     pollingTimeoutSec: '300'
+
+
+##### Deployment ##########
+
+  # - stage: release
+  #   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  #   jobs:
+  #     - deployment: app_service
+  #       environment: prod
+  #       strategy:
+  #         runOnce:
+  #           deploy:
+  #             steps:
+  #             - download: current
+  #               artifact: 'drop'
+  #               displayName: download app
+  #             - task: AzureRmWebAppDeployment@4
+  #               inputs:
+  #                 ConnectionType: 'AzureRM'
+  #                 azureSubscription: 
+  #                 appType: 'webApp'
+  #                 WebAppName: 
+  #                 packageForLinux: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+
