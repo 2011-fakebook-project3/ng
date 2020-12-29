@@ -2,6 +2,8 @@
 # Build a Node.js project that uses Angular.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+variables:
+  appDir: 'fakebook/'
 
 trigger:
   branches:
@@ -26,12 +28,13 @@ steps:
     ng build --prod
   continueOnError: True
   displayName: 'npm install and build'
+  workingDirectory: $(appDir)
 
 - task: SonarCloudPrepare@1
   continueOnError: True
   displayName: 'sonarcloud prepare'
   inputs:
-    SonarCloud: 'SonarCloud'
+    SonarCloud: 'SonarCloud Token'
     organization: '2011-fakebook-project3'
     scannerMode: 'MSBuild'
     projectKey: '2011-fakebook-project3_ng'
