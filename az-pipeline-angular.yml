@@ -5,7 +5,7 @@ variables:
 trigger:
   branches:
    include: 
-     - master
+     - main
   paths:
     include:
       - az-pipeline-angular.yml
