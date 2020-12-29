@@ -1,14 +1,19 @@
-# most basic sort of dockerfile:
-# 1. choose a base image with the dependencies for the thing you're going to copy in.
-FROM mcr.microsoft.com/dotnet/runtime:5.0
+# base image
+FROM node:12.2.0
 
-# 2. copy that thing in
-COPY publish/ /app
+# set working directory
+WORKDIR /app
 
-# 3. configure it with the command it will use to start containers.
-CMD dotnet /app/DockerConsoleApp.dll
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-# how do i use this Dockerfile?
-# 1. dotnet publish -o publish
-# 2. docker build -t docker-console .
-# 3. docker run docker-console
+# install and cache app dependencies
+COPY package.json /app/package.json
+RUN npm install
+RUN npm install -g @angular/cli@7.3.9
+
+# add app
+COPY . /app
+
+# start app
+CMD ng serve --host 0.0.0.0
