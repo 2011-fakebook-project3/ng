@@ -3,9 +3,13 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-#test edit
 trigger:
-- main
+  branches:
+   include: 
+     - main
+  paths:
+    include:
+      - az-pipeline-angular.yml
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -21,3 +25,24 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+
+- task: SonarCloudPrepare@1
+  continueOnError: True
+  displayName: 'sonarcloud prepare'
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: '2011-fakebook-project3'
+    scannerMode: 'MSBuild'
+    projectKey: '2011-fakebook-project3_ng'
+    projectName: 'ng'
+
+- task: SonarCloudAnalyze@1
+  continueOnError: True
+  displayName: 'sonarcloud analyze'
+
+- task: SonarCloudPublish@1
+  continueOnError: True
+  displayName: 'sonarcloud publish'
+  inputs:
+    pollingTimeoutSec: '300'
+
