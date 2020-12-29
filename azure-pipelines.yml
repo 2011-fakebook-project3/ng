@@ -30,15 +30,6 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: $(appDir)
 
-# - task: SonarCloudPrepare@1
-#   continueOnError: True
-#   displayName: 'sonarcloud prepare'
-#   inputs:
-#     SonarCloud: 'SonarCloud Token'
-#     organization: '2011-fakebook-project3'
-#     scannerMode: 'MSBuild'
-#     projectKey: '2011-fakebook-project3_ng'
-#     projectName: 'ng'
 - task: SonarCloudPrepare@1
   continueOnError: True
   displayName: 'sonarcloud prepare'
