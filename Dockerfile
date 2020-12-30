@@ -6,18 +6,24 @@ FROM node:12.7-alpine AS build
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
+COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci 
 
-COPY . .
+COPY . ./
 
-RUN npm run build
+RUN npx ng build --prod 
+
+WORKDIR /usr/share/nginx/html
 
 # Stage 2: Run
 
-FROM nginx:1.17.1-alpine
+FROM nginx:1.18
+
+RUN rm -rf *
+
+COPY nginx-custom.conf /etc/nginx/conf.d/default.conf
 
 # Copy compiled files from previous build stage
 
-COPY --from=build /usr/src/app/dist/fakebook /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/* ./
