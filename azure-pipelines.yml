@@ -50,11 +50,12 @@ stages:
         displayName: ng lint
         workingDirectory: $(appDir)
       
-      - script: npx ng test --browsers ChromeHeadless
+      - script: npx ng test --browsers ChromeHeadless --watch false
         displayName: ng test
         workingDirectory: $(appDir)
 
       - task: SonarCloudPrepare@1
+        condition: always()
         displayName: 'sonarcloud prepare'
         inputs:
           SonarCloud: 'SonarCloud Token'
@@ -66,9 +67,11 @@ stages:
           cliSources: '$(appDir)/src'
 
       - task: SonarCloudAnalyze@1
+        condition: always()
         displayName: 'sonarcloud analyze'
 
       - task: SonarCloudPublish@1
+        condition: always()
         displayName: 'sonarcloud publish'
         inputs:
           pollingTimeoutSec: '300'
