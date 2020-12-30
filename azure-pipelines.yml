@@ -16,39 +16,56 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+stages:
+  - stage: build
+    jobs:
+    - job: build
+      variables:
+        imageName: 'fakebookng'
+      
+      steps:
+      - task: Docker@2
+        displayName: Build Docker Image
+        inputs:
+          repository: $(imageName)
+          command: 'build'
+          Dockerfile: '$(appdir)Dockerfile'
+  
+  - stage: SonarCloud
+    jobs:
+    - job: build
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
 
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
-  continueOnError: True
-  displayName: 'npm install and build'
-  workingDirectory: $(appDir)
+      - script: |
+          npm install -g @angular/cli
+          npm install
+          ng build --prod
+        continueOnError: True
+        displayName: 'npm install and build'
+        workingDirectory: $(appDir)
 
-- task: SonarCloudPrepare@1
-  continueOnError: True
-  displayName: 'sonarcloud prepare'
-  inputs:
-    SonarCloud: 'SonarCloud Token'
-    organization: '2011-fakebook-project3'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: '2011-fakebook-project3_ng'
-    cliProjectName: 'ng'
-    cliSources: '$(appDir)/src'
+      - task: SonarCloudPrepare@1
+        continueOnError: True
+        displayName: 'sonarcloud prepare'
+        inputs:
+          SonarCloud: 'SonarCloud Token'
+          organization: '2011-fakebook-project3'
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliProjectKey: '2011-fakebook-project3_ng'
+          cliProjectName: 'ng'
+          cliSources: '$(appDir)/src'
 
-- task: SonarCloudAnalyze@1
-  continueOnError: True
-  displayName: 'sonarcloud analyze'
+      - task: SonarCloudAnalyze@1
+        continueOnError: True
+        displayName: 'sonarcloud analyze'
 
-- task: SonarCloudPublish@1
-  continueOnError: True
-  displayName: 'sonarcloud publish'
-  inputs:
-    pollingTimeoutSec: '300'
-
+      - task: SonarCloudPublish@1
+        continueOnError: True
+        displayName: 'sonarcloud publish'
+        inputs:
+          pollingTimeoutSec: '300'
