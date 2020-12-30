@@ -29,11 +29,11 @@ describe('AuthService', () => {
    
 
   it('should return true if authenticated', () => {
-    expect(service.isAuthenticated()).toBeTruthy();
+    expect(service.isAuthenticated()).toEqual("true");
   });
 
   it('should return false if not authenticated', () => {
-    expect(service.isAuthenticated()).toBeFalsy();
+    expect(service.isAuthenticated()).toEqual("false");
   });
 
 });
