@@ -62,7 +62,7 @@ stages:
         displayName: ng lint
         workingDirectory: $(appDir)
       
-      - script: npx ng test --browsers ChromeHeadless --watch false
+      - script: npx ng test --browsers ChromeHeadless --watch false --code-coverage
         displayName: ng test
         workingDirectory: $(appDir)
 
@@ -77,6 +77,7 @@ stages:
           cliProjectKey: '2011-fakebook-project3_ng'
           cliProjectName: 'ng'
           cliSources: '$(appDir)/src'
+          extraProperties: 'sonar.javascript.lcov.reportPaths=$(Agent.TempDirectory)/coverage/$(appDir)lcov.info'
 
       - task: SonarCloudAnalyze@1
         condition: always()
