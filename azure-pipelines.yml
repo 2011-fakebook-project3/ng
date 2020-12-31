@@ -1,89 +1,99 @@
-variables:
-  appDir: 'fakebook'
+
 
 trigger:
   branches:
     include:
     - main
-
   paths:
     include:
     - azure-pipelines.yml
-    - 'fakebook'
+    - fakebook
 
 pr:
   branches:
     include:
     - '*'
-
   paths:
     include:
     - azure-pipelines.yml
-    - 'fakebook'
+    - fakebook
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-latest
+
+variables:
+  appDir: fakebook
 
 stages:
-  - stage: build
-    jobs:
-    - job: build
-      variables:
-        imageName: 'fakebookng'
-      
-      steps:
-      - task: Docker@2
-        displayName: Build Docker Image
-        inputs:
-          repository: $(imageName)
-          command: 'build'
-          Dockerfile: '$(appdir)/Dockerfile'
-  
-  - stage: SonarCloud
-    dependsOn: []
-    jobs:
-    - job: build
-      steps:
-      # using node version 15.x to enforce npm 7.x
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '15.x'
-        displayName: 'Install Node.js'
+- stage: analyze
+  jobs:
+  - job: build
+    steps:
+    # using node version 15.x to enforce npm 7.x
+    - task: NodeTool@0
+      displayName: install nodejs
+      inputs:
+        versionSpec: '15.x'
 
-      - script: npm ci
-        displayName: npm install
-        workingDirectory: $(appDir)/
+    - script: npm ci
+      displayName: npm install
+      workingDirectory: $(appDir)
 
-      - script: npx ng build --prod
-        displayName: ng build
-        workingDirectory: $(appDir)/
-      
-      - script: npx ng lint
-        displayName: ng lint
-        workingDirectory: $(appDir)/
-      - task: SonarCloudPrepare@1
-        condition: always()
-        displayName: 'sonarcloud prepare'
-        inputs:
-          SonarCloud: 'SonarCloud Token'
-          organization: '2011-fakebook-project3'
-          scannerMode: 'CLI'
-          configMode: 'manual'
-          cliProjectKey: '2011-fakebook-project3_ng'
-          cliProjectName: 'ng'
-          cliSources: '$(appDir)/src'
-          extraProperties: sonar.javascript.lcov.reportPaths="$(appDir)/coverage/$(appDir)/lcov.info"
-      
-      - script: npx ng test --browsers ChromeHeadless --watch=false --code-coverage
-        displayName: ng test
-        workingDirectory: $(appDir)/
+    - script: npx ng build --prod
+      displayName: ng build
+      workingDirectory: $(appDir)
 
-      - task: SonarCloudAnalyze@1
-        condition: always()
-        displayName: 'sonarcloud analyze'
+    - task: SonarCloudPrepare@1
+      displayName: sonar prepare analysis
+      inputs:
+        SonarCloud: 'SonarCloud Token'
+        organization: '2011-fakebook-project3'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: '2011-fakebook-project3_ng'
+        cliProjectName: 'ng'
+        cliSources: '$(appDir)/src'
+        extraProperties: 'sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info'
 
-      - task: SonarCloudPublish@1
-        condition: always()
-        displayName: 'sonarcloud publish'
-        inputs:
-          pollingTimeoutSec: '300'
+    - script: npx ng lint
+      displayName: ng lint
+      workingDirectory: $(appDir)
+
+    # if previous steps successful, exactly one of these two steps should run:
+    # test on main or PRs to main
+    - script: npx ng test --browsers ChromeHeadless --watch=false --code-coverage
+      displayName: ng test (failures disallowed)
+      condition: and(succeeded(), in('refs/heads/main', variables['Build.SourceBranch'], variables['System.PullRequest.TargetBranch']))
+      workingDirectory: $(appDir)
+
+    # test outside of main or PRs to main
+    # (identical except: fails allowed for TDD workflow)
+    - script: npx ng test --browsers ChromeHeadless --watch=false --code-coverage
+      displayName: ng test (failures allowed)
+      condition: and(succeeded(), notIn('refs/heads/main', variables['Build.SourceBranch'], variables['System.PullRequest.TargetBranch']))
+      continueOnError: true
+      workingDirectory: $(appDir)
+
+    - task: SonarCloudAnalyze@1
+      displayName: sonar run analysis
+      condition: always()
+
+    - task: SonarCloudPublish@1
+      displayName: sonar analysis publish
+      condition: always()
+      inputs:
+        pollingTimeoutSec: '300'
+
+- stage: docker
+  dependsOn: []
+  variables:
+    imageName: fakebookng
+  jobs:
+  - job: build
+    steps:
+    - task: Docker@2
+      displayName: docker build image
+      inputs:
+        repository: '$(imageName)'
+        command: 'build'
+        Dockerfile: '$(appDir)/Dockerfile'
