@@ -1,5 +1,4 @@
-
-
+# trigger on main push
 trigger:
   branches:
     include:
