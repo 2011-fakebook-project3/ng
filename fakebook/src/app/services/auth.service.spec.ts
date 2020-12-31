@@ -6,34 +6,52 @@ import { NEVER } from 'rxjs';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
-  let service: AuthService;
+  let service: AuthService
 
-  let mockOktaAuthService = {
-    $authenticationState: NEVER
-  }
+  beforeEach(async () => {
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+    const mockOktaAuthService = {
+      $authenticationState: NEVER,
+      isAuthenticated(): Promise<boolean> {
+        return Promise.resolve(false);
+      }
+    }
+    await TestBed.configureTestingModule({
       providers: [
         { provide: Router, useValue: {} },
         { provide: OktaAuthService, useValue: mockOktaAuthService }
       ]
+    }).compileComponents();
 
-    });
     service = TestBed.inject(AuthService);
   });
+
+  it('should set isAuthenticated to false', () =>{
+    service.updateAuthState(false);
+    expect(service.isAuthenticated).toBe(false);
+  })
+
+  it('should set isAuthenticated to true', () =>{
+    service.updateAuthState(true);
+    expect(service.isAuthenticated).toBe(true);
+  })
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should log in and redirect to newsfeed', () => {
+    spyOn(login)
+    service.login()
+  });
    
 
   it('should return true if authenticated', () => {
-    expect(service.isAuthenticated()).toEqual("true");
+    expect(service.isAuthenticated).toBe(true);
   });
 
   it('should return false if not authenticated', () => {
-    expect(service.isAuthenticated()).toEqual("false");
+    expect(service.isAuthenticated).toBe(false);
   });
 
 });
