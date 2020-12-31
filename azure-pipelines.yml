@@ -74,7 +74,7 @@ stages:
           cliSources: '$(appDir)/src'
           extraProperties: sonar.javascript.lcov.reportPaths="./$(appDir)/coverage/$(appDir)lcov.info"
       
-      - script: npx ng test --browsers ChromeHeadless --watch false --code-coverage
+      - script: npx ng test --browsers ChromeHeadless --watch=false --code-coverage
         displayName: ng test
         workingDirectory: $(appDir)/
 
