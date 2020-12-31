@@ -78,9 +78,6 @@ stages:
         displayName: ng test
         workingDirectory: $(appDir)/
 
-      - script: cat $(Agent.TempDirectory)/coverage/$(appDir)lcov.info 
-        displayName: Show lcov.info
-
       - task: SonarCloudAnalyze@1
         condition: always()
         displayName: 'sonarcloud analyze'
