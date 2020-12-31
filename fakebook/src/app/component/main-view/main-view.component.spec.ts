@@ -1,14 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { NavigationBehaviorOptions , Router } from '@angular/router';
 import { MainViewComponent } from './main-view.component';
 
 describe('MainViewComponent', () => {
   let component: MainViewComponent;
   let fixture: ComponentFixture<MainViewComponent>;
+  let FakeAuthService = { isAuthenticated: false };
+  let FakeRouterService = { navigateByUrl(url: string, extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)} };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainViewComponent ]
+      declarations: [ MainViewComponent ],
+      providers: [ 
+        { provide: AuthService, useValue: FakeAuthService},
+        { provide: Router, useValue: FakeRouterService }
+      ]
     })
     .compileComponents();
   });
@@ -20,6 +26,7 @@ describe('MainViewComponent', () => {
   });
 
   it('should create', () => {
+
     expect(component).toBeTruthy();
   });
 });
