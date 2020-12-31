@@ -72,7 +72,7 @@ stages:
           cliProjectKey: '2011-fakebook-project3_ng'
           cliProjectName: 'ng'
           cliSources: '$(appDir)/src'
-          extraProperties: sonar.javascript.lcov.reportPaths="$(appDir)/coverage/$(appDir)lcov.info"
+          extraProperties: sonar.javascript.lcov.reportPaths="./$(appDir)/coverage/$(appDir)lcov.info"
       
       - script: npx ng test --browsers ChromeHeadless --watch false --code-coverage
         displayName: ng test
