@@ -1,5 +1,5 @@
 # using alpine because it is small apparently
-FROM node:15 AS build
+FROM node:15-alpine AS build
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY . ./
 
 RUN npx ng build --prod 
 
-FROM nginx:1.18
+FROM nginx:1.18-alpine
 
 WORKDIR /usr/share/nginx/html
 
