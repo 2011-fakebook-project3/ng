@@ -1,0 +1,89 @@
+variables:
+  appDir: 'fakebook'
+
+trigger:
+  branches:
+    include:
+    - main
+
+  paths:
+    include:
+    - azure-pipelines.yml
+    - 'fakebook'
+
+pr:
+  branches:
+    include:
+    - '*'
+
+  paths:
+    include:
+    - azure-pipelines.yml
+    - 'fakebook'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: build
+    jobs:
+    - job: build
+      variables:
+        imageName: 'fakebookng'
+      
+      steps:
+      - task: Docker@2
+        displayName: Build Docker Image
+        inputs:
+          repository: $(imageName)
+          command: 'build'
+          Dockerfile: '$(appdir)/Dockerfile'
+  
+  - stage: SonarCloud
+    dependsOn: []
+    jobs:
+    - job: build
+      steps:
+      # using node version 15.x to enforce npm 7.x
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '15.x'
+        displayName: 'Install Node.js'
+
+      - script: npm ci
+        displayName: npm install
+        workingDirectory: $(appDir)/
+
+      - script: npx ng build --prod
+        displayName: ng build
+        workingDirectory: $(appDir)/
+      
+      - script: npx ng lint
+        displayName: ng lint
+        workingDirectory: $(appDir)/
+      - task: SonarCloudPrepare@1
+        condition: always()
+        displayName: 'sonarcloud prepare'
+        inputs:
+          SonarCloud: 'SonarCloud Token'
+          organization: '2011-fakebook-project3'
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliProjectKey: '2011-fakebook-project3_ng'
+          cliProjectName: 'ng'
+          cliSources: '$(appDir)/src'
+          extraProperties: sonar.javascript.lcov.reportPaths="$(appDir)/coverage/$(appDir)/lcov.info"
+      
+      - script: npx ng test --browsers ChromeHeadless --watch=false --code-coverage
+        displayName: ng test
+        workingDirectory: $(appDir)/
+
+      - task: SonarCloudAnalyze@1
+        condition: always()
+        displayName: 'sonarcloud analyze'
+
+      - task: SonarCloudPublish@1
+        condition: always()
+        displayName: 'sonarcloud publish'
+        inputs:
+          pollingTimeoutSec: '300'
