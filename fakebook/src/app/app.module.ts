@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NewsfeedComponent } from '../app/components/newsfeed/newsfeed.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NewsfeedComponent
   ],
   imports: [
     BrowserModule,
