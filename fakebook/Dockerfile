@@ -1,5 +1,5 @@
 # using alpine because it is small apparently
-FROM node:12 AS build
+FROM node:15 AS build
 
 WORKDIR /usr/src/app
 
