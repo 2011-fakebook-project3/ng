@@ -53,7 +53,9 @@ stages:
         cliProjectKey: '2011-fakebook-project3_ng'
         cliProjectName: 'ng'
         cliSources: '$(appDir)/src'
-        extraProperties: 'sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info'
+        extraProperties: |
+          sonar.coverage.exclusions=$(appDir)/src/test.ts,$(appDir)/src/**/*.spec.ts
+          sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
 
     - script: npx ng lint
       displayName: ng lint
