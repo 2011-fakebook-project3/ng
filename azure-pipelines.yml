@@ -54,7 +54,7 @@ stages:
         cliProjectName: 'ng'
         cliSources: '$(appDir)/src'
         extraProperties: |
-          sonar.coverage.exclusions=$(appDir)/src/test.ts,$(appDir)/src/**/*.spec.ts
+          sonar.coverage.exclusions=$(appDir)/src/**/*.spec.ts
           sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
 
     - script: npx ng lint
