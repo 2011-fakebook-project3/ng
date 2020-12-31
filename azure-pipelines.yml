@@ -61,11 +61,6 @@ stages:
       - script: npx ng lint
         displayName: ng lint
         workingDirectory: $(appDir)
-      
-      - script: npx ng test --browsers ChromeHeadless --watch false --code-coverage
-        displayName: ng test
-        workingDirectory: $(appDir)
-
       - task: SonarCloudPrepare@1
         condition: always()
         displayName: 'sonarcloud prepare'
@@ -78,6 +73,10 @@ stages:
           cliProjectName: 'ng'
           cliSources: '$(appDir)/src'
           extraProperties: 'sonar.javascript.lcov.reportPaths=$(Agent.TempDirectory)/coverage/$(appDir)lcov.info'
+      
+      - script: npx ng test --browsers ChromeHeadless --watch false --code-coverage
+        displayName: ng test
+        workingDirectory: $(appDir)
 
       - task: SonarCloudAnalyze@1
         condition: always()
