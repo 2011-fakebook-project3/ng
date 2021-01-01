@@ -45,7 +45,7 @@ describe('NewsfeedService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getPost should return value from observable',
+  it('getPost should return list of posts',
     (done) => {
       service.posts$.subscribe(value => {
         expect(value).toBe(testPosts);
@@ -53,7 +53,7 @@ describe('NewsfeedService', () => {
       });
     });
 
-    it('getPost should return content', 
+    it('getPost should return content of post', 
       (done) => {
       service.posts$.subscribe(value => {
         expect(value[0].content).toBe("content 1");
