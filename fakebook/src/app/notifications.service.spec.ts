@@ -10,10 +10,10 @@ import { NotificationsService } from './notifications.service';
 describe('NotificationsService', () => {
   let service: NotificationsService;
 
-  let testLikes: LikeNotification[] = [{userId: 1, postId: 1}]
-  let testFollows: FollowNotification[] = [{ followerId: 1 }]
-  let testComments: CommentNotification[] = [{ userId: 1, postId: 1}]
-  let testPosts: PostNotification[] = [{ userId: 1, postId: 1}]
+  let testLikes: LikeNotification[] = [{ userId: 1, postId: 1 }]
+  let testFollows: FollowNotification[] = [{ followerId: 1, followingId: 2 }]
+  let testComments: CommentNotification[] = [{ userId: 1, postId: 1 }]
+  let testPosts: PostNotification[] = [{ userId: 1, postId: 1 }]
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
