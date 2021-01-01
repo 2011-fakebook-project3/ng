@@ -69,6 +69,13 @@ describe('NewsfeedService', () => {
       })
     });
 
-    
+    it('getPost should return comment Ids', 
+    (done) => {
+      service.posts$.subscribe(value => {
+        expect(value[0].commentIds[1]).toBe(2);
+        done();
+      })
+    });
+
 
 });
