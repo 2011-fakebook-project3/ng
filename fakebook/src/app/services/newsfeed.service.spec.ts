@@ -61,4 +61,14 @@ describe('NewsfeedService', () => {
       })
     });
 
+    it('getPost should return user', 
+    (done) => {
+      service.posts$.subscribe(value => {
+        expect(value[0].user).toBe(testUser);
+        done();
+      })
+    });
+
+    
+
 });
