@@ -9,8 +9,8 @@ import { Post } from '../model/post';
 })
 export class PostService {
   constructor(private http: HttpClient) { }
-  baseUrl : string = 'someUrl';
-  url = `${this.baseUrl}/api/Posts`; //update with our base url
+  baseUrl = 'someUrl';
+  url = `${this.baseUrl}/api/Posts`; // update with our base url
 
   create(post: Post): Observable<Post> {
     return undefined as unknown as Observable<Post>;
@@ -21,6 +21,6 @@ export class PostService {
     }
 
   delete(postId: number): Observable<void> {
-    return undefined as unknown as Observable<void>; 
+    return undefined as unknown as Observable<void>;
   }
 }

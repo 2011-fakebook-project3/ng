@@ -11,4 +11,3 @@ export interface User {
     followers: User[];
     followees: User[];
   }
-  
