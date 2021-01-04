@@ -15,7 +15,7 @@ export class NotificationsService {
   }
 
   getNotificationsObservable(): Observable<Notification[]> {
-    return undefined as unknown as Observable<Notification[]>
+    return undefined as unknown as Observable<Notification[]>;
   }
 
 }

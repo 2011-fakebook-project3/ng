@@ -31,24 +31,24 @@ describe('NotificationsService', () => {
   it('should return a list of notifications from observable', (done) => {
 
     const testNotifications: Notification[] = [
-      { userId: 1, postId: 1, type: "Like" },
-      { userId: 2, postId: 1, type: "Comment" },
-      { userId: 3, postId: undefined, type: "Follow" },
-      { userId: 4, postId: 2, type: "Post" }
-    ]
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, postId: undefined, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' }
+    ];
 
     service.Notifications$.subscribe(value => {
       expect(value).toBe(testNotifications);
       done();
-    })
+    });
 
-    const req = httpMock.expectOne("https://localhost:4200/notifications");
+    const req = httpMock.expectOne('https://localhost:4200/notifications');
     expect(req.request.method).toBe('GET');
     req.flush(testNotifications);
   });
 
   afterEach(() => {
     httpMock.verify();
-  })
+  });
 
-})
+});

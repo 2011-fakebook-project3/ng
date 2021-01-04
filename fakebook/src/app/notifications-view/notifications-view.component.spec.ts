@@ -30,7 +30,7 @@ describe('NotificationsViewComponent', () => {
 
   afterEach(() => {
     httpMock.verify();
-  })
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -38,27 +38,27 @@ describe('NotificationsViewComponent', () => {
 
   it('should contain a list of notifications', (done) => {
     const testNotifications: Notification[] = [
-      { userId: 1, postId: 1, type: "Like" },
-      { userId: 2, postId: 1, type: "Comment" },
-      { userId: 3, postId: undefined, type: "Follow" },
-      { userId: 4, postId: 2, type: "Post" }
-    ]
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, postId: undefined, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' }
+    ];
 
     component.getNotifications();
-    const req = httpMock.expectOne("https://localhost:4200/notifications")
+    const req = httpMock.expectOne('https://localhost:4200/notifications');
     req.flush(testNotifications);
 
     expect(req.request.method).toBe('GET');
     expect(component.notifications).toBe(testNotifications);
 
-  })
+  });
 
   it('should dismiss notifications when viewed', (done) => {
 
-  })
+  });
 
   it('should contain a link to the post or user in the notification', (done) => {
 
-  })
+  });
 
 });
