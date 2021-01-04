@@ -6,7 +6,7 @@ import { NEVER } from 'rxjs';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
-  let service: AuthService
+  let service: AuthService;
 
   beforeEach(async () => {
 
@@ -23,7 +23,7 @@ describe('AuthService', () => {
       tokenManager: {
         clear(): void {}
       }
-    }
+    };
     await TestBed.configureTestingModule({
       providers: [
         { provide: Router, useValue: {} },
@@ -45,23 +45,23 @@ describe('AuthService', () => {
   });
 
   // tests for updateAuthState
-  it('should set isAuthenticated to false', () =>{
+  it('should set isAuthenticated to false', () => {
     service.updateAuthState(false);
     expect(service.isAuthenticated).toBe(false);
-  })
+  });
 
-  it('should set isAuthenticated to true', () =>{
+  it('should set isAuthenticated to true', () => {
     service.updateAuthState(true);
     expect(service.isAuthenticated).toBe(true);
-  })
+  });
 
   // test for subscribeAuthStateChange
-  it('should get updated state change to false', () =>{
+  it('should get updated state change to false', () => {
     service.subscribeAuthStateChange((authState: boolean) => {
       service.isAuthenticated = authState;
     });
     expect(service.isAuthenticated).toBe(false);
-  })
+  });
 
   // test login
   it('should log in and redirect to newsfeed', () => {
@@ -83,7 +83,6 @@ describe('AuthService', () => {
 class UserClaims {
   Id: number;
   Name: string;
-  
   constructor(id: number, name: string) {
     this.Id = id;
     this.Name = name;
