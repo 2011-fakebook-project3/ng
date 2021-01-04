@@ -23,4 +23,16 @@ describe('NotificationsViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should contain a list of notifications', (done) => {
+
+  })
+
+  it('should dismiss notifications when viewed', (done) => {
+
+  })
+
+  it('should contain a link to the post or user in the notification', (done) => {
+
+  })
+
 });
