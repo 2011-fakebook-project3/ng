@@ -29,6 +29,7 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/fakebook'),
       subdir: '.',
       reporters: [
+        { type: 'lcov'},
         { type: 'html' },
         { type: 'text-summary' }
       ]
