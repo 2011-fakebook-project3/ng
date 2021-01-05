@@ -5,8 +5,6 @@ export interface Comment {
   userId: number;
   content: string;
   postId: number;
-  parentCommentId: number | undefined;
   createdAt: Date | undefined;
-  childCommentIds: number[];
   user: User | undefined;
 }
