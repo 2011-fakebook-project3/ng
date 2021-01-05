@@ -5,6 +5,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { NotificationsService } from './notifications.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 describe('NotificationsService', () => {
@@ -37,12 +38,12 @@ describe('NotificationsService', () => {
       { userId: 4, postId: 2, type: 'Post' }
     ];
 
-    service.Notifications$.subscribe(value => {
+    service.notifications$.subscribe(value => {
       expect(value).toBe(testNotifications);
       done();
     });
 
-    const req = httpMock.expectOne('https://localhost:4200/notifications');
+    const req = httpMock.expectOne(`${environment.baseUrl}/notifications`);
     expect(req.request.method).toBe('GET');
     req.flush(testNotifications);
   });

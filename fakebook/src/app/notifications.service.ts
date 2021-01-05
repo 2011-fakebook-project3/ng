@@ -10,12 +10,7 @@ export class NotificationsService {
 
   constructor(private http: HttpClient) { }
 
-  get Notifications$(): Observable<Notification[]> {
-    return this.getNotificationsObservable();
-  }
-
-  getNotificationsObservable(): Observable<Notification[]> {
+  get notifications$(): Observable<Notification[]> {
     return undefined as unknown as Observable<Notification[]>;
   }
-
 }

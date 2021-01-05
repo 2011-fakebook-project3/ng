@@ -5,6 +5,7 @@ import { Type } from '@angular/core';
 import { Notification } from '../model/notification';
 
 import { NotificationsViewComponent } from './notifications-view.component';
+import { environment } from 'src/environments/environment';
 
 describe('NotificationsViewComponent', () => {
   let component: NotificationsViewComponent;
@@ -45,19 +46,11 @@ describe('NotificationsViewComponent', () => {
     ];
 
     component.getNotifications();
-    const req = httpMock.expectOne('https://localhost:4200/notifications');
+    const req = httpMock.expectOne(`${environment.baseUrl}/notifications`);
     req.flush(testNotifications);
 
     expect(req.request.method).toBe('GET');
     expect(component.notifications).toBe(testNotifications);
-
-  });
-
-  it('should dismiss notifications when viewed', (done) => {
-
-  });
-
-  it('should contain a link to the post or user in the notification', (done) => {
 
   });
 

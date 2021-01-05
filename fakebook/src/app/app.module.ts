@@ -7,7 +7,6 @@ import { NotificationsViewComponent } from './notifications-view/notifications-v
 
 @NgModule({
   declarations: [
-    AppComponent,
     NotificationsViewComponent
   ],
   imports: [
