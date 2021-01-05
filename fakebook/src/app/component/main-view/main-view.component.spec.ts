@@ -10,15 +10,14 @@ describe('MainViewComponent', () => {
   let fixture: ComponentFixture<MainViewComponent>;
   let navigateSpy: any;
 
-  const FakeAuthService = { 
+  const FakeAuthService = {
     get isAuthenticated(): boolean {
       return false;
     }
   };
 
   const FakeRouterService = {
-    navigateByUrl(url: string,
-    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)}
+    navigateByUrl(url: string, extras?: NavigationBehaviorOptions): Promise<boolean> { return Promise.resolve(true); }
   };
 
   beforeEach(async () => {
@@ -63,15 +62,14 @@ describe('MainViewComponent', () => {
   let fixture: ComponentFixture<MainViewComponent>;
   let spy: any;
 
-  const FakeAuthService = { 
+  const FakeAuthService = {
     get isAuthenticated(): boolean {
       return true;
     }
   };
 
   const FakeRouterService = {
-    navigateByUrl(url: string,
-    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)}
+    navigateByUrl(url: string, extras?: NavigationBehaviorOptions): Promise<boolean> { return Promise.resolve(true); }
   };
 
   beforeEach(async () => {
@@ -90,10 +88,10 @@ describe('MainViewComponent', () => {
     component = new MainViewComponent(TestBed.inject(AuthService), TestBed.inject(Router));
     spy = spyOn(FakeRouterService, 'navigateByUrl');
   });
-  
+
   it('should route if user is logged in', () => {
     const authSpy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get');
-  
+
     const args = spy.calls.first().args[0];
 
     expect(args).toBe('newsfeed');

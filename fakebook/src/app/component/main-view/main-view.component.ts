@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -8,11 +8,10 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./main-view.component.css']
 })
 export class MainViewComponent implements OnInit {
-  
   constructor(private oktaAuth: AuthService, private router: Router) {
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
   }
 
 }
