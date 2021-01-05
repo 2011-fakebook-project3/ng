@@ -16,11 +16,7 @@ export class MainViewComponent implements OnInit {
   }
 
   checkAuthentication(): void {
-    let isAuthenticated = this.oktaAuth.isAuthenticated;
-    if(isAuthenticated) {
-      // redirect the user to the newsfeed page
-      this.router.navigateByUrl('newsfeed', { skipLocationChange: false });
-    }
+    //contains all the logic in proj 2 fakebook ngOnInit. Moved this to test this functionality.
   }
 
 }
