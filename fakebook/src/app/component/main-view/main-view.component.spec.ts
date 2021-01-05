@@ -1,3 +1,4 @@
+import { flatten } from '@angular/compiler';
 import { ComponentFixture, fakeAsync, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavigationBehaviorOptions , Router } from '@angular/router';
@@ -7,21 +8,27 @@ import { MainViewComponent } from './main-view.component';
 
 describe('MainViewComponent', () => {
   let component: MainViewComponent;
+
   let fixture: ComponentFixture<MainViewComponent>;
   let navigateSpy: any;
-  let isAuth: boolean;
+  let _isAuth: any;
 
   const FakeAuthService = {
+    _isAuth: false,
     get isAuthenticated(): boolean {
-      return false;
+      return _isAuth;
+    },
+    set isAuthneticated(value: boolean) {
+      this._isAuth = value;
     }
   };
 
-  const FakeRouterService = {
-    navigateByUrl(url: string, extras?: NavigationBehaviorOptions): Promise<boolean> { return Promise.resolve(true); }
-  };
-
   beforeEach(async () => {
+
+    const FakeRouterService = {
+      navigateByUrl(url: string, extras?: NavigationBehaviorOptions): Promise<boolean> { return Promise.resolve(true); }
+    };
+
     await TestBed.configureTestingModule({
       declarations: [ MainViewComponent ],
       providers: [
@@ -45,15 +52,20 @@ describe('MainViewComponent', () => {
   it('should not route if user is not logged in (default value)', () => {
     const spy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get');
 
+    component.checkAuthentication();
+
     expect(navigateSpy).toHaveBeenCalledTimes(0);
   });
 
   it('should route if user is logged in', () => {
-    const authSpy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get');
+    const authSpy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get').and.returnValue(true);
+
+    component.checkAuthentication();
 
     const args = navigateSpy.calls.first().args[0];
 
     expect(args).toBe('newsfeed');
+    expect(navigateSpy).toHaveBeenCalled();
   });
 /////////
   it('should create the exepcted elements on the page', () => {
