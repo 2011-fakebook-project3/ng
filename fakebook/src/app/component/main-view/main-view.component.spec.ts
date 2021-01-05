@@ -1,7 +1,8 @@
 import { ComponentFixture, fakeAsync, inject, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavigationBehaviorOptions , Router } from '@angular/router';
-import { AuthService } from 'src/app/auth.service';
+import { NEVER } from 'rxjs';
+import { AuthService } from '../../service/auth.service';
 import { MainViewComponent } from './main-view.component';
 
 describe('MainViewComponent', () => {
@@ -15,15 +16,15 @@ describe('MainViewComponent', () => {
     }
   };
 
-  const FakeRouterService = { 
-    navigateByUrl(url: string, 
-    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)} 
+  const FakeRouterService = {
+    navigateByUrl(url: string,
+    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)}
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MainViewComponent ],
-      providers: [ 
+      providers: [
         { provide: AuthService, useValue: FakeAuthService},
         { provide: Router, useValue: FakeRouterService },
       ]
@@ -68,15 +69,15 @@ describe('MainViewComponent', () => {
     }
   };
 
-  const FakeRouterService = { 
-    navigateByUrl(url: string, 
-    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)} 
+  const FakeRouterService = {
+    navigateByUrl(url: string,
+    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)}
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MainViewComponent ],
-      providers: [ 
+      providers: [
         { provide: AuthService, useValue: FakeAuthService},
         { provide: Router, useValue: FakeRouterService },
       ]
