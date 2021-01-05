@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router'
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-main-view',
@@ -8,19 +8,11 @@ import { Router } from '@angular/router'
   styleUrls: ['./main-view.component.css']
 })
 export class MainViewComponent implements OnInit {
-
-  constructor(private oktaAuth: boolean, private router: Router) {
-    // Just for testing, this should be deleted when we get the AuthService implemented
-    //    and the oktaAuth in the constructor should be changed to type AuthService not boolean
-    oktaAuth = false;
+  
+  constructor(private oktaAuth: AuthService, private router: Router) {
   }
 
   async ngOnInit() {
-    let isAuthenticated = await this.oktaAuth // add .isAuthenticated to the end of this line to get the value when AuthService implemented
-    if (isAuthenticated) {
-      // If user is signed in, redirect them to the newsfeed page
-      this.router.navigateByUrl('newsfeed', { skipLocationChange: false});
-    }
   }
 
 }
