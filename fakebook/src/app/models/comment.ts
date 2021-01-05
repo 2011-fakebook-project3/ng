@@ -6,5 +6,4 @@ export interface Comment {
   content: string;
   postId: number;
   createdAt: Date | undefined;
-  user: User | undefined;
 }
