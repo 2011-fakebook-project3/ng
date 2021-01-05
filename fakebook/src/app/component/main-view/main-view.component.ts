@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-main-view',
@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/auth.service';
   styleUrls: ['./main-view.component.css']
 })
 export class MainViewComponent implements OnInit {
-  
+
   constructor(private oktaAuth: AuthService, private router: Router) {
   }
 

@@ -2,7 +2,7 @@ import { ComponentFixture, fakeAsync, inject, TestBed } from '@angular/core/test
 import { By } from '@angular/platform-browser';
 import { NavigationBehaviorOptions , Router } from '@angular/router';
 import { NEVER } from 'rxjs';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { MainViewComponent } from './main-view.component';
 
 class MockRouter {
@@ -13,21 +13,21 @@ describe('MainViewComponent', () => {
   let component: MainViewComponent;
   let fixture: ComponentFixture<MainViewComponent>;
 
-  const FakeAuthService = { 
+  const FakeAuthService = {
     isAuthenticated(): Promise<boolean> {
       return Promise.resolve(false);
-    } 
+    }
   };
 
-  const FakeRouterService = { 
-    navigateByUrl(url: string, 
-    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)} 
+  const FakeRouterService = {
+    navigateByUrl(url: string,
+    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)}
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MainViewComponent ],
-      providers: [ 
+      providers: [
         { provide: AuthService, useValue: FakeAuthService},
         { provide: Router, useValue: FakeRouterService },
       ]
@@ -66,21 +66,21 @@ describe('MainViewComponent', () => {
   let component: MainViewComponent;
   let fixture: ComponentFixture<MainViewComponent>;
 
-  const FakeAuthService = { 
+  const FakeAuthService = {
     isAuthenticated(): Promise<boolean> {
       return Promise.resolve(true);
-    } 
+    }
   };
 
-  const FakeRouterService = { 
-    navigateByUrl(url: string, 
-    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)} 
+  const FakeRouterService = {
+    navigateByUrl(url: string,
+    extras?: NavigationBehaviorOptions): Promise<boolean> {return Promise.resolve(true)}
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MainViewComponent ],
-      providers: [ 
+      providers: [
         { provide: AuthService, useValue: FakeAuthService},
         { provide: Router, useValue: FakeRouterService },
       ]
@@ -93,15 +93,15 @@ describe('MainViewComponent', () => {
     component = new MainViewComponent(TestBed.inject(AuthService), TestBed.inject(Router));
   });
 
-  
-it('should route if user is logged in', inject([Router], (router: Router) => {
-  const spy = spyOn(router, 'navigateByUrl');
 
-  component.ngOnInit();
+  it('should route if user is logged in', inject([Router], (router: Router) => {
+    const spy = spyOn(router, 'navigateByUrl');
 
-  const args = spy.calls.first().args[0];
+    component.ngOnInit();
 
-  expect(args).toBe('newsfeed');
-}));
+    const args = spy.calls.first().args[0];
+
+    expect(args).toBe('newsfeed');
+  }));
 
 });
