@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { Notification } from './model/notification';
+import { Notification, LikeNotification, CommentNotification, PostNotification, FollowNotification } from './model/notification';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { NotificationsService } from './notifications.service';
@@ -34,7 +34,7 @@ describe('NotificationsService', () => {
     const testNotifications: Notification[] = [
       { userId: 1, postId: 1, type: 'Like' },
       { userId: 2, postId: 1, type: 'Comment' },
-      { userId: 3, postId: undefined, type: 'Follow' },
+      { userId: 3, type: 'Follow' },
       { userId: 4, postId: 2, type: 'Post' }
     ];
 

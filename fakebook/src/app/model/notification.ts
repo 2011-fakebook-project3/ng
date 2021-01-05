@@ -1,8 +1,28 @@
-export interface Notification {
-    // covers all cases of notifications, postId will be left undefined
-    // in the case of a follow, where userId is the person following/unfollowing
-    // the four cases covered by type are: "Like", "Comment", "Post", "Follow"
-    userId: number;
-    postId: number | undefined;
-    type: string;
+export type LikeNotification = {
+    userId: number,
+    postId: number,
+    type: 'Like'
 }
+
+export type PostNotification = {
+    userId: number,
+    postId: number,
+    type: 'Post'
+}
+
+export type FollowNotification = {
+    userId: number,
+    type: 'Follow'
+}
+
+export type CommentNotification = {
+    userId: number,
+    postId: number,
+    type: 'Comment'
+}
+
+export type Notification =
+    | LikeNotification
+    | PostNotification
+    | FollowNotification
+    | CommentNotification
