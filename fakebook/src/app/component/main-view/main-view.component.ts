@@ -12,6 +12,7 @@ export class MainViewComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    
   }
 
 }
