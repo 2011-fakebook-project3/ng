@@ -41,7 +41,11 @@ stages:
     - script: npx ng build --prod
       displayName: ng build
       workingDirectory: $(appDir)
-
+      
+    - script: npx ng lint
+      displayName: ng lint
+      workingDirectory: $(appDir)
+      
     - task: SonarCloudPrepare@1
       displayName: sonar prepare analysis
       inputs:
@@ -55,10 +59,6 @@ stages:
         extraProperties: |
           sonar.coverage.exclusions=$(appDir)/src/**/*.spec.ts
           sonar.javascript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
-
-    - script: npx ng lint
-      displayName: ng lint
-      workingDirectory: $(appDir)
 
     # if previous steps successful, exactly one of these two steps should run:
     # test on main or PRs to main
