@@ -10,7 +10,7 @@ import { NewsfeedService } from './newsfeed.service';
 
 describe('NewsfeedService', () => {
   let service: NewsfeedService;
-  let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy };
+  let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
   const url = `testurl.net/api/Posts`;
 
@@ -54,7 +54,7 @@ describe('NewsfeedService', () => {
 
     httpTestingController = TestBed.inject(HttpTestingController);
 
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'delete', 'post']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
     service = new NewsfeedService(httpClientSpy as any);
   });
@@ -82,8 +82,10 @@ describe('NewsfeedService', () => {
       httpTestingController.verify();
     });
 
-  it('getPost should return content of post',
+  it('getPost should return content of posts',
     (done) => {
+      httpClientSpy.get.and.returnValue(testPosts);
+
       service.getPosts().subscribe(post => {
         expect(post[0].content).toBe('content 1');
         done();
@@ -96,8 +98,10 @@ describe('NewsfeedService', () => {
       httpTestingController.verify();
     });
 
-  it('getPost should return user',
+  it('getPost should return users',
     (done) => {
+      httpClientSpy.get.and.returnValue(testPosts);
+
       service.getPosts().subscribe(post => {
         expect(post[0].user).toBe(testUser);
         done();
@@ -112,6 +116,8 @@ describe('NewsfeedService', () => {
 
   it('getPost should return comment Ids',
     (done) => {
+      httpClientSpy.get.and.returnValue(testPosts);
+
       service.getPosts().subscribe(post => {
         expect(post[0].commentIds[1]).toBe(2);
         done();
