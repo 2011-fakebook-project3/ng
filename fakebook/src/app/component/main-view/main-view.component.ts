@@ -13,6 +13,12 @@ export class MainViewComponent implements OnInit {
   }
 
   async ngOnInit() {
+    //this.router.navigateByUrl('newsfeed', { skipLocationChange: false});
+    let isAuthenticated = await this.oktaAuth.isAuthenticated; 
+    if (isAuthenticated) {
+      // If user is signed in, redirect them to the newsfeed page
+      this.router.navigateByUrl('newsfeed', { skipLocationChange: false});
+    }
   }
 
 }
