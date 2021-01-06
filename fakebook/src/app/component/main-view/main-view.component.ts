@@ -16,7 +16,7 @@ export class MainViewComponent implements OnInit {
   }
 
   checkAuthentication(): void {
-    //contains all the logic in proj 2 fakebook ngOnInit. Moved this to test this functionality.
+    // Contains all the logic in proj 2 fakebook ngOnInit. Moved this to test this functionality.
   }
 
 }

@@ -11,15 +11,14 @@ describe('MainViewComponent', () => {
 
   let fixture: ComponentFixture<MainViewComponent>;
   let navigateSpy: any;
-  let _isAuth: any;
 
   const FakeAuthService = {
-    _isAuth: false,
+    isAuth: false,
     get isAuthenticated(): boolean {
-      return _isAuth;
+      return this.isAuth;
     },
     set isAuthneticated(value: boolean) {
-      this._isAuth = value;
+      this.isAuth = value;
     }
   };
 
@@ -48,7 +47,7 @@ describe('MainViewComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-////////////
+
   it('should not route if user is not logged in (default value)', () => {
     const spy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get');
 
@@ -67,7 +66,7 @@ describe('MainViewComponent', () => {
     expect(args).toBe('newsfeed');
     expect(navigateSpy).toHaveBeenCalled();
   });
-/////////
+
   it('should create the exepcted elements on the page', () => {
     const h1 = fixture.debugElement.query(By.css('h1')).nativeElement;
     expect(h1.innerHTML).toBe('Welcome to Fakebook! Please sign in.');
