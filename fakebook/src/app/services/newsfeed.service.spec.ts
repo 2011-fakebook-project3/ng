@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { environment} from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -12,7 +13,7 @@ describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
-  const url = `testurl.net/api/Posts`;
+  const url = environment.baseUrl;
 
   const testUser: User = {
     id: 1,
@@ -27,7 +28,7 @@ describe('NewsfeedService', () => {
 
   const testComment: Comment = {
     id: 1,
-    content: "Comment Content 1",
+    content: 'Comment Content 1',
     postId: 1,
     createdAt: new Date(),
     user: testUser
@@ -75,7 +76,7 @@ describe('NewsfeedService', () => {
           done();
         });
 
-      const req = httpTestingController.expectOne(`${url}`);
+      const req = httpTestingController.expectOne(`${url}/Posts`);
 
       expect(req.request.method).toEqual('GET');
       expect(req.request.body).toBeNull();
@@ -92,7 +93,7 @@ describe('NewsfeedService', () => {
         expect(post[0].content).toBe('content 1');
         done();
       });
-      const req = httpTestingController.expectOne(`${url}`);
+      const req = httpTestingController.expectOne(`${url}/Posts`);
       expect(req.request.method).toBe('GET');
       expect(req.request.body).toBeNull();
       req.flush(testPosts);
@@ -108,7 +109,7 @@ describe('NewsfeedService', () => {
         expect(post[0].user).toBe(testUser);
         done();
       });
-      const req = httpTestingController.expectOne(`${url}`);
+      const req = httpTestingController.expectOne(`${url}/Posts`);
       expect(req.request.method).toBe('GET');
       expect(req.request.body).toBeNull();
       req.flush(testPosts);
@@ -124,7 +125,7 @@ describe('NewsfeedService', () => {
         expect(post[0].comments[0].content).toBe('Comment Content 1');
         done();
       });
-      const req = httpTestingController.expectOne(`${url}`);
+      const req = httpTestingController.expectOne(`${url}/Posts`);
       expect(req.request.method).toBe('GET');
       expect(req.request.body).toBeNull();
       req.flush(testPosts);
