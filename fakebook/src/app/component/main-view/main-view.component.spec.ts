@@ -1,8 +1,6 @@
-import { flatten } from '@angular/compiler';
-import { ComponentFixture, fakeAsync, inject, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavigationBehaviorOptions , Router } from '@angular/router';
-import { NEVER } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
 import { MainViewComponent } from './main-view.component';
 
