@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  isAuthenticated!: boolean;
-
-  constructor() { }
+  constructor() { 
+    throw error('Constructor error');
+  }
 }
