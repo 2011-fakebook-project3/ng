@@ -9,8 +9,6 @@ import { Post } from '../models/post';
 export class NewsfeedService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'someUrl';
-  url = `${this.baseUrl}/api/Posts`;
 
   getPosts(): Observable<Post[]> {
     return undefined as unknown as Observable<Post[]>;

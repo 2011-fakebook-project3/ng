@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-
+import { Comment } from '../models/comment';
 import { User } from '../models/user';
 import { Post } from '../models/post';
 import { NewsfeedService } from './newsfeed.service';
@@ -20,12 +20,17 @@ describe('NewsfeedService', () => {
     lastName: 'Holmes',
     email: 'sholmes@email.com',
     phoneNumber: undefined,
-    password: '1234',
     profilePictureUrl: null,
     status: undefined,
     birthDate: new Date('2001-08-17'),
-    followers: [],
-    followees: []
+  };
+
+  const testComment: Comment = {
+    id: 1,
+    content: "Comment Content 1",
+    postId: 1,
+    createdAt: new Date(),
+    user: testUser
   };
 
   const testPosts: Post[] = [
@@ -34,11 +39,8 @@ describe('NewsfeedService', () => {
       content: 'content 1',
       user: testUser,
       createdAt: new Date(),
-      likedByUserIds: [1, 2, 5],
       pictureUrl: '',
-      commentIds: [1, 2, 3],
-      comments: [],
-      liked: true
+      comments: [testComment],
     },
   ];
 
@@ -82,7 +84,7 @@ describe('NewsfeedService', () => {
       httpTestingController.verify();
     });
 
-  it('getPost should return content of posts',
+  it('getPost() should return content of posts',
     (done) => {
       httpClientSpy.get.and.returnValue(testPosts);
 
@@ -98,7 +100,7 @@ describe('NewsfeedService', () => {
       httpTestingController.verify();
     });
 
-  it('getPost should return users',
+  it('getPost() should return users',
     (done) => {
       httpClientSpy.get.and.returnValue(testPosts);
 
@@ -114,12 +116,12 @@ describe('NewsfeedService', () => {
       httpTestingController.verify();
     });
 
-  it('getPost should return comment Ids',
+  it('getPost() should return comments ',
     (done) => {
       httpClientSpy.get.and.returnValue(testPosts);
 
       service.getPosts().subscribe(post => {
-        expect(post[0].commentIds[1]).toBe(2);
+        expect(post[0].comments[0].content).toBe('Comment Content 1');
         done();
       });
       const req = httpTestingController.expectOne(`${url}`);
