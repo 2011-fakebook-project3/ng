@@ -7,8 +7,13 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { Comment } from '../models/comment';
 import { User } from '../models/user';
 import { Post } from '../models/post';
+import { Followee } from '../models/followee';
 import { NewsfeedService } from './newsfeed.service';
 
+
+// getfollowees() That return a list of followes (just user id & user email), what would be the endpoint for this request
+// getpost() that return a list of posts( 3 -4), what would be the endpoint for this request
+//getcomments() returns a list of comments for each post. (what would be the endpoint for each request)
 describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
@@ -21,27 +26,26 @@ describe('NewsfeedService', () => {
     lastName: 'Holmes',
     email: 'sholmes@email.com',
     phoneNumber: undefined,
-    profilePictureUrl: null,
+    profilePictureUrl: '',
     status: undefined,
     birthDate: new Date('2001-08-17'),
   };
+  
 
   const testComment: Comment = {
     id: 1,
     content: 'Comment Content 1',
     postId: 1,
     createdAt: new Date(),
-    user: testUser
+
   };
 
   const testPosts: Post[] = [
     {
       id: 1,
       content: 'content 1',
-      user: testUser,
       createdAt: new Date(),
       pictureUrl: '',
-      comments: [testComment],
     },
   ];
 
