@@ -11,7 +11,6 @@ import { AuthService } from '../../service/auth.service';
 export class MainViewComponent implements OnInit {
 
   constructor(private oktaAuth: AuthService, private router: Router) {
-    // throw error('Constructor error');
   }
 
   async ngOnInit(): Promise<void> {
