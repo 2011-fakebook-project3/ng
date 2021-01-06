@@ -9,9 +9,9 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./main-view.component.css']
 })
 export class MainViewComponent implements OnInit {
-  
+
   constructor(private oktaAuth: AuthService, private router: Router) {
-    //throw error('Constructor error');
+    // throw error('Constructor error');
   }
 
   async ngOnInit(): Promise<void> {
@@ -19,8 +19,8 @@ export class MainViewComponent implements OnInit {
   }
 
   checkAuthentication(): void {
-    let isAuthenticated = this.oktaAuth.isAuthenticated;
-    if(isAuthenticated) {
+    const isAuthenticated = this.oktaAuth.isAuthenticated;
+    if (isAuthenticated) {
       // redirect the user to the newsfeed page
       this.router.navigateByUrl('newsfeed', { skipLocationChange: false });
     }
