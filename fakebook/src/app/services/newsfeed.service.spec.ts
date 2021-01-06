@@ -30,7 +30,11 @@ describe('NewsfeedService', () => {
     status: undefined,
     birthDate: new Date('2001-08-17'),
   };
-  
+
+  const followees: Followee[] = [
+    {id: 1, email:'sHolemes@email.com'},
+    {id: 2, email:'gHouse@email.com'}
+  ]
 
   const testComment: Comment = {
     id: 1,
