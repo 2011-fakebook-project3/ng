@@ -51,7 +51,7 @@ describe('NotificationsViewComponent', () => {
 
     expect(req.request.method).toBe('GET');
     expect(component.notifications).toBe(testNotifications);
-
+    done();
   });
 
 });

@@ -17,6 +17,9 @@ export class NotificationsViewComponent implements OnInit {
   }
 
   getNotifications(): void {
+    this.service.notifications$.subscribe(notifs => {
+      this.notifications = notifs;
+    });
   }
 
 }

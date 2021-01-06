@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  // update to correct url when services are in place
+  baseUrl: 'https://PLACEHOLDERURL'
 };
