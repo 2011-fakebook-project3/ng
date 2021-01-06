@@ -16,9 +16,6 @@ describe('MainViewComponent', () => {
     isAuth: false,
     get isAuthenticated(): boolean {
       return this.isAuth;
-    },
-    set isAuthneticated(value: boolean) {
-      this.isAuth = value;
     }
   };
 
