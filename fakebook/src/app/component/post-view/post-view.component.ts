@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Post } from '../../model/post';
+
 @Component({
   selector: 'app-post-view',
   templateUrl: './post-view.component.html',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostViewComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    throw Error('not implemented');
   }
 
+  ngOnInit(): void {
+    throw Error('not implemented');
+  }
+
+  getUserId(): number {
+    throw Error('not implemented');
+  }
+
+  deletePost(post: Post): void{
+    throw Error('not implemented');
+  }
 }
