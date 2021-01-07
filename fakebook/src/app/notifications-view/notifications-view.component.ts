@@ -15,11 +15,53 @@ export class NotificationsViewComponent implements OnInit {
   constructor(private service: NotificationsService) { }
 
   ngOnInit(): void {
+    // for testing purposes only
     this.notifications = [
       { userId: 1, postId: 1, type: 'Like' },
       { userId: 2, postId: 1, type: 'Comment' },
       { userId: 3, type: 'Follow' },
-      { userId: 4, postId: 2, type: 'Post' }
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      { userId: 1, postId: 1, type: 'Like' },
+      { userId: 2, postId: 1, type: 'Comment' },
+      { userId: 3, type: 'Follow' },
+      { userId: 4, postId: 2, type: 'Post' },
+      
     ];
   }
 
