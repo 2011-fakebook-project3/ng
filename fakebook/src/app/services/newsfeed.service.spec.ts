@@ -5,9 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { Comment } from '../models/comment';
-import { User } from '../models/user';
 import { Post } from '../models/post';
-import { Followee } from '../models/followee';
 import { NewsfeedService } from './newsfeed.service';
 import { AuthService } from './auth.service';
 
@@ -16,7 +14,7 @@ describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
-  const url = environment.baseUrl;
+  const url = `${environment.baseUrl}/someUrl`;
 
 
   const fakeAuthService = {
@@ -75,7 +73,7 @@ describe('NewsfeedService', () => {
           done();
         });
 
-       const req = httpTestingController.expectOne(`${url}/someEndPoint`); // wating on what the endpoint
+       const req = httpTestingController.expectOne(`${url}`); // wating on what the endpoint
 
        expect(req.request.method).toEqual('GET');
        expect(req.request.headers).toBe(token);
