@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommentService } from 'src/app/comment.service';
 import { Comment } from 'src/app/models/comment';
 
 @Component({
@@ -19,7 +20,7 @@ export class CommentViewComponent implements OnInit {
   @Output() delete = new EventEmitter<Comment>();
 
 
-  constructor() { }
+  constructor(private commentService: CommentService) { }
 
   ngOnInit(): void {
     if(this.commentAndUserExist(this.comment)) {
@@ -31,7 +32,7 @@ export class CommentViewComponent implements OnInit {
   deleteComment(comment: Comment) {
     console.log(comment);
     if(comment && comment.id !== undefined) {
-      //this.commentService.delete(comment);
+      this.commentService.delete(comment);
       this.delete.emit(comment);
     }
   }
@@ -48,6 +49,6 @@ export class CommentViewComponent implements OnInit {
   }
 
   setFullName(comment: Comment | null): void {
-    this.user.fullname = (comment?.user?.firstName + " " + comment?.user?.lastName) ;
+    this.user.fullname = (comment?.user?.firstName + " " + comment?.user?.lastName);
   }
 }
