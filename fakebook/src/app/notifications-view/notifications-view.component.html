@@ -1,1 +1,17 @@
-<p>notifications-view works!</p>
+<button type="button" class="btn btn-default"
+    (click)="toggleNotifications()"
+    style= "padding: 5px 5px; border-radius: 5px;">
+    <img src="../../assets/notifications-icon.png" style="width: 24px; height: 28px;">
+</button>
+
+<div *ngIf="this.notifications_view" class="position-fixed bg-secondary rounded
+                                            ml-1 mt-0 px-2 p-3">
+    <ul *ngFor="let notif of this.notifications">
+        <li>
+            <div *ngIf="notif.type == 'Like'">Here is person {{notif.userId}} liking post {{notif.postId}}</div>
+            <div *ngIf="notif.type == 'Post'">Here is person {{notif.userId}} posting post {{notif.postId}}</div>
+            <div *ngIf="notif.type == 'Comment'">Here is person {{notif.userId}} commenting on post {{notif.postId}}</div>
+            <div *ngIf="notif.type == 'Follow'">Here is person {{notif.userId}} following you</div>
+        </li>
+    </ul>
+</div>
