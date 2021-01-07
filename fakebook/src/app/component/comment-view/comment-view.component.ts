@@ -23,15 +23,15 @@ export class CommentViewComponent implements OnInit {
   constructor(private commentService: CommentService) { }
 
   ngOnInit(): void {
-    if(this.commentAndUserExist(this.comment)) {
+    if (this.commentAndUserExist(this.comment)) {
       this.setFullName(this.comment);
-      this.setProfilePicture(this.comment)
+      this.setProfilePicture(this.comment);
     }
   }
 
   deleteComment(comment: Comment) {
     console.log(comment);
-    if(comment && comment.id !== undefined) {
+    if (comment && comment.id !== undefined) {
       this.commentService.delete(comment);
       this.delete.emit(comment);
     }
@@ -49,6 +49,6 @@ export class CommentViewComponent implements OnInit {
   }
 
   setFullName(comment: Comment | null): void {
-    this.user.fullname = (comment?.user?.firstName + " " + comment?.user?.lastName);
+    this.user.fullname = (comment?.user?.firstName + ' ' + comment?.user?.lastName);
   }
 }

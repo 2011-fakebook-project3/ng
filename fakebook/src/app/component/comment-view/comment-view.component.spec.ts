@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommentViewComponent } from './comment-view.component';
-import { CommentService } from "src/app/comment.service";
+import { CommentService } from 'src/app/comment.service';
 
 describe('CommentViewComponent', () => {
   let component: CommentViewComponent;
@@ -9,7 +9,7 @@ describe('CommentViewComponent', () => {
 
   const FakeCommentService = {
     delete(): void { }
-  }
+  };
 
   const fakeUser = {
     id: 1,
@@ -28,7 +28,7 @@ describe('CommentViewComponent', () => {
     postId: 1,
     createdAt: new Date(),
     user: fakeUser
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -46,7 +46,7 @@ describe('CommentViewComponent', () => {
 
     component = new CommentViewComponent(TestBed.inject(CommentService));
     component.comment = fakeComment;
-    commentDeleteSpy = spyOn(FakeCommentService, 'delete')
+    commentDeleteSpy = spyOn(FakeCommentService, 'delete');
   });
 
   it('should create', () => {
@@ -54,13 +54,13 @@ describe('CommentViewComponent', () => {
   });
 
   it('should check if comment and user exist', () => {
-    var tf = component.commentAndUserExist(component.comment);
+    let tf = component.commentAndUserExist(component.comment);
 
     expect(tf).toBeTrue();
   });
 
   it('should check if comment and user DO NOT exist', () => {
-    var tf = component.commentAndUserExist(null);
+    let tf = component.commentAndUserExist(null);
 
     expect(tf).toBeFalse();
   });
@@ -72,17 +72,17 @@ describe('CommentViewComponent', () => {
   });
 
   it('should set the full name', () => {
-    // maybe this one and maybe the profile profile picture one i could test whether it gets set in the first place, 
+    // maybe this one and maybe the profile profile picture one i could test whether it gets set in the first place,
     //    and then check if the element gets set to it.
     component.setFullName(component.comment);
 
     expect(component.user.fullname).toBe('first last');
 
-    
+
 
   });
 
   // it('should delete comments', () => {
-    
+
   // });
 });
