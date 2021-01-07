@@ -54,13 +54,13 @@ describe('CommentViewComponent', () => {
   });
 
   it('should check if comment and user exist', () => {
-    let tf = component.commentAndUserExist(component.comment);
+    const tf = component.commentAndUserExist(component.comment);
 
     expect(tf).toBeTrue();
   });
 
   it('should check if comment and user DO NOT exist', () => {
-    let tf = component.commentAndUserExist(null);
+    const tf = component.commentAndUserExist(null);
 
     expect(tf).toBeFalse();
   });
@@ -77,9 +77,6 @@ describe('CommentViewComponent', () => {
     component.setFullName(component.comment);
 
     expect(component.user.fullname).toBe('first last');
-
-
-
   });
 
   // it('should delete comments', () => {

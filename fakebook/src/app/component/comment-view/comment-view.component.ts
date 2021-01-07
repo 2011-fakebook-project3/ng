@@ -29,7 +29,7 @@ export class CommentViewComponent implements OnInit {
     }
   }
 
-  deleteComment(comment: Comment) {
+  deleteComment(comment: Comment): void {
     console.log(comment);
     if (comment && comment.id !== undefined) {
       this.commentService.delete(comment);
