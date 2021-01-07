@@ -42,7 +42,7 @@ export class PostViewComponent implements OnInit {
   }
 
   getPostComments(id: number): void{
-    //TODO: subscribe to postService to get list of comments in this post
+    // TODO: subscribe to postService to get list of comments in this post
     throw Error('not implemented');
   }
 
