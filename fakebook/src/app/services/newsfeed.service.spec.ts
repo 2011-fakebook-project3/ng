@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -9,48 +9,32 @@ import { User } from '../models/user';
 import { Post } from '../models/post';
 import { Followee } from '../models/followee';
 import { NewsfeedService } from './newsfeed.service';
+import { AuthService } from './auth.service';
 
 
-// getfollowees() That return a list of followes (just user id & user email), what would be the endpoint for this request
-// getpost() that return a list of posts( 3 -4), what would be the endpoint for this request
-//getcomments() returns a list of comments for each post. (what would be the endpoint for each request)
 describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
   const url = environment.baseUrl;
 
-  const testUser: User = {
-    id: 1,
-    firstName: 'Sherlock',
-    lastName: 'Holmes',
-    email: 'sholmes@email.com',
-    phoneNumber: undefined,
-    profilePictureUrl: '',
-    status: undefined,
-    birthDate: new Date('2001-08-17'),
+
+  const fakeAuthService = {
+    accessToken: 'token',
+     getAccessToken(): any {
+      return this.accessToken;
+    }
   };
 
-  const followees: Followee[] = [
-    {id: 1, email:'sHolemes@email.com'},
-    {id: 2, email:'gHouse@email.com'}
-  ]
 
-  const testComment: Comment = {
-    id: 1,
-    content: 'Comment Content 1',
-    postId: 1,
-    createdAt: new Date(),
-
-  };
+  const testComments: Comment[] = [
+    { id: 1, content: 'Comment Content 1', postId: 1, createdAt: new Date(), firstName: 'John', lastName: 'Watson' },
+    { id: 2, content: 'Comment Content 2', postId: 1, createdAt: new Date(), firstName: 'Microft', lastName: 'Holmes' }
+  ];
 
   const testPosts: Post[] = [
-    {
-      id: 1,
-      content: 'content 1',
-      createdAt: new Date(),
-      pictureUrl: '',
-    },
+    { id: 1, content: 'content 1', createdAt: new Date(), pictureUrl: '', email: 'irene@email.com', comments: testComments },
+    { id: 2, content: 'content 2', createdAt: new Date(), pictureUrl: '', email: 'moriarty@email.com', comments: [] }
   ];
 
   beforeEach(() => {
@@ -59,7 +43,8 @@ describe('NewsfeedService', () => {
         HttpClientTestingModule,
       ],
       providers: [
-        NewsfeedService,
+        { provide: AuthService, useValue: fakeAuthService },
+        { NewsfeedService }
       ]
     });
 
@@ -67,78 +52,36 @@ describe('NewsfeedService', () => {
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
-    service = new NewsfeedService(httpClientSpy as any);
+    service = new NewsfeedService(TestBed.inject(AuthService), httpClientSpy as any);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getPost should return list of posts',
-    (done) => {
-      httpClientSpy.get.and.returnValue(testPosts);
 
-      service.getPosts()
-        .subscribe(post => {
-          expect(post).toEqual(testPosts);
+  it('getPosts() should return list of posts',
+    (done) => {
+
+       const token = fakeAuthService.getAccessToken();
+
+       httpClientSpy.get(url, { headers: {
+        Authorization: 'Bearer ' + token,
+      }}).and.returnValue(testPosts);
+
+       service.getPosts()
+        .subscribe(posts => {
+          expect(posts).toEqual(testPosts);
           done();
         });
 
-      const req = httpTestingController.expectOne(`${url}/Posts`);
+       const req = httpTestingController.expectOne(`${url}/someEndPoint`); // wating on what the endpoint
 
-      expect(req.request.method).toEqual('GET');
-      expect(req.request.body).toBeNull();
-      req.flush(testPosts);
+       expect(req.request.method).toEqual('GET');
+       expect(req.request.headers).toBe(token);
+       req.flush(testPosts);
 
-      httpTestingController.verify();
-    });
-
-  it('getPost() should return content of posts',
-    (done) => {
-      httpClientSpy.get.and.returnValue(testPosts);
-
-      service.getPosts().subscribe(post => {
-        expect(post[0].content).toBe('content 1');
-        done();
-      });
-      const req = httpTestingController.expectOne(`${url}/Posts`);
-      expect(req.request.method).toBe('GET');
-      expect(req.request.body).toBeNull();
-      req.flush(testPosts);
-
-      httpTestingController.verify();
-    });
-
-  it('getPost() should return users',
-    (done) => {
-      httpClientSpy.get.and.returnValue(testPosts);
-
-      service.getPosts().subscribe(post => {
-        expect(post[0].user).toBe(testUser);
-        done();
-      });
-      const req = httpTestingController.expectOne(`${url}/Posts`);
-      expect(req.request.method).toBe('GET');
-      expect(req.request.body).toBeNull();
-      req.flush(testPosts);
-
-      httpTestingController.verify();
-    });
-
-  it('getPost() should return comments ',
-    (done) => {
-      httpClientSpy.get.and.returnValue(testPosts);
-
-      service.getPosts().subscribe(post => {
-        expect(post[0].comments[0].content).toBe('Comment Content 1');
-        done();
-      });
-      const req = httpTestingController.expectOne(`${url}/Posts`);
-      expect(req.request.method).toBe('GET');
-      expect(req.request.body).toBeNull();
-      req.flush(testPosts);
-
-      httpTestingController.verify();
+       httpTestingController.verify();
     });
 
 
