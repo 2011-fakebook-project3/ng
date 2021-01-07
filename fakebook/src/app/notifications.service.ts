@@ -3,15 +3,27 @@ import { observable, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Notification } from './model/notification';
 import { environment } from 'src/environments/environment';
+import * as signalR from "@aspnet/signalr";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
 
-  constructor(private http: HttpClient) { }
+  private notifications!: Notification[];
 
-  get notifications$(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(`${environment.baseUrl}/notifications`);
+  constructor(private hubConnection: signalR.HubConnection) { 
+    this.hubConnection = new signalR.HubConnectionBuilder()
+                             .withUrl(`${environment.baseUrl}/notifications`)
+                             .build();
+    this.hubConnection.start()
+
+    this.hubConnection.on('transfernotificationdata', (data) => {
+      this.notifications = data;
+    });
+  }
+
+  get notifications$(): Notification[] {
+    return this.notifications;
   }
 }
