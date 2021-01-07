@@ -1,1 +1,36 @@
-<p>post-view works!</p>
+<!-- Box containing one post and its comments -->
+<div *ngIf="post && user">
+
+    <!-- Box for making new comments responding to the post -->
+    <div class="card mt-2 mb-2">
+      <div class="d-flex justify-content-between p-2 px-3 ">
+        <div class="d-flex mt-2 flex-row align-items-center flex-fill"> <img src="{{user.profilePictureUrl}}" width="50" class="rounded-circle img-fluid">
+          <div class="d-flex flex-column ml-2">
+            <a href="/user/{{user.id}}">
+              <b>{{user.firstName}} {{user.lastName}}</b>
+            </a>
+            <small class="text-muted">{{post.createdAt | date:'medium'}}</small>
+          </div>
+            <div *ngIf='user.id === userid' class="d-flex ml-auto">
+              <button (click)='deletePost(post)' class='btn btn-outline-danger btn-xs'>delete post</button>
+            </div>
+        </div>
+      </div>
+      <img src="{{post.pictureUrl}}" class="img-fluid">
+      <div class="p-2">
+        <p class="ml-5  ">{{post.content}}</p>
+        <div *ngIf='comments!=undefined'>
+          <div class="social-body">
+            <!-- Iteration through all comments for the post -->
+            <div *ngIf='comments!=undefined'>
+              <ul *ngFor="let comment of comments">
+                  <!-- display comments here when comment component is implimented-->
+                <hr>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <!-- comment form for new comment here -->
+      </div>
+    </div>
+  </div>
