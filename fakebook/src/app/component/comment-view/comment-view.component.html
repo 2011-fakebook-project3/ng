@@ -1,1 +1,23 @@
-<p>comment-view works!</p>
+<div *ngIf="comment" class="social-comment">
+    <div class="social-avatar">
+      <div class="row">
+        <a href="" class="pull-left">
+          <img class="rounded-circle img-sm" alt="image" src="{{user.profilePictureUrl}}">
+        </a>
+        <div class="media-body">
+          <a href="#">
+            {{user.fullname}}
+          </a>
+          <small class="text-muted">{{comment.createdAt | date:'medium'}}</small>
+        </div>
+        <div *ngIf='comment.user && comment.user.id !== undefined && comment.user.id === currentUserId'>
+          <button (click)='deleteComment(comment)' class=' btn btn-outline-danger btn-xs'>Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class='social-body'>
+      <p>
+        {{comment.content}}
+      </p>
+    </div>
+  </div>

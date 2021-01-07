@@ -23,10 +23,7 @@ export class CommentViewComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.commentAndUserExist(this.comment)) {
-
       this.setFullName(this.comment);
-      // Used to check for a profile picture of the user exists. As I have been informed, the backend will set a default value
-      //    for the profile picture at the very least. Therefore user existing also means profile picture exists.
       this.setProfilePicture(this.comment)
     }
   }
