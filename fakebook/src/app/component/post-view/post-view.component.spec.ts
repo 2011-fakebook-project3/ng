@@ -12,6 +12,38 @@ describe('PostViewComponent', () => {
   let component: PostViewComponent;
   let fixture: ComponentFixture<PostViewComponent>;
 
+  const testUser: User = {
+    id: 1,
+    firstName: 'first',
+    lastName: 'last',
+    email: 'e@mail',
+    phoneNumber: undefined,
+    profilePictureUrl: null,
+    status: undefined,
+    birthDate: new Date(2010, 12),
+  };
+
+  const testComment: Comment = {
+    id: 1,
+    userId: 1,
+    content: 'comment content',
+    postId: 1,
+    createdAt: undefined,
+    user: undefined
+  };
+
+  const testPost: Post = {
+    id: 1,
+    content: 'string',
+    user: testUser,
+    pictureUrl: undefined,
+    createdAt: new Date(2020, 12),
+    likedByUserIds: [],
+    commentIds: [1],
+    comments: [testComment],
+    liked: false
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PostViewComponent ]
