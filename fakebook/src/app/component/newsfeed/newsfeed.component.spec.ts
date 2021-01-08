@@ -7,6 +7,7 @@ import { NewsfeedComponent } from './newsfeed.component';
 import { User} from '../../models/user';
 import { Post } from '../../models/post';
 import { Comment} from '../../models/comment';
+import { userInfo } from 'os';
 
 describe('NewsfeedComponent', () => {
   let component: NewsfeedComponent;
@@ -50,9 +51,17 @@ describe('NewsfeedComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display a list of posts of followers if they exists', () => {
+  it('should display a list of posts of followers if they exists', async() => {
     const showPosts = fixture.debugElement.query(By.css('.post')).nativeElement;
     expect(showPosts.tagName).toBe('div');
-    expect(showPosts.attribute).toContain('*ngFor');
+    expect(showPosts.attribute).toContain('*ngIf');
   });
+
+  it('should display user info is user information', async() => {
+        component.user = testUser;
+        component.ngOnInit();
+
+  });
+
+
 });
