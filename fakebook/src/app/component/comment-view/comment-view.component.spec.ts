@@ -5,11 +5,8 @@ import { PostService } from 'src/app/service/post.service';
 describe('CommentViewComponent', () => {
   let component: CommentViewComponent;
   let fixture: ComponentFixture<CommentViewComponent>;
-  let commentDeleteSpy: any;
 
-  const FakeCommentService = {
-    delete(): void { }
-  };
+  const FakePostService = { };
 
   const fakeUser = {
     id: 1,
@@ -34,7 +31,7 @@ describe('CommentViewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CommentViewComponent ],
       providers: [
-        { provide:  PostService, useValue: FakeCommentService}
+        { provide:  PostService, useValue: FakePostService}
       ]
     })
     .compileComponents();
@@ -46,7 +43,6 @@ describe('CommentViewComponent', () => {
 
     component = new CommentViewComponent(TestBed.inject(PostService));
     component.comment = fakeComment;
-    commentDeleteSpy = spyOn(FakeCommentService, 'delete');
   });
 
   it('should create', () => {
@@ -72,8 +68,6 @@ describe('CommentViewComponent', () => {
   });
 
   it('should set the full name', () => {
-    // maybe this one and maybe the profile profile picture one i could test whether it gets set in the first place,
-    //    and then check if the element gets set to it.
     component.setFullName(component.comment);
 
     expect(component.user.fullname).toBe('first last');
