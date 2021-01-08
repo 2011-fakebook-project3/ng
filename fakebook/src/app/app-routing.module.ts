@@ -9,7 +9,7 @@ import { MainViewComponent } from './component/main-view/main-view.component';
 
 const routes: Routes = [
   { path: '', component: MainViewComponent },
-  { path: 'Newsfeed', component: NewsfeedComponent },
+  { path: 'newsfeed', component: NewsfeedComponent },
   { path: 'login/callback', component: OktaCallbackComponent },
   { path: 'logout', component: OktaCallbackComponent },
 ];
