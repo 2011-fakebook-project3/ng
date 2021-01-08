@@ -1,19 +1,24 @@
 <button type="button" class="btn btn-default"
     (click)="toggleNotifications()"
     style= "padding: 5px 5px; border-radius: 5px;">
-    <img src="../../assets/notifications-icon.png" style="width: 24px; height: 28px;">
+
+    <img *ngIf="!this.unreadNotifications" src="../../assets/notifications-icon.png" style="width: 24px; height: 28px;">
+    <img *ngIf="this.unreadNotifications" src="../../assets/notifications-icon-red.png" style="width: 24px; height: 28px;">
+
 </button>
 
 <div *ngIf="this.notificationsView" 
-    class="position-fixed bg-secondary rounded
+    class="position-fixed rounded
             px-0 p-3"
-    style="max-width: 500px; max-height: 400px; overflow-y: auto;">
+    style="max-width: 500px; max-height: 400px; overflow-y: auto; background-color: rgb(235, 233, 233); border-radius: black 5px;">
 
     <div *ngFor="let notif of this.notifications" class="notif-block"
      style="height: 60px; display: flex; align-items: center; border-bottom: 1px solid black;">
-        <div *ngIf="notif.type == 'Like'" >Here is person {{notif.userId}} liking post {{notif.postId}}</div>
-        <div *ngIf="notif.type == 'Post'">Here is person {{notif.userId}} posting post {{notif.postId}}</div>
-        <div *ngIf="notif.type == 'Comment'">Here is person {{notif.userId}} commenting on post {{notif.postId}}</div>
-        <div *ngIf="notif.type == 'Follow'">Here is person {{notif.userId}} following you</div>
+        <img id="profile-picture" class="img-fluid rounded-circle img-float d-block img-md"
+        src="../../assets/notifications-icon.png" style="width: 32px; height: 32px;" alt="noimage">
+        <div *ngIf="notif.type == 'Like'" style="padding-left: 12px;" >Here is person {{notif.userId}} liking post {{notif.postId}}</div>
+        <div *ngIf="notif.type == 'Post'" style="padding-left: 12px;">Here is person {{notif.userId}} posting post {{notif.postId}}</div>
+        <div *ngIf="notif.type == 'Comment'" style="padding-left: 12px;">Here is person {{notif.userId}} commenting on post {{notif.postId}}</div>
+        <div *ngIf="notif.type == 'Follow'" style="padding-left: 12px;">Here is person {{notif.userId}} following you</div>
     </div>
 </div>

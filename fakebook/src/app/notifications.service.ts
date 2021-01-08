@@ -3,7 +3,7 @@ import { observable, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Notification } from './model/notification';
 import { environment } from 'src/environments/environment';
-import * as signalR from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr'
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +11,15 @@ import * as signalR from '@aspnet/signalr';
 export class NotificationsService {
 
   private notifications!: Notification[];
+  private hubConnection: HubConnection
 
-  constructor(private hubConnection: signalR.HubConnection) {
-    this.hubConnection = new signalR.HubConnectionBuilder()
+  constructor() {
+    this.hubConnection = new HubConnectionBuilder()
                              .withUrl(`${environment.baseUrl}/notifications`)
                              .build();
     this.hubConnection.start();
 
-    this.hubConnection.on('transfernotificationdata', (data) => {
+    this.hubConnection.on('SendOne', (data) => {
       this.notifications = data;
     });
   }

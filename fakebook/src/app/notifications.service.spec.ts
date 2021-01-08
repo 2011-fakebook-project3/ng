@@ -38,10 +38,7 @@ describe('NotificationsService', () => {
       { userId: 4, postId: 2, type: 'Post' }
     ];
 
-    service.notifications$.subscribe(value => {
-      expect(value).toBe(testNotifications);
-      done();
-    });
+    expect(service.notifications$).toBe(testNotifications);
 
     const req = httpMock.expectOne(`${environment.baseUrl}/notifications`);
     expect(req.request.method).toBe('GET');

@@ -9,29 +9,35 @@ import { Notification, LikeNotification, PostNotification, CommentNotification, 
 })
 export class NotificationsViewComponent implements OnInit {
 
-  notifications: Notification[] | undefined;
+  // initialize for testing purposes only
+  notifications: Notification[] = [
+    { userId: 1, postId: 1, type: 'Like' },
+    { userId: 2, postId: 1, type: 'Comment' },
+    { userId: 3, type: 'Follow' },
+    { userId: 4, postId: 2, type: 'Post' },
+  ];
   notificationsView = false;
+  unreadNotifications = true;
 
   constructor(
     private notifService: NotificationsService,
     ) { }
 
   ngOnInit(): void {
-    // for testing purposes only
-    /*this.notifications = [
-      { userId: 1, postId: 1, type: 'Like' },
-      { userId: 2, postId: 1, type: 'Comment' },
-      { userId: 3, type: 'Follow' },
-      { userId: 4, postId: 2, type: 'Post' },
-    ];*/
   }
 
   getNotifications(): void {
-    this.notifications = this.notifService.notifications$;
+    let newNotifs = this.notifService.notifications$;
+    if (newNotifs.length > 0) {
+      this.unreadNotifications = true;
+      this.notifications.concat(newNotifs);
+    }
   }
 
   toggleNotifications(): void {
     this.notificationsView = !this.notificationsView;
+    if (this.notificationsView == true){
+      this.unreadNotifications = false;
+    }
   }
-
 }
