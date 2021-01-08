@@ -31,7 +31,8 @@ export class NotificationsService {
       notifs.push({
         userId: element.TriggerUserId,
         type: element.Type.Key,
-        date: element.Date
+        date: element.Date,
+        postId: element.Type.Value
       });
     });
 

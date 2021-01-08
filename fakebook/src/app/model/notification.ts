@@ -1,12 +1,14 @@
 export type LikeNotification = {
     userId: number,
     date: Date,
+    postId: number,
     type: 'Like'
 };
 
 export type PostNotification = {
     userId: number,
     date: Date,
+    postId: number,
     type: 'Post'
 };
 
@@ -19,6 +21,7 @@ export type FollowNotification = {
 export type CommentNotification = {
     userId: number,
     date: Date,
+    postId: number,
     type: 'Comment'
 };
 

@@ -10,12 +10,7 @@ import { Notification } from '../model/notification';
 export class NotificationsViewComponent implements OnInit {
 
   // initialize for testing purposes only
-  notifications: Notification[] = [
-    { userId: 1, type: 'Like', date: new Date() },
-    { userId: 2, type: 'Comment', date: new Date() },
-    { userId: 3, type: 'Follow', date: new Date() },
-    { userId: 4, type: 'Post', date: new Date() },
-  ];
+  notifications: Notification[] = []
   notificationsView = false;
   unreadNotifications = true;
 
