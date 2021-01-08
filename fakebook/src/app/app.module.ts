@@ -9,7 +9,7 @@ import { MainViewComponent } from './component/main-view/main-view.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarViewComponent
+    NavbarViewComponent,
     MainViewComponent
   ],
   imports: [
