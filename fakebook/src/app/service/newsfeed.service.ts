@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { OktaAuthService } from '@okta/okta-angular';
 import { Post } from '../models/post';
 import { User } from '../models/user';
 import { environment} from '../../environments/environment';
@@ -11,7 +12,7 @@ import { AuthService } from './auth.service';
 })
 export class NewsfeedService {
 
-  constructor(private oktaAuth: AuthService, private http: HttpClient) { }
+  constructor(private oktaAuth: OktaAuthService, private http: HttpClient) { }
   url = `${environment.baseUrl}`;
 
   getPosts(): Observable<Post[]> {

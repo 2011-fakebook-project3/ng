@@ -30,7 +30,7 @@ export class NewsfeedComponent implements OnInit {
     if (posts && user) {
       return true;
     }
-    return false
+    return false;
   }
 
 

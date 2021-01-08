@@ -68,7 +68,7 @@ describe('NewsfeedComponent', () => {
   it('should set the user ', () => {
     component.getUser();
     expect(component.user).toBe(testUser);
-  })
+  });
 
   it('should display name in a h3 header', () => {
     const h3 = fixture.debugElement.query(By.css('h3')).nativeElement;

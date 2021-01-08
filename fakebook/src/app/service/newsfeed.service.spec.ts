@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { OktaAuthService } from '@okta/okta-angular';
 import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
@@ -56,7 +56,7 @@ describe('NewsfeedService', () => {
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
-    service = new NewsfeedService(TestBed.inject(AuthService), httpClientSpy as any);
+    service = new NewsfeedService(TestBed.inject(OktaAuthService), httpClientSpy as any);
   });
 
   it('should be created', () => {
