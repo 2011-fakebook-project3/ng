@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
 import { MainViewComponent } from './component/main-view/main-view.component';
-//import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
+import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
+
 
 const config = {
   issuer: 'https://dev-2875280.okta.com/oauth2/default',
@@ -22,7 +23,7 @@ const config = {
     AppComponent,
     NavbarViewComponent,
     MainViewComponent,
-    //NewsfeedComponent
+    NewsfeedComponent,
   ],
   imports: [
     BrowserModule,
