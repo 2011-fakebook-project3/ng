@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -8,23 +8,23 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./navbar-view.component.css']
 })
 export class NavbarViewComponent implements OnInit {
-  isAuthenticated: boolean = false;
+  isAuthenticated = false;
 
-  searchName: string = '';
+  searchName = '';
   constructor(private router: Router) { }
 
-  async ngOnInit() {
+  ngOnInit(): void {
 
   }
-  
-  login() {
-    console.log("login");
+
+  login(): void {
+    console.log('login');
   }
-  logout() {
-    console.log("logout");
+  logout(): void {
+    console.log('logout');
   }
-  onNotifySearch(name: any){
-    console.log(name)
-    this.router.navigate([`search/${name}`], { skipLocationChange: false })
+  onNotifySearch(name: any): void {
+    console.log(name);
+    this.router.navigate([`search/${name}`], { skipLocationChange: false });
   }
 }
