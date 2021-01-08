@@ -12,7 +12,7 @@ export class NavbarViewComponent implements OnInit {
   isAuthenticated = false;
 
   searchName = '';
-  constructor(private router: Router, private oktaAuth: AuthService) { }
+  constructor(private router: Router, public oktaAuth: AuthService) { }
 
   ngOnInit(): void {
     this.oktaAuth.subscribeAuthStateChange((authState: boolean) => {
