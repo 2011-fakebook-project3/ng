@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CommentService } from 'src/app/comment.service';
 import { Comment } from 'src/app/models/comment';
+import { PostService } from 'src/app/service/post.service';
 
 @Component({
   selector: 'app-comment-view',
@@ -20,7 +20,7 @@ export class CommentViewComponent implements OnInit {
   @Output() delete = new EventEmitter<Comment>();
 
 
-  constructor(private commentService: CommentService) { }
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
     if (this.commentAndUserExist(this.comment)) {
@@ -32,7 +32,7 @@ export class CommentViewComponent implements OnInit {
   deleteComment(comment: Comment): void {
     console.log(comment);
     if (comment && comment.id !== undefined) {
-      this.commentService.delete(comment);
+      this.postService.deleteComment(comment);
       this.delete.emit(comment);
     }
   }

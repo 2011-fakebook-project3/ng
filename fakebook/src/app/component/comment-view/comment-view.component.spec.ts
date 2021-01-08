@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommentViewComponent } from './comment-view.component';
-import { CommentService } from 'src/app/comment.service';
+import { PostService } from 'src/app/service/post.service';
 
 describe('CommentViewComponent', () => {
   let component: CommentViewComponent;
@@ -34,7 +34,7 @@ describe('CommentViewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ CommentViewComponent ],
       providers: [
-        { provide:  CommentService, useValue: FakeCommentService}
+        { provide:  PostService, useValue: FakeCommentService}
       ]
     })
     .compileComponents();
@@ -44,7 +44,7 @@ describe('CommentViewComponent', () => {
     fixture = TestBed.createComponent(CommentViewComponent);
     fixture.detectChanges();
 
-    component = new CommentViewComponent(TestBed.inject(CommentService));
+    component = new CommentViewComponent(TestBed.inject(PostService));
     component.comment = fakeComment;
     commentDeleteSpy = spyOn(FakeCommentService, 'delete');
   });
@@ -78,8 +78,4 @@ describe('CommentViewComponent', () => {
 
     expect(component.user.fullname).toBe('first last');
   });
-
-  // it('should delete comments', () => {
-
-  // });
 });
