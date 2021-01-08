@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { observable, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Notification } from './model/notification';
 import { environment } from 'src/environments/environment';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr'
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { ApiNotification } from './model/api-notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationsService {
 
-  private notifications!: Notification[];
-  private hubConnection: HubConnection
+  private notifications: Notification[] = [];
+  private hubConnection: HubConnection;
 
   constructor(private http: HttpClient) {
     this.hubConnection = new HubConnectionBuilder()
@@ -22,6 +22,20 @@ export class NotificationsService {
     this.hubConnection.on('SendOne', (data) => {
       this.notifications = data;
     });
+  }
+
+  mapNotifications(dbNotif: ApiNotification[]): Notification[] {
+    const notifs: Notification[] = [];
+
+    dbNotif.forEach(element => {
+      notifs.push({
+        userId: element.TriggerUserId,
+        type: element.Type.Key,
+        date: element.Date
+      });
+    });
+
+    return notifs;
   }
 
   get notifications$(): Notification[] {
