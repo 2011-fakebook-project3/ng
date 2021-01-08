@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { Comment } from '../models/comment';
+import { User } from '../models/user';
 import { Post } from '../models/post';
 import { NewsfeedService } from './newsfeed.service';
 import { AuthService } from './auth.service';
@@ -14,7 +15,7 @@ describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
-  const url = `${environment.baseUrl}/someUrl`;
+  const url = `${environment.baseUrl}`;
 
 
   const fakeAuthService = {
@@ -24,14 +25,19 @@ describe('NewsfeedService', () => {
     }
   };
 
-
-  const testComments: Comment[] = [
-    { id: 1, content: 'Comment Content 1', postId: 1, createdAt: new Date(), firstName: 'John', lastName: 'Watson' },
-    { id: 2, content: 'Comment Content 2', postId: 1, createdAt: new Date(), firstName: 'Microft', lastName: 'Holmes' }
-  ];
+  const testUser: User = {
+    id: 1,
+    firstName: 'first',
+    lastName: 'last',
+    email: 'e@mail',
+    phoneNumber: undefined,
+    profilePictureUrl: undefined,
+    status: undefined,
+    birthDate: new Date(2010, 12)
+   };
 
   const testPosts: Post[] = [
-    { id: 1, content: 'content 1', createdAt: new Date(), pictureUrl: '', email: 'irene@email.com', comments: testComments },
+    { id: 1, content: 'content 1', createdAt: new Date(), pictureUrl: '', email: 'irene@email.com', comments: [] },
     { id: 2, content: 'content 2', createdAt: new Date(), pictureUrl: '', email: 'moriarty@email.com', comments: [] }
   ];
 
@@ -73,7 +79,7 @@ describe('NewsfeedService', () => {
           done();
         });
 
-       const req = httpTestingController.expectOne(`${url}`); // wating on what the endpoint
+       const req = httpTestingController.expectOne(`${url}/someUrl`); // wating on what the endpoint
 
        expect(req.request.method).toEqual('GET');
        expect(req.request.headers).toBe(token);
@@ -82,5 +88,28 @@ describe('NewsfeedService', () => {
        httpTestingController.verify();
     });
 
+  it('getUser() should return a user',
+    (done) => {
+
+      const token = fakeAuthService.getAccessToken();
+
+      httpClientSpy.get(url, { headers: {
+       Authorization: 'Bearer ' + token,
+     }}).and.returnValue(testUser);
+
+      service.getUser()
+       .subscribe(user => {
+         expect(user).toEqual(testUser);
+         done();
+       });
+
+      const req = httpTestingController.expectOne(`${url}/someUrl`); // wating on what the endpoint
+
+      expect(req.request.method).toEqual('GET');
+      expect(req.request.headers).toBe(token);
+      req.flush(testPosts);
+
+      httpTestingController.verify();
+   });
 
 });

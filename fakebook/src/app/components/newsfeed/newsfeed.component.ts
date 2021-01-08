@@ -10,33 +10,29 @@ import { NewsfeedService } from '../../services/newsfeed.service';
 })
 export class NewsfeedComponent implements OnInit {
 
-   posts : Post[] = [];
-   user: User;
-
-   testposts:Post[] =[
-    { id: 1, content: 'content 1', createdAt: new Date(), pictureUrl: '', email: 'irene@email.com', comments: [] },
-    { id: 2, content: 'content 2', createdAt: new Date(), pictureUrl: '', email: 'moriarty@email.com', comments: [] }
-   ]
+   posts: Post[] = [];
+   user: User | null = null;
 
   constructor(
     private newsfeedService: NewsfeedService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.posts);
+
     this.getPosts();
     this.getUser();
     console.log(this.posts);
     console.log(this.user);
   }
 
-  getPosts(){
+  getPosts(): void {
     this.newsfeedService.getPosts()
     .subscribe((gotPosts) => this.posts = gotPosts);
   }
 
-  getUser(){
+  getUser(): void {
     this.newsfeedService.getUser()
     .subscribe((gotUser) => this.user = gotUser);
   }
+
 }
