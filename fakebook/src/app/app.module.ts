@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
-import { NavbarViewComponent } from './navbar-view/navbar-view.component';
+import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
 import { MainViewComponent } from './component/main-view/main-view.component';
 
 @NgModule({
