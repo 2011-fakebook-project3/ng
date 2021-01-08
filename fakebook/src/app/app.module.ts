@@ -16,7 +16,7 @@ const config = {
   redirectUri: `${window.location.origin}/login/callback`,
   scopes: ['openid'],
   postLogoutRedirectUri: window.location.origin
-}
+};
 
 @NgModule({
   declarations: [

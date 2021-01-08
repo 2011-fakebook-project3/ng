@@ -11,7 +11,7 @@ import { map, filter, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated: boolean = false;
+  isAuthenticated = false;
 
   constructor(public oktaAuth: OktaAuthService, public router: Router) {
     this.oktaAuth.$authenticationState.subscribe((isAuthenticated) =>
