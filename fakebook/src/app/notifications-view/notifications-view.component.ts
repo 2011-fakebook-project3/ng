@@ -11,10 +11,10 @@ export class NotificationsViewComponent implements OnInit {
 
   // initialize for testing purposes only
   notifications: Notification[] = [
-    { userId: 1, postId: 1, type: 'Like' },
-    { userId: 2, postId: 1, type: 'Comment' },
-    { userId: 3, type: 'Follow' },
-    { userId: 4, postId: 2, type: 'Post' },
+    { userId: 1, postId: 1, type: 'Like', date: new Date() },
+    { userId: 2, postId: 1, type: 'Comment', date: new Date() },
+    { userId: 3, type: 'Follow', date: new Date() },
+    { userId: 4, postId: 2, type: 'Post', date: new Date() },
   ];
   notificationsView = false;
   unreadNotifications = true;
@@ -24,6 +24,7 @@ export class NotificationsViewComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.getNotifications();
   }
 
   getNotifications(): void {

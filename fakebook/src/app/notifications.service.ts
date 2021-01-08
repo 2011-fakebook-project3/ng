@@ -13,7 +13,7 @@ export class NotificationsService {
   private notifications!: Notification[];
   private hubConnection: HubConnection
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.hubConnection = new HubConnectionBuilder()
                              .withUrl(`${environment.baseUrl}/notifications`)
                              .build();
@@ -26,5 +26,9 @@ export class NotificationsService {
 
   get notifications$(): Notification[] {
     return this.notifications;
+  }
+
+  setUnread(id: number): void {
+    this.http.post(`${environment.baseUrl}/notifications`, id);
   }
 }

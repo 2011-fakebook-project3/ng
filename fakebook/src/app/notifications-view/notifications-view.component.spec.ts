@@ -39,10 +39,10 @@ describe('NotificationsViewComponent', () => {
 
   it('should contain a list of notifications', (done) => {
     const testNotifications: Notification[] = [
-      { userId: 1, postId: 1, type: 'Like' },
-      { userId: 2, postId: 1, type: 'Comment' },
-      { userId: 3, type: 'Follow' },
-      { userId: 4, postId: 2, type: 'Post' }
+      { userId: 1, postId: 1, type: 'Like', date: new Date() },
+      { userId: 2, postId: 1, type: 'Comment', date: new Date() },
+      { userId: 3, type: 'Follow', date: new Date() },
+      { userId: 4, postId: 2, type: 'Post', date: new Date() },
     ];
 
     component.getNotifications();
