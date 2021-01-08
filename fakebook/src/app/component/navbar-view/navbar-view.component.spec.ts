@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service'
+import { AuthService } from '../../service/auth.service';
 import { NEVER } from 'rxjs';
 
 import { NavbarViewComponent } from './navbar-view.component';
@@ -29,7 +29,7 @@ describe('NavbarViewComponent', () => {
       declarations: [ NavbarViewComponent ],
       providers: [
         {provide: Router, useValue: {}},
-        {provide: AuthService, useValue:mockOktaAuthService}
+        {provide: AuthService, useValue: mockOktaAuthService}
       ]
     })
     .compileComponents();
