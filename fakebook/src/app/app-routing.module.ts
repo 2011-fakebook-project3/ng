@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
+import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
+import { MainViewComponent } from './component/main-view/main-view.component';
+
 
 const routes: Routes = [
-  { path: 'Newsfeed', component: NewsfeedComponent }
+    {  path: '', component: MainViewComponent },
+    { path: 'Newsfeed', component: NewsfeedComponent }
 ];
 
 @NgModule({

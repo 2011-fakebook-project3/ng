@@ -8,7 +8,7 @@ import { Comment } from '../models/comment';
 import { User } from '../models/user';
 import { Post } from '../models/post';
 import { NewsfeedService } from './newsfeed.service';
-import { AuthService } from './auth.service';
+import { AuthService } from '../service/auth.service';
 
 
 describe('NewsfeedService', () => {

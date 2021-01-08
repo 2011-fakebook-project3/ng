@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post';
 import { User } from '../models/user';
 import { environment} from '../../environments/environment';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'

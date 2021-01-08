@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Post } from '../../models/post';
-import { NewsfeedService } from '../../services/newsfeed.service';
+import { NewsfeedService } from '../../service/newsfeed.service';
 
 @Component({
   selector: 'app-newsfeed',
