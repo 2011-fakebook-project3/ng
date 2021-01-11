@@ -13,12 +13,12 @@ export class PostService {
   baseUrl = 'someUrl';
   url = `${this.baseUrl}/api/Posts`; // update with our base url
 
+  headers = {
+    Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
+    Accept: 'application/json',
+  };
+
   create(post: Post): Observable<Post> {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
     return this.http.post<Post>(`${this.url}`, post);
   }
 
@@ -31,11 +31,6 @@ export class PostService {
     }
 
   delete(postId: number): Observable<void> {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
     return this.http.delete<void>(`${this.url}/${postId}`);
   }
 }

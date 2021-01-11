@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NavigationBehaviorOptions , Router } from '@angular/router';
+import { ActivatedRoute, NavigationBehaviorOptions , Router } from '@angular/router';
 import { NEVER } from 'rxjs';
 
 import { User } from '../../model/user';
 import { Comment } from '../../model/comment';
 import { Post } from '../../model/post';
 import { PostViewComponent } from './post-view.component';
+import { PostService } from '../../service/post.service';
 
 describe('PostViewComponent', () => {
   let component: PostViewComponent;
@@ -28,44 +29,48 @@ describe('PostViewComponent', () => {
     userId: 1,
     content: 'comment content',
     postId: 1,
-    createdAt: undefined,
-    user: undefined
+    createdAt: undefined
   };
 
   const testPost: Post = {
     id: 1,
     content: 'string',
-    user: testUser,
+    userId: 1,
     pictureUrl: undefined,
     createdAt: new Date(2020, 12),
     likedByUserIds: [],
     commentIds: [1],
-    comments: [testComment],
     liked: false
   };
 
   beforeEach(async () => {
+    const mockPostService = {
+      delete(id: number): void {}
+    };
+
     await TestBed.configureTestingModule({
-      declarations: [ PostViewComponent ]
+      declarations: [ PostViewComponent ],
+      providers: [
+        {provide: PostService, useValue: mockPostService},
+        {provide: ActivatedRoute, useValue: {}}
+      ]
     })
     .compileComponents();
     fixture = TestBed.createComponent(PostViewComponent);
-    component = fixture.componentInstance;
+    component = new PostViewComponent(TestBed.inject(ActivatedRoute), TestBed.inject(PostService));
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should display a post if one exists', () => {
-    const showPost = fixture.debugElement.query(By.css('.post')).nativeElement;
-    expect(showPost.tagName).toBe('div');
-    expect(showPost.attribute).toContain('*ngIf');
+    expect(component.comments).toBeNull();
+    expect(component.userid).toBe(0);
   });
 
   it('should delete a post on deletePost()', () => {
+    spyOn(component.postService, 'delete');
     component.deletePost(testPost);
-    expect(testPost).toBeUndefined();
+    expect(component.post).toBeNull();
+    expect(component.postService.delete).toHaveBeenCalled();
   });
 });

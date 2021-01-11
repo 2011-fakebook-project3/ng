@@ -7,142 +7,47 @@ import { Comment } from 'src/app/model/comment';
 import { PostService } from './post.service';
 import { Post } from '../model/post';
 import { of } from 'rxjs';
+import { OktaAuthService } from '@okta/okta-angular';
 
 describe('PostService', () => {
-  let postService: PostService;
+  let service: PostService;
   let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy }; // spy with some functions
-  let oktaSpy: {getAccessToken: jasmine.Spy};
   let httpTestingController: HttpTestingController; // mock backend
   const url = `someUrl/api/Posts`; // test base url
 
-  // some test data
-  const testUser: User = {
-    id: 1,
-    firstName: 'first',
-    lastName: 'last',
-    email: 'e@mail',
-    phoneNumber: undefined,
-    profilePictureUrl: null,
-    status: undefined,
-    birthDate: new Date(2010, 12),
-  };
-
-  const testComment: Comment = {
-    id: 1,
-    userId: 1,
-    content: 'comment content',
-    postId: 1,
-    createdAt: undefined,
-    user: undefined
-  };
-
-  const testPost: Post = {
-    id: 1,
-    content: 'string',
-    user: testUser,
-    pictureUrl: undefined,
-    createdAt: new Date(2020, 12),
-    likedByUserIds: [],
-    commentIds: [1],
-    comments: [testComment],
-    liked: false
-  };
-
   beforeEach(() => {
+    const mockOktaAuthService = {
+      getAccessToken(): string {
+        return '0';
+      }
+    };
+    const mockHttpClient = {};
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ]
-    });
+      imports: [ HttpClientTestingModule ],
+      providers: [
+        { provide: HttpClient, useValue: mockHttpClient},
+        { provide: OktaAuthService, useValue: mockOktaAuthService}
+      ]
+    }).compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'delete', 'post']);
-    oktaSpy = jasmine.createSpyObj('OktaAuthService', ['getAccessToken']);
 
-    postService = new PostService(httpClientSpy as any, oktaSpy as any); // add oktaSpy when implemented
+    service = new PostService(httpClientSpy as any, TestBed.inject(OktaAuthService));
   });
 
   it('should be created', () => {
-    expect(postService).toBeTruthy();
+    service = new PostService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
+    expect(service).toBeTruthy();
   });
 
-  // GET
-  it('can test postService.getById', (done) => {
-
-    httpClientSpy.get.and.returnValue(of(testPost));
-
-    // make get request
-    postService.getById(testPost.id)
-      .subscribe(post =>
-      {
-        expect(post).toEqual(testPost);
-        done();
-      });
-
-    // mock backend expects one request
-    const req = httpTestingController.expectOne(`${url}/${testPost.id}`);
-
-    expect(req.request.method).toEqual('GET');
-    expect(req.request.body).toBeNull();
-    expect(req.request.params.has(`${testPost.id}`)).toBeTrue();
-
-    // Respond with mock data, causing Observable to resolve.
-    // Subscribe callback asserts that correct data was returned.
-    req.flush(testPost);
-
-    // assert that there are no outstanding requests.
-    httpTestingController.verify();
+  it('should have correct access token and headers', () => {
+    expect(service.headers.Authorization).toBe('Bearer 0');
+    expect(service.headers.Accept).toBe('application/json');
   });
 
-  // POST
-  it('can test postService.create', (done) => {
-
-    httpClientSpy.post.and.returnValue(of(testPost));
-
-    // make post request
-    postService.create(testPost)
-      .subscribe(post =>
-      {
-        expect(post).toEqual(testPost);
-        done();
-      });
-
-    // mock backend expects one request
-    const req = httpTestingController.expectOne(`${url}`);
-
-    // test features of request
-    expect(req.request.method).toEqual('POST');
-    expect(req.request.body).toEqual(testPost);
-    expect(req.request.params.has(`${testPost}`)).toBeTrue();
-
-    // resolve request to mock backend
-    req.flush(testPost);
-
-    // assert that there are no outstanding requests.
-    httpTestingController.verify();
-  });
-  // DELETE
-  it('can test postService.delete', (done) => {
-
-    httpClientSpy.delete.and.returnValue(of(null));
-
-    // make delete request
-    postService.delete(testPost.id)
-    .subscribe(value =>
-      {
-        expect(value).toBeNull();
-        done();
-      });
-    // mock backend expects one request
-    const req = httpTestingController.expectOne(`${url}/${testPost.id}`);
-
-    // test features of request
-    expect(req.request.method).toEqual('DELETE');
-    expect(req.request.body).toBeNull();
-    expect(req.request.params.has(`${testPost.id}`)).toBeTrue();
-
-    // resolve request to mock backend
-    req.flush(null);
-
-    // assert that there are no outstanding requests.
-    httpTestingController.verify();
+  it('should have the correct urls', () => {
+    expect(service.baseUrl).toBe('someUrl');
+    expect(service.url).toBe(`${service.baseUrl}/api/Posts`);
   });
 });
