@@ -4,10 +4,10 @@
     <!-- Box for making new comments responding to the post -->
     <div class="card mt-2 mb-2">
       <div class="d-flex justify-content-between p-2 px-3 ">
-        <div class="d-flex mt-2 flex-row align-items-center flex-fill"> <img src="{{user.profilePictureUrl}}" width="50" class="rounded-circle img-fluid">
+        <div class="d-flex mt-2 flex-row align-items-center flex-fill"> <img src="{{user.profilePictureUrl}}" alt="{{user.profilePictureUrl}}" width="50" class="rounded-circle img-fluid">
           <div class="d-flex flex-column ml-2">
             <a href="/user/{{user.id}}">
-              <b>{{user.firstName}} {{user.lastName}}</b>
+              <strong>{{user.firstName}} {{user.lastName}}</strong>
             </a>
             <small class="text-muted">{{post.createdAt | date:'medium'}}</small>
           </div>
@@ -16,7 +16,7 @@
             </div>
         </div>
       </div>
-      <img src="{{post.pictureUrl}}" class="img-fluid">
+      <img src="{{post.pictureUrl}}" alt="{{post.pictureUrl}}" class="img-fluid">
       <div class="p-2">
         <p class="ml-5  ">{{post.content}}</p>
         <div *ngIf='comments!=undefined'>
