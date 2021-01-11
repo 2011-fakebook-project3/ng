@@ -23,7 +23,7 @@ export class NotificationsService {
 
     this.hubConnection.on('SendCaller', (data) => {
       console.log(data);
-      console.log("memes")
+      console.log('memes');
     });
   }
 

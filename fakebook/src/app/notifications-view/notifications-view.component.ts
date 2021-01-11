@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../service/notifications.service';
 import { Notification } from '../model/notification';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
@@ -12,7 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 export class NotificationsViewComponent implements OnInit {
 
   // initialize for testing purposes only
-  notifications: Notification[] = []
+  notifications: Notification[] = [];
   notificationsView = false;
   unreadNotifications = false;
 
