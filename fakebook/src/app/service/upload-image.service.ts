@@ -7,12 +7,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UploadImageService {
-  baseUrl: string = `${environment.profile.url}/api/profiles/`;
-  
+  baseUrl = `${environment.profile.url}/api/profiles/`;
+
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
 
-  public UploadImage(formData: FormData) {
-    let headers = {
+  public UploadImage(formData: FormData): Promise<any> {
+    const headers = {
       headers: {
         Authorization: 'Bearer ' + this.oktaAuth.getAccessToken()
       }
