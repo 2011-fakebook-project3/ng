@@ -59,6 +59,7 @@ describe('PostService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'delete', 'post']);
+    oktaSpy = jasmine.createSpyObj('');
 
     postService = new PostService(httpClientSpy as any, oktaSpy as any); // add oktaSpy when implemented
   });
