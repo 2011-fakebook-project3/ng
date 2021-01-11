@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { OktaCallbackComponent } from '@okta/okta-angular';
 
 import { Post } from '../model/post';
 
