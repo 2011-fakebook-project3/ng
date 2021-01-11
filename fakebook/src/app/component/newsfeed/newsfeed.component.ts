@@ -18,21 +18,12 @@ export class NewsfeedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.userAndPostExists(this.posts, this.user)) {
+
       this.getPosts();
       this.getUser();
-    }
-    console.log(this.posts);
-    console.log(this.user);
+      console.log(this.user);
+      console.log(this.posts);
   }
-
-  userAndPostExists(posts: Post[], user: User | null): boolean {
-    if (posts && user) {
-      return true;
-    }
-    return false;
-  }
-
 
   getPosts(): void {
     this.newsfeedService.getPosts()
@@ -42,6 +33,7 @@ export class NewsfeedComponent implements OnInit {
   getUser(): void {
     this.newsfeedService.getUser()
       .subscribe((gotUser) => this.user = gotUser);
+
   }
 
 }

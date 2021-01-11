@@ -12,25 +12,20 @@ import { AuthService } from './auth.service';
 })
 export class NewsfeedService {
 
-  constructor(private oktaAuth: OktaAuthService, private http: HttpClient) { }
+  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
   url = `${environment.baseUrl}`;
 
+  headers = {
+    Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
+    Accept: 'application/json',
+  };
+
   getPosts(): Observable<Post[]> {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
-    return this.http.get<Post[]>(`${this.url}/someurl`, { headers });
+    return this.http.get<Post[]>(`${this.url}/api/posts`);
   }
 
   getUser(): Observable<User>{
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
-    return this.http.get<User>(`${this.url}/someurl`, { headers });
+    return this.http.get<User>(`${this.url}/api/user`);
   }
 
 }
