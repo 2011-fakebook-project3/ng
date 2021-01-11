@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarViewComponent } from './navbar-view.component';
+import { NewsfeedComponent } from './newsfeed.component';
 
-describe('NavbarViewComponent', () => {
-  let component: NavbarViewComponent;
-  let fixture: ComponentFixture<NavbarViewComponent>;
+describe('NewsfeedComponent', () => {
+  let component: NewsfeedComponent;
+  let fixture: ComponentFixture<NewsfeedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavbarViewComponent ]
+      declarations: [ NewsfeedComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavbarViewComponent);
+    fixture = TestBed.createComponent(NewsfeedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
