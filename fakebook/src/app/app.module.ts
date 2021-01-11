@@ -4,12 +4,8 @@ import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
 import { PostViewComponent } from './component/post-view/post-view.component';
 import { NavbarViewComponent } from './navbar-view/navbar-view.component';
-=======
-import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
->>>>>>> 11d9d7e45f7748121e11a5fb76f609dc6c0cda14
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 
