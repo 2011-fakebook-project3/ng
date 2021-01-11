@@ -21,12 +21,9 @@ describe('PostService', () => {
     lastName: 'last',
     email: 'e@mail',
     phoneNumber: undefined,
-    password: 'password',
     profilePictureUrl: null,
     status: undefined,
     birthDate: new Date(2010, 12),
-    followers: [],
-    followees: []
   };
 
   const testComment: Comment = {
@@ -34,9 +31,7 @@ describe('PostService', () => {
     userId: 1,
     content: 'comment content',
     postId: 1,
-    parentCommentId: undefined,
     createdAt: undefined,
-    childCommentIds: [],
     user: undefined
   };
 
