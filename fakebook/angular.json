@@ -26,7 +26,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "nginx-custom.conf"
+              "src/nginx-custom.conf"
             ],
             "styles": [
               "src/styles.css"
@@ -90,7 +90,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "nginx-custom.conf"
+              "src/nginx-custom.conf"
             ],
             "styles": [
               "src/styles.css"
