@@ -14,6 +14,7 @@ import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
+import { CommonModule } from '@angular/common';
 
 @Pipe({
   name: 'timeAgo',
@@ -43,7 +44,8 @@ const config = {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    OktaAuthModule
+    OktaAuthModule,
+    CommonModule
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
   bootstrap: [AppComponent]

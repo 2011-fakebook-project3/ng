@@ -21,4 +21,8 @@
         <div *ngIf="notif.type == 'Comment'" style="padding-left: 12px;">Here is person {{notif.userId}} commenting on post <br>{{notif.date.toString() | timeAgo}}</div>
         <div *ngIf="notif.type == 'Follow'" style="padding-left: 12px;">Here is person {{notif.userId}} following you<br>{{notif.date.toString() | timeAgo}}</div>
     </div>
+
+    <div *ngIf="this.notifications.length === 0">
+        <div>You have no new notifications</div>
+    </div>
 </div>

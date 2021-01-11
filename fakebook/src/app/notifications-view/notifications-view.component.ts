@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../service/notifications.service';
 import { Notification } from '../model/notification';
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-notifications-view',
