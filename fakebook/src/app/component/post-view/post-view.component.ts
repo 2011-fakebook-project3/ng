@@ -23,7 +23,7 @@ export class PostViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private postService: PostService
+    public postService: PostService
   ) {
   }
 
