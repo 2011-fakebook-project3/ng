@@ -24,7 +24,7 @@ export class NotificationsService {
     this.hubConnection.start();
 
     this.hubConnection.on('SendAll', (data, data2) => {
-      this.notifications.next(this.mapNotifications([data2] as ApiNotification[]))
+      this.notifications.next(this.mapNotifications([data2] as ApiNotification[]));
     });
   }
 

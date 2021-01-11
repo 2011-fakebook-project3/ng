@@ -28,9 +28,12 @@ export class NotificationsViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.notifService.notificationsObs.subscribe((notifs) => {
-      this.notifications.push.apply(notifs);
+      notifs.forEach(element => {
+        this.notifications.push(element);
+      });
       this.unreadNotifications = true;
-      console.log(notifs)
+      console.log(notifs);
+      console.log(this.notifications);
     });
   }
 
