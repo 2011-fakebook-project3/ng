@@ -11,7 +11,7 @@ import { User } from 'src/app/model/user';
 export class ProfileService {
   baseUrl = `${environment.profile.url}/api/profiles/`;
 
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
+  constructor(public http: HttpClient, private oktaAuth: OktaAuthService) { }
 
 // headers for all function calls.
   headers = {

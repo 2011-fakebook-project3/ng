@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   baseURL: 'http://localhost:4200/',
   profile: {
-    url: 'http://localhost:4200/'
+    url: 'http://localhost:4200'
   }
 };
 
