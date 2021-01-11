@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
+import { NEVER } from 'rxjs';
 
 import { NavbarViewComponent } from './navbar-view.component';
 
@@ -8,13 +10,30 @@ describe('NavbarViewComponent', () => {
   let fixture: ComponentFixture<NavbarViewComponent>;
 
   beforeEach(async () => {
+    const mockOktaAuthService = {
+      $authenticationState: NEVER,
+      isAuthenticated(): Promise<boolean> {
+        return Promise.resolve(false);
+      },
+      signInWithRedirect(): void {},
+      subscribeAuthStateChange(): void {},
+      login(): void {},
+      logout(): void {},
+      signOut(): void {},
+      tokenManager: {
+        clear(): void {}
+      }
+    };
+
     await TestBed.configureTestingModule({
       declarations: [ NavbarViewComponent ],
       providers: [
-        {provide: Router, useValue: {}}
+        {provide: Router, useValue: {}},
+        {provide: AuthService, useValue: mockOktaAuthService}
       ]
     })
     .compileComponents();
+
   });
 
   beforeEach(() => {
@@ -32,17 +51,17 @@ describe('NavbarViewComponent', () => {
   });
 
   it('should call login', () => {
-    spyOn(console, 'log');
+    spyOn(component.oktaAuth, 'login');
     component.login();
 
-    expect(console.log).toHaveBeenCalled();
+    expect(component.oktaAuth.login).toHaveBeenCalled();
   });
 
   it('should call logout', () => {
-    spyOn(console, 'log');
+    spyOn(component.oktaAuth, 'logout');
     component.logout();
 
-    expect(console.log).toHaveBeenCalled();
+    expect(component.oktaAuth.logout).toHaveBeenCalled();
   });
 
   it('should have a empty search name', () => {

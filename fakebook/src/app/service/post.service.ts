@@ -8,19 +8,29 @@ import { Post } from '../model/post';
   providedIn: 'root'
 })
 export class PostService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
   baseUrl = 'someUrl';
   url = `${this.baseUrl}/api/Posts`; // update with our base url
 
   create(post: Post): Observable<Post> {
-    return undefined as unknown as Observable<Post>;
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    return this.http.post<Post>(`${this.url}`, post);
   }
 
   getById(id: number): Observable<Post> {
-    return undefined as unknown as Observable<Post>;
+    return this.http.get<Post>(`${this.url}/${id}`);
     }
 
   delete(postId: number): Observable<void> {
-    return undefined as unknown as Observable<void>;
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    return this.http.delete<void>(`${this.url}/${postId}`);
   }
 }
