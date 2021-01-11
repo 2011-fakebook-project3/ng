@@ -9,7 +9,7 @@ import { Post } from '../model/post';
 import { OktaAuthService } from '@okta/okta-angular';
 
 describe('PostService', () => {
-  let postService: PostService;
+  let service: PostService;
   let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy }; // spy with some functions
   let httpTestingController: HttpTestingController; // mock backend
   const url = `testurl.net/api/Posts`; // test base url
@@ -32,11 +32,21 @@ describe('PostService', () => {
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'delete', 'post']);
 
-    postService = new PostService(httpClientSpy as any, TestBed.inject(OktaAuthService));
+    service = new PostService(httpClientSpy as any, TestBed.inject(OktaAuthService));
   });
 
   it('should be created', () => {
-    postService = new PostService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
-    expect(postService).toBeTruthy();
+    service = new PostService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
+    expect(service).toBeTruthy();
+  });
+
+  it('should have correct access token and headers', () => {
+    expect(service.headers.Authorization).toBe('Bearer 0');
+    expect(service.headers.Accept).toBe('application/json');
+  });
+
+  it('should have the correct urls', () => {
+    expect(service.baseUrl).toBe('someUrl');
+    expect(service.url).toBe(`${service.baseUrl}/api/Posts`);
   });
 });
