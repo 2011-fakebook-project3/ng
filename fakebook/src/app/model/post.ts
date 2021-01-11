@@ -1,14 +1,10 @@
-import { User } from './user';
-import { Comment } from './comment';
-
 export interface Post {
   id: number;
   content: string;
-  user: User;
+  userId: number;
   pictureUrl: string | undefined;
   createdAt: Date;
   likedByUserIds: number[];
   commentIds: number[];
-  comments: Comment[];
   liked: boolean | false;
 }
