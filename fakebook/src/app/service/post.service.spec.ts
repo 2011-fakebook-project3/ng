@@ -10,6 +10,7 @@ import { Post } from '../model/post';
 describe('PostService', () => {
   let postService: PostService;
   let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy }; // spy with some functions
+  let oktaSpy: {};
   let httpTestingController: HttpTestingController; // mock backend
   const url = `testurl.net/api/Posts`; // test base url
 
@@ -59,7 +60,7 @@ describe('PostService', () => {
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'delete', 'post']);
 
-    postService = new PostService(httpClientSpy as any); // add oktaSpy when implemented
+    postService = new PostService(httpClientSpy as any, oktaSpy as any); // add oktaSpy when implemented
   });
 
   it('should be created', () => {

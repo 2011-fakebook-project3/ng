@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { OktaCallbackComponent } from '@okta/okta-angular';
+import { OktaAuthService, OktaCallbackComponent } from '@okta/okta-angular';
 
 import { Post } from '../model/post';
 
@@ -24,6 +24,10 @@ export class PostService {
 
   getById(id: number): Observable<Post> {
     return this.http.get<Post>(`${this.url}/${id}`);
+    }
+
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.url}`);
     }
 
   delete(postId: number): Observable<void> {
