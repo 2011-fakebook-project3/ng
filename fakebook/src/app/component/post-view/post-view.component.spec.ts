@@ -48,7 +48,7 @@ describe('PostViewComponent', () => {
   beforeEach(async () => {
     const mockPostService = {
       delete(id: number): void {}
-    }
+    };
 
     await TestBed.configureTestingModule({
       declarations: [ PostViewComponent ],
