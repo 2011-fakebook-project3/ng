@@ -1,28 +1,28 @@
 export type LikeNotification = {
-    userId: number,
+    userId: string,
     date: Date,
     postId: number,
-    type: 'Like'
+    type: 'like'
 };
 
 export type PostNotification = {
-    userId: number,
+    userId: string,
     date: Date,
     postId: number,
-    type: 'Post'
+    type: 'post'
 };
 
 export type FollowNotification = {
-    userId: number,
+    userId: string,
     date: Date,
-    type: 'Follow'
+    type: 'follow'
 };
 
 export type CommentNotification = {
-    userId: number,
+    userId: string,
     date: Date,
     postId: number,
-    type: 'Comment'
+    type: 'comment'
 };
 
 export type Notification =
