@@ -6,13 +6,14 @@ import { User} from 'src/app/model/user';
 import { Comment } from 'src/app/model/comment';
 import { PostService } from './post.service';
 import { Post } from '../model/post';
+import { of } from 'rxjs';
 
 describe('PostService', () => {
   let postService: PostService;
   let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy }; // spy with some functions
-  let oktaSpy: {};
+  let oktaSpy: {getAccessToken: jasmine.Spy};
   let httpTestingController: HttpTestingController; // mock backend
-  const url = `testurl.net/api/Posts`; // test base url
+  const url = `someUrl/api/Posts`; // test base url
 
   // some test data
   const testUser: User = {
@@ -54,7 +55,7 @@ describe('PostService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'delete', 'post']);
-    oktaSpy = jasmine.createSpyObj('');
+    oktaSpy = jasmine.createSpyObj('OktaAuthService', ['getAccessToken']);
 
     postService = new PostService(httpClientSpy as any, oktaSpy as any); // add oktaSpy when implemented
   });
@@ -66,7 +67,7 @@ describe('PostService', () => {
   // GET
   it('can test postService.getById', (done) => {
 
-    httpClientSpy.get.and.returnValue(testPost);
+    httpClientSpy.get.and.returnValue(of(testPost));
 
     // make get request
     postService.getById(testPost.id)
@@ -94,7 +95,7 @@ describe('PostService', () => {
   // POST
   it('can test postService.create', (done) => {
 
-    httpClientSpy.post.and.returnValue(testPost);
+    httpClientSpy.post.and.returnValue(of(testPost));
 
     // make post request
     postService.create(testPost)
@@ -121,7 +122,7 @@ describe('PostService', () => {
   // DELETE
   it('can test postService.delete', (done) => {
 
-    httpClientSpy.delete.and.returnValue(testPost);
+    httpClientSpy.delete.and.returnValue(of(null));
 
     // make delete request
     postService.delete(testPost.id)
