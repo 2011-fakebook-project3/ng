@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { NotificationsService } from '../notifications.service';
+import { NotificationsService } from '../service/notifications.service';
 import { Notification } from '../model/notification';
 
 @Component({

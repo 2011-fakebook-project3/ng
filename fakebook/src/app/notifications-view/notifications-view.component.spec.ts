@@ -1,6 +1,6 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationsService } from '../notifications.service';
+import { NotificationsService } from '../service/notifications.service';
 import { Type } from '@angular/core';
 import { Notification } from '../model/notification';
 

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { Notification, LikeNotification, CommentNotification, PostNotification, FollowNotification } from './model/notification';
+import { Notification, LikeNotification, CommentNotification, PostNotification, FollowNotification } from '../model/notification';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { NotificationsService } from './notifications.service';

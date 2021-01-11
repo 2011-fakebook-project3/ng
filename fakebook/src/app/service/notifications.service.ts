@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Notification } from './model/notification';
+import { Notification } from '../model/notification';
 import { environment } from 'src/environments/environment';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
-import { ApiNotification } from './model/api-notification';
+import { ApiNotification } from '../model/api-notification';
 
 @Injectable({
   providedIn: 'root'
