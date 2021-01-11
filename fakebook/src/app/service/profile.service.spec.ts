@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Observable } from 'rxjs';
-import { User } from '../model/user'
 
 import { ProfileService } from './profile.service';
 
