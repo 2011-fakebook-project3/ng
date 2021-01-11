@@ -30,19 +30,17 @@ describe('PostService', () => {
     userId: 1,
     content: 'comment content',
     postId: 1,
-    createdAt: undefined,
-    user: undefined
+    createdAt: undefined
   };
 
   const testPost: Post = {
     id: 1,
     content: 'string',
-    user: testUser,
+    userId: 1,
     pictureUrl: undefined,
     createdAt: new Date(2020, 12),
     likedByUserIds: [],
     commentIds: [1],
-    comments: [testComment],
     liked: false
   };
 
