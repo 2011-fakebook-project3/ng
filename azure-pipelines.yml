@@ -43,9 +43,10 @@ stages:
       workingDirectory: $(appDir)
     
     - task: AzureRmWebAppDeployment@4
+      displayName: azure app service deploy
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Azure subscription 1(1)(b039e9a7-436a-45e5-9c21-b3c078fecd2c)'
-        appType: 'webAppLinux'
+        appType: 'webApp'
         WebAppName: '2011-Revature-Fakebook'
         packageForLinux: '$(appDir)/dist/$(appDir)'
