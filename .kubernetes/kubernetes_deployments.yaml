@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: fakebook-spa
-        image: fakebookng:latest
+        image: fakebook.azurecr.io/fakebookng:latest
         ports:
         - containerPort: 80
         resources:
