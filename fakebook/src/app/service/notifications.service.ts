@@ -4,6 +4,7 @@ import { Notification } from '../model/notification';
 import { environment } from 'src/environments/environment';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { ApiNotification } from '../model/api-notification';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class NotificationsService {
   private notifications: Notification[] = [];
   private hubConnection: HubConnection;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: OktaAuthService) {
+
     this.hubConnection = new HubConnectionBuilder()
                              .withUrl(`${environment.baseUrl}/notifications`)
                              .build();
