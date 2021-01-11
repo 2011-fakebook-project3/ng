@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -11,17 +12,19 @@ export class NavbarViewComponent implements OnInit {
   isAuthenticated = false;
 
   searchName = '';
-  constructor(private router: Router) { }
+  constructor(private router: Router, public oktaAuth: AuthService) { }
 
   ngOnInit(): void {
-
+    this.oktaAuth.subscribeAuthStateChange((authState: boolean) => {
+      this.isAuthenticated = authState;
+    });
   }
 
   login(): void {
-    console.log('login');
+    this.oktaAuth.login();
   }
   logout(): void {
-    console.log('logout');
+    this.oktaAuth.logout();
   }
   onNotifySearch(name: any): void {
     console.log(name);
