@@ -12,7 +12,7 @@ export class NotificationsViewComponent implements OnInit {
   // initialize for testing purposes only
   notifications: Notification[] = []
   notificationsView = false;
-  unreadNotifications = true;
+  unreadNotifications = false;
 
   constructor(
     private notifService: NotificationsService,

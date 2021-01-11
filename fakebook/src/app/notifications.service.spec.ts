@@ -32,10 +32,10 @@ describe('NotificationsService', () => {
   it('should return a list of notifications from observable', (done) => {
 
     const testNotifications: Notification[] = [
-      { userId: 1, type: 'Like', date: new Date() },
-      { userId: 2, type: 'Comment', date: new Date() },
+      { userId: 1, postId: 1, type: 'Like', date: new Date() },
+      { userId: 2, postId: 2, type: 'Comment', date: new Date() },
       { userId: 3, type: 'Follow', date: new Date() },
-      { userId: 4, type: 'Post', date: new Date() },
+      { userId: 4, postId: 3, type: 'Post', date: new Date() },
     ];
 
     expect(service.notifications$).toBe(testNotifications);

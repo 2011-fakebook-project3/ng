@@ -19,8 +19,9 @@ export class NotificationsService {
                              .build();
     this.hubConnection.start();
 
-    this.hubConnection.on('SendOne', (data) => {
-      this.notifications = data;
+    this.hubConnection.on('SendCaller', (data) => {
+      console.log(data);
+      console.log("memes")
     });
   }
 
