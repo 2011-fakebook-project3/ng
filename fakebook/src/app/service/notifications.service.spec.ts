@@ -23,7 +23,7 @@ describe('NotificationsService', () => {
         AuthService,
       ]
     });
-    service = TestBed.inject(NotificationsService);
+    service = new NotificationsService(TestBed.inject(AuthService));
     httpMock = TestBed.inject(HttpTestingController);
   });
 

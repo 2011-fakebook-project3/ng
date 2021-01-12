@@ -17,7 +17,11 @@ describe('NotificationsViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule, ],
-      declarations: [ NotificationsViewComponent, ]
+      declarations: [ NotificationsViewComponent, ],
+      providers: [
+        AuthService,
+        NotificationsService
+      ]
     })
     .compileComponents();
 
