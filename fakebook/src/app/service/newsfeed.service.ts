@@ -12,7 +12,7 @@ import { environment} from '../../environments/environment';
 export class NewsfeedService {
 
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService, ) { }
-  baseUrl = 'https://fakebook.revaturelabs.com/';
+  baseUrl = 'https://fakebook.revaturelabs.com';
   url = `${this.baseUrl}`;
 
   headers = {
