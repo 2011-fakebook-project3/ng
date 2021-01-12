@@ -9,7 +9,7 @@ import { User } from 'src/app/model/user';
   providedIn: 'root'
 })
 export class ProfileService {
-  baseUrl = `${environment.profile.url}/api/profiles/`;
+  baseUrl = `${environment}/api/profiles/`;
 
   constructor(public http: HttpClient, private oktaAuth: OktaAuthService) { }
 
