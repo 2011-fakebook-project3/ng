@@ -57,7 +57,9 @@ export class ProfileService {
   public UpdateProfile(email: string, profile: User): Observable<User>
   {
     return this.http.put<User>(this.baseUrl + email, profile, this.headers);
-  public GetProfileWithNullRoute(): Observable<User> /* null route */ {
+  }
+  public GetProfileWithNullRoute(): Observable<User> /* null route */
+  {
     return this.http.get<User>(this.baseUrl, this.headers);
   }
 }
