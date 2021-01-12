@@ -33,7 +33,7 @@ describe('NewsfeedComponent', () => {
 
   beforeEach(async () => {
     const FakeNewsFeedService = {
-      getUser(){
+      getUser(): any{
        return of(testUser);
        },
        getPosts(): Observable<Post[]>{
