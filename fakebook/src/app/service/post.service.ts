@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { OktaAuthService, OktaCallbackComponent } from '@okta/okta-angular';
 
 import { Post } from '../model/post';
-import { newPost } from '../model/newpost';
+import { NewPost } from '../model/newpost';
 import { promise } from 'protractor';
 
 @Injectable({
