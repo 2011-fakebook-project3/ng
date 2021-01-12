@@ -47,34 +47,34 @@ export class PostViewComponent implements OnInit {
     throw Error('not implemented');
   }
 
-  likePost(postId: number){
-    this.postService.likePost(postId).subscribe;
-    this.post?.likedByUserIds.push(postId);
-  }
+  // likePost(postId: number): void{
+  //   this.postService.likePost(postId).subscribe();
+  //   this.post?.likedByUserIds.push(postId);
+  // }
 
-  unLikePost(postId: number){
-    if(this.post && this.post.likedByUserIds && this.post?.likedByUserIds.indexOf(postId) !== -1){
-      //this.post.likedByUserIds = this.post?.likedByUserIds.filter(element !== postId)
-      this.postService.unLikePost(postId).subscribe;
-    }
-  }
+  // unLikePost(postId: number): void {
+  //   if (this.post && this.post.likedByUserIds && this.post?.likedByUserIds.indexOf(postId) !== -1){
+  //     // this.post.likedByUserIds = this.post?.likedByUserIds.filter(element !== postId)
+  //     this.postService.unLikePost(postId).subscribe();
+  //   }
+  // }
 
   deletePost(post: Post): void{
     this.post = null;
-    this.postService.delete(post.id).subscribe;
+    this.postService.delete(post.id).subscribe();
   }
 
   deleteComment(comment: Comment): void {
-    if(this.post) {
+    if (this.post) {
       // TODO: delete from backend
 
 
-      let index = this.post.comments.indexOf(comment);
+      const index = this.post.comments.indexOf(comment);
       delete this.post.comments[index];
     }
   }
 
-  onNotifyComment(valueEmitted: any){
+  onNotifyComment(valueEmitted: any): void {
     this.notifyComment.emit(valueEmitted);
   }
 

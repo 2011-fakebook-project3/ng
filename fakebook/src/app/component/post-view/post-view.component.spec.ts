@@ -58,7 +58,7 @@ describe('PostViewComponent', () => {
     })
     .compileComponents();
     fixture = TestBed.createComponent(PostViewComponent);
-    component = new PostViewComponent(TestBed.inject(ActivatedRoute), TestBed.inject(PostService),TestBed.inject(ProfileService));
+    component = new PostViewComponent(TestBed.inject(ActivatedRoute), TestBed.inject(PostService), TestBed.inject(ProfileService));
     fixture.detectChanges();
   });
 
