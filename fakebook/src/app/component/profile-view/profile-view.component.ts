@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; // getting the id number
 import { User } from 'src/app/model/user';
-import { UserService } from '../../service/user.service';
+import { ProfileService } from '../../service/profile.service'
 
 @Component({
   selector: 'app-profile-view',
-  providers: [UserService],
+  providers: [ProfileService],
   templateUrl: './profile-view.component.html',
   styleUrls: ['./profile-view.component.css']
 })
@@ -14,7 +14,7 @@ export class ProfileViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, // getting the id # in route
-    private userService: UserService
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class ProfileViewComponent implements OnInit {
 
       const id = tempId;
 
-      this.userService.getUser(id).subscribe(user => this.user = user);
+      this.profileService.GetProfile(id).subscribe(user => this.user = user);
 
     }
   }
