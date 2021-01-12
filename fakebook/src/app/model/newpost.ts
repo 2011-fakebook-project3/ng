@@ -1,7 +1,7 @@
-export class newPost {
+export class NewPost {
     constructor(
     public content: string,
-    public userId: number | undefined,
+    public userId: string | undefined,
     public pictureUrl: string | undefined
     ) {}
 }

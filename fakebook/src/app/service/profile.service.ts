@@ -25,4 +25,8 @@ export class ProfileService {
 
     return this.http.get<User>(this.baseUrl + email, this.headers);
   }
+
+  public GetProfileWithNullRoute(): Observable<User> /* null route */ {
+    return this.http.get<User>(this.baseUrl, this.headers);
+  }
 }

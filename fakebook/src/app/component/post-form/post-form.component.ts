@@ -1,13 +1,13 @@
 import { Component, Input, Output, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/app/model/user';
-import { UserService } from '../../service/user.service';
-import { newPost } from '../../model/newpost';
+import { ProfileService } from '../../service/profile.service';
+import { NewPost } from '../../model/newpost';
 import { PostService } from '../../service/post.service';
 import { UploadService } from '../../service/upload.service';
 
 @Component({
   selector: 'app-new-post-form',
-  providers: [PostService, UserService],
+  providers: [PostService, ProfileService],
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.css'],
 })
@@ -15,6 +15,7 @@ export class PostFormComponent implements OnInit {
   submitted = false;
   file: File | null = null;
   imageSource = '';
+  newPost = new NewPost('', '', ''); // we'll initialize user id at onsubmit
 
   @ViewChild('fileInput') fileInputRef!: ElementRef;
 
@@ -25,27 +26,26 @@ export class PostFormComponent implements OnInit {
   constructor(
     private uploadService: UploadService,
     private httpPost: PostService,
-    private userService: UserService
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
-    //this.getUser();
+    // this.getUser();
   }
-  newPost = new newPost('', undefined, ''); // we'll initialize user id at onsubmit
 
-  onSubmit() {
+  onSubmit(): any {
     if (this.file) {
-      let content = this.newPost.content;
-      let promise = this.save();
-      if(promise) {
+      const content = this.newPost.content;
+      const promise = this.save();
+      if (promise) {
         promise.then((res) => {
           this.newPost.content = content;
           this.newPost.pictureUrl = res.path;
-          this.newPost.userId = this.user?.id;
+          this.newPost.userId = this.user?.email;
           this.submitted = true;
           this.httpPost.create(this.newPost)
-            .then(res => {
-              return this.notify.emit("test value from child")
+            .then(result => {
+              return this.notify.emit('test value from child');
             });
 
           this.newPost.content = '';
@@ -56,19 +56,19 @@ export class PostFormComponent implements OnInit {
       }
     } else {
       console.log(this.newPost);
-      this.newPost.userId = this.user?.id;
+      this.newPost.userId = this.user?.email;
       this.submitted = true;
-      this.httpPost.create(this.newPost).then(res => { return this.notify.emit("test value from child")});
+      this.httpPost.create(this.newPost).then(res => this.notify.emit('test value from child'));
     }
   }
 
-  getUser() {
-    this.userService
-      .getUserProfile() // gets the user
+  getUser(): void {
+    this.profileService
+      .GetProfileWithNullRoute() // gets the user
       .subscribe((gotuser: User | null) => (this.user = gotuser));
   }
 
-  getUserId() {
+  getUserId(): number | undefined {
     return this.user?.id;
   }
 
