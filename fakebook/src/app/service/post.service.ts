@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { OktaAuthService, OktaCallbackComponent } from '@okta/okta-angular';
 
 import { Post } from '../model/post';
+import { newPost } from '../model/newpost';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,8 @@ export class PostService {
     Accept: 'application/json',
   };
 
-  create(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${this.url}`, post);
+  create(post: newPost): Promise<newPost> {
+    return this.http.post<newPost>(`${this.url}`, post).toPromise();
   }
 
   getById(id: number): Observable<Post> {

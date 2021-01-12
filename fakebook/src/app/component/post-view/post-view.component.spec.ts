@@ -26,7 +26,7 @@ describe('PostViewComponent', () => {
 
   const testComment: Comment = {
     id: 1,
-    userId: 1,
+    userEmail: 'e@email.com',
     content: 'comment content',
     postId: 1,
     createdAt: undefined
@@ -39,7 +39,7 @@ describe('PostViewComponent', () => {
     pictureUrl: undefined,
     createdAt: new Date(2020, 12),
     likedByUserIds: [],
-    commentIds: [1],
+    comments: [],
     liked: false
   };
 

@@ -1,5 +1,7 @@
-export interface NewPost {
-    content: string;
-    userId: number | undefined;
-    pictureUrl: string | undefined;
+export class newPost {
+    constructor(
+    public content: string,
+    public userId: number | undefined,
+    public pictureUrl: string | undefined
+    ) {}
 }
