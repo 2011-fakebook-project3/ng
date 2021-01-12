@@ -15,8 +15,8 @@ describe('NewsfeedComponent', () => {
 
 
   const testposts: Post[] = [
-    { id: 1, content: 'content 1', userId: 2, createdAt: new Date(), pictureUrl: '', likedByUserIds: [], commentIds: [], liked: false },
-    { id: 2, content: 'content 2', userId: 3, createdAt: new Date(), pictureUrl: '', likedByUserIds: [], commentIds: [], liked: false  }
+    { id: 1, content: 'content 1', userId: 2, createdAt: new Date(), pictureUrl: '', likedByUserIds: [], comments: [], liked: false },
+    { id: 2, content: 'content 2', userId: 3, createdAt: new Date(), pictureUrl: '', likedByUserIds: [], comments: [], liked: false  }
   ];
 
   const testUser: User = {
