@@ -24,7 +24,7 @@ export class NotificationsService {
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
         if (this.token === undefined) {
-          return "";
+          return '';
         }
         else {
           return this.token;
@@ -38,7 +38,7 @@ export class NotificationsService {
                              .build();
     this.hubConnection.start();
 
-    // push each a notification object to two different arrays so its easy to 
+    // push each a notification object to two different arrays so its easy to
     // update when sending back to the backend
     this.hubConnection.on('SendAll', (data, data2) => {
       this.notifications.next(this.mapNotifications([data2] as ApiNotification[]));
@@ -61,9 +61,7 @@ export class NotificationsService {
     return notifs;
   }
 
-  // calls the function to update the notification on the database
-  // Will be used to set notificationIDs to read
-
+  // once the notifications view has expanded, will set all notifications to read on the database
   setRead(ids: string[]): void {
     this.hubConnection.invoke('SetNotificationsToRead', ids);
   }

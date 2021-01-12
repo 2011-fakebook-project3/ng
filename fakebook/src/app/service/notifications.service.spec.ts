@@ -32,10 +32,10 @@ describe('NotificationsService', () => {
   it('should return a list of notifications from observable', (done) => {
 
     const testNotifications: Notification[] = [
-      { id: "1", userId: "1", postId: 1, type: 'like', date: new Date() },
-      { id: "1", userId: "2", postId: 2, type: 'comment', date: new Date() },
-      { id: "1", userId: "3", type: 'follow', date: new Date() },
-      { id: "1", userId: "4", postId: 3, type: 'post', date: new Date() },
+      { id: '1', userId: '1', postId: 1, type: 'like', date: new Date() },
+      { id: '1', userId: '2', postId: 2, type: 'comment', date: new Date() },
+      { id: '1', userId: '3', type: 'follow', date: new Date() },
+      { id: '1', userId: '4', postId: 3, type: 'post', date: new Date() },
     ];
 
     expect(service.notificationsObs.subscribe).toBe(testNotifications);

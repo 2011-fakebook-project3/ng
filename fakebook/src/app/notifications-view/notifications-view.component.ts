@@ -42,7 +42,7 @@ export class NotificationsViewComponent implements OnInit {
   }
 
   updateNotifications(): void {
-    let ids: string[] = [];
+    const ids: string[] = [];
 
     this.notifications.forEach(element => {
       ids.push(element.id);
