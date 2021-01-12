@@ -25,6 +25,7 @@ const config = {
   declarations: [
     AppComponent,
     CommentViewComponent,
+    NewsfeedComponent,
     NavbarViewComponent,
     MainViewComponent,
     NewsfeedComponent,

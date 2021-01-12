@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: ''
+  baseUrl: 'someUrl' //replace with backend production url
 };

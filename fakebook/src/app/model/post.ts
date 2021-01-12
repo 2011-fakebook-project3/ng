@@ -7,6 +7,6 @@ export interface Post {
   pictureUrl: string | undefined;
   createdAt: Date;
   likedByUserIds: number[];
-  commentIds: Comment[];
+  comments: Comment[];
   liked: boolean | false;
 }
