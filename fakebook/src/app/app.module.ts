@@ -4,7 +4,6 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
-import { NavbarViewComponent } from './navbar-view/navbar-view.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { TimeAgoPipe } from 'time-ago-pipe';
@@ -14,6 +13,8 @@ import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
+import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
+
 import { CommonModule } from '@angular/common';
 
 @Pipe({

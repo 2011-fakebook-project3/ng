@@ -19,7 +19,7 @@ export class NotificationsService {
   private token = this.authService.oktaAuth.getAccessToken();
 
   constructor(private authService: AuthService) {
-    
+
     // initialize options so hub connection can use authorization
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
@@ -34,12 +34,11 @@ export class NotificationsService {
 
     // Start hub connection to SignalR
     this.hubConnection = new HubConnectionBuilder()
-                             .withUrl(`${environment.baseUrl}/notifications`, options)
+                             .withUrl(`${environment.baseUrl}/notifications`)
                              .build();
     this.hubConnection.start();
 
-    // push each a notification object to two different arrays so its easy to
-    // update when sending back to the backend
+    // append notifications to the notifications list
     this.hubConnection.on('SendAll', (data, data2) => {
       this.notifications.next(this.mapNotifications([data2] as ApiNotification[]));
     });
