@@ -27,7 +27,7 @@ describe('PostViewComponent', () => {
 
   const testComment: Comment = {
     id: 1,
-    userEmail: 'e@mail',
+    userEmail: 'e@email.com',
     content: 'comment content',
     postId: 1,
     createdAt: undefined
