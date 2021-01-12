@@ -11,7 +11,12 @@ import { AuthService } from './auth.service';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
-  let httpMock: HttpTestingController;
+
+  const mockAuthService = {
+    getAccessToken(): string {
+      return "token";
+    }
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,35 +25,15 @@ describe('NotificationsService', () => {
       ],
       providers: [
         NotificationsService,
-        AuthService,
+        { provide: AuthService, useValue: mockAuthService },
+
       ]
     });
     service = new NotificationsService(TestBed.inject(AuthService));
-    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('should return a list of notifications from observable', (done) => {
-
-    const testNotifications: Notification[] = [
-      { id: '1', userId: '1', postId: 1, type: 'like', date: new Date() },
-      { id: '1', userId: '2', postId: 2, type: 'comment', date: new Date() },
-      { id: '1', userId: '3', type: 'follow', date: new Date() },
-      { id: '1', userId: '4', postId: 3, type: 'post', date: new Date() },
-    ];
-
-    expect(service.notificationsObs.subscribe).toBe(testNotifications);
-
-    const req = httpMock.expectOne(`${environment.baseUrl}/notifications`);
-    expect(req.request.method).toBe('GET');
-    req.flush(testNotifications);
-  });
-
-  afterEach(() => {
-    httpMock.verify();
   });
 
 });
