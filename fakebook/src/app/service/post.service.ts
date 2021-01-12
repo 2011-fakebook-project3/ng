@@ -20,8 +20,8 @@ export class PostService {
     Accept: 'application/json',
   };
 
-  create(post: newPost): Promise<newPost> {
-    return this.http.post<newPost>(`${this.url}`, post).toPromise();
+  create(post: NewPost): Promise<NewPost> {
+    return this.http.post<NewPost>(`${this.url}`, post).toPromise();
   }
 
   getById(id: number): Observable<Post> {
