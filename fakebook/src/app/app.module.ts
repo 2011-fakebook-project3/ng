@@ -9,7 +9,9 @@ import { NavbarViewComponent } from './component/navbar-view/navbar-view.compone
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { CommentViewComponent } from './component/comment-view/comment-view.component';
+import { FormsModule } from '@angular/forms';
+import { CommentFormComponent } from './component/comment-form/comment-form.component';
 
 const config = {
   issuer: 'https://dev-2875280.okta.com/oauth2/default',
@@ -24,14 +26,18 @@ const config = {
   declarations: [
     AppComponent,
     PostViewComponent,
+    CommentViewComponent,
+    NewsfeedComponent,
     NavbarViewComponent,
     MainViewComponent,
     NewsfeedComponent,
+    CommentFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     OktaAuthModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
