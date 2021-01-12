@@ -63,7 +63,7 @@ describe('NewsfeedService', () => {
 
 
   it('should have the correct urls', () => {
-    expect(service.url).toBe('someUrl');
+    expect(service.url).toBe(url);
   });
 
 });

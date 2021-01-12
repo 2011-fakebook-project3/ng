@@ -10,7 +10,7 @@ import { ProfileService } from '../../service/profile.service';
   styleUrls: ['./profile-view.component.css']
 })
 export class ProfileViewComponent implements OnInit {
-  user: User | undefined;
+  user: User | null = null;
 
   constructor(
     private route: ActivatedRoute, // getting the id # in route
@@ -23,12 +23,13 @@ export class ProfileViewComponent implements OnInit {
   getUser(): void {
     let tempId = ''; // the only way i could declare a variable that may accept a null value in thefuture
     // get the id number from the route
+    debugger;
     if (this.route.snapshot.paramMap.get('id') != null) {
       tempId += this.route.snapshot.paramMap.get('id');
 
       const id = tempId;
 
-      this.profileService.GetProfile(id).subscribe(user => this.user = user);
+      this.profileService.GetProfile(id).subscribe((gotuser: User | null) => (this.user = gotuser));
 
     }
   }
