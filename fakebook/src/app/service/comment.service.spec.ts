@@ -6,7 +6,7 @@ import { CommentService } from './comment.service';
 
 describe('CommentService', () => {
   let service: CommentService;
-  let fakeAuthService = { }
+  const fakeAuthService = { };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
