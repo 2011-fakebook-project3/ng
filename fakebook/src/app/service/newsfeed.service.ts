@@ -2,17 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { OktaAuthService } from '@okta/okta-angular';
-import { Post } from '../models/post';
-import { User } from '../models/user';
+import { Post } from '../model/post';
+import { User } from '../model/user';
 import { environment} from '../../environments/environment';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsfeedService {
 
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
+  constructor(private http: HttpClient, private oktaAuth: OktaAuthService, ) { }
   url = `${environment.baseUrl}`;
 
   headers = {
@@ -21,11 +20,21 @@ export class NewsfeedService {
   };
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.url}/api/posts`);
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    return this.http.get<Post[]>(`${this.url}/api/Posts`, { headers });
   }
 
   getUser(): Observable<User>{
-    return this.http.get<User>(`${this.url}/api/user`);
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    return this.http.get<User>(`${this.url}/api/User`, { headers });
   }
 
 }

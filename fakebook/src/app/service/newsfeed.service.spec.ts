@@ -5,9 +5,9 @@ import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 
-import { Comment } from '../models/comment';
-import { User } from '../models/user';
-import { Post } from '../models/post';
+import { Comment } from '../model/comment';
+import { User } from '../model/user';
+import { Post } from '../model/post';
 import { NewsfeedService } from './newsfeed.service';
 import { AuthService } from '../service/auth.service';
 import { of } from 'rxjs';

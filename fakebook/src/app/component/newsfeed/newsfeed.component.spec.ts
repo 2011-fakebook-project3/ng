@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed, fakeAsync, waitForAsync, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NavigationBehaviorOptions, Router } from '@angular/router';
-import { NEVER } from 'rxjs';
+import { NEVER, Observable, of } from 'rxjs';
 
 import { NewsfeedComponent } from './newsfeed.component';
-import { User } from '../../models/user';
-import { Post } from '../../models/post';
-import { Comment } from '../../models/comment';
+import { User } from '../../model/user';
+import { Post } from '../../model/post';
 import { NewsfeedService } from 'src/app/service/newsfeed.service';
+
 
 describe('NewsfeedComponent', () => {
   let component: NewsfeedComponent;
   let fixture: ComponentFixture<NewsfeedComponent>;
 
-  const FakeNewsFeedService = {};
+
 
   const testposts: Post[] = [
-    { id: 1, content: 'content 1', createdAt: new Date(), pictureUrl: '', email: 'irene@email.com', comments: [] },
-    { id: 2, content: 'content 2', createdAt: new Date(), pictureUrl: '', email: 'moriarty@email.com', comments: [] }
+    { id: 1, content: 'content 1', userId: 2, createdAt: new Date(), pictureUrl: '', likedByUserIds: [], commentIds: [], liked: false },
+    { id: 2, content: 'content 2', userId: 3, createdAt: new Date(), pictureUrl: '', likedByUserIds: [], commentIds: [], liked: false  }
   ];
 
   const testUser: User = {
@@ -26,15 +25,24 @@ describe('NewsfeedComponent', () => {
     lastName: 'last',
     email: 'first.last@email.com',
     phoneNumber: '5551234567',
-    profilePictureUrl: 'https://image.png',
+    profilePictureUrl: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JIWU3L8WkMo9Yv1VtNnErQHaEK%26pid%3DApi&f=1',
     status: 'My Fake User status',
     birthDate: new Date()
   };
 
 
   beforeEach(async () => {
+    const FakeNewsFeedService = {
+      getUser(){
+       return of(testUser);
+       },
+       getPosts(): Observable<Post[]>{
+         return of(testposts);
+       }
+     };
+
     await TestBed.configureTestingModule({
-      declarations: [NewsfeedComponent],
+      declarations: [ NewsfeedComponent ],
       providers: [
         { provide: NewsfeedService, useValue: FakeNewsFeedService }
       ]
@@ -44,11 +52,8 @@ describe('NewsfeedComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NewsfeedComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-
-    component = new NewsfeedComponent(TestBed.inject(NewsfeedService));
-    component.user = testUser;
-    component.posts = testposts;
   });
 
   it('should create', () => {
@@ -56,19 +61,18 @@ describe('NewsfeedComponent', () => {
   });
 
   it('should get user information onInit', () => {
-    const  user = component.getUser();
-    expect(user).toBeTruthy();
+    expect(component.user).toBe(testUser);
   });
 
   it('should get a list of posts OnInit', () => {
-    const posts = component.getPosts();
-    expect(posts).toBeTruthy();
+    expect(component.posts).toBe(testposts);
   });
 
-  it('should set the user ', () => {
-    component.getUser();
-    expect(component.user).toBe(testUser);
+
+  it('should get all posts', () => {
+    expect(component.posts.length).toBe(2);
   });
+
 
   it('should display name in a h3 header', () => {
     const h3 = fixture.debugElement.query(By.css('h3')).nativeElement;
