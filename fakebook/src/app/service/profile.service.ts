@@ -25,21 +25,4 @@ export class ProfileService {
 
     return this.http.get<User>(this.baseUrl + email, this.headers);
   }
-
-  public GetProfiles(emails: string[]): Observable<User> /* profile */{
-    // make empty collection of profiles
-    // emails={abc, 123, }
-
-    return this.http.get<User>(this.baseUrl + 'selection/' + emails, this.headers);
-  }
-
-  public createProfile(profile: User): Observable<User> {
-
-    return this.http.post<User>(`${this.baseUrl}`, profile, this.headers);
-  }
-
-  public UpdateProfile(email: string, profile: User): Observable<User>
-  {
-    return this.http.put<User>(this.baseUrl + email, profile, this.headers);
-  }
 }
