@@ -29,7 +29,6 @@ describe('NotificationsViewComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule, ],
       declarations: [ NotificationsViewComponent, ],
       providers: [
         { provide: AuthService, useValue: mockAuthService },

@@ -54,8 +54,6 @@ describe('NewsfeedService', () => {
     expect(service).toBeTruthy();
   });
 
-
-
   it('should have correct access token and headers', () => {
     expect(service.headers.Authorization).toBe('Bearer 0');
     expect(service.headers.Accept).toBe('application/json');
