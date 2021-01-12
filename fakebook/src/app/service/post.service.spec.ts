@@ -13,7 +13,7 @@ describe('PostService', () => {
   let service: PostService;
   let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy }; // spy with some functions
   let httpTestingController: HttpTestingController; // mock backend
-  const url = `someUrl/api/Posts`; // test base url
+  const url = `https://fakebook.revaturelabs.com/api/Posts`; // test base url
 
   beforeEach(() => {
     const mockOktaAuthService = {
@@ -42,12 +42,12 @@ describe('PostService', () => {
   });
 
   it('should have correct access token and headers', () => {
-    expect(service.headers.Authorization).toBe('Bearer 0');
-    expect(service.headers.Accept).toBe('application/json');
+    expect(service.headers.headers.Authorization).toBe('Bearer 0');
+    expect(service.headers.headers.Accept).toBe('application/json');
   });
 
   it('should have the correct urls', () => {
-    expect(service.baseUrl).toBe('someUrl');
+    expect(service.baseUrl).toBe('https://fakebook.revaturelabs.com/');
     expect(service.url).toBe(`${service.baseUrl}/api/Posts`);
   });
 });

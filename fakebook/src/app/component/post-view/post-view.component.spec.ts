@@ -8,6 +8,7 @@ import { Comment } from '../../model/comment';
 import { Post } from '../../model/post';
 import { PostViewComponent } from './post-view.component';
 import { PostService } from '../../service/post.service';
+import { ProfileService } from 'src/app/service/profile.service';
 
 describe('PostViewComponent', () => {
   let component: PostViewComponent;
@@ -26,7 +27,7 @@ describe('PostViewComponent', () => {
 
   const testComment: Comment = {
     id: 1,
-    userId: 1,
+    userEmail: 'e@mail',
     content: 'comment content',
     postId: 1,
     createdAt: undefined
@@ -39,7 +40,7 @@ describe('PostViewComponent', () => {
     pictureUrl: undefined,
     createdAt: new Date(2020, 12),
     likedByUserIds: [],
-    commentIds: [1],
+    comments: [],
     liked: false
   };
 
@@ -57,14 +58,14 @@ describe('PostViewComponent', () => {
     })
     .compileComponents();
     fixture = TestBed.createComponent(PostViewComponent);
-    component = new PostViewComponent(TestBed.inject(ActivatedRoute), TestBed.inject(PostService));
+    component = new PostViewComponent(TestBed.inject(ActivatedRoute), TestBed.inject(PostService),TestBed.inject(ProfileService));
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
     expect(component.comments).toBeNull();
-    expect(component.userid).toBe(0);
+    expect(component.userEmail).toBe('');
   });
 
   it('should delete a post on deletePost()', () => {
