@@ -19,18 +19,18 @@
       <img src="{{post.pictureUrl}}" alt="{{post.pictureUrl}}" class="img-fluid">
       <div class="p-2">
         <p class="ml-5  ">{{post.content}}</p>
-        <div *ngIf='comments!=undefined'>
+        <div *ngIf='post.comments!=undefined'>
           <div class="social-body">
             <!-- Iteration through all comments for the post -->
-            <div *ngIf='comments!=undefined'>
-              <ul *ngFor="let comment of comments">
-                  <!-- display comments here when comment component is implimented-->
+            <div *ngIf='post.comments!=undefined'>
+              <ul *ngFor="let comment of post.comments">
+                <app-comment-view (delete)='deleteComment($event)' [comment]='comment' [currentUserEmail]='user.email'></app-comment-view>
                 <hr>
               </ul>
             </div>
           </div>
         </div>
-      <!-- comment form for new comment here -->
+        <app-comment-form [postId]='post.id' (notifyComment)="onNotifyComment($event)"></app-comment-form>
       </div>
     </div>
   </div>
