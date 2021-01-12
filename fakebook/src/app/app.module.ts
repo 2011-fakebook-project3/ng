@@ -28,7 +28,7 @@ const config = {
     NavbarViewComponent,
     MainViewComponent,
     NewsfeedComponent,
-    CommentFormComponent,
+    //CommentFormComponent,
   ],
   imports: [
     BrowserModule,
