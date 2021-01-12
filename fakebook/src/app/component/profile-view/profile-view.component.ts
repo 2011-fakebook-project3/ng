@@ -23,7 +23,6 @@ export class ProfileViewComponent implements OnInit {
   getUser(): void {
     let tempId = ''; // the only way i could declare a variable that may accept a null value in thefuture
     // get the id number from the route
-    debugger;
     if (this.route.snapshot.paramMap.get('id') != null) {
       tempId += this.route.snapshot.paramMap.get('id');
 
