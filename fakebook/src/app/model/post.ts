@@ -1,3 +1,5 @@
+import { Comment } from '@angular/compiler';
+
 export interface Post {
   id: number;
   content: string;
@@ -5,6 +7,6 @@ export interface Post {
   pictureUrl: string | undefined;
   createdAt: Date;
   likedByUserIds: number[];
-  commentIds: number[];
+  commentIds: Comment[];
   liked: boolean | false;
 }

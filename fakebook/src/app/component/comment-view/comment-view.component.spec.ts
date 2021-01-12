@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommentService } from 'src/app/service/comment.service';
+import { ProfileService } from 'src/app/service/profile.service';
 import { CommentViewComponent } from './comment-view.component';
-import { PostService } from 'src/app/service/post.service';
 
 describe('CommentViewComponent', () => {
   let component: CommentViewComponent;
   let fixture: ComponentFixture<CommentViewComponent>;
 
-  const FakePostService = { };
+  const FakeCommentService = { };
+  const FakeProfileService = { };
 
   const fakeUser = {
     id: 1,
@@ -24,14 +26,16 @@ describe('CommentViewComponent', () => {
     content: 'my fake comment',
     postId: 1,
     createdAt: new Date(),
-    user: fakeUser
+    childCommentIds: [5, 3],
+    userEmail: fakeUser.email
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CommentViewComponent ],
       providers: [
-        { provide:  PostService, useValue: FakePostService}
+        { provide:  CommentService, useValue: FakeCommentService },
+        { provide: ProfileService, useValue: FakeProfileService }
       ]
     })
     .compileComponents();
@@ -41,7 +45,7 @@ describe('CommentViewComponent', () => {
     fixture = TestBed.createComponent(CommentViewComponent);
     fixture.detectChanges();
 
-    component = new CommentViewComponent(TestBed.inject(PostService));
+    component = new CommentViewComponent(TestBed.inject(CommentService), TestBed.inject(ProfileService));
     component.comment = fakeComment;
   });
 
@@ -59,17 +63,5 @@ describe('CommentViewComponent', () => {
     const tf = component.commentAndUserExist(null);
 
     expect(tf).toBeFalse();
-  });
-
-  it('should set the profile picture', () => {
-    component.setProfilePicture(component.comment);
-
-    expect(component.user.profilePictureUrl).toBe('https://image.png');
-  });
-
-  it('should set the full name', () => {
-    component.setFullName(component.comment);
-
-    expect(component.user.fullname).toBe('first last');
   });
 });

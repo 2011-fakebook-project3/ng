@@ -10,7 +10,7 @@
           </a>
           <small class="text-muted">{{comment.createdAt | date:'medium'}}</small>
         </div>
-        <div *ngIf='comment.user && comment.user.id !== undefined && comment.user.id === currentUserId'>
+        <div *ngIf='comment !== undefined'>
           <button (click)='deleteComment(comment)' class=' btn btn-outline-danger btn-xs'>Delete</button>
         </div>
       </div>
