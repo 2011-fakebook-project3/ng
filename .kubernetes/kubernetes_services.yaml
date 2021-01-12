@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fakebook-spa
+  labels:
+    app: fakebook-spa
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: fakebook-spa

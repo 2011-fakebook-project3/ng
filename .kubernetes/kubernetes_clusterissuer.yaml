@@ -1,0 +1,27 @@
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: nick.escalona@revature.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+          podTemplate:
+            spec:
+              nodeSelector:
+                kubernetes.io/os: linux
+
+# helm repo add jetstack https://charts.jetstack.io
+# helm repo update
+# helm install cert-manager \
+#   --version v0.16.1 \
+#   --set installCRDs=true \
+#   --set nodeSelector."beta\.kubernetes\.io/os"=linux \
+#   jetstack/cert-manager

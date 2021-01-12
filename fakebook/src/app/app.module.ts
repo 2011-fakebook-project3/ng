@@ -1,27 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { TimeAgoPipe } from 'time-ago-pipe';
-
-
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
-
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
-
 import { CommonModule } from '@angular/common';
+import { CommentViewComponent } from './component/comment-view/comment-view.component';
+import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
+import { MainViewComponent } from './component/main-view/main-view.component';
+import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
+import { FormsModule } from '@angular/forms';
 
 @Pipe({
   name: 'timeAgo',
   pure: false
 })
 export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform{}
+
+
 
 const config = {
   issuer: 'https://dev-2875280.okta.com/oauth2/default',
@@ -36,10 +38,13 @@ const config = {
   declarations: [
     AppComponent,
     NotificationsViewComponent,
+    CommentViewComponent,
+    NewsfeedComponent,
     NavbarViewComponent,
     TimeAgoExtendsPipe,
     MainViewComponent,
     NewsfeedComponent,
+    // CommentFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +52,7 @@ const config = {
     HttpClientModule,
     OktaAuthModule,
     CommonModule
+    FormsModule,
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
   bootstrap: [AppComponent]
