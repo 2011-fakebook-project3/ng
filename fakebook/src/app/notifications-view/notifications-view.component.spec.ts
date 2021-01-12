@@ -13,13 +13,12 @@ import { NEVER, Observable } from 'rxjs';
 describe('NotificationsViewComponent', () => {
   let component: NotificationsViewComponent;
   let fixture: ComponentFixture<NotificationsViewComponent>;
-  let httpMock: HttpTestingController;
 
   beforeEach(async () => {
 
     const mockAuthService = {
       getAccessToken(): string {
-        return "token";
+        return 'token';
       }
     };
 
@@ -27,7 +26,7 @@ describe('NotificationsViewComponent', () => {
       notificationsObs: new Observable<Notification>(),
 
       setRead(): void { }
-    }
+    };
 
     await TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule, ],
@@ -59,6 +58,8 @@ describe('NotificationsViewComponent', () => {
     expect(component.notificationsView).toBeFalse();
     component.toggleNotifications();
     expect(component.notificationsView).toBeTrue();
+    component.toggleNotifications();
+    expect(component.notificationsView).toBeFalse();
   });
 
 });

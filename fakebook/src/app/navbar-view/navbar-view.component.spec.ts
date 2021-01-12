@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NavbarViewComponent } from './navbar-view.component';
 
 describe('NavbarViewComponent', () => {

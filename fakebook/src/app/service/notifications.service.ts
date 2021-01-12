@@ -19,7 +19,7 @@ export class NotificationsService {
   private token = this.authService.oktaAuth.getAccessToken();
 
   constructor(private authService: AuthService) {
-
+    
     // initialize options so hub connection can use authorization
     const options: IHttpConnectionOptions = {
       accessTokenFactory: () => {
