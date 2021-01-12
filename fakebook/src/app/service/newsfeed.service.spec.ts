@@ -4,11 +4,13 @@ import { OktaAuthService } from '@okta/okta-angular';
 import { HttpClient, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { Comment } from '../models/comment';
-import { User } from '../models/user';
-import { Post } from '../models/post';
+
+import { Comment } from '../model/comment';
+import { User } from '../model/user';
+import { Post } from '../model/post';
 import { NewsfeedService } from './newsfeed.service';
 import { AuthService } from '../service/auth.service';
+import { of } from 'rxjs';
 
 
 describe('NewsfeedService', () => {
@@ -18,98 +20,50 @@ describe('NewsfeedService', () => {
   const url = `${environment.baseUrl}`;
 
 
-  const fakeAuthService = {
-    accessToken: 'token',
-     getAccessToken(): any {
-      return this.accessToken;
-    }
-  };
-
-  const testUser: User = {
-    id: 1,
-    firstName: 'first',
-    lastName: 'last',
-    email: 'e@mail',
-    phoneNumber: undefined,
-    profilePictureUrl: undefined,
-    status: undefined,
-    birthDate: new Date(2010, 12)
-   };
-
-  const testPosts: Post[] = [
-    { id: 1, content: 'content 1', createdAt: new Date(), pictureUrl: '', email: 'irene@email.com', comments: [] },
-    { id: 2, content: 'content 2', createdAt: new Date(), pictureUrl: '', email: 'moriarty@email.com', comments: [] }
-  ];
-
   beforeEach(() => {
+
+    const mockOktaAuthService = {
+      getAccessToken(): string {
+        return '0';
+      }
+    };
+
+    const mockHttpClient = {};
+
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
       ],
       providers: [
-        { provide: AuthService, useValue: fakeAuthService },
-        { NewsfeedService }
+        { provide: HttpClient, useValue: mockHttpClient},
+        { provide: OktaAuthService, useValue: mockOktaAuthService}
+
       ]
-    });
+    }).compileComponents();
 
     httpTestingController = TestBed.inject(HttpTestingController);
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
-    service = new NewsfeedService(TestBed.inject(OktaAuthService), httpClientSpy as any);
+    service = new NewsfeedService(httpClientSpy as any, TestBed.inject(OktaAuthService));
   });
 
+
   it('should be created', () => {
+    service = new NewsfeedService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
     expect(service).toBeTruthy();
   });
 
 
-  it('getPosts() should return list of posts',
-    (done) => {
 
-       const token = fakeAuthService.getAccessToken();
+  it('should have correct access token and headers', () => {
+    expect(service.headers.Authorization).toBe('Bearer 0');
+    expect(service.headers.Accept).toBe('application/json');
+  });
 
-       httpClientSpy.get(url, { headers: {
-        Authorization: 'Bearer ' + token,
-      }}).and.returnValue(testPosts);
 
-       service.getPosts()
-        .subscribe(posts => {
-          expect(posts).toEqual(testPosts);
-          done();
-        });
-
-       const req = httpTestingController.expectOne(`${url}/someUrl`); // wating on what the endpoint
-
-       expect(req.request.method).toEqual('GET');
-       expect(req.request.headers).toBe(token);
-       req.flush(testPosts);
-
-       httpTestingController.verify();
-    });
-
-  it('getUser() should return a user',
-    (done) => {
-
-      const token = fakeAuthService.getAccessToken();
-
-      httpClientSpy.get(url, { headers: {
-       Authorization: 'Bearer ' + token,
-     }}).and.returnValue(testUser);
-
-      service.getUser()
-       .subscribe(user => {
-         expect(user).toEqual(testUser);
-         done();
-       });
-
-      const req = httpTestingController.expectOne(`${url}/someUrl`); // wating on what the endpoint
-
-      expect(req.request.method).toEqual('GET');
-      expect(req.request.headers).toBe(token);
-      req.flush(testPosts);
-
-      httpTestingController.verify();
-   });
+  it('should have the correct urls', () => {
+    expect(service.url).toBe('someUrl');
+  });
 
 });

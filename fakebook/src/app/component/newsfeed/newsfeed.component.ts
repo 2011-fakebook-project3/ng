@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { Post } from '../../models/post';
+import { User } from 'src/app/model/user';
+import { Post } from '../../model/post';
 import { NewsfeedService } from '../../service/newsfeed.service';
 
 @Component({
@@ -18,30 +18,19 @@ export class NewsfeedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.userAndPostExists(this.posts, this.user)) {
-      this.getPosts();
-      this.getUser();
-    }
-    console.log(this.posts);
-    console.log(this.user);
+    this.getUser();
+    this.getPosts();
   }
-
-  userAndPostExists(posts: Post[], user: User | null): boolean {
-    if (posts && user) {
-      return true;
-    }
-    return false;
-  }
-
 
   getPosts(): void {
     this.newsfeedService.getPosts()
-      .subscribe((gotPosts) => this.posts = gotPosts);
+      .subscribe(gotPosts => this.posts = gotPosts);
   }
 
   getUser(): void {
     this.newsfeedService.getUser()
-      .subscribe((gotUser) => this.user = gotUser);
+      .subscribe(gotUser => this.user = gotUser);
+
   }
 
 }
