@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { OktaAuthService, OktaCallbackComponent } from '@okta/okta-angular';
 
 import { Post } from '../model/post';
+import { NewPost } from '../model/newpost';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class PostService {
     }
   };
 
-  create(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${this.url}`, post, this.headers);
+  create(post: NewPost): Observable<NewPost> {
+    return this.http.post<NewPost>(`${this.url}`, post, this.headers);
   }
 
   likePost(id: number): Observable<Post> {
