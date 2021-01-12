@@ -12,14 +12,9 @@ import { runInThisContext } from 'vm';
 })
 export class NotificationsViewComponent implements OnInit {
 
-  notifications: Notification[] = [
-    { userId: '1', postId: 1, type: 'like', date: new Date() },
-    { userId: '2', postId: 2, type: 'comment', date: new Date() },
-    { userId: '3', type: 'follow', date: new Date() },
-    { userId: '4', postId: 3, type: 'post', date: new Date() },
-  ];
+  notifications: Notification[] = [];
   notificationsView = false;
-  unreadNotifications = true;
+  unreadNotifications = false;
 
   constructor(
     private notifService: NotificationsService,
@@ -29,10 +24,11 @@ export class NotificationsViewComponent implements OnInit {
   ngOnInit(): void {
     this.notifService.notificationsObs.subscribe((notifs) => {
       notifs.forEach(element => {
-        this.notifications.push(element);
+        this.notifications.unshift(element);
       });
-      this.unreadNotifications = true;
-      console.log(notifs);
+      if (this.notificationsView === false) {
+        this.unreadNotifications = true;
+      }
       console.log(this.notifications);
     });
   }
@@ -41,6 +37,17 @@ export class NotificationsViewComponent implements OnInit {
     this.notificationsView = !this.notificationsView;
     if (this.notificationsView === true){
       this.unreadNotifications = false;
+      this.updateNotifications();
     }
+  }
+
+  updateNotifications(): void {
+    let ids: string[] = [];
+
+    this.notifications.forEach(element => {
+      ids.push(element.id);
+    });
+
+    this.notifService.setRead(ids);
   }
 }
