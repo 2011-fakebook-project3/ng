@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LikeService {
-  url = `${environment.baseURL}/api/`;
+  url = `${environment.baseUrl}/api/`;
 
   constructor(
     private http: HttpClient,

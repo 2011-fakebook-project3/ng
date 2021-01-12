@@ -9,7 +9,7 @@ import { User } from 'src/app/model/user';
   providedIn: 'root'
 })
 export class ProfileService {
-  baseUrl = `${environment.baseURL}api/profiles/`;
+  baseUrl = `${environment.baseUrl}api/profiles/`;
 
   constructor(public http: HttpClient, private oktaAuth: OktaAuthService) { }
 
@@ -37,7 +37,6 @@ export class ProfileService {
       - [POST]        /profiles/upload
           + uploads an image via a form (input type='file')
   */
-
   public GetProfile(email: string): Observable<User> /* profile */{
 
     return this.http.get<User>(this.baseUrl + email, this.headers);
@@ -58,5 +57,9 @@ export class ProfileService {
   public UpdateProfile(email: string, profile: User): Observable<User>
   {
     return this.http.put<User>(this.baseUrl + email, profile, this.headers);
+  }
+  public GetProfileWithNullRoute(): Observable<User> /* null route */
+  {
+    return this.http.get<User>(this.baseUrl, this.headers);
   }
 }

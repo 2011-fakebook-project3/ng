@@ -17,7 +17,7 @@ describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
-  const url = `${environment.baseURL}`;
+  const url = `${environment.baseUrl}`;
 
 
   beforeEach(() => {

@@ -8,7 +8,7 @@ import { NewPost } from '../../model/newpost';
 describe('LikeViewComponent', () => {
   let component: LikeViewComponent;
   let fixture: ComponentFixture<LikeViewComponent>;
-  const newPost: NewPost = { content: '', userId: 1, pictureUrl: ''}; // probably have to change for real testing
+  const newPost: NewPost = { content: '', userId: '', pictureUrl: ''}; // probably have to change for real testing
   const FakeOktaAuthService  = { create(post: NewPost): Promise<NewPost> { return Promise.resolve(newPost); } };
   const FakeLikeService = { like(postId: number): any { return 1; } };
 

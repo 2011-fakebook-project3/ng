@@ -21,8 +21,8 @@ export class PostService {
     }
   };
 
-  create(post: NewPost): Observable<NewPost> {
-    return this.http.post<NewPost>(`${this.url}`, post, this.headers);
+  create(post: NewPost): Promise<NewPost> {
+    return this.http.post<NewPost>(`${this.url}`, post, this.headers).toPromise();
   }
 
   likePost(id: number): Observable<Post> {

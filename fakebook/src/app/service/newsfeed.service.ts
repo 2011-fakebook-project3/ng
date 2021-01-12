@@ -12,7 +12,7 @@ import { environment} from '../../environments/environment';
 export class NewsfeedService {
 
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService, ) { }
-  url = `${environment.baseURL}`;
+  url = `${environment.baseUrl}`;
 
   headers = {
     Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),

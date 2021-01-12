@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { OktaAuthService } from '@okta/okta-angular';
@@ -9,6 +10,7 @@ describe('ProfileService', () => {
   let service: ProfileService;
 
   beforeEach(() => {
+
     const mockOktaAuthService = {
       getAccessToken(): string {
         return '';

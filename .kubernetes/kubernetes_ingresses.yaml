@@ -1,0 +1,45 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: fakebook
+spec:
+  rules:
+  - host: fakebook.revaturelabs.com
+    http:
+      paths:
+      - backend:
+          serviceName: fakebook-posts-api
+          servicePort: 80
+        path: /api/posts
+      - backend:
+          serviceName: fakebook-posts-api
+          servicePort: 80
+        path: /api/comments
+      - backend:
+          serviceName: fakebook-posts-api
+          servicePort: 80
+        path: /api/follows
+      - backend:
+          serviceName: fakebook-notifications-api
+          servicePort: 80
+        path: /notifications
+      - backend:
+          serviceName: fakebook-spa
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - fakebook.revaturelabs.com
+    secretName: fakebook-tls
+
+# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+# helm install fakebook-ingress ingress-nginx/ingress-nginx \
+#   --set controller.replicaCount=2 \
+#   --set controller.service.loadBalancerIP="20.72.138.197" \
+#   --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
+#   --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux \
+#   --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-resource-group"=Fakebook

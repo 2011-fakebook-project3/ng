@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fakebook-spa
+  labels:
+    app: fakebook-spa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fakebook-spa
+  strategy:
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: fakebook-spa
+    spec:
+      containers:
+      - name: fakebook-spa
+        image: fakebook.azurecr.io/fakebookng:latest
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi

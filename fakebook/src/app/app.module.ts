@@ -13,6 +13,8 @@ import { CommentViewComponent } from './component/comment-view/comment-view.comp
 import { FormsModule } from '@angular/forms';
 import { CommentFormComponent } from './component/comment-form/comment-form.component';
 import { LikeViewComponent } from './component/like-view/like-view.component';
+import { PostFormComponent } from './component/post-form/post-form.component';
+
 
 const config = {
   issuer: 'https://dev-2875280.okta.com/oauth2/default',
@@ -34,6 +36,7 @@ const config = {
     NewsfeedComponent,
     CommentFormComponent,
     LikeViewComponent,
+    PostFormComponent,
   ],
   imports: [
     BrowserModule,
