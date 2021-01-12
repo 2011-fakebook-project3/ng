@@ -6,6 +6,8 @@ import { Notification } from '../model/notification';
 
 import { NotificationsViewComponent } from './notifications-view.component';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../service/auth.service';
+import { OktaAuthService } from '@okta/okta-angular';
 
 describe('NotificationsViewComponent', () => {
   let component: NotificationsViewComponent;
@@ -14,8 +16,8 @@ describe('NotificationsViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
-      declarations: [ NotificationsViewComponent ]
+      imports: [ HttpClientTestingModule, ],
+      declarations: [ NotificationsViewComponent, ]
     })
     .compileComponents();
 
@@ -35,6 +37,12 @@ describe('NotificationsViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a toggleable notifications view', () => {
+    expect(component.notificationsView).toBeFalse();
+    component.toggleNotifications();
+    expect(component.notificationsView).toBeTrue();
   });
 
   // it('should contain a list of notifications', (done) => {

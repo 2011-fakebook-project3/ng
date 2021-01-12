@@ -6,6 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { NotificationsService } from './notifications.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 
 describe('NotificationsService', () => {
@@ -15,10 +16,11 @@ describe('NotificationsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
+        HttpClientTestingModule
       ],
       providers: [
         NotificationsService,
+        AuthService,
       ]
     });
     service = TestBed.inject(NotificationsService);
