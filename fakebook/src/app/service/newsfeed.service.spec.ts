@@ -17,7 +17,6 @@ describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
-  const url = `${environment.baseUrl}`;
 
 
   beforeEach(() => {
@@ -63,7 +62,8 @@ describe('NewsfeedService', () => {
 
 
   it('should have the correct urls', () => {
-    expect(service.url).toBe('http://localhost:4200/');
+    expect(service.url).toBe('https://fakebook.revaturelabs.com/');
+
   });
 
 });

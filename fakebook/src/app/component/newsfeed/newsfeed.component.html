@@ -19,7 +19,7 @@
         <div class="col-md-6">
             <app-new-post-form [user]="user"></app-new-post-form>
             <div *ngFor="let post of posts">
-                <!-- Insert post-view component here-->
+                <app-post-view [post]="post" [userEmail]="user.email" (notifyComment)="onNotifyComment($event)"></app-post-view>
             </div>
         </div>
         <div class="col-md-6">

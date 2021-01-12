@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NEVER, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { NewsfeedComponent } from './newsfeed.component';
 import { User } from '../../model/user';
 import { Post } from '../../model/post';
 import { NewsfeedService } from 'src/app/service/newsfeed.service';
+import { PostService } from 'src/app/service/post.service';
 
 
 describe('NewsfeedComponent', () => {
@@ -41,10 +42,15 @@ describe('NewsfeedComponent', () => {
        }
      };
 
+    const mockPostService = {
+      delete(id: number): void {}
+    };
+
     await TestBed.configureTestingModule({
       declarations: [ NewsfeedComponent ],
       providers: [
-        { provide: NewsfeedService, useValue: FakeNewsFeedService }
+        { provide: NewsfeedService, useValue: FakeNewsFeedService },
+        { provide: PostService,  useValue: mockPostService }
       ]
     })
       .compileComponents();
