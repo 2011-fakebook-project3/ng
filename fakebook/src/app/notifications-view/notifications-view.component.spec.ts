@@ -8,6 +8,7 @@ import { NotificationsViewComponent } from './notifications-view.component';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../service/auth.service';
 import { OktaAuthService } from '@okta/okta-angular';
+import { NEVER, Observable } from 'rxjs';
 
 describe('NotificationsViewComponent', () => {
   let component: NotificationsViewComponent;
@@ -15,12 +16,25 @@ describe('NotificationsViewComponent', () => {
   let httpMock: HttpTestingController;
 
   beforeEach(async () => {
+
+    const mockAuthService = {
+      getAccessToken(): string {
+        return "token";
+      }
+    };
+
+    const mockNotifservice = {
+      notificationsObs: new Observable<Notification>(),
+
+      setRead(): void { }
+    }
+
     await TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule, ],
       declarations: [ NotificationsViewComponent, ],
       providers: [
-        AuthService,
-        NotificationsService
+        { provide: AuthService, useValue: mockAuthService },
+        { provide: NotificationsService, useValue: mockNotifservice },
       ]
     })
     .compileComponents();
@@ -30,13 +44,11 @@ describe('NotificationsViewComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationsViewComponent);
     component = fixture.componentInstance;
-    httpMock = fixture.debugElement.injector.get<HttpTestingController>(HttpTestingController as Type<HttpTestingController>);
 
     fixture.detectChanges();
   });
 
   afterEach(() => {
-    httpMock.verify();
   });
 
   it('should create', () => {
