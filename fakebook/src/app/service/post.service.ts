@@ -11,7 +11,7 @@ import { NewPost } from '../model/newpost';
 })
 export class PostService {
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
-  baseUrl = 'https://fakebook.revaturelabs.com/';
+  baseUrl = 'https://fakebook.revaturelabs.com';
   url = `${this.baseUrl}/api/Posts`; // TODO: update with our base url
 
   headers = {
