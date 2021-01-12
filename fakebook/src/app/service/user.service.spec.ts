@@ -1,14 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserService } from './user.service';
+import { HttpClient } from '@angular/common/http';
 
 describe('UserService', () => {
   let service: UserService;
 
   beforeEach(() => {
+    const mockHttpClient = {};
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UserService]
+      providers: [
+        UserService,
+        { provide: HttpClient, useValue: mockHttpClient}
+      ]
 
     });
 
@@ -19,7 +24,7 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   });
   it('should have getUser function', () => {
-    const service: UserService = TestBed.get(UserService);
+    service = new UserService(TestBed.inject(HttpClient));
     expect(service.getUser).toBeTruthy();
    });
 });
