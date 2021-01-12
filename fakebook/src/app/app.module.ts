@@ -5,9 +5,11 @@ import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostViewComponent } from './component/post-view/post-view.component';
+import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
 import { MainViewComponent } from './component/main-view/main-view.component';
-import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 const config = {
@@ -23,6 +25,7 @@ const config = {
   declarations: [
     AppComponent,
     PostViewComponent,
+    NewsfeedComponent,
     NavbarViewComponent,
     MainViewComponent,
     NewsfeedComponent,
@@ -30,7 +33,8 @@ const config = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    OktaAuthModule
+    OktaAuthModule,
+    HttpClientModule
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
   bootstrap: [AppComponent]
