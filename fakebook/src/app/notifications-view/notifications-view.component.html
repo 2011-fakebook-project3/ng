@@ -2,12 +2,12 @@
     (click)="toggleNotifications()"
     style= "padding: 5px 5px; border-radius: 5px;">
 
-    <img *ngIf="!this.unreadNotifications" src="../../assets/notifications-icon.png" style="width: 24px; height: 28px;">
-    <img *ngIf="this.unreadNotifications" src="../../assets/notifications-icon-red.png" style="width: 24px; height: 28px;">
+    <img *ngIf="!this.unreadNotifications" src="../../assets/notifications-icon.png" style="width: 24px; height: 28px;" alt="noimage">
+    <img *ngIf="this.unreadNotifications" src="../../assets/notifications-icon-red.png" style="width: 24px; height: 28px;" alt="noimage">
 
 </button>
 
-<div *ngIf="this.notificationsView" 
+<div *ngIf="this.notificationsView"
     class="position-fixed rounded
             px-0 p-3"
     style="max-width: 500px; max-height: 400px; overflow-y: auto; background-color: rgb(235, 233, 233); border-radius: black 5px; z-index: 100;">
