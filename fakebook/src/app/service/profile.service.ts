@@ -26,16 +26,4 @@ export class ProfileService {
 
     return this.http.get<User>(this.baseUrl + email, this.headers);
   }
-
-  // If you click on a user and want to see their posts
-  public GetUserPosts(email: string): Observable<Post[]> {
-    // Fake Route!
-    return this.http.get<Post[]>(this.baseUrl + email, this.headers);
-  }
-
-  // If you are on your own profile
-  public GetOwnPosts(): Observable<Post[]> {
-
-    return this.http.get<Post[]>(`${environment}/api/posts`, this.headers);
-  }
 }
