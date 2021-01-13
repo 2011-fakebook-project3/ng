@@ -16,7 +16,7 @@
           <li>
             <a class="nav-link" *ngIf="!isAuthenticated" routerLink="/about/">About Us <span class="sr-only">(current)</span></a>
           </li>
-          <li>
+          <li *ngIf="isAuthenticated">
             <app-notifications-view></app-notifications-view>
           </li>
         </ul>
