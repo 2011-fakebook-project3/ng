@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: 'login/callback', component: OktaCallbackComponent },
   { path: 'logout', component: OktaCallbackComponent },
   { path: 'profile/:email', component: ProfileViewComponent},
-  { path: 'user/:id', component: ProfileViewComponent },
 ];
 
 @NgModule({
