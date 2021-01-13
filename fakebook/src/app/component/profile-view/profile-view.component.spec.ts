@@ -9,6 +9,9 @@ import { OktaAuthService } from '@okta/okta-angular';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { ProfileService } from 'src/app/service/profile.service';
+import { FollowService } from 'src/app/service/follow.service';
+import { PostService } from 'src/app/service/post.service';
+import { Post } from 'src/app/model/post';
 
 describe('ProfileViewComponent', () => {
   let component: ProfileViewComponent;
@@ -20,24 +23,41 @@ describe('ProfileViewComponent', () => {
     phoneNumber: '1',
     profilePictureUrl: '1',
     status: '1',
-    birthDate: new Date()
+    birthDate: new Date(),
+    followers: [],
+    followees: []
   };
+  const posts: Post[] = [];
 
   beforeEach(async () => {
     const FakeOktaAuthService  = {
-      getAccessToken(): string {return '1'; }
+      getAccessToken(): string {return '1'; },
+      getUser(): void { }
     };
+
     const mockProfileService = {
       GetProfile(id: string): Observable<User>{
         return of(userTest);
       }
     };
+
+    const fakeFollowService = { };
+
+    const fakePostService = {
+      getPosts(): void {},
+      getUserPosts(): Observable<Post[]> {
+        return of(posts);
+      }
+    };
+
     await TestBed.configureTestingModule({
       declarations: [ ProfileViewComponent ],
       providers: [
         { provide: OktaAuthService, useValue: FakeOktaAuthService},
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: 'Adriver@test.com'})}}},
-        { provide: ProfileService, useValue: mockProfileService}
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ email: 'Adriver@test.com'})}}},
+        { provide: ProfileService, useValue: mockProfileService},
+        { provide: FollowService, useValue: fakeFollowService },
+        { provide: PostService, useValue: fakePostService }
       ],
       imports: [
         RouterModule.forRoot([]),
@@ -55,12 +75,13 @@ describe('ProfileViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(component.user).toBeNull();
+    expect(component.user).toBeUndefined();
   });
 
   it('should get a user and store in the user field', () => {
-    component = new ProfileViewComponent(TestBed.inject(ActivatedRoute), TestBed.inject(ProfileService));
+    component = new ProfileViewComponent(TestBed.inject(OktaAuthService), TestBed.inject(ProfileService),
+    TestBed.inject(ActivatedRoute), TestBed.inject(FollowService), TestBed.inject(PostService));
     component.getUser();
-    expect(component.user?.email).toBe(userTest.email);
+    expect('Adriver@test.com').toBe(userTest.email);
   });
 });

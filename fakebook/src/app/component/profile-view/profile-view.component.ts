@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; // getting the id number
+import { ActivatedRoute } from '@angular/router';
+import { OktaAuthService } from '@okta/okta-angular';
+import { Post } from 'src/app/model/post';
 import { User } from 'src/app/model/user';
-import { ProfileService } from '../../service/profile.service';
+import { FollowService } from 'src/app/service/follow.service';
+import { PostService } from 'src/app/service/post.service';
+import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-profile-view',
@@ -10,27 +14,71 @@ import { ProfileService } from '../../service/profile.service';
   styleUrls: ['./profile-view.component.css']
 })
 export class ProfileViewComponent implements OnInit {
-  user: User | null = null;
+  // User whose profile page you are on
+  user: User | undefined;
+  // User logged in
+  selfUser!: User;
+  // Person logged in email
+  currentUserEmail = '';
+  posts: Post[] | undefined;
+  followStatus = false;
+  selfProfileCheck = false;
 
-  constructor(
-    private route: ActivatedRoute, // getting the id # in route
-    private profileService: ProfileService
-  ) {}
+  constructor(private oktaAuth: OktaAuthService,
+              private profileService: ProfileService,
+              private route: ActivatedRoute,
+              private followService: FollowService,
+              private postService: PostService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    // Get Current User Email
+    const userClaims = await this.oktaAuth.getUser();
+    if (userClaims) {
+      this.currentUserEmail = userClaims.email ?? '';
+    }
+
     this.getUser();
   }
-  getUser(): void {
-    let tempId = ''; // the only way i could declare a variable that may accept a null value in thefuture
-    // get the id number from the route
-    if (this.route.snapshot.paramMap.get('id') != null) {
-      tempId += this.route.snapshot.paramMap.get('id');
 
-      const id = tempId;
+  async getUser(): Promise<void> {
 
-      this.profileService.GetProfile(id).subscribe((gotuser: User | null) => (this.user = gotuser));
+    if (this.route.snapshot.paramMap.get('email') != null) {
 
+      const email = this.route.snapshot.paramMap.get('email');
+      if (email) {
+        // Set user
+        this.profileService.GetProfile(email).subscribe(user => this.user = user);
+        // Set posts
+        this.postService.getUserPosts(email).subscribe(posts => this.posts = posts);
+        // Set follow status
+        this.profileService.GetProfile(email)
+        .subscribe(user => this.profileService.GetProfile(this.currentUserEmail)
+          .subscribe(selfUser => this.followStatus = this.followService.getFollowStatus(selfUser, user)));
+      }
+    } else {
+      const userClaims = await this.oktaAuth.getUser();
+      this.currentUserEmail = userClaims.email ?? '';
+
+      this.profileService.GetProfile(this.currentUserEmail).subscribe(user => this.user = user);
+
+      this.postService.getPosts().subscribe(posts => this.posts = posts);
+      this.selfProfileCheck = true;
     }
   }
-}
 
+  followUser(): any {
+    if (this.user !== undefined && this.selfUser !== undefined) {
+      if (this.followStatus) {
+        this.followService.unfollow(this.user, this.selfUser);
+        this.followStatus = false;
+      } else {
+        this.followService.follow(this.user, this.selfUser);
+        this.followStatus = true;
+      }
+    }
+  }
+
+  onNotifyComment(postId: any): void {
+    console.log(postId);
+  }
+}
