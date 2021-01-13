@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'someUrl' // replace with backend development url
+  baseUrl: 'https://localhost:4200' // replace with backend development url
 
 };
 
