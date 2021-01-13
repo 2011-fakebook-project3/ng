@@ -58,7 +58,7 @@ describe('PostFormComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
     expect(component.newPost.content).toBe('');
-    expect(component.newPost.userId).toBeUndefined();
+    expect(component.newPost.userId).toBe('');
     expect(component.newPost.pictureUrl).toBe('');
     expect(component.submitted).toBeFalse();
     expect(component.file).toBeNull();
