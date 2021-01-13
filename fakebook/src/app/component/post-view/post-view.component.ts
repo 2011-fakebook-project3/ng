@@ -5,6 +5,7 @@ import { User } from 'src/app/model/user';
 import { PostService } from 'src/app/service/post.service';
 import { Comment } from 'src/app/model/comment';
 import { Post } from '../../model/post';
+import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-post-view',
@@ -14,7 +15,7 @@ import { Post } from '../../model/post';
 export class PostViewComponent implements OnInit {
 
   @Input() post: Post | null = null;
-  @Input() userid = 0;
+  @Input() userEmail = '';
 
   @Output() notifyComment: EventEmitter<string> = new EventEmitter<string>();
 
@@ -23,22 +24,23 @@ export class PostViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public postService: PostService
+    public postService: PostService,
+    public profileService: ProfileService
   ) {
   }
 
   ngOnInit(): void {
-    if (this.userid !== 0) {
-      this.getUser(this.userid);
+    if (this.userEmail !== '') {
+      this.getUser(this.userEmail);
     }
     if (this.post) {
       this.getPostComments(this.post.id);
     }
   }
 
-  getUser(id: number): void{
-    // TODO: get user from which service?
-    throw Error('not implemented');
+
+  getUser(email: string): void{
+    this.profileService.GetProfile(email).subscribe((user) => (this.user = user));
   }
 
   getPostComments(id: number): void{
@@ -46,8 +48,35 @@ export class PostViewComponent implements OnInit {
     throw Error('not implemented');
   }
 
+  // likePost(postId: number): void{
+  //   this.postService.likePost(postId).subscribe();
+  //   this.post?.likedByUserIds.push(postId);
+  // }
+
+  // unLikePost(postId: number): void {
+  //   if (this.post && this.post.likedByUserIds && this.post?.likedByUserIds.indexOf(postId) !== -1){
+  //     // this.post.likedByUserIds = this.post?.likedByUserIds.filter(element !== postId)
+  //     this.postService.unLikePost(postId).subscribe();
+  //   }
+  // }
+
   deletePost(post: Post): void{
     this.post = null;
     this.postService.delete(post.id);
   }
+
+  deleteComment(comment: Comment): void {
+    if (this.post) {
+      // TODO: delete from backend
+
+
+      const index = this.post.comments.indexOf(comment);
+      delete this.post.comments[index];
+    }
+  }
+
+  onNotifyComment(valueEmitted: any): void {
+    this.notifyComment.emit(valueEmitted);
+  }
+
 }

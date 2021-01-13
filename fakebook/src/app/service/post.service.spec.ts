@@ -6,13 +6,15 @@ import { User} from 'src/app/model/user';
 import { Comment } from 'src/app/model/comment';
 import { PostService } from './post.service';
 import { Post } from '../model/post';
+import { of } from 'rxjs';
 import { OktaAuthService } from '@okta/okta-angular';
+import { environment } from 'src/environments/environment';
 
 describe('PostService', () => {
   let service: PostService;
   let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy }; // spy with some functions
   let httpTestingController: HttpTestingController; // mock backend
-  const url = `testurl.net/api/Posts`; // test base url
+  const url = `https://fakebook.revaturelabs.com/api/Posts`; // test base url
 
   beforeEach(() => {
     const mockOktaAuthService = {
@@ -41,12 +43,11 @@ describe('PostService', () => {
   });
 
   it('should have correct access token and headers', () => {
-    expect(service.headers.Authorization).toBe('Bearer 0');
-    expect(service.headers.Accept).toBe('application/json');
+    expect(service.headers.headers.Authorization).toBe('Bearer 0');
+    expect(service.headers.headers.Accept).toBe('application/json');
   });
 
   it('should have the correct urls', () => {
-    expect(service.baseUrl).toBe('someUrl');
-    expect(service.url).toBe(`${service.baseUrl}/api/Posts`);
+    expect(service.url).toBe(`${environment.baseUrl}/api/Posts`);
   });
 });

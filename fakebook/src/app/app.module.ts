@@ -3,6 +3,8 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostViewComponent } from './component/post-view/post-view.component';
+import { CommentFormComponent } from './component/comment-form/comment-form.component';
+import { LikeViewComponent } from './component/like-view/like-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -22,7 +24,6 @@ import { PostFormComponent } from './component/post-form/post-form.component';
   pure: false
 })
 export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform{}
-
 
 
 const config = {
@@ -45,7 +46,8 @@ const config = {
     TimeAgoExtendsPipe,
     MainViewComponent,
     NewsfeedComponent,
-    // CommentFormComponent,
+    CommentFormComponent,
+    LikeViewComponent,
     PostFormComponent,
   ],
   imports: [

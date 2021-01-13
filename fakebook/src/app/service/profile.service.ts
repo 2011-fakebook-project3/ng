@@ -37,7 +37,6 @@ export class ProfileService {
       - [POST]        /profiles/upload
           + uploads an image via a form (input type='file')
   */
-
   public GetProfile(email: string): Observable<User> /* profile */{
 
     return this.http.get<User>(this.baseUrl + email, this.headers);

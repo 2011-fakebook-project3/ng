@@ -16,7 +16,7 @@ export class CommentViewComponent implements OnInit {
   };
 
   @Input() comment: Comment | null = null;
-  @Input() currentUserId!: number;
+  @Input() currentUserEmail!: string;
 
   @Output() delete = new EventEmitter<Comment>();
 
