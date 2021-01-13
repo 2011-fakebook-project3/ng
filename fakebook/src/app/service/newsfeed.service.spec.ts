@@ -63,7 +63,7 @@ describe('NewsfeedService', () => {
 
 
   it('should have the correct urls', () => {
-    expect(service.url).toBe('http://localhost:4200/');
+    expect(service.url).toBe('http://localhost:4200');
   });
 
 });
