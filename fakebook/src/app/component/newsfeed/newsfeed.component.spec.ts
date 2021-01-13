@@ -27,7 +27,9 @@ describe('NewsfeedComponent', () => {
     phoneNumber: '5551234567',
     profilePictureUrl: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JIWU3L8WkMo9Yv1VtNnErQHaEK%26pid%3DApi&f=1',
     status: 'My Fake User status',
-    birthDate: new Date()
+    birthDate: new Date(),
+    followers: [],
+    followees: []
   };
 
 
