@@ -54,8 +54,6 @@ describe('NewsfeedService', () => {
     expect(service).toBeTruthy();
   });
 
-
-
   it('should have correct access token and headers', () => {
     expect(service.headers.Authorization).toBe('Bearer 0');
     expect(service.headers.Accept).toBe('application/json');
@@ -63,7 +61,7 @@ describe('NewsfeedService', () => {
 
 
   it('should have the correct urls', () => {
-    expect(service.url).toBe('http://localhost:4200');
+    expect(service.url).toBe(environment.baseUrl);
   });
 
 });
