@@ -37,12 +37,12 @@ export class NotificationsService {
                              .withUrl(`${environment.baseUrl}/notifications`, options)
                              .build();
     this.hubConnection.start()
-    .catch((error) => console.log(error));
-
-    // append notifications to the notifications list
-    this.hubConnection.on('SendAll', (data, data2) => {
-      this.notifications.next(this.mapNotifications([data2] as ApiNotification[]));
-    });
+    .catch(error => console.log('hub connection failed'))
+    .then(() =>
+      this.hubConnection.on('SendAll', (data, data2) =>
+      {
+        this.notifications.next(this.mapNotifications([data2] as ApiNotification[]));
+      }));
   }
 
   // mapping function that maps the received notification to the one that the component uses
