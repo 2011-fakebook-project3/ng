@@ -26,7 +26,7 @@ export class NewsfeedService {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
     };
-    return this.http.get<Post[]>(`${this.url}/api/Posts`, { headers });
+    return this.http.get<Post[]>(`${this.url}/api/posts/newsfeed`, { headers });
   }
 
   getUser(): Observable<User>{
@@ -35,7 +35,7 @@ export class NewsfeedService {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
     };
-    return this.http.get<User>(`${this.url}/api/User`, { headers });
+    return this.http.get<User>(`${this.url}/api/profiles/`, { headers });
   }
 
 }
