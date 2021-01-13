@@ -7,6 +7,7 @@ import { ApiNotification } from '../model/api-notification';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Notification as Dontdothis, Observable, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
+import { PostService } from './post.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,10 @@ export class NotificationsService {
   public notificationsObs = this.notifications.asObservable();
   private token = this.authService.oktaAuth.getAccessToken();
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private postService: PostService
+    ) {
 
     // initialize options so hub connection can use authorization
     const options: IHttpConnectionOptions = {
@@ -64,5 +68,27 @@ export class NotificationsService {
   // once the notifications view has expanded, will set all notifications to read on the database
   setRead(ids: string[]): void {
     this.hubConnection.invoke('MarkNotificationAsReadAsync', ids);
+  }
+
+  // invokes the Create comment function on the signalR backend
+  createCommentNotification(commenterEmail: string, postId: number): void {
+
+    let posterEmail: string;
+
+    // gets email of the post creator and sends a new notification to the backend
+    this.postService.getById(postId).subscribe(post => {
+
+      posterEmail = post.userEmail;
+
+      let notif: ApiNotification = {
+        id: "",
+        date: new Date(Date.now()),
+        triggerUserId: commenterEmail,
+        loggedInUserId: posterEmail,
+        type: {key: 'comment', value: 0},
+        hasBennread: false
+      }
+      this.hubConnection.invoke('CreateNotification', notif);
+    });
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
 import { CommentFormData } from 'src/app/model/comment-form-data';
 import { CommentService } from 'src/app/service/comment.service';
+import { NotificationsService } from 'src/app/service/notifications.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class CommentFormComponent implements OnInit {
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
-    private oktaAuth: OktaAuthService
+    private oktaAuth: OktaAuthService,
+    private notificationsService: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class CommentFormComponent implements OnInit {
       createdAt: undefined,
       userEmail: this.email
     }).then(res => this.notifyComment.emit(this.postId));
+
+    this.notificationsService.createCommentNotification(this.email, comment.postId);
 
     this.comment.content = '';
   }
