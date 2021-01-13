@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { OktaAuthService } from '@okta/okta-angular';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { ProfileService } from './profile.service';
+import { UploadImageService } from './upload-image.service';
 
-describe('ProfileService', () => {
-  let service: ProfileService;
+describe('UploadImageService', () => {
+  let service: UploadImageService;
 
   beforeEach(() => {
     const mockOktaAuthService = {
@@ -22,14 +21,12 @@ describe('ProfileService', () => {
         { provide: OktaAuthService, useValue: mockOktaAuthService}
       ]
     }).compileComponents();
-    service = TestBed.inject(ProfileService);
+    service = TestBed.inject(UploadImageService);
   });
 
   it('should be created', () => {
-    service = new ProfileService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
+    service = new UploadImageService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
     expect(service).toBeTruthy();
-    expect(service.baseUrl).toBe(`${environment.baseUrl}/api/profiles/`);
-    expect(service.headers.headers.Accept).toBe('application/json');
-    expect(service.headers.headers.Authorization).toBe('Bearer ');
+    expect(service.url).toBe(`${environment.baseUrl}/api/profiles/`);
   });
 });
