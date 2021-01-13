@@ -30,22 +30,13 @@ export class PostViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.userEmail !== '') {
-      this.getUser(this.userEmail);
-    }
-    if (this.post) {
-      this.getPostComments(this.post.id);
+    if (this.post && this.post.userEmail) {
+      this.getUser(this.post.userEmail);
     }
   }
-
 
   getUser(email: string): void{
     this.profileService.GetProfile(email).subscribe((user) => (this.user = user));
-  }
-
-  getPostComments(id: number): void{
-    // TODO: subscribe to postService to get list of comments in this post
-    throw Error('not implemented');
   }
 
   // likePost(postId: number): void{

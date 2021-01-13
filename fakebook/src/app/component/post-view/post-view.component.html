@@ -6,7 +6,7 @@
       <div class="d-flex justify-content-between p-2 px-3 ">
         <div class="d-flex mt-2 flex-row align-items-center flex-fill"> <img src="{{user.profilePictureUrl}}" alt="{{user.profilePictureUrl}}" width="50" class="rounded-circle img-fluid">
           <div class="d-flex flex-column ml-2">
-            <a href="/user/{{user.id}}">
+            <a href="/profile/{{user.email}}">
               <strong>{{user.firstName}} {{user.lastName}}</strong>
             </a>
             <small class="text-muted">{{post.createdAt | date:'medium'}}</small>
