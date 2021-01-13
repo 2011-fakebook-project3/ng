@@ -10,6 +10,7 @@ import { MainViewComponent } from './component/main-view/main-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileViewComponent } from './component/profile-view/profile-view.component';
 // import { CommentFormComponent } from './component/comment-form/comment-form.component';
 
 const config = {
@@ -29,6 +30,7 @@ const config = {
     NavbarViewComponent,
     MainViewComponent,
     NewsfeedComponent,
+    ProfileViewComponent,
     // CommentFormComponent,
   ],
   imports: [
