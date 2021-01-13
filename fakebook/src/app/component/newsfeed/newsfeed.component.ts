@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
 import { Post } from '../../model/post';
 import { NewsfeedService } from '../../service/newsfeed.service';
+import { PostService } from '../../service/post.service';
 
 @Component({
   selector: 'app-newsfeed',
@@ -14,7 +15,8 @@ export class NewsfeedComponent implements OnInit {
   user: User | null = null;
 
   constructor(
-    private newsfeedService: NewsfeedService
+    private newsfeedService: NewsfeedService,
+    private postService: PostService
   ) { }
 
   ngOnInit(): void {
@@ -32,5 +34,14 @@ export class NewsfeedComponent implements OnInit {
       .subscribe(gotUser => this.user = gotUser);
 
   }
+
+  onNotifyComment(valueEmitted: any): any{
+    console.log(valueEmitted);
+    this.postService.getById(valueEmitted)
+      .subscribe(res => {
+        const index = this.posts.findIndex(post => post.id === res.id);
+        this.posts[index] = res;
+      });
+    }
 
 }
