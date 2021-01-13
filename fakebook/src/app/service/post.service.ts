@@ -11,7 +11,7 @@ import { NewPost } from '../model/newpost';
 })
 export class PostService {
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
-  baseUrl = 'https://fakebook.revaturelabs.com/';
+  baseUrl = 'https://fakebook.revaturelabs.com';
   url = `${this.baseUrl}/api/Posts`; // TODO: update with our base url
 
   headers = {
@@ -35,6 +35,10 @@ export class PostService {
 
   getById(id: number): Observable<Post> {
     return this.http.get<Post>(`${this.url}/${id}`, this.headers);
+    }
+
+  getUserPosts(email: string): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.url}/user/${email}`, this.headers);
     }
 
   getPosts(): Observable<Post[]> {
