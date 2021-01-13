@@ -39,9 +39,9 @@ export class NotificationsService {
     this.hubConnection.start()
     .catch(error => console.log('hub connection failed'))
     .then(() =>
-      this.hubConnection.on('SendAll', (data, data2) =>
+      this.hubConnection.on('SendUserGroupAsync', (data) =>
       {
-        this.notifications.next(this.mapNotifications([data2] as ApiNotification[]));
+        this.notifications.next(this.mapNotifications([data] as ApiNotification[]));
       }));
   }
 
@@ -63,6 +63,6 @@ export class NotificationsService {
 
   // once the notifications view has expanded, will set all notifications to read on the database
   setRead(ids: string[]): void {
-    this.hubConnection.invoke('SetNotificationsToRead', ids);
+    this.hubConnection.invoke('MarkNotificationAsReadAsync', ids);
   }
 }
