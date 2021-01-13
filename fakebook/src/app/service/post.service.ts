@@ -5,14 +5,14 @@ import { OktaAuthService, OktaCallbackComponent } from '@okta/okta-angular';
 
 import { Post } from '../model/post';
 import { NewPost } from '../model/newpost';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
-  baseUrl = 'https://fakebook.revaturelabs.com';
-  url = `${this.baseUrl}/api/Posts`; // TODO: update with our base url
+  url = `${environment.baseUrl}/api/Posts`;
 
   headers = {
     headers: {

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationBehaviorOptions , Router } from '@angular/router';
-import { NEVER } from 'rxjs';
+import { NEVER, Observable, of } from 'rxjs';
 
 import { User } from '../../model/user';
 import { Comment } from '../../model/comment';
@@ -9,6 +9,8 @@ import { Post } from '../../model/post';
 import { PostViewComponent } from './post-view.component';
 import { PostService } from '../../service/post.service';
 import { ProfileService } from 'src/app/service/profile.service';
+import { HttpClientModule } from '@angular/common/http';
+import { OktaAuthService } from '@okta/okta-angular';
 
 describe('PostViewComponent', () => {
   let component: PostViewComponent;
@@ -44,16 +46,22 @@ describe('PostViewComponent', () => {
     liked: false
   };
 
+  const fakeHTTPClient = { };
+  const fakeOktaAuth = { getAccessToken(): void {} };
   beforeEach(async () => {
     const mockPostService = {
       delete(id: number): void {}
     };
 
     await TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ PostViewComponent ],
       providers: [
         {provide: PostService, useValue: mockPostService},
-        {provide: ActivatedRoute, useValue: {}}
+        {provide: ActivatedRoute, useValue: {}},
+        { provide: HttpClientModule, useValue: fakeHTTPClient},
+        { provide: OktaAuthService, useValue: fakeOktaAuth}
+
       ]
     })
     .compileComponents();

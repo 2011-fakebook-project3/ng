@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommentViewComponent } from './component/comment-view/comment-view.component';
 import { FormsModule } from '@angular/forms';
 import { CommentFormComponent } from './component/comment-form/comment-form.component';
+import { LikeViewComponent } from './component/like-view/like-view.component';
 import { PostFormComponent } from './component/post-form/post-form.component';
 
 
@@ -34,6 +35,7 @@ const config = {
     MainViewComponent,
     NewsfeedComponent,
     CommentFormComponent,
+    LikeViewComponent,
     PostFormComponent,
   ],
   imports: [

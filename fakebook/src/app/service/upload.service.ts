@@ -8,7 +8,7 @@ export class UploadService {
 
   upload(formData: FormData): Promise<any> {
     return this.http.post<{ path: string, userId: number }>(
-      `${environment.baseURL}/api/Posts/UploadPicture`,
+      `${environment.baseUrl}/api/Posts/UploadPicture`,
       formData
     ).toPromise();
   }

@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UploadImageService {
-  baseUrl = `${environment.profile.url}/api/profiles/`;
+  baseUrl = `${environment.baseUrl}/api/profiles/`;
 
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
 

@@ -19,6 +19,11 @@
       <img src="{{post.pictureUrl}}" alt="{{post.pictureUrl}}" class="img-fluid">
       <div class="p-2">
         <p class="ml-5  ">{{post.content}}</p>
+        <hr>
+          <div class="d-flex justify-content-between align-items-center">
+            <app-like-view [liked]='post.liked' [postId]='post.id' [count]='post.likedByUserIds.length'></app-like-view>
+          </div>
+        <hr>
         <div *ngIf='post.comments!=undefined'>
           <div class="social-body">
             <!-- Iteration through all comments for the post -->

@@ -8,6 +8,7 @@ import { PostService } from './post.service';
 import { Post } from '../model/post';
 import { of } from 'rxjs';
 import { OktaAuthService } from '@okta/okta-angular';
+import { environment } from 'src/environments/environment';
 
 describe('PostService', () => {
   let service: PostService;
@@ -47,7 +48,6 @@ describe('PostService', () => {
   });
 
   it('should have the correct urls', () => {
-    expect(service.baseUrl).toBe('https://fakebook.revaturelabs.com/');
-    expect(service.url).toBe(`${service.baseUrl}/api/Posts`);
+    expect(service.url).toBe(`${environment.baseUrl}/api/Posts`);
   });
 });
