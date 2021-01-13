@@ -37,7 +37,7 @@ export class NotificationsService {
                              .withUrl(`${environment.baseUrl}/notifications`, options)
                              .build();
     this.hubConnection.start()
-    .catch(error => console.log('hub connection failed'))
+    .catch(error => console.log(error))
     .then(() =>
       this.hubConnection.on('SendAll', (data, data2) =>
       {
