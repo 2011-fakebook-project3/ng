@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../model/user';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +10,7 @@ import { Observable } from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  // test url
-  url = `https://2011-project2-fakebook.azurewebsites.net/api/`; // url of the api
+  url = `${environment.baseUrl}/api/`;
 
   // Get the user's information
   // Returns: An Observable.

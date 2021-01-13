@@ -16,14 +16,16 @@ export class LikeViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit(liked: boolean): void {
-    if (liked) {
+  submit(): void {
+    // if the post is aready liked we should unlike it
+    if (this.liked) {
       this.likeService.unlike(this.postId);
-      this.liked = !liked;
+      this.liked = !this.liked;
       this.count --;
     } else {
+      // like the post
       this.likeService.like(this.postId);
-      this.liked = !liked;
+      this.liked = !this.liked;
       this.count ++;
     }
   }
