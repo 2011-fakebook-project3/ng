@@ -4,10 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:4200',
-  profile: {
-    url: 'http://localhost:4200'
-  }
+  baseUrl: 'https://localhost:4200'
 };
 
 /*
