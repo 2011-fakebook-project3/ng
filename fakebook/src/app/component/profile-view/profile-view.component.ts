@@ -52,7 +52,7 @@ export class ProfileViewComponent implements OnInit {
 
       this.profileService.GetProfile(email).subscribe(user => this.user = user);
 
-      this.postService.GetUserPosts(email).subscribe(posts => this.posts = posts);
+      this.postService.getUserPosts(email).subscribe(posts => this.posts = posts);
       // This might have problems due to async. currentUserEmail may not be set in time
       this.profileService.GetProfile(email)
         .subscribe(user => this.profileService.GetProfile(this.currentUserEmail)
@@ -63,7 +63,7 @@ export class ProfileViewComponent implements OnInit {
 
       this.profileService.GetProfile(this.currentUserEmail).subscribe(user => this.user = user);
 
-      this.postService.GetOwnPosts().subscribe(posts => this.posts = posts);
+      this.postService.getPosts().subscribe(posts => this.posts = posts);
       this.selfProfileCheck = true;
     }
   }
