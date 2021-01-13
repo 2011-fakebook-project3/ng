@@ -20,11 +20,10 @@ stages:
   jobs:
   - job: build
     steps:
-    # using node version 15.x to enforce npm 7.x
     - task: NodeTool@0
       displayName: install nodejs
       inputs:
-        versionSpec: '15.x'
+        versionSpec: '14.x'
 
     - script: npm ci
       displayName: npm install
