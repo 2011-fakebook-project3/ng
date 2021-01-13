@@ -6,8 +6,6 @@ import { OktaCallbackComponent } from '@okta/okta-angular';
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { ProfileViewComponent } from './component/profile-view/profile-view.component';
 
-
-
 const routes: Routes = [
   { path: '', component: MainViewComponent },
   { path: 'newsfeed', component: NewsfeedComponent },
@@ -15,7 +13,6 @@ const routes: Routes = [
   { path: 'logout', component: OktaCallbackComponent },
   { path: 'profile/:email', component: ProfileViewComponent},
   { path: 'user/:id', component: ProfileViewComponent },
-
 ];
 
 @NgModule({

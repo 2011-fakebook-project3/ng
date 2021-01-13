@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PostViewComponent } from './component/post-view/post-view.component';
+import { CommentFormComponent } from './component/comment-form/comment-form.component';
+import { LikeViewComponent } from './component/like-view/like-view.component';
+import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
@@ -11,18 +15,15 @@ import { CommonModule } from '@angular/common';
 import { CommentViewComponent } from './component/comment-view/comment-view.component';
 import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
 import { MainViewComponent } from './component/main-view/main-view.component';
-import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileViewComponent } from './component/profile-view/profile-view.component';
-import { PostViewComponent } from './component/post-view/post-view.component';
-// import { CommentFormComponent } from './component/comment-form/comment-form.component';
+import { PostFormComponent } from './component/post-form/post-form.component';
 
 @Pipe({
   name: 'timeAgo',
   pure: false
 })
 export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform{}
-
 
 
 const config = {
@@ -37,6 +38,7 @@ const config = {
 @NgModule({
   declarations: [
     AppComponent,
+    PostViewComponent,
     NotificationsViewComponent,
     CommentViewComponent,
     NewsfeedComponent,
@@ -46,7 +48,9 @@ const config = {
     NewsfeedComponent,
     ProfileViewComponent,
     PostViewComponent,
-    // CommentFormComponent,
+    CommentFormComponent,
+    LikeViewComponent,
+    PostFormComponent,
   ],
   imports: [
     BrowserModule,

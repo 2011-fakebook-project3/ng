@@ -38,12 +38,14 @@ export class ProfileService {
       - [POST]        /profiles/upload
           + uploads an image via a form (input type='file')
   */
-
   public GetProfile(email: string): Observable<User> /* profile */{
 
     return this.http.get<User>(this.baseUrl + email, this.headers);
   }
 
+  public GetProfileWithNullRoute(): Observable<User> /* null route */ {
+    return this.http.get<User>(this.baseUrl, this.headers);
+  }
   public GetProfiles(emails: string[]): Observable<User> /* profile */{
     // make empty collection of profiles
     // emails={abc, 123, }
