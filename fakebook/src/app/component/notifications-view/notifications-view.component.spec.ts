@@ -1,12 +1,12 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificationsService } from '../service/notifications.service';
+import { NotificationsService } from '../../service/notifications.service';
 import { Type } from '@angular/core';
-import { Notification } from '../model/notification';
+import { Notification } from '../../model/notification';
 
 import { NotificationsViewComponent } from './notifications-view.component';
 import { environment } from 'src/environments/environment';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { OktaAuthService } from '@okta/okta-angular';
 import { NEVER, Observable } from 'rxjs';
 
