@@ -38,7 +38,7 @@ describe('PostViewComponent', () => {
   const testPost: Post = {
     id: 1,
     content: 'string',
-    userId: 1,
+    userEmail: 'e@mail',
     pictureUrl: undefined,
     createdAt: new Date(2020, 12),
     likedByUserIds: [],
