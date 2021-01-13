@@ -35,6 +35,10 @@ spec:
           serviceName: fakebook-profiles-api
           servicePort: 80
         path: /api/profiles
+      - backend:
+          serviceName: fakebook-profile-picture-api
+          servicePort: 80
+        path: /api/profilepicture
   tls:
   - hosts:
     - fakebook.revaturelabs.com
