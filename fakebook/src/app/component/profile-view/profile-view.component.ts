@@ -33,8 +33,9 @@ export class ProfileViewComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     // Get Current User Email
     const userClaims = await this.oktaAuth.getUser();
-    this.currentUserEmail = userClaims.email ?? '';
-
+    if (userClaims) {
+      this.currentUserEmail = userClaims.email ?? '';
+    }
 
     this.getUser();
   }

@@ -35,6 +35,6 @@ export class FollowService {
   }
 
   getFollowStatus(follower: User, followee: User): boolean {
-    return followee.followers.some((user) => user.id === follower.id);
+    return followee.followers.some((user) => user.email === follower.email);
   }
 }

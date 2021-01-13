@@ -7,4 +7,6 @@ export interface User {
   profilePictureUrl: string | null;
   status: string | undefined;
   birthDate: Date;
+  followers: User[];
+  followees: User[];
 }
