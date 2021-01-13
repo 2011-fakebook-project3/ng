@@ -4,6 +4,7 @@ import { OktaAuthService } from '@okta/okta-angular';
 import { Post } from 'src/app/model/post';
 import { User } from 'src/app/model/user';
 import { FollowService } from 'src/app/service/follow.service';
+import { PostService } from 'src/app/service/post.service';
 import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class ProfileViewComponent implements OnInit {
   constructor(private oktaAuth: OktaAuthService,
               private profileService: ProfileService,
               private route: ActivatedRoute,
-              private followService: FollowService) { }
+              private followService: FollowService,
+              private postService: PostService) { }
 
   async ngOnInit(): Promise<void> {
     // Get Current User Email
@@ -48,7 +50,7 @@ export class ProfileViewComponent implements OnInit {
 
       this.profileService.GetProfile(email).subscribe(user => this.user = user);
 
-      this.profileService.GetUserPosts(email).subscribe(posts => this.posts = posts);
+      this.postService.GetUserPosts(email).subscribe(posts => this.posts = posts);
       // This might have problems due to async. currentUserEmail may not be set in time
       this.profileService.GetProfile(email)
         .subscribe(user => this.profileService.GetProfile(this.currentUserEmail)
@@ -59,9 +61,8 @@ export class ProfileViewComponent implements OnInit {
 
       this.profileService.GetProfile(this.currentUserEmail).subscribe(user => this.user = user);
 
-      this.profileService.GetOwnPosts().subscribe(posts => this.posts = posts);
+      this.postService.GetOwnPosts().subscribe(posts => this.posts = posts);
       this.selfProfileCheck = true;
-
     }
   }
 
@@ -79,5 +80,7 @@ export class ProfileViewComponent implements OnInit {
     }
   }
 
-
+  onNotifyComment(postId: any): void {
+    console.log(postId);
+  }
 }

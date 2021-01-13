@@ -30,7 +30,7 @@ export class FollowService {
       Accept: 'application/json',
       'Content-Type': 'application/json'
     };
-    return this.http.delete(`${this.url}/User/${followee.id}/unfollow/${follower.id}`, { headers })
+    return this.http.delete(`${this.url}/follows/${follower.id}`, { headers })
       .toPromise().then(res => console.log(JSON.stringify(res)));
   }
 
