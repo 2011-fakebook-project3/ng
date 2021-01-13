@@ -38,7 +38,8 @@ describe('ProfileViewComponent', () => {
       }
     };
     const fakeFollowService = { };
-    const fakePostService = { getPosts(): void {}};
+    const fakePostService = { getPosts(): void {},
+      getUserPosts(): void {}};
     await TestBed.configureTestingModule({
       declarations: [ ProfileViewComponent ],
       providers: [
