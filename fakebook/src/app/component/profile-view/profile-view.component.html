@@ -38,7 +38,7 @@
           <div class="row">
             <div class="col-2 col-md-3" *ngFor="let friend of user.followees">
               <a href="/user/{{friend.id}}"> <img data-toggle="tooltip" data-placement="top" title="{{friend.firstName}}"
-                  class="img-fluid img-md img-round rounded-circle" src="{{friend.profilePictureUrl}}"> </a>
+                  class="img-fluid img-md img-round rounded-circle" src="{{friend.profilePictureUrl}}" alt=""> </a>
             </div>
           </div>
         </div>
