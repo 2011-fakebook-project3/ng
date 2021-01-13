@@ -1,18 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
-
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NotificationsViewComponent } from './notifications-view/notifications-view.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
+import { CommonModule } from '@angular/common';
 import { CommentViewComponent } from './component/comment-view/comment-view.component';
 import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { NewsfeedComponent } from './component/newsfeed/newsfeed.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { ProfileViewComponent } from './component/profile-view/profile-view.component';
 import { PostViewComponent } from './component/post-view/post-view.component';
 // import { CommentFormComponent } from './component/comment-form/comment-form.component';
+
+@Pipe({
+  name: 'timeAgo',
+  pure: false
+})
+export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform{}
+
+
 
 const config = {
   issuer: 'https://dev-2875280.okta.com/oauth2/default',
@@ -26,9 +37,11 @@ const config = {
 @NgModule({
   declarations: [
     AppComponent,
+    NotificationsViewComponent,
     CommentViewComponent,
     NewsfeedComponent,
     NavbarViewComponent,
+    TimeAgoExtendsPipe,
     MainViewComponent,
     NewsfeedComponent,
     ProfileViewComponent,
@@ -38,9 +51,10 @@ const config = {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     OktaAuthModule,
+    CommonModule,
     FormsModule,
-    HttpClientModule
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
   bootstrap: [AppComponent]

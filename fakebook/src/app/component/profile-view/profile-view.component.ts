@@ -9,6 +9,7 @@ import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-profile-view',
+  providers: [ProfileService],
   templateUrl: './profile-view.component.html',
   styleUrls: ['./profile-view.component.css']
 })
