@@ -11,6 +11,7 @@ import { User } from 'src/app/model/user';
 import { ProfileService } from 'src/app/service/profile.service';
 import { FollowService } from 'src/app/service/follow.service';
 import { PostService } from 'src/app/service/post.service';
+import { Post } from 'src/app/model/post';
 
 describe('ProfileViewComponent', () => {
   let component: ProfileViewComponent;
@@ -26,20 +27,29 @@ describe('ProfileViewComponent', () => {
     followers: [],
     followees: []
   };
+  const posts: Post[] = [];
 
   beforeEach(async () => {
     const FakeOktaAuthService  = {
       getAccessToken(): string {return '1'; },
       getUser(): void { }
     };
+
     const mockProfileService = {
       GetProfile(id: string): Observable<User>{
         return of(userTest);
       }
     };
+
     const fakeFollowService = { };
-    const fakePostService = { getPosts(): void {},
-      getUserPosts(): void {}};
+
+    const fakePostService = {
+      getPosts(): void {},
+      getUserPosts(): Observable<Post[]> {
+        return of(posts);
+      }
+    };
+
     await TestBed.configureTestingModule({
       declarations: [ ProfileViewComponent ],
       providers: [

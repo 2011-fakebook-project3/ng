@@ -5,7 +5,7 @@
           <img class="rounded-circle img-sm" alt="image" src="{{user.profilePictureUrl}}">
         </a>
         <div class="media-body">
-          <a href="/profile/{{comment.userEmail}}">
+          <a routerLink='/profile/{{comment.userEmail}}'>
             {{user.fullname}}
           </a>
           <small class="text-muted">{{comment.createdAt | date:'medium'}}</small>

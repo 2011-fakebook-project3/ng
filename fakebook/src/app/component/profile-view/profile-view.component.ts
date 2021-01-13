@@ -14,13 +14,13 @@ import { ProfileService } from 'src/app/service/profile.service';
   styleUrls: ['./profile-view.component.css']
 })
 export class ProfileViewComponent implements OnInit {
+  // User whose profile page you are on
   user: User | undefined;
+  // User logged in
   selfUser!: User;
   // Person logged in email
   currentUserEmail = '';
-  // This should be the email of the person whose profile you click on
-  profileUserEmail = '';
-  posts: Post[] = [];
+  posts: Post[] | undefined;
   followStatus = false;
   selfProfileCheck = false;
 
@@ -41,22 +41,20 @@ export class ProfileViewComponent implements OnInit {
   }
 
   async getUser(): Promise<void> {
-    let tempEmail = '';
-    // Async problems possibly
-    this.profileService.GetProfile(this.currentUserEmail).subscribe(profile => this.selfUser = profile);
 
     if (this.route.snapshot.paramMap.get('email') != null) {
-      tempEmail += this.route.snapshot.paramMap.get('email');
 
-      const email = tempEmail;
-
-      this.profileService.GetProfile(email).subscribe(user => this.user = user);
-
-      this.postService.getUserPosts(email).subscribe(posts => this.posts = posts);
-      // This might have problems due to async. currentUserEmail may not be set in time
-      this.profileService.GetProfile(email)
+      const email = this.route.snapshot.paramMap.get('email');
+      if (email) {
+        // Set user
+        this.profileService.GetProfile(email).subscribe(user => this.user = user);
+        // Set posts
+        this.postService.getUserPosts(email).subscribe(posts => this.posts = posts);
+        // Set follow status
+        this.profileService.GetProfile(email)
         .subscribe(user => this.profileService.GetProfile(this.currentUserEmail)
           .subscribe(selfUser => this.followStatus = this.followService.getFollowStatus(selfUser, user)));
+      }
     } else {
       const userClaims = await this.oktaAuth.getUser();
       this.currentUserEmail = userClaims.email ?? '';
@@ -71,11 +69,9 @@ export class ProfileViewComponent implements OnInit {
   followUser(): any {
     if (this.user !== undefined && this.selfUser !== undefined) {
       if (this.followStatus) {
-        console.log('UNFOLLOW');
         this.followService.unfollow(this.user, this.selfUser);
         this.followStatus = false;
       } else {
-        console.log('FOLLOW');
         this.followService.follow(this.user, this.selfUser);
         this.followStatus = true;
       }
