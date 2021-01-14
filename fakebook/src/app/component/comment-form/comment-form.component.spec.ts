@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { Comment } from 'src/app/model/comment';
 import { AuthService } from 'src/app/service/auth.service';
 import { CommentService } from 'src/app/service/comment.service';
+import { NotificationsService } from 'src/app/service/notifications.service';
 
 import { CommentFormComponent } from './comment-form.component';
 
@@ -18,6 +19,7 @@ describe('CommentFormComponent', () => {
   const fakeAuthService = {
     getUser(): void { }
   };
+  const fakeNotificationsService = {};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -26,7 +28,8 @@ describe('CommentFormComponent', () => {
         { provide: CommentService, useValue: fakeCommentService },
         { provide: ActivatedRoute, useValue: {
           paramMap: of( convertToParamMap( { userId: 1 } ) ) } },
-        { provide: OktaAuthService, useValue: fakeAuthService}
+        { provide: OktaAuthService, useValue: fakeAuthService},
+        { provide: NotificationsService, useValue: fakeNotificationsService},
       ]
     })
     .compileComponents();
@@ -38,6 +41,6 @@ describe('CommentFormComponent', () => {
 
     const fakeCommentServ = TestBed.inject(CommentService);
     const fakeAuthServiceTwo = TestBed.inject(OktaAuthService);
-    component = new CommentFormComponent(fakeCommentServ, TestBed.inject(ActivatedRoute), fakeAuthServiceTwo);
+    component = new CommentFormComponent(TestBed.inject(CommentService), TestBed.inject(ActivatedRoute), TestBed.inject(OktaAuthService), TestBed.inject(NotificationsService));
   });
 });

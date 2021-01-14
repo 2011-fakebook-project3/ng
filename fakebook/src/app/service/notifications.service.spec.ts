@@ -25,7 +25,8 @@ describe('NotificationsService', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: AuthService, useValue: mockAuthService },
-        { provide: OktaAuthService, useValue: mockOktaAuthService }
+        { provide: OktaAuthService, useValue: mockOktaAuthService },
+        { provide: HttpClient, useValue: {}}
       ]
     }).compileComponents();
 
