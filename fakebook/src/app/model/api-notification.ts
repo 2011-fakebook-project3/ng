@@ -8,6 +8,6 @@ export type ApiNotification = {
     type: PostType,
     loggedInUserId: string,
     triggerUserId: string,
-    hasBennread: boolean,
+    hasBeenread: boolean,
     date: Date
 };

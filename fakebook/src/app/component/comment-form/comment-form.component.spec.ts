@@ -19,7 +19,6 @@ describe('CommentFormComponent', () => {
   const fakeAuthService = {
     getUser(): void { }
   };
-  const fakeNotificationsService = {};
 
   const fakeNotifService = {
     createCommentNotification(): void { }
@@ -34,7 +33,6 @@ describe('CommentFormComponent', () => {
           paramMap: of( convertToParamMap( { userId: 1 } ) ) } },
         { provide: OktaAuthService, useValue: fakeAuthService},
         { provide: NotificationsService, useValue: fakeNotifService},
-        { provide: NotificationsService, useValue: fakeNotificationsService},
       ]
     })
     .compileComponents();
