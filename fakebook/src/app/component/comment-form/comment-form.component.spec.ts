@@ -23,7 +23,7 @@ describe('CommentFormComponent', () => {
 
   const fakeNotifService = {
     createCommentNotification(): void { }
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
