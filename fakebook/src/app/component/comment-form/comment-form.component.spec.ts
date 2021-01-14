@@ -41,6 +41,7 @@ describe('CommentFormComponent', () => {
 
     const fakeCommentServ = TestBed.inject(CommentService);
     const fakeAuthServiceTwo = TestBed.inject(OktaAuthService);
-    component = new CommentFormComponent(TestBed.inject(CommentService), TestBed.inject(ActivatedRoute), TestBed.inject(OktaAuthService), TestBed.inject(NotificationsService));
+    component = new CommentFormComponent(TestBed.inject(CommentService), TestBed.inject(ActivatedRoute),
+                                         TestBed.inject(OktaAuthService), TestBed.inject(NotificationsService));
   });
 });
