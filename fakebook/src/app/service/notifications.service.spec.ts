@@ -7,6 +7,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { OktaAuthService } from '@okta/okta-angular';
+import { Post } from '../model/post';
+import { PostService } from './post.service';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
@@ -21,11 +23,18 @@ describe('NotificationsService', () => {
     oktaAuth: mockOktaAuthService
   };
 
+  const mockPostService = {
+    getById(id: number): Observable<Post> {
+      return new Observable<Post>();
+    }
+  };
+
   beforeEach(async () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: OktaAuthService, useValue: mockOktaAuthService },
+        { provide: PostService, useValue: mockPostService },
         { provide: HttpClient, useValue: {}}
       ]
     }).compileComponents();

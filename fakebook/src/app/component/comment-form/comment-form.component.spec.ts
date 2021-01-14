@@ -21,6 +21,10 @@ describe('CommentFormComponent', () => {
   };
   const fakeNotificationsService = {};
 
+  const fakeNotifService = {
+    createCommentNotification(): void { }
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CommentFormComponent ],
@@ -29,6 +33,7 @@ describe('CommentFormComponent', () => {
         { provide: ActivatedRoute, useValue: {
           paramMap: of( convertToParamMap( { userId: 1 } ) ) } },
         { provide: OktaAuthService, useValue: fakeAuthService},
+        { provide: NotificationsService, useValue: fakeNotifService},
         { provide: NotificationsService, useValue: fakeNotificationsService},
       ]
     })
