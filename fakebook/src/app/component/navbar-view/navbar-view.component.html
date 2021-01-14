@@ -8,13 +8,10 @@
       <div class="collapse navbar-collapse" id="navbarsExample07">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" *ngIf="isAuthenticated" routerLink="/user/">Profile <span class="sr-only">(current)</span></a>
+            <a class="nav-link" *ngIf="isAuthenticated" routerLink="/profile/">Profile <span class="sr-only">(current)</span></a>
           </li>
           <li>
             <a class="nav-link" *ngIf="isAuthenticated" routerLink="/newsfeed/">Newsfeed <span class="sr-only">(current)</span></a>
-          </li>
-          <li>
-            <a class="nav-link" *ngIf="!isAuthenticated" routerLink="/about/">About Us <span class="sr-only">(current)</span></a>
           </li>
           <li *ngIf="isAuthenticated">
             <app-notifications-view></app-notifications-view>
