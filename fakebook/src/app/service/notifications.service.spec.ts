@@ -27,7 +27,7 @@ describe('NotificationsService', () => {
     getById(id: number): Observable<Post> {
       return new Observable<Post>();
     }
-  }
+  };
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
