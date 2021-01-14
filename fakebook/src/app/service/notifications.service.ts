@@ -86,7 +86,7 @@ export class NotificationsService {
         triggerUserId: commenterEmail,
         loggedInUserId: posterEmail,
         type: {key: 'comment', value: 0},
-        hasBennread: false
+        hasBeenread: false
       };
       this.hubConnection.invoke('CreateNotification', notif);
     });
