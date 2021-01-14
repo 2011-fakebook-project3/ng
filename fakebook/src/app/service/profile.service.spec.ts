@@ -29,7 +29,5 @@ describe('ProfileService', () => {
     service = new ProfileService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
     expect(service).toBeTruthy();
     expect(service.baseUrl).toBe(`${environment.baseUrl}/api/profiles/`);
-    expect(service.headers.headers.Accept).toBe('application/json');
-    expect(service.headers.headers.Authorization).toBe('Bearer ');
   });
 });
