@@ -41,16 +41,17 @@ describe('ProfileViewComponent', () => {
       }
     };
 
-    const fakeFollowService = { };
+    const fakeFollowService = { getFollowStatus(follower: User, followee: User): boolean {
+        return true;
+      }
+    };
 
     const fakePostService = {
       getPosts(): void {},
       getUserPosts(): Observable<Post[]> {
         return of(posts);
       },
-      getFollowStatus(follower: User, followee: User): boolean {
-        return true;
-      }
+
     };
 
     await TestBed.configureTestingModule({
