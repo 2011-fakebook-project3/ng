@@ -47,6 +47,9 @@ describe('ProfileViewComponent', () => {
       getPosts(): void {},
       getUserPosts(): Observable<Post[]> {
         return of(posts);
+      },
+      getFollowStatus(follower: User, followee: User): boolean {
+        return true;
       }
     };
 
