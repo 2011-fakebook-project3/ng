@@ -4,6 +4,7 @@ import { OktaAuthService } from '@okta/okta-angular';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
+import { Post } from '../model/post';
 
 @Injectable({
   providedIn: 'root'
