@@ -41,7 +41,6 @@ export class ProfileViewComponent implements OnInit {
   }
 
   async getUser(): Promise<void> {
-
     if (this.route.snapshot.paramMap.get('email') != null) {
 
       const email = this.route.snapshot.paramMap.get('email');
@@ -56,13 +55,11 @@ export class ProfileViewComponent implements OnInit {
           .subscribe(selfUser => this.followStatus = this.followService.getFollowStatus(selfUser, user)));
       }
     } else {
-      const userClaims = await this.oktaAuth.getUser();
-      this.currentUserEmail = userClaims.email ?? '';
-
-      this.profileService.GetProfile(this.currentUserEmail).subscribe(user => this.user = user);
-
-      this.postService.getUserPosts(this.currentUserEmail).subscribe(posts => this.posts = posts);
-      this.selfProfileCheck = true;
+      this.profileService.GetProfileWithNullRoute().subscribe(user => {
+        this.user = user;
+        this.postService.getUserPosts(this.user.email).subscribe(posts => this.posts = posts);
+        this.selfProfileCheck = true;
+      });
     }
   }
 
