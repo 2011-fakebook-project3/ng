@@ -61,7 +61,7 @@ export class ProfileViewComponent implements OnInit {
 
       this.profileService.GetProfile(this.currentUserEmail).subscribe(user => this.user = user);
 
-      this.postService.getPosts().subscribe(posts => this.posts = posts);
+      this.postService.getUserPosts(this.currentUserEmail).subscribe(posts => this.posts = posts);
       this.selfProfileCheck = true;
     }
   }
