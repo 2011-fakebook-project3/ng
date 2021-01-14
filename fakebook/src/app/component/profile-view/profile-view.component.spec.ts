@@ -51,7 +51,6 @@ describe('ProfileViewComponent', () => {
       getUserPosts(): Observable<Post[]> {
         return of(posts);
       },
-
     };
 
     await TestBed.configureTestingModule({
