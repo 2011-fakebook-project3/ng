@@ -14,12 +14,12 @@ export class ProfileService {
 
   constructor(public http: HttpClient, private oktaAuth: OktaAuthService) { }
 
-// headers for all function calls.
+  // headers for all function calls.
   headers = {
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Bearer ' + this.oktaAuth.getAccessToken()
-    }
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
+      'Content-Type': 'application/json'
+    })
   };
 
   /*
