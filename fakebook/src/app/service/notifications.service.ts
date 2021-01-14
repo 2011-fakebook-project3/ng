@@ -80,14 +80,14 @@ export class NotificationsService {
 
       posterEmail = post.userEmail;
 
-      let notif: ApiNotification = {
-        id: "",
+      const notif: ApiNotification = {
+        id: '',
         date: new Date(Date.now()),
         triggerUserId: commenterEmail,
         loggedInUserId: posterEmail,
         type: {key: 'comment', value: 0},
         hasBennread: false
-      }
+      };
       this.hubConnection.invoke('CreateNotification', notif);
     });
   }

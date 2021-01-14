@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'newsfeed', component: NewsfeedComponent },
   { path: 'login/callback', component: OktaCallbackComponent },
   { path: 'logout', component: OktaCallbackComponent },
-  { path: 'user/:id', component: ProfileViewComponent },
+  { path: 'profile/:email', component: ProfileViewComponent},
 ];
 
 @NgModule({

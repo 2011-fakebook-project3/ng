@@ -20,7 +20,9 @@ describe('PostFormComponent', () => {
     phoneNumber: '',
     profilePictureUrl: '',
     status: '',
-    birthDate: new Date()
+    birthDate: new Date(),
+    followers: [],
+    followees: []
   };
 
   beforeEach(async () => {

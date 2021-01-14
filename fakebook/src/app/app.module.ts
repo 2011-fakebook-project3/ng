@@ -16,7 +16,7 @@ import { CommentViewComponent } from './component/comment-view/comment-view.comp
 import { NavbarViewComponent } from './component/navbar-view/navbar-view.component';
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { FormsModule } from '@angular/forms';
-// import { CommentFormComponent } from './component/comment-form/comment-form.component';
+import { ProfileViewComponent } from './component/profile-view/profile-view.component';
 import { PostFormComponent } from './component/post-form/post-form.component';
 
 @Pipe({
@@ -46,6 +46,8 @@ const config = {
     TimeAgoExtendsPipe,
     MainViewComponent,
     NewsfeedComponent,
+    ProfileViewComponent,
+    PostViewComponent,
     CommentFormComponent,
     LikeViewComponent,
     PostFormComponent,

@@ -19,6 +19,7 @@ describe('CommentFormComponent', () => {
   const fakeAuthService = {
     getUser(): void { }
   };
+  const fakeNotificationsService = {};
 
   const fakeNotifService = {
     createCommentNotification(): void { }
@@ -32,7 +33,8 @@ describe('CommentFormComponent', () => {
         { provide: ActivatedRoute, useValue: {
           paramMap: of( convertToParamMap( { userId: 1 } ) ) } },
         { provide: OktaAuthService, useValue: fakeAuthService},
-        { provide: NotificationsService, useValue: fakeNotifService}
+        { provide: NotificationsService, useValue: fakeNotifService},
+        { provide: NotificationsService, useValue: fakeNotificationsService},
       ]
     })
     .compileComponents();
@@ -44,6 +46,7 @@ describe('CommentFormComponent', () => {
 
     const fakeCommentServ = TestBed.inject(CommentService);
     const fakeAuthServiceTwo = TestBed.inject(OktaAuthService);
-    component = new CommentFormComponent(fakeCommentServ, TestBed.inject(ActivatedRoute), fakeAuthServiceTwo, TestBed.inject(NotificationsService));
+    component = new CommentFormComponent(TestBed.inject(CommentService), TestBed.inject(ActivatedRoute),
+                                         TestBed.inject(OktaAuthService), TestBed.inject(NotificationsService));
   });
 });

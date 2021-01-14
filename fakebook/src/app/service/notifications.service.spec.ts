@@ -34,7 +34,8 @@ describe('NotificationsService', () => {
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: OktaAuthService, useValue: mockOktaAuthService },
-        { provide: PostService, useValue: mockPostService }
+        { provide: PostService, useValue: mockPostService },
+        { provide: HttpClient, useValue: {}}
       ]
     }).compileComponents();
 

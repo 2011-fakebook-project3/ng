@@ -1,3 +1,4 @@
+import { PostViewComponent } from './post-view.component';
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationBehaviorOptions , Router } from '@angular/router';
@@ -6,7 +7,6 @@ import { NEVER, Observable, of } from 'rxjs';
 import { User } from '../../model/user';
 import { Comment } from '../../model/comment';
 import { Post } from '../../model/post';
-import { PostViewComponent } from './post-view.component';
 import { PostService } from '../../service/post.service';
 import { ProfileService } from 'src/app/service/profile.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +25,8 @@ describe('PostViewComponent', () => {
     profilePictureUrl: null,
     status: undefined,
     birthDate: new Date(2010, 12),
+    followees: [],
+    followers: []
   };
 
   const testComment: Comment = {
