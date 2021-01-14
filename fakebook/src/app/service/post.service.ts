@@ -40,10 +40,6 @@ export class PostService {
     return this.http.get<Post[]>(`${this.url}/user/${email}`, this.headers);
     }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.url}`, this.headers);
-    }
-
   delete(postId: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${postId}`, this.headers);
   }
