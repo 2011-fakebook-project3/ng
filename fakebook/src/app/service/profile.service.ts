@@ -7,12 +7,12 @@ import { User } from 'src/app/model/user';
 import { Post } from '../model/post';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
   baseUrl = `${environment.baseUrl}/api/profiles/`;
 
-  constructor(public http: HttpClient, private oktaAuth: OktaAuthService) { }
+  constructor(public http: HttpClient, private oktaAuth: OktaAuthService) {}
 
   /*
     endpoints:
@@ -30,7 +30,7 @@ export class ProfileService {
       - [POST]        /profiles/upload
           + uploads an image via a form (input type='file')
   */
-  public GetProfile(email: string): Observable<User> /* profile */{
+  public GetProfile(email: string): Observable<User> /* profile */ {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + accessToken,
@@ -48,7 +48,7 @@ export class ProfileService {
     };
     return this.http.get<User>(this.baseUrl, { headers });
   }
-  public GetProfiles(emails: string[]): Observable<User> /* profile */{
+  public GetProfiles(emails: string[]): Observable<User> /* profile */ {
     // make empty collection of profiles
     // emails={abc, 123, }
     const accessToken = this.oktaAuth.getAccessToken();
@@ -57,7 +57,9 @@ export class ProfileService {
       Accept: 'application/json',
     };
 
-    return this.http.get<User>(this.baseUrl + 'selection/' + emails, { headers });
+    return this.http.get<User>(this.baseUrl + 'selection/' + emails, {
+      headers,
+    });
   }
 
   public createProfile(profile: User): Observable<User> {

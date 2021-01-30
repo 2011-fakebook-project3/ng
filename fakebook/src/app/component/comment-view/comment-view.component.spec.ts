@@ -7,8 +7,8 @@ describe('CommentViewComponent', () => {
   let component: CommentViewComponent;
   let fixture: ComponentFixture<CommentViewComponent>;
 
-  const FakeCommentService = { };
-  const FakeProfileService = { };
+  const FakeCommentService = {};
+  const FakeProfileService = {};
 
   const fakeUser = {
     id: 1,
@@ -18,7 +18,7 @@ describe('CommentViewComponent', () => {
     phoneNumber: '5551234567',
     profilePictureUrl: 'https://image.png',
     status: 'My Fake User status',
-    birthDate: new Date()
+    birthDate: new Date(),
   };
 
   const fakeComment = {
@@ -27,25 +27,27 @@ describe('CommentViewComponent', () => {
     postId: 1,
     createdAt: new Date(),
     childCommentIds: [5, 3],
-    userEmail: fakeUser.email
+    userEmail: fakeUser.email,
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommentViewComponent ],
+      declarations: [CommentViewComponent],
       providers: [
-        { provide:  CommentService, useValue: FakeCommentService },
-        { provide: ProfileService, useValue: FakeProfileService }
-      ]
-    })
-    .compileComponents();
+        { provide: CommentService, useValue: FakeCommentService },
+        { provide: ProfileService, useValue: FakeProfileService },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CommentViewComponent);
     fixture.detectChanges();
 
-    component = new CommentViewComponent(TestBed.inject(CommentService), TestBed.inject(ProfileService));
+    component = new CommentViewComponent(
+      TestBed.inject(CommentService),
+      TestBed.inject(ProfileService)
+    );
     component.comment = fakeComment;
   });
 

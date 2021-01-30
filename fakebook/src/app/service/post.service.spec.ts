@@ -1,8 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
-import { User} from 'src/app/model/user';
+import { User } from 'src/app/model/user';
 import { Comment } from 'src/app/model/comment';
 import { PostService } from './post.service';
 import { Post } from '../model/post';
@@ -12,7 +15,11 @@ import { environment } from 'src/environments/environment';
 
 describe('PostService', () => {
   let service: PostService;
-  let httpClientSpy: { get: jasmine.Spy, delete: jasmine.Spy, post: jasmine.Spy }; // spy with some functions
+  let httpClientSpy: {
+    get: jasmine.Spy;
+    delete: jasmine.Spy;
+    post: jasmine.Spy;
+  }; // spy with some functions
   let httpTestingController: HttpTestingController; // mock backend
   const url = `https://fakebook.revaturelabs.com/api/Posts`; // test base url
 
@@ -20,25 +27,35 @@ describe('PostService', () => {
     const mockOktaAuthService = {
       getAccessToken(): string {
         return '0';
-      }
+      },
     };
     const mockHttpClient = {};
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
+      imports: [HttpClientTestingModule],
       providers: [
-        { provide: HttpClient, useValue: mockHttpClient},
-        { provide: OktaAuthService, useValue: mockOktaAuthService}
-      ]
+        { provide: HttpClient, useValue: mockHttpClient },
+        { provide: OktaAuthService, useValue: mockOktaAuthService },
+      ],
     }).compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
 
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'delete', 'post']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', [
+      'get',
+      'delete',
+      'post',
+    ]);
 
-    service = new PostService(httpClientSpy as any, TestBed.inject(OktaAuthService));
+    service = new PostService(
+      httpClientSpy as any,
+      TestBed.inject(OktaAuthService)
+    );
   });
 
   it('should be created', () => {
-    service = new PostService(TestBed.inject(HttpClient), TestBed.inject(OktaAuthService));
+    service = new PostService(
+      TestBed.inject(HttpClient),
+      TestBed.inject(OktaAuthService)
+    );
     expect(service).toBeTruthy();
   });
 

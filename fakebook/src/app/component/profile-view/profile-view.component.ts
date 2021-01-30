@@ -11,7 +11,7 @@ import { ProfileService } from 'src/app/service/profile.service';
   selector: 'app-profile-view',
   providers: [ProfileService],
   templateUrl: './profile-view.component.html',
-  styleUrls: ['./profile-view.component.css']
+  styleUrls: ['./profile-view.component.css'],
 })
 export class ProfileViewComponent implements OnInit {
   // User whose profile page you are on
@@ -24,11 +24,13 @@ export class ProfileViewComponent implements OnInit {
   followStatus = false;
   selfProfileCheck = false;
 
-  constructor(private oktaAuth: OktaAuthService,
-              private profileService: ProfileService,
-              private route: ActivatedRoute,
-              private followService: FollowService,
-              private postService: PostService) { }
+  constructor(
+    private oktaAuth: OktaAuthService,
+    private profileService: ProfileService,
+    private route: ActivatedRoute,
+    private followService: FollowService,
+    private postService: PostService
+  ) {}
 
   async ngOnInit(): Promise<void> {
     // Get Current User Email
@@ -42,22 +44,37 @@ export class ProfileViewComponent implements OnInit {
 
   async getUser(): Promise<void> {
     if (this.route.snapshot.paramMap.get('email') != null) {
-
       const email = this.route.snapshot.paramMap.get('email');
       if (email) {
         // Set user
-        this.profileService.GetProfile(email).subscribe(user => this.user = user);
+        this.profileService
+          .GetProfile(email)
+          .subscribe((user) => (this.user = user));
         // Set posts
-        this.postService.getUserPosts(email).subscribe(posts => this.posts = posts);
+        this.postService
+          .getUserPosts(email)
+          .subscribe((posts) => (this.posts = posts));
         // Set follow status
-        this.profileService.GetProfile(email)
-        .subscribe(user => this.profileService.GetProfile(this.currentUserEmail)
-          .subscribe(selfUser => this.followStatus = this.followService.getFollowStatus(selfUser, user)));
+        this.profileService
+          .GetProfile(email)
+          .subscribe((user) =>
+            this.profileService
+              .GetProfile(this.currentUserEmail)
+              .subscribe(
+                (selfUser) =>
+                  (this.followStatus = this.followService.getFollowStatus(
+                    selfUser,
+                    user
+                  ))
+              )
+          );
       }
     } else {
-      this.profileService.GetProfileWithNullRoute().subscribe(user => {
+      this.profileService.GetProfileWithNullRoute().subscribe((user) => {
         this.user = user;
-        this.postService.getUserPosts(this.user.email).subscribe(posts => this.posts = posts);
+        this.postService
+          .getUserPosts(this.user.email)
+          .subscribe((posts) => (this.posts = posts));
         this.selfProfileCheck = true;
       });
     }

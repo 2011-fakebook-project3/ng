@@ -21,10 +21,9 @@ import { PostFormComponent } from './component/post-form/post-form.component';
 
 @Pipe({
   name: 'timeAgo',
-  pure: false
+  pure: false,
 })
-export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform{}
-
+export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform {}
 
 const config = {
   issuer: 'https://dev-2875280.okta.com/oauth2/default',
@@ -32,7 +31,7 @@ const config = {
   clientId: '0oa3g3amkeK6iIIeP5d6',
   redirectUri: `${window.location.origin}/login/callback`,
   scopes: ['openid'],
-  postLogoutRedirectUri: window.location.origin
+  postLogoutRedirectUri: window.location.origin,
 };
 
 @NgModule({
@@ -61,6 +60,6 @@ const config = {
     FormsModule,
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

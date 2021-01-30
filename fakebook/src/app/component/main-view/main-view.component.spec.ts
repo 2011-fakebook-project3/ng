@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NavigationBehaviorOptions , Router } from '@angular/router';
+import { NavigationBehaviorOptions, Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { MainViewComponent } from './main-view.component';
 
@@ -14,28 +14,34 @@ describe('MainViewComponent', () => {
     isAuth: false,
     get isAuthenticated(): boolean {
       return this.isAuth;
-    }
+    },
   };
 
   beforeEach(async () => {
-
     const FakeRouterService = {
-      navigateByUrl(url: string, extras?: NavigationBehaviorOptions): Promise<boolean> { return Promise.resolve(true); }
+      navigateByUrl(
+        url: string,
+        extras?: NavigationBehaviorOptions
+      ): Promise<boolean> {
+        return Promise.resolve(true);
+      },
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ MainViewComponent ],
+      declarations: [MainViewComponent],
       providers: [
-        { provide: AuthService, useValue: FakeAuthService},
+        { provide: AuthService, useValue: FakeAuthService },
         { provide: Router, useValue: FakeRouterService },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MainViewComponent);
     fixture.detectChanges();
 
-    component = new MainViewComponent(TestBed.inject(AuthService), TestBed.inject(Router));
+    component = new MainViewComponent(
+      TestBed.inject(AuthService),
+      TestBed.inject(Router)
+    );
     navigateSpy = spyOn(FakeRouterService, 'navigateByUrl');
   });
 
@@ -52,7 +58,11 @@ describe('MainViewComponent', () => {
   });
 
   it('should route if user is logged in', () => {
-    const authSpy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get').and.returnValue(true);
+    const authSpy = spyOnProperty(
+      FakeAuthService,
+      'isAuthenticated',
+      'get'
+    ).and.returnValue(true);
 
     component.checkAuthentication();
 
@@ -67,6 +77,8 @@ describe('MainViewComponent', () => {
     expect(h1.innerHTML).toBe('Welcome to Fakebook! Please sign in.');
 
     const p = fixture.debugElement.query(By.css('p')).nativeElement;
-    expect(p.innerHTML).toBe('Come talk to all the great people enjoying this wonderful site');
+    expect(p.innerHTML).toBe(
+      'Come talk to all the great people enjoying this wonderful site'
+    );
   });
 });

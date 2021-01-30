@@ -6,14 +6,12 @@ import { CommentService } from './comment.service';
 
 describe('CommentService', () => {
   let service: CommentService;
-  const fakeAuthService = { };
+  const fakeAuthService = {};
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-        imports: [HttpClientModule],
-        providers: [
-            { provide: OktaAuthService, useValue: fakeAuthService }
-        ]
+      imports: [HttpClientModule],
+      providers: [{ provide: OktaAuthService, useValue: fakeAuthService }],
     });
     service = TestBed.inject(CommentService);
   });

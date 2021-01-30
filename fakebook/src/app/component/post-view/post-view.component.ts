@@ -1,4 +1,4 @@
-import { Component, OnInit, Input , Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { User } from 'src/app/model/user';
@@ -10,10 +10,9 @@ import { ProfileService } from 'src/app/service/profile.service';
 @Component({
   selector: 'app-post-view',
   templateUrl: './post-view.component.html',
-  styleUrls: ['./post-view.component.css']
+  styleUrls: ['./post-view.component.css'],
 })
 export class PostViewComponent implements OnInit {
-
   @Input() post: Post | null = null;
   @Input() userEmail = '';
 
@@ -26,8 +25,7 @@ export class PostViewComponent implements OnInit {
     private route: ActivatedRoute,
     public postService: PostService,
     public profileService: ProfileService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     if (this.post && this.post.userEmail) {
@@ -35,8 +33,10 @@ export class PostViewComponent implements OnInit {
     }
   }
 
-  getUser(email: string): void{
-    this.profileService.GetProfile(email).subscribe((user) => (this.user = user));
+  getUser(email: string): void {
+    this.profileService
+      .GetProfile(email)
+      .subscribe((user) => (this.user = user));
   }
 
   // likePost(postId: number): void{
@@ -51,7 +51,7 @@ export class PostViewComponent implements OnInit {
   //   }
   // }
 
-  deletePost(post: Post): void{
+  deletePost(post: Post): void {
     this.post = null;
     this.postService.delete(post.id);
   }
@@ -59,7 +59,6 @@ export class PostViewComponent implements OnInit {
   deleteComment(comment: Comment): void {
     if (this.post) {
       // TODO: delete from backend
-
 
       const index = this.post.comments.indexOf(comment);
       delete this.post.comments[index];
@@ -69,5 +68,4 @@ export class PostViewComponent implements OnInit {
   onNotifyComment(valueEmitted: any): void {
     this.notifyComment.emit(valueEmitted);
   }
-
 }

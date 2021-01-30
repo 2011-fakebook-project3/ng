@@ -1,7 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { Notification, LikeNotification, CommentNotification, PostNotification, FollowNotification } from '../model/notification';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  Notification,
+  LikeNotification,
+  CommentNotification,
+  PostNotification,
+  FollowNotification,
+} from '../model/notification';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { NotificationsService } from './notifications.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -16,17 +25,17 @@ describe('NotificationsService', () => {
   const mockOktaAuthService = {
     getAccessToken(): string {
       return 'token';
-    }
+    },
   };
 
   const mockAuthService = {
-    oktaAuth: mockOktaAuthService
+    oktaAuth: mockOktaAuthService,
   };
 
   const mockPostService = {
     getById(id: number): Observable<Post> {
       return new Observable<Post>();
-    }
+    },
   };
 
   beforeEach(async () => {
@@ -35,8 +44,8 @@ describe('NotificationsService', () => {
         { provide: AuthService, useValue: mockAuthService },
         { provide: OktaAuthService, useValue: mockOktaAuthService },
         { provide: PostService, useValue: mockPostService },
-        { provide: HttpClient, useValue: {}}
-      ]
+        { provide: HttpClient, useValue: {} },
+      ],
     }).compileComponents();
 
     service = TestBed.inject(NotificationsService);

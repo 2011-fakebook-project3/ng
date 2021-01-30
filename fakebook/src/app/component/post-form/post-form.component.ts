@@ -1,4 +1,12 @@
-import { Component, Input, Output, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { User } from 'src/app/model/user';
 import { ProfileService } from '../../service/profile.service';
 import { NewPost } from '../../model/newpost';
@@ -39,10 +47,9 @@ export class PostFormComponent {
           this.newPost.pictureUrl = res.path;
           this.newPost.userId = this.user?.email;
           this.submitted = true;
-          this.httpPost.create(this.newPost)
-            .then(result => {
-              return this.notify.emit('test value from child');
-            });
+          this.httpPost.create(this.newPost).then((result) => {
+            return this.notify.emit('test value from child');
+          });
 
           this.newPost.content = '';
           this.newPost.pictureUrl = '';
@@ -54,7 +61,9 @@ export class PostFormComponent {
       console.log(this.newPost);
       this.newPost.userId = this.user?.email;
       this.submitted = true;
-      this.httpPost.create(this.newPost).then(res => this.notify.emit('test value from child'));
+      this.httpPost
+        .create(this.newPost)
+        .then((res) => this.notify.emit('test value from child'));
     }
   }
 
@@ -68,7 +77,7 @@ export class PostFormComponent {
     return this.user?.id;
   }
 
-  save(): Promise<{ path: string, userId: number }> | null {
+  save(): Promise<{ path: string; userId: number }> | null {
     if (this.file && this.user) {
       const formData = new FormData();
 
