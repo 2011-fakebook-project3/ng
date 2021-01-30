@@ -6,15 +6,12 @@ import { LikeService } from 'src/app/service/like.service';
   templateUrl: './like-view.component.html',
   styleUrls: ['./like-view.component.css']
 })
-export class LikeViewComponent implements OnInit {
+export class LikeViewComponent {
   @Input() count!: number;
   @Input() postId!: number;
   @Input() liked!: boolean;
 
   constructor(private likeService: LikeService) { }
-
-  ngOnInit(): void {
-  }
 
   submit(): void {
     // if the post is aready liked we should unlike it

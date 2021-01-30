@@ -11,7 +11,7 @@ import { UploadService } from '../../service/upload.service';
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.css'],
 })
-export class PostFormComponent implements OnInit {
+export class PostFormComponent {
   submitted = false;
   file: File | null = null;
   imageSource = '';
@@ -28,10 +28,6 @@ export class PostFormComponent implements OnInit {
     private httpPost: PostService,
     private profileService: ProfileService
   ) {}
-
-  ngOnInit(): void {
-    // this.getUser();
-  }
 
   onSubmit(): any {
     if (this.file) {
