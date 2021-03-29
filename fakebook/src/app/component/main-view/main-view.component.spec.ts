@@ -72,12 +72,12 @@ describe('MainViewComponent', () => {
     expect(navigateSpy).toHaveBeenCalled();
   });
 
-  it('should create the exepcted elements on the page', () => {
+  it('should create the expected elements on the page', () => {
     const h1 = fixture.debugElement.query(By.css('h1')).nativeElement;
-    expect(h1.innerHTML).toBe('Welcome to Fakebook! Please sign in.');
+    expect(h1.innerHTML).toContain('Welcome to Fakebook! Please sign in.');
 
     const p = fixture.debugElement.query(By.css('p')).nativeElement;
-    expect(p.innerHTML).toBe(
+    expect(p.innerHTML).toContain(
       'Come talk to all the great people enjoying this wonderful site'
     );
   });
