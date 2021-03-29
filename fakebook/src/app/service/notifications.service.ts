@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Notification } from '../model/notification';
-import { environment } from 'src/environments/environment';
 import {
   HubConnection,
   HubConnectionBuilder,
   IHttpConnectionOptions,
-} from '@aspnet/signalr';
+} from '@microsoft/signalr';
+import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Notification } from '../model/notification';
 import { ApiNotification } from '../model/api-notification';
-import { OktaAuthService } from '@okta/okta-angular';
-import { Notification as Dontdothis, Observable, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 import { PostService } from './post.service';
 
