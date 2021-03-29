@@ -1,4 +1,12 @@
-import { Component, Input, Output, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { User } from 'src/app/model/user';
 import { ProfileService } from '../../service/profile.service';
 import { NewPost } from '../../model/newpost';
@@ -11,7 +19,7 @@ import { UploadService } from '../../service/upload.service';
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.css'],
 })
-export class PostFormComponent implements OnInit {
+export class PostFormComponent {
   submitted = false;
   file: File | null = null;
   imageSource = '';
@@ -29,10 +37,6 @@ export class PostFormComponent implements OnInit {
     private profileService: ProfileService
   ) {}
 
-  ngOnInit(): void {
-    // this.getUser();
-  }
-
   onSubmit(): any {
     if (this.file) {
       const content = this.newPost.content;
@@ -43,10 +47,9 @@ export class PostFormComponent implements OnInit {
           this.newPost.pictureUrl = res.path;
           this.newPost.userId = this.user?.email;
           this.submitted = true;
-          this.httpPost.create(this.newPost)
-            .then(result => {
-              return this.notify.emit('test value from child');
-            });
+          this.httpPost.create(this.newPost).then((result) => {
+            return this.notify.emit('test value from child');
+          });
 
           this.newPost.content = '';
           this.newPost.pictureUrl = '';
@@ -58,7 +61,9 @@ export class PostFormComponent implements OnInit {
       console.log(this.newPost);
       this.newPost.userId = this.user?.email;
       this.submitted = true;
-      this.httpPost.create(this.newPost).then(res => this.notify.emit('test value from child'));
+      this.httpPost
+        .create(this.newPost)
+        .then((res) => this.notify.emit('test value from child'));
     }
   }
 
@@ -72,7 +77,7 @@ export class PostFormComponent implements OnInit {
     return this.user?.id;
   }
 
-  save(): Promise<{ path: string, userId: number }> | null {
+  save(): Promise<{ path: string; userId: number }> | null {
     if (this.file && this.user) {
       const formData = new FormData();
 

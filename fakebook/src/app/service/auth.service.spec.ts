@@ -9,7 +9,6 @@ describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(async () => {
-
     const mockOktaAuthService = {
       $authenticationState: NEVER,
       isAuthenticated(): Promise<boolean> {
@@ -21,14 +20,14 @@ describe('AuthService', () => {
       },
       signOut(): void {},
       tokenManager: {
-        clear(): void {}
-      }
+        clear(): void {},
+      },
     };
     await TestBed.configureTestingModule({
       providers: [
         { provide: Router, useValue: {} },
-        { provide: OktaAuthService, useValue: mockOktaAuthService }
-      ]
+        { provide: OktaAuthService, useValue: mockOktaAuthService },
+      ],
     }).compileComponents();
 
     service = TestBed.inject(AuthService);
@@ -40,7 +39,10 @@ describe('AuthService', () => {
 
   // test contructor
   it('should set isAuthenticated to false in constructor', () => {
-    service = new AuthService(TestBed.inject(OktaAuthService), TestBed.inject(Router));
+    service = new AuthService(
+      TestBed.inject(OktaAuthService),
+      TestBed.inject(Router)
+    );
     expect(service.isAuthenticated).toBe(false);
   });
 

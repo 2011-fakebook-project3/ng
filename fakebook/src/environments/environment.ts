@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://fakebook.revaturelabs.com'
+  baseUrl: 'https://fakebook.revaturelabs.com',
 };
 
 /*

@@ -19,7 +19,8 @@ export class FollowService {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
-    return this.http.post(`${this.url}/follows/${follower.id}`, null, { headers })
+    return this.http
+      .post(`${this.url}/follows/${follower.id}`, null, { headers })
       .toPromise();
   }
 
@@ -28,10 +29,12 @@ export class FollowService {
     const headers = {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     };
-    return this.http.delete(`${this.url}/follows/${follower.id}`, { headers })
-      .toPromise().then(res => console.log(JSON.stringify(res)));
+    return this.http
+      .delete(`${this.url}/follows/${follower.id}`, { headers })
+      .toPromise()
+      .then((res) => console.log(JSON.stringify(res)));
   }
 
   getFollowStatus(follower: User, followee: User): boolean {

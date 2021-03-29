@@ -1,10 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { ProfileViewComponent } from './profile-view.component';
-import { ActivatedRoute, convertToParamMap, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  convertToParamMap,
+  RouterModule,
+} from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/model/user';
@@ -16,7 +20,8 @@ import { Post } from 'src/app/model/post';
 describe('ProfileViewComponent', () => {
   let component: ProfileViewComponent;
   let fixture: ComponentFixture<ProfileViewComponent>;
-  const userTest: User = { id: 10,
+  const userTest: User = {
+    id: 10,
     firstName: 'Adam',
     lastName: 'Driver',
     email: 'Adriver@test.com',
@@ -25,25 +30,28 @@ describe('ProfileViewComponent', () => {
     status: '1',
     birthDate: new Date(),
     followers: [],
-    followees: []
+    followees: [],
   };
   const posts: Post[] = [];
 
   beforeEach(async () => {
-    const FakeOktaAuthService  = {
-      getAccessToken(): string {return '1'; },
-      getUser(): void { }
+    const FakeOktaAuthService = {
+      getAccessToken(): string {
+        return '1';
+      },
+      getUser(): void {},
     };
 
     const mockProfileService = {
-      GetProfile(id: string): Observable<User>{
+      GetProfile(id: string): Observable<User> {
         return of(userTest);
-      }
+      },
     };
 
-    const fakeFollowService = { getFollowStatus(follower: User, followee: User): boolean {
+    const fakeFollowService = {
+      getFollowStatus(follower: User, followee: User): boolean {
         return true;
-      }
+      },
     };
 
     const fakePostService = {
@@ -54,20 +62,23 @@ describe('ProfileViewComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ ProfileViewComponent ],
+      declarations: [ProfileViewComponent],
       providers: [
-        { provide: OktaAuthService, useValue: FakeOktaAuthService},
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ email: 'Adriver@test.com'})}}},
-        { provide: ProfileService, useValue: mockProfileService},
+        { provide: OktaAuthService, useValue: FakeOktaAuthService },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: convertToParamMap({ email: 'Adriver@test.com' }),
+            },
+          },
+        },
+        { provide: ProfileService, useValue: mockProfileService },
         { provide: FollowService, useValue: fakeFollowService },
-        { provide: PostService, useValue: fakePostService }
+        { provide: PostService, useValue: fakePostService },
       ],
-      imports: [
-        RouterModule.forRoot([]),
-        HttpClientTestingModule
-      ]
-    })
-    .compileComponents();
+      imports: [RouterModule.forRoot([]), HttpClientTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -82,8 +93,13 @@ describe('ProfileViewComponent', () => {
   });
 
   it('should get a user and store in the user field', () => {
-    component = new ProfileViewComponent(TestBed.inject(OktaAuthService), TestBed.inject(ProfileService),
-    TestBed.inject(ActivatedRoute), TestBed.inject(FollowService), TestBed.inject(PostService));
+    component = new ProfileViewComponent(
+      TestBed.inject(OktaAuthService),
+      TestBed.inject(ProfileService),
+      TestBed.inject(ActivatedRoute),
+      TestBed.inject(FollowService),
+      TestBed.inject(PostService)
+    );
     component.getUser();
     expect('Adriver@test.com').toBe(userTest.email);
   });

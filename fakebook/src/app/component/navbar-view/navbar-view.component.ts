@@ -6,13 +6,13 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-navbar-view',
   templateUrl: './navbar-view.component.html',
-  styleUrls: ['./navbar-view.component.css']
+  styleUrls: ['./navbar-view.component.css'],
 })
 export class NavbarViewComponent implements OnInit {
   isAuthenticated = false;
 
   searchName = '';
-  constructor(private router: Router, public oktaAuth: AuthService) { }
+  constructor(private router: Router, public oktaAuth: AuthService) {}
 
   ngOnInit(): void {
     this.oktaAuth.subscribeAuthStateChange((authState: boolean) => {

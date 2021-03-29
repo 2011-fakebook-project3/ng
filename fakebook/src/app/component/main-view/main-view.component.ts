@@ -6,12 +6,10 @@ import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
-  styleUrls: ['./main-view.component.css']
+  styleUrls: ['./main-view.component.css'],
 })
 export class MainViewComponent implements OnInit {
-
-  constructor(private oktaAuth: AuthService, private router: Router) {
-  }
+  constructor(private oktaAuth: AuthService, private router: Router) {}
 
   async ngOnInit(): Promise<void> {
     this.checkAuthentication();
@@ -24,5 +22,4 @@ export class MainViewComponent implements OnInit {
       this.router.navigateByUrl('newsfeed', { skipLocationChange: false });
     }
   }
-
 }

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { NotificationsService } from '../../service/notifications.service';
 import { Notification } from '../../model/notification';
 import { CommonModule } from '@angular/common';
@@ -12,19 +17,15 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./notifications-view.component.css'],
 })
 export class NotificationsViewComponent implements OnInit {
-
   notifications: Notification[] = [];
   notificationsView = false;
   unreadNotifications = false;
 
-  constructor(
-    private notifService: NotificationsService
-    ) {
-    }
+  constructor(private notifService: NotificationsService) {}
 
   ngOnInit(): void {
     this.notifService.notificationsObs.subscribe((notifs) => {
-      notifs.forEach(element => {
+      notifs.forEach((element) => {
         this.notifications.unshift(element);
       });
       if (this.notificationsView === false) {
@@ -36,7 +37,7 @@ export class NotificationsViewComponent implements OnInit {
 
   toggleNotifications(): void {
     this.notificationsView = !this.notificationsView;
-    if (this.notificationsView === true){
+    if (this.notificationsView === true) {
       this.unreadNotifications = false;
       this.updateNotifications();
     }
@@ -45,7 +46,7 @@ export class NotificationsViewComponent implements OnInit {
   updateNotifications(): void {
     const ids: string[] = [];
 
-    this.notifications.forEach(element => {
+    this.notifications.forEach((element) => {
       ids.push(element.id);
     });
 

@@ -7,21 +7,23 @@ import { Post } from '../model/post';
 import { NewPost } from '../model/newpost';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) { }
+  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
   url = `${environment.baseUrl}/api/posts`;
 
   headers = {
     headers: {
       Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
       Accept: 'application/json',
-    }
+    },
   };
 
   create(post: NewPost): Promise<NewPost> {
-    return this.http.post<NewPost>(`${this.url}`, post, this.headers).toPromise();
+    return this.http
+      .post<NewPost>(`${this.url}`, post, this.headers)
+      .toPromise();
   }
 
   likePost(id: number): Observable<Post> {
@@ -34,11 +36,11 @@ export class PostService {
 
   getById(id: number): Observable<Post> {
     return this.http.get<Post>(`${this.url}/${id}`, this.headers);
-    }
+  }
 
   getUserPosts(email: string): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.url}/user/${email}`, this.headers);
-    }
+  }
 
   delete(postId: number): Observable<void> {
     return this.http.delete<void>(`${this.url}/${postId}`, this.headers);
@@ -46,5 +48,4 @@ export class PostService {
   update(post: Post): Observable<Post> {
     return this.http.put<Post>(`${this.url}/${post.id}`, post, this.headers);
   }
-
 }

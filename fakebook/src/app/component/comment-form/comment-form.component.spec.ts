@@ -14,28 +14,31 @@ describe('CommentFormComponent', () => {
   let fixture: ComponentFixture<CommentFormComponent>;
 
   const fakeCommentService = {
-    create(comment: Comment): void { }
+    create(comment: Comment): void {},
   };
   const fakeAuthService = {
-    getUser(): void { }
+    getUser(): void {},
   };
 
   const fakeNotifService = {
-    createCommentNotification(): void { }
+    createCommentNotification(): void {},
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CommentFormComponent ],
+      declarations: [CommentFormComponent],
       providers: [
         { provide: CommentService, useValue: fakeCommentService },
-        { provide: ActivatedRoute, useValue: {
-          paramMap: of( convertToParamMap( { userId: 1 } ) ) } },
-        { provide: OktaAuthService, useValue: fakeAuthService},
-        { provide: NotificationsService, useValue: fakeNotifService},
-      ]
-    })
-    .compileComponents();
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            paramMap: of(convertToParamMap({ userId: 1 })),
+          },
+        },
+        { provide: OktaAuthService, useValue: fakeAuthService },
+        { provide: NotificationsService, useValue: fakeNotifService },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -44,7 +47,11 @@ describe('CommentFormComponent', () => {
 
     const fakeCommentServ = TestBed.inject(CommentService);
     const fakeAuthServiceTwo = TestBed.inject(OktaAuthService);
-    component = new CommentFormComponent(TestBed.inject(CommentService), TestBed.inject(ActivatedRoute),
-                                         TestBed.inject(OktaAuthService), TestBed.inject(NotificationsService));
+    component = new CommentFormComponent(
+      TestBed.inject(CommentService),
+      TestBed.inject(ActivatedRoute),
+      TestBed.inject(OktaAuthService),
+      TestBed.inject(NotificationsService)
+    );
   });
 });

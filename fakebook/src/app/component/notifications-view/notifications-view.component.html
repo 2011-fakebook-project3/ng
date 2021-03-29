@@ -1,28 +1,74 @@
-<button type="button" class="btn btn-default"
-    (click)="toggleNotifications()"
-    style= "padding: 5px 5px; border-radius: 5px;">
-
-    <img *ngIf="!this.unreadNotifications" src="../../assets/notifications-icon.png" style="width: 24px; height: 28px;" alt="noimage">
-    <img *ngIf="this.unreadNotifications" src="../../assets/notifications-icon-red.png" style="width: 24px; height: 28px;" alt="noimage">
-
+<button
+  type="button"
+  class="btn btn-default"
+  (click)="toggleNotifications()"
+  style="padding: 5px 5px; border-radius: 5px"
+>
+  <img
+    *ngIf="!this.unreadNotifications"
+    src="../../assets/notifications-icon.png"
+    style="width: 24px; height: 28px"
+    alt="noimage"
+  />
+  <img
+    *ngIf="this.unreadNotifications"
+    src="../../assets/notifications-icon-red.png"
+    style="width: 24px; height: 28px"
+    alt="noimage"
+  />
 </button>
 
-<div *ngIf="this.notificationsView"
-    class="position-fixed rounded
-            px-0 p-3"
-    style="max-width: 500px; max-height: 400px; overflow-y: auto; background-color: rgb(235, 233, 233); border-radius: black 5px; z-index: 100;">
-
-    <div *ngFor="let notif of this.notifications"
-     style="max-height: 120px; display: flex; align-items: center; border-bottom: 1px solid black;">
-        <img id="profile-picture" class="img-fluid rounded-circle img-float d-block img-md"
-        src="../../assets/notifications-icon.png" style="width: 32px; height: 32px;" alt="noimage">
-        <div *ngIf="notif.type == 'like'" style="padding-left: 12px;" >Here is person {{notif.userId}} liking post <br>{{notif.date.toString() | timeAgo}}</div>
-        <div *ngIf="notif.type == 'post'" style="padding-left: 12px;">Here is person {{notif.userId}} posting post <br>{{notif.date.toString() | timeAgo}}</div>
-        <div *ngIf="notif.type == 'comment'" style="padding-left: 12px;">Here is person {{notif.userId}} commenting on post <br>{{notif.date.toString() | timeAgo}}</div>
-        <div *ngIf="notif.type == 'follow'" style="padding-left: 12px;">Here is person {{notif.userId}} following you<br>{{notif.date.toString() | timeAgo}}</div>
+<div
+  *ngIf="this.notificationsView"
+  class="position-fixed rounded px-0 p-3"
+  style="
+    max-width: 500px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: rgb(235, 233, 233);
+    border-radius: black 5px;
+    z-index: 100;
+  "
+>
+  <div
+    *ngFor="let notif of this.notifications"
+    style="
+      max-height: 120px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid black;
+    "
+  >
+    <img
+      id="profile-picture"
+      class="img-fluid rounded-circle img-float d-block img-md"
+      src="../../assets/notifications-icon.png"
+      style="width: 32px; height: 32px"
+      alt="noimage"
+    />
+    <div *ngIf="notif.type == 'like'" style="padding-left: 12px">
+      Here is person {{ notif.userId }} liking post <br />{{
+        notif.date.toString() | timeAgo
+      }}
     </div>
-
-    <div *ngIf="this.notifications.length === 0">
-        <div>You have no new notifications</div>
+    <div *ngIf="notif.type == 'post'" style="padding-left: 12px">
+      Here is person {{ notif.userId }} posting post <br />{{
+        notif.date.toString() | timeAgo
+      }}
     </div>
+    <div *ngIf="notif.type == 'comment'" style="padding-left: 12px">
+      Here is person {{ notif.userId }} commenting on post <br />{{
+        notif.date.toString() | timeAgo
+      }}
+    </div>
+    <div *ngIf="notif.type == 'follow'" style="padding-left: 12px">
+      Here is person {{ notif.userId }} following you<br />{{
+        notif.date.toString() | timeAgo
+      }}
+    </div>
+  </div>
+
+  <div *ngIf="this.notifications.length === 0">
+    <div>You have no new notifications</div>
+  </div>
 </div>

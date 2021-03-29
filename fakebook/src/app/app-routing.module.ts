@@ -11,12 +11,12 @@ const routes: Routes = [
   { path: 'newsfeed', component: NewsfeedComponent },
   { path: 'login/callback', component: OktaCallbackComponent },
   { path: 'logout', component: OktaCallbackComponent },
-  { path: 'profile/:email', component: ProfileViewComponent},
-  { path: 'profile', component: ProfileViewComponent}
+  { path: 'profile/:email', component: ProfileViewComponent },
+  { path: 'profile', component: ProfileViewComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes), HttpClientModule],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

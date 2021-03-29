@@ -1,5 +1,5 @@
 export interface CommentFormData {
-    content: string;
-    postId: number;
-    parentCommentId: number | undefined;
-  }
+  content: string;
+  postId: number;
+  parentCommentId: number | undefined;
+}

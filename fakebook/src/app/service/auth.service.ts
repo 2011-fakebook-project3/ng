@@ -8,14 +8,14 @@ import { of } from 'rxjs';
 import { map, filter, switchMap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   isAuthenticated = false;
 
   constructor(public oktaAuth: OktaAuthService, public router: Router) {
     this.oktaAuth.$authenticationState.subscribe((isAuthenticated) =>
-    this.updateAuthState(isAuthenticated)
+      this.updateAuthState(isAuthenticated)
     );
   }
 
@@ -27,12 +27,14 @@ export class AuthService {
   }
 
   subscribeAuthStateChange(updateFn: (authState: boolean) => void): void {
-    this.oktaAuth.$authenticationState.subscribe((authState) => updateFn(authState));
+    this.oktaAuth.$authenticationState.subscribe((authState) =>
+      updateFn(authState)
+    );
   }
 
   login(): void {
     this.oktaAuth.signInWithRedirect({
-      originalUri: 'newsfeed'
+      originalUri: 'newsfeed',
     });
   }
 

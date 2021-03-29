@@ -6,13 +6,12 @@ import { ProfileService } from 'src/app/service/profile.service';
 @Component({
   selector: 'app-comment-view',
   templateUrl: './comment-view.component.html',
-  styleUrls: ['./comment-view.component.css']
+  styleUrls: ['./comment-view.component.css'],
 })
 export class CommentViewComponent implements OnInit {
-
   user = {
     profilePictureUrl: '',
-    fullname: ''
+    fullname: '',
   };
 
   @Input() comment: Comment | null = null;
@@ -20,14 +19,17 @@ export class CommentViewComponent implements OnInit {
 
   @Output() delete = new EventEmitter<Comment>();
 
-
-  constructor(private commentService: CommentService, private profileService: ProfileService) { }
+  constructor(
+    private commentService: CommentService,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     if (this.commentAndUserExist(this.comment)) {
-      this.profileService.GetProfile(this.comment?.userEmail ?? '')
-      .subscribe(prof => this.user.profilePictureUrl = prof.profilePictureUrl ?? '',
-      prof => this.user.fullname = (prof.firstName + ' ' + prof.lastName));
+      this.profileService.GetProfile(this.comment?.userEmail ?? '').subscribe(
+        (prof) => (this.user.profilePictureUrl = prof.profilePictureUrl ?? ''),
+        (prof) => (this.user.fullname = prof.firstName + ' ' + prof.lastName)
+      );
     }
   }
 

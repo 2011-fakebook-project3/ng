@@ -1,7 +1,17 @@
 import { PostViewComponent } from './post-view.component';
-import { ComponentFixture, TestBed, fakeAsync, waitForAsync, inject } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  waitForAsync,
+  inject,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ActivatedRoute, NavigationBehaviorOptions , Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationBehaviorOptions,
+  Router,
+} from '@angular/router';
 import { NEVER, Observable, of } from 'rxjs';
 
 import { User } from '../../model/user';
@@ -26,7 +36,7 @@ describe('PostViewComponent', () => {
     status: undefined,
     birthDate: new Date(2010, 12),
     followees: [],
-    followers: []
+    followers: [],
   };
 
   const testComment: Comment = {
@@ -34,7 +44,7 @@ describe('PostViewComponent', () => {
     userEmail: 'e@email.com',
     content: 'comment content',
     postId: 1,
-    createdAt: undefined
+    createdAt: undefined,
   };
 
   const testPost: Post = {
@@ -45,30 +55,32 @@ describe('PostViewComponent', () => {
     createdAt: new Date(2020, 12),
     likedByUserIds: [],
     comments: [],
-    liked: false
+    liked: false,
   };
 
-  const fakeHTTPClient = { };
+  const fakeHTTPClient = {};
   const fakeOktaAuth = { getAccessToken(): void {} };
   beforeEach(async () => {
     const mockPostService = {
-      delete(id: number): void {}
+      delete(id: number): void {},
     };
 
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [ PostViewComponent ],
+      declarations: [PostViewComponent],
       providers: [
-        {provide: PostService, useValue: mockPostService},
-        {provide: ActivatedRoute, useValue: {}},
-        { provide: HttpClientModule, useValue: fakeHTTPClient},
-        { provide: OktaAuthService, useValue: fakeOktaAuth}
-
-      ]
-    })
-    .compileComponents();
+        { provide: PostService, useValue: mockPostService },
+        { provide: ActivatedRoute, useValue: {} },
+        { provide: HttpClientModule, useValue: fakeHTTPClient },
+        { provide: OktaAuthService, useValue: fakeOktaAuth },
+      ],
+    }).compileComponents();
     fixture = TestBed.createComponent(PostViewComponent);
-    component = new PostViewComponent(TestBed.inject(ActivatedRoute), TestBed.inject(PostService), TestBed.inject(ProfileService));
+    component = new PostViewComponent(
+      TestBed.inject(ActivatedRoute),
+      TestBed.inject(PostService),
+      TestBed.inject(ProfileService)
+    );
     fixture.detectChanges();
   });
 

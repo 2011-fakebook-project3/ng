@@ -1,4 +1,7 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotificationsService } from '../../service/notifications.service';
 import { Type } from '@angular/core';
@@ -15,28 +18,25 @@ describe('NotificationsViewComponent', () => {
   let fixture: ComponentFixture<NotificationsViewComponent>;
 
   beforeEach(async () => {
-
     const mockAuthService = {
       getAccessToken(): string {
         return 'token';
-      }
+      },
     };
 
     const mockNotifservice = {
       notificationsObs: new Observable<Notification>(),
 
-      setRead(): void { }
+      setRead(): void {},
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ NotificationsViewComponent, ],
+      declarations: [NotificationsViewComponent],
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: NotificationsService, useValue: mockNotifservice },
-      ]
-    })
-    .compileComponents();
-
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -46,8 +46,7 @@ describe('NotificationsViewComponent', () => {
     fixture.detectChanges();
   });
 
-  afterEach(() => {
-  });
+  afterEach(() => {});
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -60,5 +59,4 @@ describe('NotificationsViewComponent', () => {
     component.toggleNotifications();
     expect(component.notificationsView).toBeFalse();
   });
-
 });

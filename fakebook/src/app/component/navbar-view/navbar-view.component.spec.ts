@@ -21,19 +21,17 @@ describe('NavbarViewComponent', () => {
       logout(): void {},
       signOut(): void {},
       tokenManager: {
-        clear(): void {}
-      }
+        clear(): void {},
+      },
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ NavbarViewComponent ],
+      declarations: [NavbarViewComponent],
       providers: [
-        {provide: Router, useValue: {}},
-        {provide: AuthService, useValue: mockOktaAuthService}
-      ]
-    })
-    .compileComponents();
-
+        { provide: Router, useValue: {} },
+        { provide: AuthService, useValue: mockOktaAuthService },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
