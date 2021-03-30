@@ -31,6 +31,6 @@ describe('ProfileService', () => {
       TestBed.inject(OktaAuthService)
     );
     expect(service).toBeTruthy();
-    expect(service.baseUrl).toBe(`${environment.baseUrl}/api/profiles/`);
+    expect(service.baseUrl).toBe(`${environment.baseUrls.profile}/api/profiles/`);
   });
 });

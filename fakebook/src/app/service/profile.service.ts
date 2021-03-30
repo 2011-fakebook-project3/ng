@@ -10,7 +10,7 @@ import { Post } from '../model/post';
   providedIn: 'root',
 })
 export class ProfileService {
-  baseUrl = `${environment.baseUrl}/api/profiles/`;
+  baseUrl = `${environment.baseUrls.profile}/api/profiles/`;
 
   constructor(public http: HttpClient, private oktaAuth: OktaAuthService) {}
 

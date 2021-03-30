@@ -39,7 +39,7 @@ export class NotificationsService {
 
     // Start hub connection to SignalR
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(`${environment.baseUrl}/notifications`, options)
+      .withUrl(`${environment.baseUrls.notifications}/notifications`, options)
       .build();
     this.hubConnection
       .start()

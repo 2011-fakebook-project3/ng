@@ -65,6 +65,6 @@ describe('PostService', () => {
   });
 
   it('should have the correct urls', () => {
-    expect(service.url).toBe(`${environment.baseUrl}/api/posts`);
+    expect(service.url).toBe(`${environment.baseUrls.posts}/api/posts`);
   });
 });

@@ -30,6 +30,6 @@ describe('UploadImageService', () => {
       TestBed.inject(OktaAuthService)
     );
     expect(service).toBeTruthy();
-    expect(service.url).toBe(`${environment.baseUrl}/api/profiles/`);
+    expect(service.url).toBe(`${environment.baseUrls.profile}/api/profiles/`);
   });
 });

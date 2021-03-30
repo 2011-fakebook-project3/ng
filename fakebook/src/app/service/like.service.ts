@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class LikeService {
-  url = `${environment.baseUrl}/api/`;
+  url = `${environment.baseUrls.posts}/api/`;
 
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
 

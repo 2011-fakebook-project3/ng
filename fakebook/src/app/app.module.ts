@@ -25,9 +25,9 @@ import { PostFormComponent } from './component/post-form/post-form.component';
 export class TimeAgoExtendsPipe extends TimeAgoPipe implements PipeTransform {}
 
 const config = {
-  issuer: 'https://dev-2875280.okta.com/oauth2/default',
+  issuer: 'https://revature-p3.okta.com/oauth2/default',
   pkce: true,
-  clientId: '0oa3g3amkeK6iIIeP5d6',
+  clientId: '0oafgszgmBjYO7PPh5d6',
   redirectUri: `${window.location.origin}/login/callback`,
   scopes: ['openid'],
   postLogoutRedirectUri: window.location.origin,

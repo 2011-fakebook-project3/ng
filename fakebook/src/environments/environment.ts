@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://fakebook.revaturelabs.com',
+  baseUrls: {
+    posts: 'https://localhost:44366',
+    notifications: 'https://localhost:44345',
+    profile: 'https://localhost:44362',
+  },
 };
 
 /*
