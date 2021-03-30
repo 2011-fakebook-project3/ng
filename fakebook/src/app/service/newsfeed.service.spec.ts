@@ -22,7 +22,7 @@ describe('NewsfeedService', () => {
   let service: NewsfeedService;
   let httpClientSpy: { get: jasmine.Spy };
   let httpTestingController: HttpTestingController;
-  const url = `${environment.baseUrl}`;
+  const url = `${environment.baseUrls.posts}`;
 
   beforeEach(() => {
     const mockOktaAuthService = {
@@ -65,6 +65,6 @@ describe('NewsfeedService', () => {
   });
 
   it('should have the correct urls', () => {
-    expect(service.url).toBe(environment.baseUrl);
+    expect(service.url).toBe(environment.baseUrls.posts);
   });
 });

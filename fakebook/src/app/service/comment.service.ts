@@ -9,7 +9,7 @@ import { Post } from '../model/post';
   providedIn: 'root',
 })
 export class CommentService {
-  url = `${environment.baseUrl}/api/comments`;
+  url = `${environment.baseUrls.posts}/api/comments`;
 
   constructor(private oktaAuth: OktaAuthService, private http: HttpClient) {}
 

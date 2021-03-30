@@ -1,4 +1,10 @@
+const clusterBaseUrl = 'https://fakebook.revaturelabs.com';
+
 export const environment = {
   production: true,
-  baseUrl: 'https://fakebook.revaturelabs.com',
+  baseUrls: {
+    posts: clusterBaseUrl,
+    notifications: clusterBaseUrl,
+    profile: clusterBaseUrl,
+  },
 };

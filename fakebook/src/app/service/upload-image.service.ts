@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UploadImageService {
-  url = `${environment.baseUrl}/api/profiles/`;
+  url = `${environment.baseUrls.profile}/api/profiles/`;
 
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
 
@@ -20,7 +20,7 @@ export class UploadImageService {
 
     return this.http
       .post<{ path: string; userId: number }>(
-        `${environment.baseUrl}/api/ProfilePicture`,
+        `${environment.baseUrls.profile}/api/ProfilePicture`,
         formData,
         headers
       )

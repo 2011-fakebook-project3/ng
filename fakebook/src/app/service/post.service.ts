@@ -11,7 +11,7 @@ import { NewPost } from '../model/newpost';
 })
 export class PostService {
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
-  url = `${environment.baseUrl}/api/posts`;
+  url = `${environment.baseUrls.posts}/api/posts`;
 
   headers = {
     headers: {
