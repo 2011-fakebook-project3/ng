@@ -63,8 +63,4 @@ describe('NewsfeedService', () => {
     expect(service.headers.Authorization).toBe('Bearer 0');
     expect(service.headers.Accept).toBe('application/json');
   });
-
-  it('should have the correct urls', () => {
-    expect(service.url).toBe(environment.baseUrls.posts);
-  });
 });
