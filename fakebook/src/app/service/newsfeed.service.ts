@@ -11,7 +11,6 @@ import { environment } from '../../environments/environment';
 })
 export class NewsfeedService {
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
-  url = `${environment.baseUrls.posts}`;
 
   headers = {
     Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
@@ -24,7 +23,10 @@ export class NewsfeedService {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
     };
-    return this.http.get<Post[]>(`${this.url}/api/posts/newsfeed`, { headers });
+    return this.http.get<Post[]>(
+      `${environment.baseUrls.posts}/api/posts/newsfeed`,
+      { headers }
+    );
   }
 
   getUser(): Observable<User> {
@@ -33,6 +35,8 @@ export class NewsfeedService {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
     };
-    return this.http.get<User>(`${this.url}/api/profiles/`, { headers });
+    return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/`, {
+      headers,
+    });
   }
 }
