@@ -46,6 +46,7 @@ stages:
         configMode: 'manual'
         cliProjectKey: '2011-fakebook-project3_ng'
         cliProjectName: 'ng'
+        cliProjectVersion: '0.2'
         cliSources: '$(appDir)/src'
         extraProperties: |
           sonar.coverage.exclusions=$(appDir)/src/**/*.spec.ts
