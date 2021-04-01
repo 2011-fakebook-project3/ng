@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -44,10 +44,15 @@ spec:
     - fakebook.revaturelabs.com
     secretName: fakebook-tls
 
-# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+# https://docs.microsoft.com/en-us/azure/aks/ingress-static-ip
+
+# (group is the aks-created one)
+# az network public-ip create -g mc_nick-escalona-945-p3_fakebook_eastus -n fakebook-public-ip --sku Standard --allocation-method static --query publicIp.ipAddress -o tsv
+# (output 52.152.144.110)
+
 # helm install fakebook-ingress ingress-nginx/ingress-nginx \
-#   --set controller.replicaCount=2 \
-#   --set controller.service.loadBalancerIP="20.72.138.197" \
-#   --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
-#   --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux \
-#   --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-resource-group"=Fakebook
+#     --set controller.replicaCount=2 \
+#     --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
+#     --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux \
+#     --set controller.admissionWebhooks.patch.nodeSelector."beta\.kubernetes\.io/os"=linux \
+#     --set controller.service.loadBalancerIP="52.152.144.110"
