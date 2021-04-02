@@ -3,42 +3,61 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
   name: fakebook
 spec:
+  defaultBackend:
+    service:
+      name: fakebook-spa
+      port:
+        number: 80
+  ingressClassName: nginx
   rules:
   - host: fakebook.revaturelabs.com
     http:
       paths:
-      - backend:
-          serviceName: fakebook-posts-api
-          servicePort: 80
-        path: /api/posts
-      - backend:
-          serviceName: fakebook-posts-api
-          servicePort: 80
-        path: /api/comments
-      - backend:
-          serviceName: fakebook-posts-api
-          servicePort: 80
-        path: /api/follows
-      - backend:
-          serviceName: fakebook-notifications-api
-          servicePort: 80
-        path: /notifications
-      - backend:
-          serviceName: fakebook-spa
-          servicePort: 80
-        path: /
-      - backend:
-          serviceName: fakebook-profile-api
-          servicePort: 80
-        path: /api/profiles
-      - backend:
-          serviceName: fakebook-profile-api
-          servicePort: 80
-        path: /api/profilepicture
+      - path: /api/posts
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-posts-api
+            port:
+              number: 80
+      - path: /api/comments
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-posts-api
+            port:
+              number: 80
+      - path: /api/follows
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-posts-api
+            port:
+              number: 80
+      - path: /notifications
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-notifications-api
+            port:
+              number: 80
+      - path: /api/profiles
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-profile-api
+            port:
+              number: 80
+      - path: /api/profilepicture
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-profile-api
+            port:
+              number: 80
   tls:
   - hosts:
     - fakebook.revaturelabs.com
