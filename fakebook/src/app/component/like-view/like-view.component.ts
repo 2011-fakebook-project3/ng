@@ -7,9 +7,9 @@ import { LikeService } from 'src/app/service/like.service';
   styleUrls: ['./like-view.component.css'],
 })
 export class LikeViewComponent {
-  @Input() count!: number;
-  @Input() postId!: number;
-  @Input() liked!: boolean;
+  @Input() count: number;
+  @Input() postId: number;
+  @Input() liked: boolean;
 
   constructor(private likeService: LikeService) {}
 
