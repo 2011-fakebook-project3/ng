@@ -46,7 +46,7 @@ describe('NewsfeedComponent', () => {
     status: 'My Fake User status',
     birthDate: new Date(),
     followers: [],
-    followees: [],
+    following: [],
   };
 
   beforeEach(async () => {
