@@ -7,7 +7,7 @@ import { LikeService } from 'src/app/service/like.service';
   styleUrls: ['./like-view.component.css'],
 })
 export class LikeViewComponent {
-  @Input() count: number;
+  @Input() count: number | undefined;
   @Input() postId: number;
   @Input() liked: boolean;
 
@@ -18,12 +18,12 @@ export class LikeViewComponent {
     if (this.liked) {
       this.likeService.unlike(this.postId);
       this.liked = !this.liked;
-      this.count--;
+      this.count!--;
     } else {
       // like the post
       this.likeService.like(this.postId);
       this.liked = !this.liked;
-      this.count++;
+      this.count!++;
     }
   }
 }
