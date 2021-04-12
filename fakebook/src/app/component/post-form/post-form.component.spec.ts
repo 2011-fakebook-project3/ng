@@ -30,7 +30,7 @@ describe('PostFormComponent', () => {
     const mockUploadService = {};
     const mockPostService = {};
     const mockProfileService = {
-      GetProfileWithNullRoute(): Observable<User> {
+      getProfileWithNullRoute(): Observable<User> {
         return of(user);
       },
     };

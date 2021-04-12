@@ -26,7 +26,7 @@ export class CommentViewComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.commentAndUserExist(this.comment)) {
-      this.profileService.GetProfile(this.comment?.userEmail ?? '').subscribe(
+      this.profileService.getProfileByEmail(this.comment?.userEmail ?? '').subscribe(
         (prof) => (this.user.profilePictureUrl = prof.profilePictureUrl ?? ''),
         (prof) => (this.user.fullname = prof.firstName + ' ' + prof.lastName)
       );

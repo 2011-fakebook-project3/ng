@@ -1,18 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { OktaAuthService } from '@okta/okta-angular';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
-import { Post } from '../model/post';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class ProfileService {
-  baseUrl = `${environment.baseUrls.profile}/api/profiles/`;
-
-constructor(public http: HttpClient, private oktaAuth: OktaAuthService) {}
 
   /*
     endpoints:
@@ -30,55 +20,37 @@ constructor(public http: HttpClient, private oktaAuth: OktaAuthService) {}
       - [POST]        /profiles/upload
           + uploads an image via a form (input type='file')
   */
-  public GetProfile(email: string): Observable<User> /* profile */ {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProfileService {
+  baseUrl = `${environment.baseUrls.profile}/api/profiles/`;
+  headers: any;
+  constructor(public http: HttpClient) {
+    this.headers = {
+      Authorization: 'Bearer ',
       Accept: 'application/json',
     };
-
-    return this.http.get<User>(this.baseUrl + email, { headers });
   }
 
-  public GetProfileWithNullRoute(): Observable<User> /* null route */ {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
-    return this.http.get<User>(this.baseUrl, { headers });
+  public getProfileByEmail(email: string): Observable<User> {
+    return this.http.get<User>(this.baseUrl + email, { headers: this.headers });
   }
-  public GetProfiles(emails: string[]): Observable<User> /* profile */ {
-    // make empty collection of profiles
-    // emails={abc, 123, }
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
 
-    return this.http.get<User>(this.baseUrl + 'selection/' + emails, {
-      headers,
-    });
+  public getProfileWithNullRoute(): Observable<User> {
+    return this.http.get<User>(this.baseUrl, { headers: this.headers });
+  }
+  
+  public getProfilesByEmails(emails: string[]): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl + 'selection/' + emails, { headers: this.headers });
   }
 
   public createProfile(profile: User): Observable<User> {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
-
-    return this.http.post<User>(`${this.baseUrl}`, profile, { headers });
+    return this.http.post<User>(`${this.baseUrl}`, profile, { headers: this.headers });
   }
 
-  public UpdateProfile(email: string, profile: User): Observable<User> {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
-
-    return this.http.put<User>(this.baseUrl + email, profile, { headers });
+  public updateProfile(email: string, profile: User): Observable<User> {
+    return this.http.put<User>(this.baseUrl + email, profile, { headers: this.headers });
   }
 }

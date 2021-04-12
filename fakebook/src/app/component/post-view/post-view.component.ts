@@ -35,7 +35,7 @@ export class PostViewComponent implements OnInit {
 
   getUser(email: string): void {
     this.profileService
-      .GetProfile(email)
+      .getProfileByEmail(email)
       .subscribe((user) => (this.user = user));
   }
 

@@ -43,7 +43,7 @@ describe('ProfileViewComponent', () => {
     };
 
     const mockProfileService = {
-      GetProfile(id: string): Observable<User> {
+      getProfile(id: string): Observable<User> {
         return of(userTest);
       },
     };
