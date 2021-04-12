@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { runInThisContext } from 'vm';
 import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notifications-view',
@@ -51,5 +52,13 @@ export class NotificationsViewComponent implements OnInit {
     });
 
     this.notifService.setRead(ids);
+  }
+
+  visitPost(): void {
+    
+  }
+
+  visitProfile(): void {
+
   }
 }
