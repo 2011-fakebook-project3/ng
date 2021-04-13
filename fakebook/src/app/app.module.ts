@@ -18,12 +18,6 @@ import { MainViewComponent } from './component/main-view/main-view.component';
 import { ProfileViewComponent } from './component/profile-view/profile-view.component';
 import { PostFormComponent } from './component/post-form/post-form.component';
 
-import { CoreModule } from './authentication/core/core.module';
-import { AccountModule }  from './authentication/account/account.module';
-import { ShellModule } from './authentication/shell/shell.module';
-import { TopSecretModule } from './authentication/top-secret/top-secret.module';
-import { SharedModule }   from './authentication/shared/shared.module';
-
 @Pipe({
   name: 'timeAgo',
   pure: false,
@@ -63,12 +57,6 @@ const config = {
     OktaAuthModule,
     CommonModule,
     FormsModule,
-    CoreModule,
-    AccountModule,
-    TopSecretModule,   
-    AppRoutingModule,
-    ShellModule,   
-    SharedModule 
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
   bootstrap: [AppComponent],
