@@ -1,15 +1,9 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnInit,
 } from '@angular/core';
 import { NotificationsService } from '../../services/notifications.service';
 import { Notification } from '../../model/notification';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { runInThisContext } from 'vm';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-notifications-view',
@@ -51,5 +45,13 @@ export class NotificationsViewComponent implements OnInit {
     });
 
     this.notifService.setRead(ids);
+  }
+
+  visitPost(): void {
+    
+  }
+
+  visitProfile(): void {
+
   }
 }
