@@ -117,7 +117,6 @@
   },
   "defaultProject": "fakebook",
   "cli": {
-    "analytics": "bb5f1d68-a71f-4ee5-9e3a-211e64255ef5",
     "defaultCollection": "@angular-eslint/schematics"
   }
 }

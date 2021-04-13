@@ -49,7 +49,6 @@ export class PostService {
         Accept: 'application/json',
       },
     };
-    console.log(this.headers);
     return this.http.delete<void>(`${this.url}/${postId}`, newheaders);
   }
   update(post: Post): Observable<Post> {
