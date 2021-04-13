@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/model/user';
-import { PostService } from 'src/app/service/post.service';
-import { ProfileService } from 'src/app/service/profile.service';
-import { UploadService } from 'src/app/service/upload.service';
+import { PostService } from 'src/app/services/post.service';
+import { ProfileService } from 'src/app/services/profile.service';
+import { UploadService } from 'src/app/services/upload.service';
 import { NewPost } from '../../model/newpost';
 import { PostFormComponent } from './post-form.component';
 

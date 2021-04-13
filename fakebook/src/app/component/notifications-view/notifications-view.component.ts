@@ -4,12 +4,12 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { NotificationsService } from '../../service/notifications.service';
+import { NotificationsService } from '../../services/notifications.service';
 import { Notification } from '../../model/notification';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { runInThisContext } from 'vm';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-notifications-view',

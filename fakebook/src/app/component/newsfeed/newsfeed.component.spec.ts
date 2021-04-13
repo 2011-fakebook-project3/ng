@@ -5,8 +5,8 @@ import { NEVER, Observable, of } from 'rxjs';
 import { NewsfeedComponent } from './newsfeed.component';
 import { User } from '../../model/user';
 import { Post } from '../../model/post';
-import { NewsfeedService } from 'src/app/service/newsfeed.service';
-import { PostService } from 'src/app/service/post.service';
+import { NewsfeedService } from 'src/app/services/newsfeed.service';
+import { PostService } from 'src/app/services/post.service';
 
 describe('NewsfeedComponent', () => {
   let component: NewsfeedComponent;

@@ -3,9 +3,9 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
 import { of } from 'rxjs';
 import { Comment } from 'src/app/model/comment';
-import { AuthService } from 'src/app/service/auth.service';
-import { CommentService } from 'src/app/service/comment.service';
-import { NotificationsService } from 'src/app/service/notifications.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { CommentService } from 'src/app/services/comment.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 import { CommentFormComponent } from './comment-form.component';
 

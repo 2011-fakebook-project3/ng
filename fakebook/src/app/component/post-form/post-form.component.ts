@@ -8,10 +8,10 @@ import {
   ElementRef,
 } from '@angular/core';
 import { User } from 'src/app/model/user';
-import { ProfileService } from '../../service/profile.service';
+import { ProfileService } from '../../services/profile.service';
 import { NewPost } from '../../model/newpost';
-import { PostService } from '../../service/post.service';
-import { UploadService } from '../../service/upload.service';
+import { PostService } from '../../services/post.service';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-new-post-form',
