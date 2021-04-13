@@ -23,7 +23,7 @@ describe('PostFormComponent', () => {
     status: '',
     birthDate: new Date(),
     followers: [],
-    followees: [],
+    following: [],
   };
 
   beforeEach(async () => {

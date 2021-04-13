@@ -35,7 +35,7 @@ describe('PostViewComponent', () => {
     profilePictureUrl: null,
     status: undefined,
     birthDate: new Date(2010, 12),
-    followees: [],
+    following: [],
     followers: [],
   };
 
