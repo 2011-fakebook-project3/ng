@@ -17,8 +17,8 @@ import { NEVER, Observable, of } from 'rxjs';
 import { User } from '../../model/user';
 import { Comment } from '../../model/comment';
 import { Post } from '../../model/post';
-import { PostService } from '../../service/post.service';
-import { ProfileService } from 'src/app/service/profile.service';
+import { PostService } from '../../services/post.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { HttpClientModule } from '@angular/common/http';
 import { OktaAuthService } from '@okta/okta-angular';
 
@@ -35,7 +35,7 @@ describe('PostViewComponent', () => {
     profilePictureUrl: null,
     status: undefined,
     birthDate: new Date(2010, 12),
-    followees: [],
+    following: [],
     followers: [],
   };
 
@@ -53,7 +53,7 @@ describe('PostViewComponent', () => {
     userEmail: 'e@mail',
     pictureUrl: undefined,
     createdAt: new Date(2020, 12),
-    likedByUserIds: [],
+    likes: [],
     comments: [],
     liked: false,
   };

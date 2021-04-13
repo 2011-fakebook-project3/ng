@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LikeService } from 'src/app/service/like.service';
+import { LikeService } from 'src/app/services/like.service';
 
 @Component({
   selector: 'app-like-view',

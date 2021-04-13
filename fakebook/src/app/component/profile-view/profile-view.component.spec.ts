@@ -12,9 +12,9 @@ import {
 import { OktaAuthService } from '@okta/okta-angular';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/model/user';
-import { ProfileService } from 'src/app/service/profile.service';
-import { FollowService } from 'src/app/service/follow.service';
-import { PostService } from 'src/app/service/post.service';
+import { ProfileService } from 'src/app/services/profile.service';
+import { FollowService } from 'src/app/services/follow.service';
+import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post';
 
 describe('ProfileViewComponent', () => {
@@ -30,7 +30,7 @@ describe('ProfileViewComponent', () => {
     status: '1',
     birthDate: new Date(),
     followers: [],
-    followees: [],
+    following: [],
   };
   const posts: Post[] = [];
 

@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { User } from 'src/app/model/user';
-import { PostService } from 'src/app/service/post.service';
+import { PostService } from 'src/app/services/post.service';
 import { Comment } from 'src/app/model/comment';
 import { Post } from '../../model/post';
-import { ProfileService } from 'src/app/service/profile.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-post-view',
