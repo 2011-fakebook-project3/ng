@@ -8,5 +8,5 @@ export interface User {
   status: string | undefined;
   birthDate: Date;
   followers: User[];
-  followees: User[];
+  following: User[];
 }

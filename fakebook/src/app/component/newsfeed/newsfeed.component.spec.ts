@@ -19,7 +19,7 @@ describe('NewsfeedComponent', () => {
       userEmail: 'e@mail',
       createdAt: new Date(),
       pictureUrl: '',
-      likedByUserIds: [],
+      likes: [],
       comments: [],
       liked: false,
     },
@@ -29,7 +29,7 @@ describe('NewsfeedComponent', () => {
       userEmail: 'e@mail',
       createdAt: new Date(),
       pictureUrl: '',
-      likedByUserIds: [],
+      likes: [],
       comments: [],
       liked: false,
     },
@@ -46,7 +46,7 @@ describe('NewsfeedComponent', () => {
     status: 'My Fake User status',
     birthDate: new Date(),
     followers: [],
-    followees: [],
+    following: [],
   };
 
   beforeEach(async () => {

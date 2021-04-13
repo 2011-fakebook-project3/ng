@@ -6,7 +6,7 @@ export interface Post {
   userEmail: string;
   pictureUrl: string | undefined;
   createdAt: Date;
-  likedByUserIds: number[];
+  likes: string[];
   comments: Comment[];
   liked: boolean | false;
 }
