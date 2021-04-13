@@ -16,7 +16,7 @@ export class ProfileSearchComponent {
 
   getProfiles(): void {
     this.profileService
-      .getProfilesByEmails(this.searchProfile.value)
+      .GetProfilesByEmails(this.searchProfile.value)
       .subscribe((results: User[]) => (this.profileList = results));
   }
 }

@@ -69,7 +69,7 @@ export class PostFormComponent {
 
   getUser(): void {
     this.profileService
-      .getProfileWithNullRoute()
+      .GetProfileWithNullRoute()
       .subscribe((gotuser: User | null) => (this.user = gotuser));
   }
 

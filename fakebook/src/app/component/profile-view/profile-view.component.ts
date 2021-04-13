@@ -48,7 +48,7 @@ export class ProfileViewComponent implements OnInit {
       if (email) {
         // Set user
         this.profileService
-          .getProfileByEmail(email)
+          .GetProfileByEmail(email)
           .subscribe((user) => (this.user = user));
         // Set posts
         this.postService
@@ -56,10 +56,10 @@ export class ProfileViewComponent implements OnInit {
           .subscribe((posts) => (this.posts = posts));
         // Set follow status
         this.profileService
-          .getProfileByEmail(email)
+          .GetProfileByEmail(email)
           .subscribe((user) =>
             this.profileService
-              .getProfileByEmail(this.currentUserEmail)
+              .GetProfileByEmail(this.currentUserEmail)
               .subscribe(
                 (selfUser) =>
                   (this.followStatus = this.followService.getFollowStatus(
@@ -70,7 +70,7 @@ export class ProfileViewComponent implements OnInit {
           );
       }
     } else {
-      this.profileService.getProfileWithNullRoute().subscribe((user) => {
+      this.profileService.GetProfileWithNullRoute().subscribe((user) => {
         this.user = user;
         this.postService
           .getUserPosts(this.user.email)
