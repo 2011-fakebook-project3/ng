@@ -28,6 +28,9 @@
         <li *ngIf="isAuthenticated">
           <app-notifications-view></app-notifications-view>
         </li>
+        <li *ngIf="isAuthenticated">
+          <app-profile-search></app-profile-search>
+        </li>
       </ul>
 
       <button
@@ -46,5 +49,5 @@
       </button>
     </div>
   </div>
-  <app-profile-search></app-profile-search>
+  
 </nav>

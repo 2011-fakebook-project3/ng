@@ -34,23 +34,23 @@ export class ProfileService {
     };
   }
 
-  public getProfileByEmail(email: string): Observable<User> {
+  public GetProfileByEmail(email: string): Observable<User> {
     return this.http.get<User>(this.baseUrl + email, { headers: this.headers });
   }
 
-  public getProfileWithNullRoute(): Observable<User> {
+  public GetProfileWithNullRoute(): Observable<User> {
     return this.http.get<User>(this.baseUrl, { headers: this.headers });
   }
   
-  public getProfilesByEmails(emails: string[]): Observable<User[]> {
+  public GetProfilesByEmails(emails: string[]): Observable<User[]> {
     return this.http.get<User[]>(this.baseUrl + 'selection/' + emails, { headers: this.headers });
   }
 
-  public createProfile(profile: User): Observable<User> {
+  public CreateProfile(profile: User): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}`, profile, { headers: this.headers });
   }
 
-  public updateProfile(email: string, profile: User): Observable<User> {
+  public UpdateProfile(email: string, profile: User): Observable<User> {
     return this.http.put<User>(this.baseUrl + email, profile, { headers: this.headers });
   }
 }
