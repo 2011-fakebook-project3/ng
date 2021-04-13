@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Post } from '../model/post';
@@ -29,16 +29,20 @@ export class NewsfeedService {
     );
   }
 
-  getPostById(postId: number): Observable<Post[]> {
+  getPostById(postId: number): Promise<Post[]> {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
     };
-    return this.http.get<Post[]>(
+    let post: Post;
+    return this.http.get<Post>(
       `${environment.baseUrls.posts}/api/posts/${postId}`,
       { headers }
-    );
+    ).toPromise().then(p => {
+      post = p;    
+      return [post];
+    });
   }
 
   getUser(): Observable<User> {
