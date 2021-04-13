@@ -31,7 +31,6 @@ export class NotificationsViewComponent implements OnInit {
       if (this.notificationsView === false) {
         this.unreadNotifications = true;
       }
-      console.log(this.notifications);
     });
   }
 

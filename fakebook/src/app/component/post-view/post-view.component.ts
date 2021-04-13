@@ -53,7 +53,7 @@ export class PostViewComponent implements OnInit {
 
   deletePost(post: Post): void {
     this.post = null;
-    this.postService.delete(post.id);
+    this.postService.delete(post.id).subscribe();
   }
 
   deleteComment(comment: Comment): void {

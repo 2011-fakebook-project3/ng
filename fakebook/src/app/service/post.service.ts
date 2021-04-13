@@ -43,7 +43,14 @@ export class PostService {
   }
 
   delete(postId: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${postId}`, this.headers);
+    var newheaders = {
+      headers: {
+        Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
+        Accept: 'application/json',
+      },
+    };
+    console.log(this.headers);
+    return this.http.delete<void>(`${this.url}/${postId}`, newheaders);
   }
   update(post: Post): Observable<Post> {
     return this.http.put<Post>(`${this.url}/${post.id}`, post, this.headers);
