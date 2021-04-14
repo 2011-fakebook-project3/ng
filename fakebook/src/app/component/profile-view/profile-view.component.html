@@ -14,6 +14,21 @@
   <h2 class="d-flex justify-content-center">
     {{ user?.firstName }} {{ user?.lastName }}
   </h2>
+  <div class="col text-center">
+    <button 
+      type="button" 
+      class="btn text-center" 
+      [class]="followStatus ? 'btn-success' : 'btn-primary'" 
+      (click)="followUser()"
+    >
+      <div *ngIf="followStatus">
+        Following
+      </div>
+      <div *ngIf="!followStatus">
+        Follow
+      </div>
+    </button>
+  </div>
 </div>
 <div class="container" *ngIf="user">
   <div class="row">
