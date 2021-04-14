@@ -96,4 +96,11 @@ describe('PostViewComponent', () => {
     expect(component.post).toBeNull();
     expect(component.postService.delete).toHaveBeenCalled();
   });
+
+  it('should be editable on startEditPost()', () => {
+    component.post = testPost;
+    component.startEditPost();
+    expect(component.isEditing).toBeTrue();
+    expect(component.editContent).toEqual(testPost.content);
+  });
 });

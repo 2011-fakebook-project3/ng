@@ -20,6 +20,8 @@ export class PostViewComponent implements OnInit {
 
   user: User | null = null;
   comments: Comment[] | null = null;
+  isEditing : boolean = false;
+  editContent : string = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +52,21 @@ export class PostViewComponent implements OnInit {
   //     this.postService.unLikePost(postId).subscribe();
   //   }
   // }
+
+  startEditPost(): void
+  {
+
+  }
+
+  endEditPost() : void
+  {
+
+  }
+
+  cancelEditPost() : void
+  {
+
+  }
 
   deletePost(post: Post): void {
     this.post = null;
