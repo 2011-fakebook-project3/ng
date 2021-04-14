@@ -62,7 +62,11 @@ export class PostViewComponent implements OnInit {
 
   endEditPost() : void
   {
+    if(!this.post)
+      return;
 
+    this.post.content = this.editContent;
+    this.postService.update(this.post);
   }
 
   cancelEditPost() : void
