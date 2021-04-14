@@ -19,7 +19,10 @@ export class NewsfeedComponent implements OnInit {
     private readonly newsfeedService: NewsfeedService,
     private readonly postService: PostService,
     private readonly route: ActivatedRoute
-    ) {
+    ) {}
+
+  ngOnInit(): void {
+    this.getUser();
     this.route.params.subscribe((params) => {
       if(params['id'] !== undefined) {
         this.postId = +params['id'];
@@ -30,10 +33,6 @@ export class NewsfeedComponent implements OnInit {
         this.getPosts();
       }
     });
-  }
-
-  ngOnInit(): void {
-    this.getUser();
   }
 
   getPosts(): void {

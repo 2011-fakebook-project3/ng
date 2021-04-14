@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class CommentService {
-  url = `${environment.baseUrls.posts}/api/comments`;
-  acceptHeader = 'application/json';
+  private readonly url = `${environment.baseUrls.posts}/api/comments`;
+  private readonly acceptHeader = 'application/json';
 
   constructor(private readonly oktaAuth: OktaAuthService, private readonly http: HttpClient) {}
 

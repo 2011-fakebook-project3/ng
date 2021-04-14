@@ -7,14 +7,14 @@ import { LikeService } from 'src/app/services/like.service';
   styleUrls: ['./like-view.component.css'],
 })
 export class LikeViewComponent {
-  @Input() count!: number;
-  @Input() postId!: number;
-  @Input() liked!: boolean;
+  @Input() count?: number;
+  @Input() postId?: number;
+  @Input() liked?: boolean;
 
   constructor(private likeService: LikeService) {}
 
   submit(): void {
-    if (this.count) {
+    if ((this.count !== undefined) && this.postId) {
       // if the post is aready liked we should unlike it
       if (this.liked) {
         this.likeService.unlike(this.postId);
