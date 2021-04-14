@@ -1,12 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NEVER, Observable, of } from 'rxjs';
+import { NEVER, Observable, of, from } from 'rxjs';
 
 import { NewsfeedComponent } from './newsfeed.component';
 import { User } from '../../model/user';
 import { Post } from '../../model/post';
 import { NewsfeedService } from 'src/app/services/newsfeed.service';
 import { PostService } from 'src/app/services/post.service';
+import { ActivatedRoute } from '@angular/router';
 
 describe('NewsfeedComponent', () => {
   let component: NewsfeedComponent;
@@ -57,6 +58,9 @@ describe('NewsfeedComponent', () => {
       getPosts(): Observable<Post[]> {
         return of(testposts);
       },
+      getPostById(postId: number): Observable<Post> {
+        return of(testposts[0]);
+      }
     };
 
     const mockPostService = {
@@ -68,6 +72,11 @@ describe('NewsfeedComponent', () => {
       providers: [
         { provide: NewsfeedService, useValue: FakeNewsFeedService },
         { provide: PostService, useValue: mockPostService },
+        { provide: ActivatedRoute, useValue: 
+          {
+            params: from([{id: 1}]),
+          }
+        }
       ],
     }).compileComponents();
   });
@@ -75,6 +84,7 @@ describe('NewsfeedComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NewsfeedComponent);
     component = fixture.componentInstance;
+    component.posts = testposts;
     fixture.detectChanges();
   });
 
