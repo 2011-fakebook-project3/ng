@@ -67,7 +67,7 @@ export class PostViewComponent implements OnInit {
 
   cancelEditPost() : void
   {
-
+    this.isEditing = false;
   }
 
   deletePost(post: Post): void {
