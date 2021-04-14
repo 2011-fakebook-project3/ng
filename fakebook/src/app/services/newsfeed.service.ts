@@ -17,7 +17,7 @@ export class NewsfeedService {
     Accept: 'application/json',
   };
 
-  getPosts(postId?: number): Observable<Post[]> {
+  getPosts(): Observable<Post[]> {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + accessToken,
@@ -29,20 +29,16 @@ export class NewsfeedService {
     );
   }
 
-  getPostById(postId: number): Promise<Post[]> {
+  getPostById(postId: number): Observable<Post> {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
     };
-    let post: Post;
     return this.http.get<Post>(
       `${environment.baseUrls.posts}/api/posts/${postId}`,
       { headers }
-    ).toPromise().then(p => {
-      post = p;    
-      return [post];
-    });
+    );
   }
 
   getUser(): Observable<User> {
