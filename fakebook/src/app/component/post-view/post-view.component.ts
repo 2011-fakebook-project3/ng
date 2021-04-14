@@ -21,7 +21,7 @@ export class PostViewComponent implements OnInit {
   user: User | null = null;
   comments: Comment[] | null = null;
   isEditing : boolean = false;
-  editContent : string = "";
+  editContent: string  = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -55,7 +55,9 @@ export class PostViewComponent implements OnInit {
 
   startEditPost(): void
   {
-
+    this.isEditing = true;
+    if(this.post)
+      this.editContent = this.post?.content;
   }
 
   endEditPost() : void
