@@ -21,16 +21,17 @@ export class NewsfeedComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
-      console.log(params);
-      if(params['id'] != undefined){   
+      if(params['id'] !== undefined) {   
         this.postId = +params['id'];
-          if(this.postId != undefined)
+          if(this.postId !== undefined && !isNaN(this.postId))
+          {
             this.getPostById();
+          }
       }
-      else{
+      else {
         this.getPosts();
       }
-    })
+    });
   }
 
   ngOnInit(): void {
