@@ -47,7 +47,7 @@ export class NewsfeedComponent implements OnInit {
       .getPostById(this.postId)
       .subscribe((p) => this.posts = [p]);
     }
-  }  
+  }
 
   getUser(): void {
     this.newsfeedService
