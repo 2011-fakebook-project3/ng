@@ -45,9 +45,11 @@ export class NewsfeedComponent implements OnInit {
   }
 
   getPostById(): void {
-    this.newsfeedService
-      .getPostById(this.postId!)
+    if (this.postId !== undefined && !isNaN(this.postId)) {
+      this.newsfeedService
+      .getPostById(this.postId)
       .subscribe(p => this.posts = [p]);
+    }
   }
   
 
