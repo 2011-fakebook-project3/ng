@@ -63,6 +63,7 @@ describe('PostViewComponent', () => {
   beforeEach(async () => {
     const mockPostService = {
       delete(id: number): void {},
+      update(post : Post): void {},
     };
 
     await TestBed.configureTestingModule({
@@ -111,7 +112,7 @@ describe('PostViewComponent', () => {
     expect(component.isEditing).toBeFalse();
   });
 
-  it('should send the edited post endEditPost()', () => {
+  it('should send the edited post on endEditPost()', () => {
     let newPostContent = "New post content";
     spyOn(component.postService, 'update');
 
@@ -119,6 +120,6 @@ describe('PostViewComponent', () => {
     component.startEditPost();
     component.editContent = newPostContent;
     component.endEditPost();
-    expect(component.postService.update).toHaveBeenCalled();
+    expect(component.postService.update).toHaveBeenCalledWith(component.post);
   });
 });
