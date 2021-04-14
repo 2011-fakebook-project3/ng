@@ -46,12 +46,4 @@ export class NotificationsViewComponent implements OnInit {
 
     this.notifService.setRead(ids);
   }
-
-  visitPost(): void {
-    
-  }
-
-  visitProfile(): void {
-
-  }
 }

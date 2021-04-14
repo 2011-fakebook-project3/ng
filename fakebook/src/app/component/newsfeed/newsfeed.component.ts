@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { Post } from '../../model/post';
 import { NewsfeedService } from '../../services/newsfeed.service';
@@ -16,19 +16,17 @@ export class NewsfeedComponent implements OnInit {
   postId: number | undefined;
 
   constructor(
-    private newsfeedService: NewsfeedService,
-    private postService: PostService,
-    private route: ActivatedRoute
-  ) {
-    this.route.params.subscribe(params => {
-      if(params['id'] !== undefined) {   
+    private readonly newsfeedService: NewsfeedService,
+    private readonly postService: PostService,
+    private readonly route: ActivatedRoute
+    ) {
+    this.route.params.subscribe((params) => {
+      if(params['id'] !== undefined) {
         this.postId = +params['id'];
-          if(this.postId !== undefined && !isNaN(this.postId))
-          {
-            this.getPostById();
-          }
-      }
-      else {
+        if(this.postId !== undefined && !isNaN(this.postId)) {
+          this.getPostById();
+        }
+      } else {
         this.getPosts();
       }
     });
@@ -48,10 +46,9 @@ export class NewsfeedComponent implements OnInit {
     if (this.postId !== undefined && !isNaN(this.postId)) {
       this.newsfeedService
       .getPostById(this.postId)
-      .subscribe(p => this.posts = [p]);
+      .subscribe((p) => this.posts = [p]);
     }
-  }
-  
+  }  
 
   getUser(): void {
     this.newsfeedService

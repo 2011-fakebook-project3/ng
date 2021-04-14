@@ -72,7 +72,7 @@ describe('NewsfeedComponent', () => {
       providers: [
         { provide: NewsfeedService, useValue: FakeNewsFeedService },
         { provide: PostService, useValue: mockPostService },
-        { provide: ActivatedRoute, useValue: 
+        { provide: ActivatedRoute, useValue:
           {
             params: from([{id: 1}]),
           }

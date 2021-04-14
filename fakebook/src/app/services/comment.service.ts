@@ -3,21 +3,21 @@ import { Injectable } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Comment } from 'src/app/model/comment';
 import { environment } from 'src/environments/environment';
-import { Post } from '../model/post';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentService {
   url = `${environment.baseUrls.posts}/api/comments`;
+  acceptHeader = 'application/json';
 
-  constructor(private oktaAuth: OktaAuthService, private http: HttpClient) {}
+  constructor(private readonly oktaAuth: OktaAuthService, private readonly http: HttpClient) {}
 
   create(comment: Comment): Promise<Comment> {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: `Bearer ${accessToken}`,
-      Accept: 'application/json',
+      Accept: this.acceptHeader,
     };
 
     const targetUrl = `/${this.url}`;
@@ -32,7 +32,7 @@ export class CommentService {
 
     const headers = {
       Authorization: `Bearer ${accessToken}`,
-      Accept: 'application/json',
+      Accept: this.acceptHeader,
     };
 
     const targetUrl = `/${this.url}/${comment.id}`;
@@ -46,7 +46,7 @@ export class CommentService {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: `Bearer ${accessToken}`,
-      Accept: 'application/json',
+      Accept: this.acceptHeader,
     };
 
     const targetUrl = `/${this.url}/${commentId}`;
