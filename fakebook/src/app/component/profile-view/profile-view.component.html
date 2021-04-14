@@ -16,10 +16,10 @@
   </h2>
   <div class="col text-center">
     <button 
-    type="button" 
-    class="btn text-center" 
-    [ngClass]="followStatus ? 'btn-success' : 'btn-primary'" 
-    (click)="followUser()"
+      type="button" 
+      class="btn text-center" 
+      [class]="followStatus ? 'btn-success' : 'btn-primary'" 
+      (click)="followUser()"
     >
       <div *ngIf="followStatus">
         Following
