@@ -15,13 +15,13 @@
 
     <div class="collapse navbar-collapse" id="navbarsExample07">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" *ngIf="isAuthenticated" routerLink="/profile/"
+        <li >
+          <a class="nav-link" *ngIf="isAuthenticated" routerLink="/profile/" routerLinkActive="active"
             >Profile <span class="sr-only">(current)</span></a
           >
         </li>
         <li>
-          <a class="nav-link" *ngIf="isAuthenticated" routerLink="/newsfeed/"
+          <a class="nav-link" *ngIf="isAuthenticated" routerLink="/newsfeed/" routerLinkActive="active"
             >Newsfeed <span class="sr-only">(current)</span></a
           >
         </li>
