@@ -53,7 +53,7 @@ describe('PostViewComponent', () => {
     userEmail: 'e@mail',
     pictureUrl: undefined,
     createdAt: new Date(2020, 12),
-    likedByUserIds: [],
+    likes: [],
     comments: [],
     liked: false,
   };
