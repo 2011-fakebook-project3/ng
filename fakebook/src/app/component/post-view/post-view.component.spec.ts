@@ -110,4 +110,15 @@ describe('PostViewComponent', () => {
     component.cancelEditPost();
     expect(component.isEditing).toBeFalse();
   });
+
+  it('should send the edited post endEditPost()', () => {
+    let newPostContent = "New post content";
+    spyOn(component.postService, 'update');
+
+    component.post = testPost;
+    component.startEditPost();
+    component.editContent = newPostContent;
+    component.endEditPost();
+    expect(component.postService.update).toHaveBeenCalled();
+  });
 });
