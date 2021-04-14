@@ -103,4 +103,11 @@ describe('PostViewComponent', () => {
     expect(component.isEditing).toBeTrue();
     expect(component.editContent).toEqual(testPost.content);
   });
+
+  it('should stop editing on cancelEditPost()', () => {
+    component.post = testPost;
+    component.startEditPost();
+    component.cancelEditPost();
+    expect(component.isEditing).toBeFalse();
+  });
 });
