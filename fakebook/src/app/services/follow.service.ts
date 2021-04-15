@@ -2,20 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from '../model/user';
-import { OktaAuthService } from '@okta/okta-angular';
-import { FnParam } from '@angular/compiler/src/output/output_ast';
+import { AuthService } from '../authentication/core/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FollowService {
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
   url = `${environment.baseUrls.posts}/api`;
 
   follow(follower: User, followee: User): any {
-    const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
-      Authorization: 'Bearer ' + accessToken,
+      Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
@@ -25,9 +23,8 @@ export class FollowService {
   }
 
   unfollow(follower: User, followee: User): any {
-    const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
-      Authorization: 'Bearer ' + accessToken,
+      Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };

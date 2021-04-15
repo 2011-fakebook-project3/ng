@@ -23,6 +23,7 @@ import { AccountModule }  from './authentication/account/account.module';
 import { ShellModule } from './authentication/shell/shell.module';
 import { TopSecretModule } from './authentication/top-secret/top-secret.module';
 import { SharedModule }   from './authentication/shared/shared.module';
+import { AuthGuard } from './authentication/core/authentication/auth.guard';
 
 @Pipe({
   name: 'timeAgo',
@@ -70,7 +71,7 @@ const config = {
     ShellModule,   
     SharedModule 
   ],
-  providers: [{ provide: OKTA_CONFIG, useValue: config }],
+  providers: [{ provide: OKTA_CONFIG, useValue: config }, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

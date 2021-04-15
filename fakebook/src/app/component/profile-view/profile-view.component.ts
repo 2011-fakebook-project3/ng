@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OktaAuthService } from '@okta/okta-angular';
+import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 import { Post } from 'src/app/model/post';
 import { User } from 'src/app/model/user';
 import { FollowService } from 'src/app/services/follow.service';
@@ -25,7 +25,7 @@ export class ProfileViewComponent implements OnInit {
   selfProfileCheck = false;
 
   constructor(
-    private oktaAuth: OktaAuthService,
+    private auth: AuthService,
     private profileService: ProfileService,
     private route: ActivatedRoute,
     private followService: FollowService,
@@ -34,10 +34,14 @@ export class ProfileViewComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     // Get Current User Email
-    const userClaims = await this.oktaAuth.getUser();
-    if (userClaims) {
-      this.currentUserEmail = userClaims.email ?? '';
-    }
+    // const userClaims = await this.oktaAuth.getUser();
+    // if (userClaims) {
+    //   this.currentUserEmail = userClaims.email ?? '';
+    // }
+    setTimeout(() => {
+      this.currentUserEmail = this.auth.email;
+    }, 1000);
+    
 
     this.getUser();
   }
@@ -73,7 +77,7 @@ export class ProfileViewComponent implements OnInit {
       this.profileService.GetProfileWithNullRoute().subscribe((user) => {
         this.user = user;
         this.postService
-          .getUserPosts(this.user.email)
+          .getUserPosts(this.auth.email)
           .subscribe((posts) => (this.posts = posts));
         this.selfProfileCheck = true;
       });

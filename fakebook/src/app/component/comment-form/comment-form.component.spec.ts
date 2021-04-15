@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
-import { OktaAuthService } from '@okta/okta-angular';
 import { of } from 'rxjs';
+import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 import { Comment } from 'src/app/model/comment';
-import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 
@@ -35,7 +34,7 @@ describe('CommentFormComponent', () => {
             paramMap: of(convertToParamMap({ userId: 1 })),
           },
         },
-        { provide: OktaAuthService, useValue: fakeAuthService },
+        { provide: AuthService, useValue: fakeAuthService },
         { provide: NotificationsService, useValue: fakeNotifService },
       ],
     }).compileComponents();
@@ -46,11 +45,11 @@ describe('CommentFormComponent', () => {
     fixture.detectChanges();
 
     const fakeCommentServ = TestBed.inject(CommentService);
-    const fakeAuthServiceTwo = TestBed.inject(OktaAuthService);
+    const fakeAuthServiceTwo = TestBed.inject(AuthService);
     component = new CommentFormComponent(
       TestBed.inject(CommentService),
       TestBed.inject(ActivatedRoute),
-      TestBed.inject(OktaAuthService),
+      TestBed.inject(AuthService),
       TestBed.inject(NotificationsService)
     );
   });

@@ -54,6 +54,10 @@ export class AuthService extends BaseService  {
     return this.user != null ? this.user.profile.name! : '';
   }
 
+  get email(): string {
+    return this.user !== null ? this.user.profile.email! : '';
+  }
+
   async signout() {
     await this.manager.signoutRedirect();
   }
@@ -61,7 +65,7 @@ export class AuthService extends BaseService  {
 
 export function getClientSettings(): UserManagerSettings {
   return {
-      authority: 'http://localhost:5000',
+      authority: 'https://localhost:5001',
       client_id: 'angular_spa',
       redirect_uri: 'http://localhost:4200/auth-callback',
       post_logout_redirect_uri: 'http://localhost:4200/',

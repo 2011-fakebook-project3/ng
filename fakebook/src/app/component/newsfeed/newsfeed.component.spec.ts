@@ -7,6 +7,7 @@ import { User } from '../../model/user';
 import { Post } from '../../model/post';
 import { NewsfeedService } from 'src/app/services/newsfeed.service';
 import { PostService } from 'src/app/services/post.service';
+import { ActivatedRoute } from '@angular/router';
 
 describe('NewsfeedComponent', () => {
   let component: NewsfeedComponent;

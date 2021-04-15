@@ -1,6 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OktaAuthService } from '@okta/okta-angular';
+import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 import { CommentFormData } from 'src/app/model/comment-form-data';
 import { CommentService } from 'src/app/services/comment.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
@@ -13,7 +13,6 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 export class CommentFormComponent implements OnInit {
   @Input() postId!: number;
   @Input() parentCommentId!: number;
-  email = '';
 
   comment: CommentFormData = {
     content: '',
@@ -26,19 +25,12 @@ export class CommentFormComponent implements OnInit {
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
-    private oktaAuth: OktaAuthService,
+    private auth: AuthService,
     private notificationsService: NotificationsService
   ) {}
 
   ngOnInit(): void {
     this.setPostID(this.postId);
-    this.getUserEmail();
-  }
-
-  getUserEmail(): void {
-    this.oktaAuth.getUser().then((user) => {
-      this.email = user.email ?? '';
-    });
   }
 
   setPostID(id: number): void {
@@ -52,12 +44,12 @@ export class CommentFormComponent implements OnInit {
         content: comment.content,
         postId: comment.postId,
         createdAt: undefined,
-        userEmail: this.email,
+        userEmail: this.auth.email,
       })
       .then((res) => this.notifyComment.emit(this.postId));
 
     this.notificationsService.createCommentNotification(
-      this.email,
+      this.auth.email,
       comment.postId
     );
 
