@@ -18,7 +18,8 @@
             post.createdAt | date: 'medium'
           }}</small>
         </div>
-        <div *ngIf="user.email === userEmail">
+        <div *ngIf="user.email === userEmail;then is_my_post"></div>
+        <ng-template #is_my_post>
           <div class="d-flex ml-auto">
             <button
               (click)="deletePost(post)"
@@ -27,7 +28,8 @@
               delete post
             </button>
           </div>
-          <div *ngIf="isEditing;else begin_edit">
+          <div *ngIf="isEditing;then continue_edit else begin_edit"></div>
+          <ng-template #continue_edit>
             <button
               (click)="cancelEditPost()"
               class="material-icons">close
@@ -36,14 +38,15 @@
               (click)="endEditPost()"
               class="material-icons">save
             </button>
-          </div>
+          </ng-template>
+        </ng-template>
           <ng-template #begin_edit>
             <button
               (click)="startEditPost()"
               class="material-icons">edit
             </button>
           </ng-template>
-        </div>
+        </ng-template>
       </div>
     </div>
     <img
