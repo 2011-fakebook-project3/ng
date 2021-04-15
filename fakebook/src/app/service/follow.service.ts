@@ -10,9 +10,9 @@ import { FnParam } from '@angular/compiler/src/output/output_ast';
 })
 export class FollowService {
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
-  url = `${environment.baseUrls.posts}/api`;
+  url = `${environment.baseUrls.profile}/api/profiles`;
 
-  follow(follower: User, followee: User): any {
+  follow(follower: string): any {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + accessToken,
@@ -20,11 +20,11 @@ export class FollowService {
       'Content-Type': 'application/json',
     };
     return this.http
-      .post(`${this.url}/follows/${follower.id}`, null, { headers })
+      .post(`${this.url}/follow/${follower}`, null, { headers })
       .toPromise();
   }
 
-  unfollow(follower: User, followee: User): any {
+  unfollow(follower: string): any {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + accessToken,
@@ -32,9 +32,8 @@ export class FollowService {
       'Content-Type': 'application/json',
     };
     return this.http
-      .delete(`${this.url}/follows/${follower.id}`, { headers })
-      .toPromise()
-      .then((res) => console.log(JSON.stringify(res)));
+      .post(`${this.url}/unfollow/${follower}`, null, { headers })
+      .toPromise();
   }
 
   getFollowStatus(follower: User, followee: User): boolean {
