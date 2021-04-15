@@ -60,10 +60,13 @@ describe('PostViewComponent', () => {
 
   const fakeHTTPClient = {};
   const fakeOktaAuth = { getAccessToken(): void {} };
+  class Subscribable {
+    subscribe() :void {}
+  }
   beforeEach(async () => {
     const mockPostService = {
       delete(id: number): void {},
-      update(post : Post): void {},
+      update(post : Post): Subscribable { return new Subscribable(); },
     };
 
     await TestBed.configureTestingModule({
@@ -114,13 +117,24 @@ describe('PostViewComponent', () => {
 
   it('should send the edited post on endEditPost()', () => {
     let newPostContent = "New post content";
-    spyOn(component.postService, 'update');
+    component.postService.update = jasmine.createSpy().and.returnValue(new Subscribable());
 
     component.post = testPost;
     component.startEditPost();
     component.editContent = newPostContent;
     component.endEditPost();
     expect(component.postService.update).toHaveBeenCalledWith(component.post);
+  });
+
+  it('should set the post content on endEditPost()', () => {
+    let newPostContent = "New post content";
+    component.postService.update = jasmine.createSpy().and.returnValue(new Subscribable());
+    
+    component.post = testPost;
+    component.startEditPost();
+    component.editContent = newPostContent;
+    component.endEditPost();
+    expect(component.post.content).toEqual(newPostContent);
   });
 
   it('should stop editing on endEditPost()', () => {
