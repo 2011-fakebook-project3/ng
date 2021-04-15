@@ -1,0 +1,8 @@
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.notification:hover {
+  background-color: lightgrey;
+}
