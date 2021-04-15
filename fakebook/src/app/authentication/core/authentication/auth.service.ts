@@ -51,11 +51,17 @@ export class AuthService extends BaseService  {
   }
 
   get name(): string {
-    return this.user != null ? this.user.profile.name! : '';
+    if (this.user !== null && this.user.profile.name !== undefined) {
+      return this.user.profile.name;
+    }
+    return '';
   }
 
   get email(): string {
-    return this.user !== null ? this.user.profile.email! : '';
+    if (this.user !== null && this.user.profile.email !== undefined) {
+      return this.user.profile.email;
+    }
+    return '';
   }
 
   async signout() {

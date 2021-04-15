@@ -14,16 +14,18 @@ export class LikeViewComponent {
   constructor(private likeService: LikeService) {}
 
   submit(): void {
-    // if the post is aready liked we should unlike it
-    if (this.liked) {
-      this.likeService.unlike(this.postId);
-      this.liked = !this.liked;
-      this.count!--;
-    } else {
-      // like the post
-      this.likeService.like(this.postId);
-      this.liked = !this.liked;
-      this.count!++;
+    if ((this.count !== undefined) && this.postId) {
+      // if the post is aready liked we should unlike it
+      if (this.liked) {
+        this.likeService.unlike(this.postId);
+        this.liked = !this.liked;
+        this.count--;
+      } else {
+        // like the post
+        this.likeService.like(this.postId);
+        this.liked = !this.liked;
+        this.count++;
+      }
     }
   }
 }

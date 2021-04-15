@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../core/authentication/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../../core/authentication/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit { 
+export class LoginComponent { 
 
   constructor(private authService: AuthService, private spinner: NgxSpinnerService) { }    
   
@@ -16,8 +16,5 @@ export class LoginComponent implements OnInit {
     login() {     
       this.spinner.show();
       this.authService.login();
-    }   
-
-    ngOnInit() {
     }
 }
