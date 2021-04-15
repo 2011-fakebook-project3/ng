@@ -29,17 +29,17 @@
           </div>
           <div *ngIf="isEditing;else begin_edit">
             <button
-              (click)="cancelEditPost(post)"
+              (click)="cancelEditPost()"
               class="material-icons">close
             </button>
             <button
-              (click)="stopEditPost(post)"
+              (click)="endEditPost()"
               class="material-icons">save
             </button>
           </div>
           <ng-template #begin_edit>
             <button
-              (click)="startEditPost(post)"
+              (click)="startEditPost()"
               class="material-icons">edit
             </button>
           </ng-template>
@@ -53,8 +53,12 @@
     />
     <div class="p-2">
       <div *ngIf="isEditing;then edit_content else show_content"></div>
-      <p class="ml-5" #show_content>{{ post.content }}</p>
-      <textarea [(ngModel)]="editContent" #edit_content></textarea>
+      <ng-template #show_content>
+        <p class="ml-5">{{ post.content }}</p>
+      </ng-template>
+      <ng-template #edit_content>
+        <textarea [(ngModel)]="editContent"></textarea>
+      </ng-template>
       <hr />
       <div class="d-flex justify-content-between align-items-center">
         <app-like-view
