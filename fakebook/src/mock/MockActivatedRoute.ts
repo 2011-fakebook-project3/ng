@@ -13,4 +13,4 @@ export class MockActivatedRoute {
         this._testParams = newParams;
         this.paramsSubject.next(newParams);
     }
-};
+}
