@@ -63,10 +63,13 @@ export class PostViewComponent implements OnInit {
   endEditPost() : void
   {
     if(!this.post)
+    {
+      alert("Cannot edit a null post!");
       return;
+    }
 
     this.post.content = this.editContent;
-    this.postService.update(this.post);
+    this.postService.update(this.post).subscribe();
     this.isEditing = false;
   }
 
