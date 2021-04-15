@@ -81,7 +81,7 @@ export class ProfileViewComponent implements OnInit {
   }
 
   followUser(): any {
-    if (this.user !== undefined && this.selfUser !== undefined) {
+    if (this.user !== undefined) {
       if (this.followStatus) {
         this.followService.unfollow(this.user.email);
         this.followStatus = false;
