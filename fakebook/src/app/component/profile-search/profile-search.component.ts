@@ -27,10 +27,8 @@ export class ProfileSearchComponent implements OnInit {
   }
 
   search() {
-    debugger;
-    this.profileService.GetProfilesByEmails(this.searchProfile.value).subscribe(
+    this.profileService.GetProfileByEmail(this.searchProfile.value).subscribe(
       (response) => {
-        // this.searchProfile.setValue("");
       });
   }
 }

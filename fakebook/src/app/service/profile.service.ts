@@ -27,20 +27,23 @@ import { User } from 'src/app/model/user';
 export class ProfileService {
   profileList: User[] = [];
   baseUrl = `${environment.baseUrls.profile}/api/profiles/`;
-  headers: any;
   token;
+  headers: any;
   constructor(public http: HttpClient, private oktaAuth: OktaAuthService) {
     this.token = this.oktaAuth.getAccessToken();
+    this.headers = {
+      Authorization: 'Bearer ' + this.token
+    };
   }
 
   public GetProfileByEmail(email: string): Observable<User> {
-    // debugger;
-    // const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + this.token
     };
     
-    return this.http.get<User>(`${this.baseUrl}${email}`, {params: new HttpParams({fromString: email} as HttpParamsOptions), headers: headers});
+    return this.http.get<User>(`${this.baseUrl}`, {params: new HttpParams({fromObject: {
+      'email': email
+    }} as HttpParamsOptions), headers: this.headers});
   }
 
   public GetProfileWithNullRoute(): Observable<User> {
