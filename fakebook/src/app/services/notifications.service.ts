@@ -20,7 +20,7 @@ export class NotificationsService {
   >();
   private hubConnection: HubConnection;
   public notificationsObs = this.notifications.asObservable();
-  private token = this.auth.authorizationHeaderValue
+  private token = this.auth.authorizationHeaderValue.split("Bearer")[1].trimLeft();
 
   constructor(
     private auth: AuthService,

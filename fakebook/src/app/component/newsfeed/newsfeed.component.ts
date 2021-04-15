@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { Post } from '../../model/post';
 import { NewsfeedService } from '../../services/newsfeed.service';
@@ -21,7 +21,6 @@ export class NewsfeedComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
-      console.log(params);
       if(params['id'] != undefined){   
         this.postId = +params['id'];
           if(this.postId != undefined)

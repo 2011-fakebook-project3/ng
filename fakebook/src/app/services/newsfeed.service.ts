@@ -44,7 +44,7 @@ export class NewsfeedService {
       Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
-    return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/`, {
+    return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/` + this.auth.email, {
       headers,
     });
   }

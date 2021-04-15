@@ -43,7 +43,7 @@ export class ProfileService {
       Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
-    return this.http.get<User>(this.baseUrl, { headers });
+    return this.http.get<User>(this.baseUrl + this.auth.email, { headers });
   }
   public GetProfiles(emails: string[]): Observable<User> /* profile */ {
     // make empty collection of profiles

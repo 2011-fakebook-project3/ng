@@ -23,6 +23,7 @@ import { AccountModule }  from './authentication/account/account.module';
 import { ShellModule } from './authentication/shell/shell.module';
 import { SharedModule }   from './authentication/shared/shared.module';
 import { AuthGuard } from './authentication/core/authentication/auth.guard';
+import { AuthCallbackComponent } from './authentication/auth-callback/auth-callback.component';
 
 @Pipe({
   name: 'timeAgo',
@@ -55,6 +56,7 @@ const config = {
     CommentFormComponent,
     LikeViewComponent,
     PostFormComponent,
+    AuthCallbackComponent
   ],
   imports: [
     BrowserModule,
