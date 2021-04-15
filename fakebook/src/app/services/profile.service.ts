@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { OktaAuthService } from '@okta/okta-angular';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
-import { Post } from '../model/post';
 
 @Injectable({
   providedIn: 'root',

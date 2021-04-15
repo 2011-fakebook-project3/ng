@@ -9,6 +9,7 @@ import { ProfileViewComponent } from './component/profile-view/profile-view.comp
 const routes: Routes = [
   { path: '', component: MainViewComponent },
   { path: 'newsfeed', component: NewsfeedComponent },
+  { path: 'newsfeed/:id', component: NewsfeedComponent },
   { path: 'login/callback', component: OktaCallbackComponent },
   { path: 'logout', component: OktaCallbackComponent },
   { path: 'profile/:email', component: ProfileViewComponent },
