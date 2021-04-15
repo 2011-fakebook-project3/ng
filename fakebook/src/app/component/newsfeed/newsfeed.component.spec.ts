@@ -1,16 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NEVER, Observable, of, from } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { NewsfeedComponent } from './newsfeed.component';
 import { User } from '../../model/user';
 import { Post } from '../../model/post';
 import { NewsfeedService } from 'src/app/services/newsfeed.service';
 import { PostService } from 'src/app/services/post.service';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MockActivatedRoute } from '../../../mock/MockActivatedRoute';
-import { Mock } from 'protractor/built/driverProviders';
-
 describe('NewsfeedComponent', () => {
   let component: NewsfeedComponent;
   let fixture: ComponentFixture<NewsfeedComponent>;
