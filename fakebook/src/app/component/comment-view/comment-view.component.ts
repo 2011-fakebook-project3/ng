@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Comment } from 'src/app/model/comment';
-import { CommentService } from 'src/app/service/comment.service';
-import { ProfileService } from 'src/app/service/profile.service';
+import { CommentService } from 'src/app/services/comment.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-comment-view',

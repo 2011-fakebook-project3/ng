@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommentService } from 'src/app/service/comment.service';
-import { ProfileService } from 'src/app/service/profile.service';
+import { CommentService } from 'src/app/services/comment.service';
+import { ProfileService } from 'src/app/services/profile.service';
 import { CommentViewComponent } from './comment-view.component';
 
 describe('CommentViewComponent', () => {
