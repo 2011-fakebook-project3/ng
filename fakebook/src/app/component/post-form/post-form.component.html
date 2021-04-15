@@ -13,7 +13,7 @@
     ></textarea>
     
     <!-- implementation of posting images hidden until functioning -->
-     <div *ngIf="imageSource"> 
+    <div *ngIf="imageSource"> 
       <input
         #fileInput
         type="file"
@@ -22,7 +22,7 @@
         id="fileToUpload"
         (change)="fileSelect($event)"
       />
-     <img [src]="imageSource" alt="noImage" />
+      <img [src]="imageSource" alt="noImage" />
     </div>
       <input
         type="submit"
