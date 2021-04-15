@@ -18,14 +18,34 @@
             post.createdAt | date: 'medium'
           }}</small>
         </div>
-        <div *ngIf="user.email === userEmail" class="d-flex ml-auto">
-          <button
-            (click)="deletePost(post)"
-            class="btn btn-outline-danger btn-xs"
-          >
-            delete post
-          </button>
-        </div>
+        <div *ngIf="user.email === userEmail;then is_my_post"></div>
+        <ng-template #is_my_post>
+          <div class="d-flex ml-auto">
+            <div *ngIf="isEditing;then continue_edit else begin_edit"></div>
+          <ng-template #continue_edit>
+            <button
+              (click)="cancelEditPost()"
+              class="btn material-icons">close
+            </button>
+            <button
+              (click)="endEditPost()"
+              class="btn material-icons">save
+            </button>
+          </ng-template>
+          <ng-template #begin_edit>
+            <button
+              (click)="startEditPost()"
+              class="btn material-icons">edit
+            </button>
+          </ng-template>
+            <button
+              (click)="deletePost(post)"
+              class="btn btn-outline-danger btn-xs"
+            >
+              delete post
+            </button>
+          </div>
+        </ng-template>
       </div>
     </div>
     <img
@@ -34,7 +54,13 @@
       class="img-fluid"
     />
     <div class="p-2">
-      <p class="ml-5">{{ post.content }}</p>
+      <div *ngIf="isEditing;then edit_content else show_content"></div>
+      <ng-template #show_content>
+        <p class="ml-5">{{ post.content }}</p>
+      </ng-template>
+      <ng-template #edit_content>
+        <textarea class="form-control" [(ngModel)]="editContent"></textarea>
+      </ng-template>
       <hr />
       <div class="d-flex justify-content-between align-items-center">
         <app-like-view
