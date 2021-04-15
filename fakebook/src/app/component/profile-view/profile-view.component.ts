@@ -32,24 +32,29 @@ export class ProfileViewComponent implements OnInit {
     private postService: PostService
   ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     // get Current User Email
-    const userClaims = await this.oktaAuth.getUser();
-    if (userClaims) {
-      this.currentUserEmail = userClaims.email ?? '';
-    }
+    this.oktaAuth.getUser().then(
+      user => this.currentUserEmail = user?.email ?? ''
+    ).finally(() =>
+      this.getUser()
+    )
+    // const userClaims = 
+    // if (userClaims) {
+    //   this.currentUserEmail = ;
+    // }
 
-    this.getUser();
+    // this.getUser();
   }
 
-  async getUser(): Promise<void> {
+   getUser() {
     if (this.route.snapshot.paramMap.get('email') != null) {
       const email = this.route.snapshot.paramMap.get('email');
       if (email) {
         // Set user
         this.profileService
           .GetProfileByEmail(email)
-          .subscribe((user) => (this.user = user));
+          .subscribe((user) => (this.user = user ? user : undefined));
         // Set posts
         this.postService
           .getUserPosts(email)
