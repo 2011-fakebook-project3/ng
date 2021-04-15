@@ -1,8 +1,13 @@
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -52,17 +57,24 @@ const config = {
     LikeViewComponent,
     PostFormComponent,
     ProfileSearchComponent,
-    ProfileCardComponent,
+    ProfileCardComponent    
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     OktaAuthModule,
     CommonModule,
     FormsModule,
+    MatSelectModule,
+    MatIconModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+export class MaterialModule {}

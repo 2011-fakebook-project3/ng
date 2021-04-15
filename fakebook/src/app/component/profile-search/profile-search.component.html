@@ -1,3 +1,23 @@
-<form style="padding: 5px 5px; border-radius: 5px">
-    <input #searchBox id="profile-search-box" placeholder="Search">
-</form>
+<!-- <form style="padding: 5px 5px; border-radius: 5px">
+  <input #searchBox id="profile-search-box" placeholder="Search">
+</form> -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<mat-form-field>
+  <input matInput
+    matPrefix
+    id="profile-search-box"
+    class="search-input"
+    type="search"
+    [formControl]="searchProfile"
+  >
+  <mat-icon
+    class="search-icon" (click)="search()">search</mat-icon>
+</mat-form-field>
+          
+<div class="row">
+  <div class="col-sm-6"  *ngFor="let p of profileList">
+    <div class="card">
+      <app-profile-card [user]="p"></app-profile-card>
+    </div>
+  </div>
+</div>
