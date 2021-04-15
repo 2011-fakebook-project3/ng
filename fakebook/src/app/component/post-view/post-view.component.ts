@@ -20,8 +20,8 @@ export class PostViewComponent implements OnInit {
 
   user: User | null = null;
   comments: Comment[] | null = null;
-  isEditing : boolean = false;
-  editContent: string  = "";
+  isEditing  = false;
+  editContent  = "";
 
   constructor(
     private route: ActivatedRoute,
