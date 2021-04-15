@@ -122,4 +122,11 @@ describe('PostViewComponent', () => {
     component.endEditPost();
     expect(component.postService.update).toHaveBeenCalledWith(component.post);
   });
+
+  it('should stop editing on endEditPost()', () => {
+    component.post = testPost;
+    component.startEditPost();
+    component.endEditPost();
+    expect(component.isEditing).toBeFalse();
+  });
 });
