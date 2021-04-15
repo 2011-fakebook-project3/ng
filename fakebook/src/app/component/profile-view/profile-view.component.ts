@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { OktaAuthService } from '@okta/okta-angular';
 import { Post } from 'src/app/model/post';
 import { User } from 'src/app/model/user';
-import { FollowService } from 'src/app/service/follow.service';
-import { PostService } from 'src/app/service/post.service';
-import { ProfileService } from 'src/app/service/profile.service';
+import { FollowService } from 'src/app/services/follow.service';
+import { PostService } from 'src/app/services/post.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-profile-view',

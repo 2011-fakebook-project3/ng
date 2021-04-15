@@ -15,7 +15,7 @@ import { Comment } from '../model/comment';
 import { User } from '../model/user';
 import { Post } from '../model/post';
 import { NewsfeedService } from './newsfeed.service';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from './auth.service';
 import { of } from 'rxjs';
 
 describe('NewsfeedService', () => {
