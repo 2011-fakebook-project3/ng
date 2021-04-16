@@ -24,6 +24,7 @@ import { ProfileViewComponent } from './component/profile-view/profile-view.comp
 import { PostFormComponent } from './component/post-form/post-form.component';
 import { ProfileSearchComponent } from './component/profile-search/profile-search.component';
 import { ProfileCardComponent } from './component/profile-card/profile-card.component';
+import { SearchResultsComponent } from './component/search-results/search-results.component';
 
 @Pipe({
   name: 'timeAgo',
@@ -57,7 +58,8 @@ const config = {
     LikeViewComponent,
     PostFormComponent,
     ProfileSearchComponent,
-    ProfileCardComponent    
+    ProfileCardComponent,
+    SearchResultsComponent    
   ],
   imports: [
     BrowserModule,
