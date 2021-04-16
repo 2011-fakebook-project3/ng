@@ -41,7 +41,7 @@ export class NewsfeedComponent implements OnInit {
         this.user = gotUser;
         if(loadUserFeed)
          {
-          this.newsfeedService.getPosts(gotUser?.followers!)
+          this.newsfeedService.getPosts(gotUser?.followers)
             .subscribe((gotPosts) => (this.posts = gotPosts));
         }
       });
