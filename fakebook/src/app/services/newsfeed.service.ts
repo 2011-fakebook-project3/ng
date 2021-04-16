@@ -13,7 +13,7 @@ export class NewsfeedService {
 
   getPosts(followers : string[]): Observable<Post[]> {
     return this.http.post<Post[]>(
-      `${environment.baseUrls.posts}/api/posts/newsfeed`, followers
+      `${environment.baseUrls.posts}/api/posts/newsfeed`, { emails: followers }
     );
   }
 
