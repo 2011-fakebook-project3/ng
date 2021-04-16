@@ -1,5 +1,12 @@
 <form style="padding: 5px 5px; border-radius: 5px">
-    
-    <input #searchBox type="text" id="profile-search-box" placeholder="Search">
+    <input #autoCompleteInput type="text" id="profile-search-box" placeholder="Search" [formControl]="searchProfile" autoComplete="auto">
+    <div *ngFor="let option of this.searchDataService.searchOption" (removed)="removeOption(option)">
+        <span>{{option.firstName}}</span>
+    </div>
+    <div #auto displayWith="displayFn">
+        <option *ngFor="let option of autoCompleteList" value="option" (onSelectionChange)="filterProfileList($event)">
+            {{option.firstName}}
+        </option>
+    </div>
 
 </form>

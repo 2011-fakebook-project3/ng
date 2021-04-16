@@ -18,10 +18,11 @@ export class ProfileSearchComponent implements OnInit {
   profileList: User[] = [];
   autoCompleteList: any;
 
-  constructor(private readonly profileService: ProfileService, private searchDataService: ProfileSearchDataService) { }
+
+  constructor(private readonly profileService: ProfileService, public searchDataService: ProfileSearchDataService) { }
 
   ngOnInit() {
-    this.searchDataService.getProfiles().subscribe(profiles => {
+    this.searchDataService.getProfile("testaccount@gmail.com").subscribe(profiles => {
       this.profileList = profiles;
     }); 
     

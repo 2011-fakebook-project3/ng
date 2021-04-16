@@ -23,10 +23,6 @@ export class NavbarViewComponent implements OnInit {
     this.oktaAuth.subscribeAuthStateChange((authState: boolean) => {
       this.isAuthenticated = authState;
     });
-    this.searchDataService.getProfiles().subscribe(profiles => {
-      this.profile = profiles;
-      this.searchDataService.searchData = profiles;
-    });
   }
 
   login(): void {

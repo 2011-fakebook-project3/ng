@@ -29,9 +29,7 @@
           <app-notifications-view></app-notifications-view>
         </li>
         <li *ngIf="isAuthenticated">
-          <div>
-            <app-profile-search (onSelectedOption)="onSelectedFilter($event)"></app-profile-search>
-          </div>
+          <app-profile-search (onSelectedOption)="onSelectedFilter($event)"></app-profile-search>  
           <div *ngFor="let profiles of profile" class="group">
             <p>{{profiles.firstName}}</p>
           </div>

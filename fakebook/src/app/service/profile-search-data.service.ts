@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user';
 import { environment } from 'src/environments/environment';
 import { OktaAuthService } from '@okta/okta-angular';
+import { userInfo } from 'node:os';
+import {ProfileService} from '../service/profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,16 @@ export class ProfileSearchDataService {
   public searchData!: User[];
   profileUrl = `${environment.baseUrls.profile}/api/profiles/`; 
 
-  constructor(private http: HttpClient, oktaAuth: OktaAuthService) { }
+  constructor(private http: HttpClient, private oktaAuth: OktaAuthService, private profileService: ProfileService) { }
   
-  getProfiles(): Observable<User[]>{
-    return this.http.get<User[]>(this.profileUrl);
+  getProfile(email: string): Observable<User[]>{
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    
+    return this.http.get<User[]>(this.profileUrl + email, { headers });
     
   }
 

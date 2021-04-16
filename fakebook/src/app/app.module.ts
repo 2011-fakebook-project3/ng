@@ -2,7 +2,7 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -61,6 +61,7 @@ const config = {
     OktaAuthModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [{ provide: OKTA_CONFIG, useValue: config }],
   bootstrap: [AppComponent],
