@@ -17,14 +17,14 @@ export class NewsfeedService {
     Accept: 'application/json',
   };
 
-  getPosts(): Observable<Post[]> {
+  getPosts(followers : User[]): Observable<Post[]> {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
       Authorization: 'Bearer ' + accessToken,
       Accept: 'application/json',
     };
-    return this.http.get<Post[]>(
-      `${environment.baseUrls.posts}/api/posts/newsfeed`,
+    return this.http.post<Post[]>(
+      `${environment.baseUrls.posts}/api/posts/newsfeed`, followers,
       { headers }
     );
   }
