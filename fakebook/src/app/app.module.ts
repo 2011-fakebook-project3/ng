@@ -18,6 +18,13 @@ import { MainViewComponent } from './component/main-view/main-view.component';
 import { ProfileViewComponent } from './component/profile-view/profile-view.component';
 import { PostFormComponent } from './component/post-form/post-form.component';
 
+import { CoreModule } from './authentication/core/core.module';
+import { AccountModule }  from './authentication/account/account.module';
+import { ShellModule } from './authentication/shell/shell.module';
+import { SharedModule }   from './authentication/shared/shared.module';
+import { AuthGuard } from './authentication/core/authentication/auth.guard';
+import { AuthCallbackComponent } from './authentication/auth-callback/auth-callback.component';
+
 @Pipe({
   name: 'timeAgo',
   pure: false,
@@ -49,6 +56,7 @@ const config = {
     CommentFormComponent,
     LikeViewComponent,
     PostFormComponent,
+    AuthCallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -57,8 +65,13 @@ const config = {
     OktaAuthModule,
     CommonModule,
     FormsModule,
+    CoreModule,
+    AccountModule,
+    AppRoutingModule,
+    ShellModule,   
+    SharedModule 
   ],
-  providers: [{ provide: OKTA_CONFIG, useValue: config }],
+  providers: [{ provide: OKTA_CONFIG, useValue: config }, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

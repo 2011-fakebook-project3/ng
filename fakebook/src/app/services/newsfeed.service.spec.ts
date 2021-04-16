@@ -3,20 +3,14 @@ import { environment } from '../../environments/environment';
 import { OktaAuthService } from '@okta/okta-angular';
 import {
   HttpClient,
-  HttpErrorResponse,
-  HttpClientModule,
 } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
 
-import { Comment } from '../model/comment';
-import { User } from '../model/user';
-import { Post } from '../model/post';
 import { NewsfeedService } from './newsfeed.service';
-import { AuthService } from './auth.service';
-import { of } from 'rxjs';
+import { AuthService } from '../authentication/core/authentication/auth.service';
 
 describe('NewsfeedService', () => {
   let service: NewsfeedService;
@@ -25,10 +19,10 @@ describe('NewsfeedService', () => {
   const url = `${environment.baseUrls.posts}`;
 
   beforeEach(() => {
-    const mockOktaAuthService = {
-      getAccessToken(): string {
-        return '0';
-      },
+    const mockAuthService = {
+      get authorizationHeaderValue(): string {
+        return "Bearer 0";
+      }
     };
 
     const mockHttpClient = {};
@@ -37,7 +31,7 @@ describe('NewsfeedService', () => {
       imports: [HttpClientTestingModule],
       providers: [
         { provide: HttpClient, useValue: mockHttpClient },
-        { provide: OktaAuthService, useValue: mockOktaAuthService },
+        { provide: AuthService, useValue: mockAuthService },
       ],
     }).compileComponents();
 
@@ -47,14 +41,14 @@ describe('NewsfeedService', () => {
 
     service = new NewsfeedService(
       httpClientSpy as any,
-      TestBed.inject(OktaAuthService)
+      TestBed.inject(AuthService)
     );
   });
 
   it('should be created', () => {
     service = new NewsfeedService(
       TestBed.inject(HttpClient),
-      TestBed.inject(OktaAuthService)
+      TestBed.inject(AuthService)
     );
     expect(service).toBeTruthy();
   });

@@ -1,21 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OktaAuthService } from '@okta/okta-angular';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Post } from '../model/post';
 import { NewPost } from '../model/newpost';
+import { AuthService } from '../authentication/core/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
   url = `${environment.baseUrls.posts}/api/posts`;
 
   headers = {
     headers: {
-      Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
+      Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     },
   };

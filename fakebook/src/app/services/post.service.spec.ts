@@ -1,17 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
 
-import { User } from 'src/app/model/user';
-import { Comment } from 'src/app/model/comment';
 import { PostService } from './post.service';
-import { Post } from '../model/post';
-import { of } from 'rxjs';
-import { OktaAuthService } from '@okta/okta-angular';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../authentication/core/authentication/auth.service';
 
 describe('PostService', () => {
   let service: PostService;
@@ -24,17 +20,17 @@ describe('PostService', () => {
   const url = `https://fakebook.revaturelabs.com/api/Posts`; // test base url
 
   beforeEach(() => {
-    const mockOktaAuthService = {
-      getAccessToken(): string {
-        return '0';
-      },
+    const mockAuthService = {
+      get authorizationHeaderValue(): string {
+        return "Bearer 0";
+      }
     };
     const mockHttpClient = {};
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
         { provide: HttpClient, useValue: mockHttpClient },
-        { provide: OktaAuthService, useValue: mockOktaAuthService },
+        { provide: AuthService, useValue: mockAuthService },
       ],
     }).compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -47,14 +43,14 @@ describe('PostService', () => {
 
     service = new PostService(
       httpClientSpy as any,
-      TestBed.inject(OktaAuthService)
+      TestBed.inject(AuthService)
     );
   });
 
   it('should be created', () => {
     service = new PostService(
       TestBed.inject(HttpClient),
-      TestBed.inject(OktaAuthService)
+      TestBed.inject(AuthService)
     );
     expect(service).toBeTruthy();
   });

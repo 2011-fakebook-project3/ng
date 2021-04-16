@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { OktaAuthService } from '@okta/okta-angular';
 import { Post } from '../model/post';
 import { User } from '../model/user';
 import { environment } from '../../environments/environment';
+import { AuthService } from '../authentication/core/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NewsfeedService {
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   headers = {
-    Authorization: 'Bearer ' + this.oktaAuth.getAccessToken(),
+    Authorization: this.auth.authorizationHeaderValue,
     Accept: 'application/json',
   };
 
-  getPosts(): Observable<Post[]> {
-    const accessToken = this.oktaAuth.getAccessToken();
+  getPosts(postId?: number): Observable<Post[]> {
     const headers = {
-      Authorization: 'Bearer ' + accessToken,
+      Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
     return this.http.get<Post[]>(
@@ -30,9 +29,8 @@ export class NewsfeedService {
   }
 
   getPostById(postId: number): Observable<Post> {
-    const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
-      Authorization: 'Bearer ' + accessToken,
+      Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
     return this.http.get<Post>(
@@ -42,12 +40,11 @@ export class NewsfeedService {
   }
 
   getUser(): Observable<User> {
-    const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
-      Authorization: 'Bearer ' + accessToken,
+      Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
-    return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/`, {
+    return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/` + this.auth.email, {
       headers,
     });
   }

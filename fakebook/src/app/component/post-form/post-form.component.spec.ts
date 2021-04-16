@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { OktaAuthService } from '@okta/okta-angular';
 import { Observable, of } from 'rxjs';
+import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
+import { ConfigService } from 'src/app/authentication/shared/config.service';
 import { User } from 'src/app/model/user';
 import { PostService } from 'src/app/services/post.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -35,14 +36,17 @@ describe('PostFormComponent', () => {
       },
     };
     const newPostObject: NewPost = { content: '', userId: '', pictureUrl: '' };
-    const FakeOktaAuthService = {
-      create(post: NewPost): Promise<NewPost> {
-        return Promise.resolve(newPostObject);
-      },
-      getAccessToken(): string {
-        return '1';
-      },
+    const mockAuthService = {
+      get authorizationHeaderValue(): string {
+        return "Bearer 1";
+      }
     };
+    const mockConfigService = {
+      get authApiURI() {
+        return 'https://localhost:5001/api';
+      } 
+    }
+
     await TestBed.configureTestingModule({
       declarations: [PostFormComponent],
       providers: [
@@ -50,7 +54,8 @@ describe('PostFormComponent', () => {
         { provide: PostService, useValue: mockPostService },
         { provide: ProfileService, useValue: mockProfileService },
         { provide: HttpClient, useValue: {} },
-        { provide: OktaAuthService, useValue: FakeOktaAuthService },
+        { provide: AuthService, useValue: mockAuthService },
+        { provide: ConfigService, useValue: mockConfigService }
       ],
     }).compileComponents();
   });
