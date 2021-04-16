@@ -1,8 +1,8 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommentFormData } from 'src/app/model/comment-form-data';
-import { CommentService } from 'src/app/service/comment.service';
-import { NotificationsService } from 'src/app/service/notifications.service';
+import { CommentService } from 'src/app/services/comment.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-comment-form',

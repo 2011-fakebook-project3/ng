@@ -17,6 +17,12 @@ export class NewsfeedService {
     );
   }
 
+  getPostById(postId: number): Observable<Post> {
+    return this.http.get<Post>(
+      `${environment.baseUrls.posts}/api/posts/${postId}`
+    );
+  }
+
   getUser(): Observable<User> {
     return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/`);
   }

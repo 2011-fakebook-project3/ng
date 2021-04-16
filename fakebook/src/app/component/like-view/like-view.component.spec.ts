@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LikeService } from 'src/app/service/like.service';
+import { LikeService } from 'src/app/services/like.service';
 import { LikeViewComponent } from './like-view.component';
 import { NewPost } from '../../model/newpost';
 

@@ -9,7 +9,8 @@ import { Post } from '../model/post';
   providedIn: 'root',
 })
 export class CommentService {
-  url = `${environment.baseUrls.posts}/api/comments`;
+  private readonly url = `${environment.baseUrls.posts}/api/comments`;
+  private readonly acceptHeader = 'application/json';
 
   constructor(private http: HttpClient) {}
 
