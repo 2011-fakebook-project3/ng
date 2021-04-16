@@ -25,19 +25,15 @@ export class NotificationsViewComponent implements OnInit {
       if (this.notificationsView === false) {
         this.unreadNotifications = true;
       }
-      console.log(this.notifications);
+      //console.log(this.notifications);
     });
   }
 
   toggleNotifications(): void {
     this.notificationsView = !this.notificationsView;
-    if (this.notificationsView === true) {
-      this.unreadNotifications = false;
-      this.updateNotifications();
-    }
   }
 
-  updateNotifications(): void {
+  markAllAsRead(): void {
     const ids: string[] = [];
 
     this.notifications.forEach((element) => {
@@ -45,5 +41,7 @@ export class NotificationsViewComponent implements OnInit {
     });
 
     this.notifService.setRead(ids);
+    this.unreadNotifications = false;
+    this.notifications = [];
   }
 }
