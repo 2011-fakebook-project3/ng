@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LikeService } from 'src/app/service/like.service';
 import { LikeViewComponent } from './like-view.component';
-import { OktaAuthService } from '@okta/okta-angular';
 import { NewPost } from '../../model/newpost';
 
 describe('LikeViewComponent', () => {
@@ -22,10 +21,7 @@ describe('LikeViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LikeViewComponent],
-      providers: [
-        { provide: LikeService, useValue: FakeLikeService },
-        { provide: OktaAuthService, useValue: FakeOktaAuthService },
-      ],
+      providers: [{ provide: LikeService, useValue: FakeLikeService }],
     }).compileComponents();
   });
 

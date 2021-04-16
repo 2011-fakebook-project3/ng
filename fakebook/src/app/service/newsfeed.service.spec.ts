@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { environment } from '../../environments/environment';
-import { OktaAuthService } from '@okta/okta-angular';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -35,32 +34,18 @@ describe('NewsfeedService', () => {
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        { provide: HttpClient, useValue: mockHttpClient },
-        { provide: OktaAuthService, useValue: mockOktaAuthService },
-      ],
+      providers: [{ provide: HttpClient, useValue: mockHttpClient }],
     }).compileComponents();
 
     httpTestingController = TestBed.inject(HttpTestingController);
 
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
-    service = new NewsfeedService(
-      httpClientSpy as any,
-      TestBed.inject(OktaAuthService)
-    );
+    service = new NewsfeedService(httpClientSpy as any);
   });
 
   it('should be created', () => {
-    service = new NewsfeedService(
-      TestBed.inject(HttpClient),
-      TestBed.inject(OktaAuthService)
-    );
+    service = new NewsfeedService(TestBed.inject(HttpClient));
     expect(service).toBeTruthy();
-  });
-
-  it('should have correct access token and headers', () => {
-    expect(service.headers.Authorization).toBe('Bearer 0');
-    expect(service.headers.Accept).toBe('application/json');
   });
 });

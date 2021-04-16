@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { OktaAuthService } from '@okta/okta-angular';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,34 +9,18 @@ import { environment } from 'src/environments/environment';
 export class LikeService {
   url = `${environment.baseUrls.posts}/api/`;
 
-  constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
+  constructor(private http: HttpClient) {}
 
   like(postId: number): any {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      }),
-    };
-
     return this.http
-      .post(`${this.url}Posts/${postId}/like/`, null, httpOptions)
+      .post(`${this.url}Posts/${postId}/like/`, null)
       .toPromise()
       .then((res) => console.log(JSON.stringify(res)));
   }
 
   unlike(postId: number): any {
-    const accessToken = this.oktaAuth.getAccessToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      }),
-    };
-
     return this.http
-      .post(`${this.url}Posts/${postId}/unlike/`, null, httpOptions)
+      .post(`${this.url}Posts/${postId}/unlike/`, null)
       .toPromise();
   }
 
