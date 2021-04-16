@@ -2,7 +2,6 @@ import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
-// import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-view',

@@ -28,12 +28,12 @@ export class NewsfeedService {
     );
   }
 
-  getPostById(postId: number): Observable<Post[]> {
+  getPostById(postId: number): Observable<Post> {
     const headers = {
       Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
-    return this.http.get<Post[]>(
+    return this.http.get<Post>(
       `${environment.baseUrls.posts}/api/posts/${postId}`,
       { headers }
     );

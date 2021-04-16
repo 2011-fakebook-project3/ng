@@ -19,22 +19,20 @@ export class NewsfeedComponent implements OnInit {
     private newsfeedService: NewsfeedService,
     private postService: PostService,
     private route: ActivatedRoute
-  ) {
-    this.route.params.subscribe(params => {
-      if(params['id'] != undefined){   
-        this.postId = +params['id'];
-          if(this.postId != undefined)
-            this.getPostsById();
-      }
-      else{
-        this.getPosts();
-      }
-    })
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
-    //this.getPosts();
+    this.route.params.subscribe((params) => {
+      if(params['id'] !== undefined) {
+        this.postId = +params['id'];
+        if(this.postId !== undefined && !isNaN(this.postId)) {
+          this.getPostById();
+        }
+      } else {
+        this.getPosts();
+      }
+    });
   }
 
   getPosts(): void {
@@ -43,12 +41,13 @@ export class NewsfeedComponent implements OnInit {
       .subscribe((gotPosts) => (this.posts = gotPosts));
   }
 
-  getPostsById(): void {
-    this.newsfeedService
+  getPostById(): void {
+    if (this.postId !== undefined && !isNaN(this.postId)) {
+      this.newsfeedService
       .getPostById(this.postId)
-      .subscribe((gotPosts) => (this.posts = gotPosts));
+      .subscribe((p) => this.posts = [p]);
+    }
   }
-  
 
   getUser(): void {
     this.newsfeedService
