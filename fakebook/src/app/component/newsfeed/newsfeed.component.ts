@@ -13,13 +13,13 @@ import { PostService } from '../../services/post.service';
 export class NewsfeedComponent implements OnInit {
   posts: Post[] = [];
   user: User | null = null;
-  postId: number;
+  postId: number | undefined;
 
   constructor(
-    private newsfeedService: NewsfeedService,
-    private postService: PostService,
-    private route: ActivatedRoute
-  ) {}
+    private readonly newsfeedService: NewsfeedService,
+    private readonly postService: PostService,
+    private readonly route: ActivatedRoute
+    ) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -37,7 +37,7 @@ export class NewsfeedComponent implements OnInit {
 
   getPosts(): void {
     this.newsfeedService
-      .getPosts(this.postId)
+      .getPosts()
       .subscribe((gotPosts) => (this.posts = gotPosts));
   }
 

@@ -1,8 +1,8 @@
 a {
-    color: inherit;
-    text-decoration: inherit;
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .notification:hover {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }

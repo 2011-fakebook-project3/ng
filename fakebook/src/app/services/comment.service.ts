@@ -8,7 +8,8 @@ import { AuthService } from '../authentication/core/authentication/auth.service'
   providedIn: 'root',
 })
 export class CommentService {
-  url = `${environment.baseUrls.posts}/api/comments`;
+  private readonly url = `${environment.baseUrls.posts}/api/comments`;
+  private readonly acceptHeader = 'application/json';
 
   constructor(private auth: AuthService, private http: HttpClient) {}
 

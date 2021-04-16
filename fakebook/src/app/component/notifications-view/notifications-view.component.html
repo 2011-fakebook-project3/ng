@@ -49,7 +49,7 @@
     <div *ngIf="notif.type == 'like'" style="padding-left: 12px">
       <a [routerLink]="['/newsfeed', notif.postId]">
         <div>
-          Here is person {{ notif.userId }} liking post <br />{{
+          {{ notif.userId }} liked your post <br />{{
             notif.date.toString() | timeAgo
           }}
         </div>
@@ -58,7 +58,7 @@
     <div *ngIf="notif.type == 'post'" style="padding-left: 12px">
       <a [routerLink]="['/newsfeed', notif.postId]">
         <div>
-          Here is person {{ notif.userId }} posting post <br />{{
+          {{ notif.userId }} made a post <br />{{
             notif.date.toString() | timeAgo
           }}
         </div>
@@ -67,7 +67,7 @@
     <div *ngIf="notif.type == 'comment'" style="padding-left: 12px">
       <a [routerLink]="['/newsfeed', notif.postId]">
         <div>
-          Here is person {{ notif.userId }} commenting on post <br />{{
+          {{ notif.userId }} commented on your post <br />{{
             notif.date.toString() | timeAgo
           }}
         </div>
@@ -76,7 +76,7 @@
     <div *ngIf="notif.type == 'follow'" style="padding-left: 12px">
       <a [routerLink]="['/profile', notif.userId]">
         <div>
-          Here is person {{ notif.userId }} following you<br />{{
+          {{ notif.userId }} followed you<br />{{
             notif.date.toString() | timeAgo
           }}
         </div>
