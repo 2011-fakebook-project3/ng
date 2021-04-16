@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { User } from 'src/app/model/user';
-import { PostService } from 'src/app/service/post.service';
+import { PostService } from 'src/app/services/post.service';
 import { Comment } from 'src/app/model/comment';
 import { Post } from '../../model/post';
-import { ProfileService } from 'src/app/service/profile.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-post-view',
@@ -20,6 +20,8 @@ export class PostViewComponent implements OnInit {
 
   user: User | null = null;
   comments: Comment[] | null = null;
+  isEditing  = false;
+  editContent  = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +52,31 @@ export class PostViewComponent implements OnInit {
   //     this.postService.unLikePost(postId).subscribe();
   //   }
   // }
+
+  startEditPost(): void
+  {
+    this.isEditing = true;
+    if(this.post)
+      this.editContent = this.post?.content;
+  }
+
+  endEditPost() : void
+  {
+    if(!this.post)
+    {
+      alert("Cannot edit a null post!");
+      return;
+    }
+
+    this.post.content = this.editContent;
+    this.postService.update(this.post).subscribe();
+    this.isEditing = false;
+  }
+
+  cancelEditPost() : void
+  {
+    this.isEditing = false;
+  }
 
   deletePost(post: Post): void {
     this.post = null;

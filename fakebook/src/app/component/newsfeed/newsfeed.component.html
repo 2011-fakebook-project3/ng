@@ -16,7 +16,7 @@
                 phoneNumber: {{ user?.phoneNumber }}
               </p>
               <p class="text-muted mb-1">Email: {{ user?.email }}</p>
-              <p class="text-muted mb-1">Birth Date: {{ user?.birthDate }}</p>
+              <p class="text-muted mb-1">Birth Date: {{ user?.birthDate | date:'fullDate' }}</p>
             </div>
           </div>
         </div>
