@@ -29,7 +29,7 @@ describe('ProfileViewComponent', () => {
     status: '1',
     birthDate: new Date(),
     followers: [],
-    followees: [],
+    following: [],
   };
   const posts: Post[] = [];
 
