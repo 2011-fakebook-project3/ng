@@ -23,7 +23,7 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      let loadUserFeed = params['id'] !== undefined;
+      let loadUserFeed = params['id'] === undefined;
       this.getPosts(loadUserFeed);
       if(!loadUserFeed) {
         this.postId = +params['id'];
@@ -39,7 +39,8 @@ export class NewsfeedComponent implements OnInit {
       .getUser()
       .subscribe((gotUser) => { 
         this.user = gotUser;
-        if(loadUserFeed) {
+        if(loadUserFeed)
+         {
           this.newsfeedService.getPosts(gotUser?.followers!)
             .subscribe((gotPosts) => (this.posts = gotPosts));
         }
