@@ -11,9 +11,9 @@ import { environment } from '../../environments/environment';
 export class NewsfeedService {
   constructor(private http: HttpClient) {}
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(
-      `${environment.baseUrls.posts}/api/posts/newsfeed`
+  getPosts(followers : string[]): Observable<Post[]> {
+    return this.http.post<Post[]>(
+      `${environment.baseUrls.posts}/api/posts/newsfeed`, { emails: followers }
     );
   }
 
