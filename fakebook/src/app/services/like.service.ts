@@ -12,22 +12,20 @@ export class LikeService {
 
   constructor(private http: HttpClient, private oktaAuth: OktaAuthService) {}
 
-  like(postId: number): any {
+  like(likeableId: number, likeableResource : string): any {
     const accessToken = this.oktaAuth.getAccessToken();
     const httpOptions = {
-      headers: new HttpHeaders({
+      headers: {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
-      }),
+      },
     };
 
     return this.http
-      .post(`${this.url}Posts/${postId}/like/`, null, httpOptions)
-      .toPromise()
-      .then((res) => console.log(JSON.stringify(res)));
+      .post(`${this.url}${likeableResource}/${likeableId}/like/`, null, httpOptions).subscribe(()=> {});
   }
 
-  unlike(postId: number): any {
+  unlike(likeableId: number, likeableResource : string): any {
     const accessToken = this.oktaAuth.getAccessToken();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -37,7 +35,7 @@ export class LikeService {
     };
 
     return this.http
-      .post(`${this.url}Posts/${postId}/unlike/`, null, httpOptions)
+      .post(`${this.url}${likeableResource}/${likeableId}/unlike/`, null, httpOptions)
       .toPromise();
   }
 

@@ -23,6 +23,8 @@ export class PostViewComponent implements OnInit {
   isEditing  = false;
   editContent  = "";
 
+  readonly resourceCollection = "posts";
+
   constructor(
     private route: ActivatedRoute,
     public postService: PostService,
