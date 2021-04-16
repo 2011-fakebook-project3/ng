@@ -32,10 +32,11 @@ export class PostService {
     return this.http.get<Post[]>(`${this.url}/user/${email}`);
   }
 
-  delete(postId: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${postId}`);
-  }
   update(post: Post): Observable<Post> {
     return this.http.put<Post>(`${this.url}/${post.id}`, post);
+  }
+  delete(postId: number): null {
+    this.http.delete<void>(`${this.url}/${postId}`).subscribe();
+    return null;
   }
 }
