@@ -14,7 +14,7 @@
   <h2 class="d-flex justify-content-center">
     {{ user?.firstName }} {{ user?.lastName }}
   </h2>
-  <div class="col text-center">
+  <div *ngIf="user.email !== currentUserEmail" class="col text-center">
     <button 
       type="button" 
       class="btn text-center" 
