@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AuthCallbackComponent implements OnInit {
 
-  error: boolean;
+  error = false;
 
   constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
 

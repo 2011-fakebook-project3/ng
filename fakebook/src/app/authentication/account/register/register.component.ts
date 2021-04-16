@@ -11,13 +11,12 @@ import { UserRegistration }    from '../../shared/models/user.registration';
 })
 export class RegisterComponent {
 
-  success: boolean;
-  error: string;
+  success = false;
+  error = "";
   userRegistration: UserRegistration = { name: '', email: '', password: ''};
   submitted = false;
 
   constructor(private authService: AuthService, private spinner: NgxSpinnerService) {
-   
   }
 
   onSubmit() { 

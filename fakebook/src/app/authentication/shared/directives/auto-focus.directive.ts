@@ -5,7 +5,7 @@ import { AfterContentInit, Directive, ElementRef, Input } from '@angular/core';
 })
 export class AutofocusDirective implements AfterContentInit {
 
-    @Input() public appAutoFocus: boolean;
+    @Input() public appAutoFocus = false;
 
     public constructor(private el: ElementRef) {
     }
