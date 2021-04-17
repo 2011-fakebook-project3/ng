@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 
 import { BaseService } from "../../shared/base.service";
 import { ConfigService } from '../../shared/config.service';
-import { OktaAuthService } from '@okta/okta-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +71,7 @@ export class AuthService extends BaseService  {
 
 export function getClientSettings(): UserManagerSettings {
   return {
-      authority: 'https://localhost:5001',
+      authority: 'https://localhost:44374',
       client_id: 'angular_spa',
       redirect_uri: 'http://localhost:4200/auth-callback',
       post_logout_redirect_uri: 'http://localhost:4200/',
