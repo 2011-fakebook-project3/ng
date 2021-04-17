@@ -12,8 +12,8 @@ export class PostService {
   constructor(private http: HttpClient) {}
   url = `${environment.baseUrls.posts}/api/posts`;
 
-  create(post: NewPost): Promise<Post> {
-    return this.http.post<Post>(`${this.url}`, post).toPromise();
+  create(post: NewPost): Promise<NewPost> {
+    return this.http.post<NewPost>(`${this.url}`, post).toPromise();
   }
 
   likePost(id: number): Observable<Post> {
