@@ -10,7 +10,7 @@ export class LikeViewComponent {
   @Input() count?: number;
   @Input() postId?: number;
   @Input() liked?: boolean;
-  @Input() resourceCollection? : string;
+  @Input() resourceCollection = "";
 
   constructor(private likeService: LikeService) {}
 
@@ -18,12 +18,12 @@ export class LikeViewComponent {
     if ((this.count !== undefined) && this.postId) {
       // if the resource is aready liked we should unlike it
       if (this.liked) {
-        this.likeService.unlike(this.postId, this.resourceCollection!);
+        this.likeService.unlike(this.postId, this.resourceCollection);
         this.liked = !this.liked;
         this.count--;
       } else {
         // like the resource
-        this.likeService.like(this.postId, this.resourceCollection!);
+        this.likeService.like(this.postId, this.resourceCollection);
         this.liked = !this.liked;
         this.count++;
       }
