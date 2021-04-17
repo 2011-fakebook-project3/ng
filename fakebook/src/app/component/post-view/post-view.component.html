@@ -64,7 +64,7 @@
       <hr />
       <div class="d-flex justify-content-between align-items-center">
         <app-like-view
-          [liked]="post.liked"
+          [liked]="isLikedByUser"
           [postId]="post.id"
           [count]="post.likes.length"
           [resourceCollection]="resourceCollection"
