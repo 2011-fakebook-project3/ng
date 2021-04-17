@@ -46,19 +46,6 @@ export class PostViewComponent implements OnInit {
       .subscribe((user) => (this.user = user));
   }
 
-  // likePost(postId: number): void{
-  //   this.postService.likePost(postId).subscribe();
-  //   this.post?.likedByUserIds.push(postId);
-  // }
-
-  // unLikePost(postId: number): void {
-  //   if (this.post && this.post.likedByUserIds && this.post?.likedByUserIds.indexOf(postId) !== -1){
-  //     // this.post.likedByUserIds = this.post?.likedByUserIds.filter(element !== postId)
-  //     this.postService.unLikePost(postId).subscribe();
-  //   }
-  // }
-
-
   startEditPost(): void
   {
     this.isEditing = true;
