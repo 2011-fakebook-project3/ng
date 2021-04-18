@@ -46,6 +46,7 @@ export class ProfileService {
     }} as HttpParamsOptions), headers: this.headers});
   }
 
+
   public GetProfileWithNullRoute(): Observable<User> {
     const accessToken = this.oktaAuth.getAccessToken();
     const headers = {
@@ -65,6 +66,17 @@ export class ProfileService {
 
     return this.http.get<User[]>(this.baseUrl + 'selection/' + emails, { headers });
   }
+
+  public GetProfilesByName(name: string): Observable<User[]> {
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+
+    return this.http.get<User[]>(this.baseUrl + 'search' + name, { headers });
+  }
+
 
   public CreateProfile(profile: User): Observable<User> {
     const accessToken = this.oktaAuth.getAccessToken();
