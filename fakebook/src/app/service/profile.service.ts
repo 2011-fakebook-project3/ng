@@ -97,4 +97,14 @@ export class ProfileService {
 
     return this.http.put<User>(this.baseUrl + email, profile, { headers });
   }
+
+  public GetProfileByName(name: string): Observable<User[]>{
+    const headers = {
+      Authorization: 'Bearer ' + this.token
+    };
+    
+    return this.http.get<User[]>(`${this.baseUrl}` + 'search', {params: new HttpParams({fromObject: {
+      'name': name
+    }} as HttpParamsOptions), headers: this.headers});
+  }
 }

@@ -14,6 +14,7 @@ export class ProfileSearchComponent implements OnInit {
   @Output() onSelectedOption = new EventEmitter();
   searchProfile= new FormControl('');
   profileList: User[] = [];
+  searchView = false;
 
   constructor(private readonly profileService: ProfileService) { }
 
@@ -27,8 +28,13 @@ export class ProfileSearchComponent implements OnInit {
   }
 
   search() {
-    this.profileService.GetProfileByEmail(this.searchProfile.value).subscribe(
+    this.profileService.GetProfileByName(this.searchProfile.value).subscribe(
       (response) => {
+        // Implement functionality for profiles
+        this.searchView = !this.searchView;
+        if(this.searchView === true){
+          this.profileList = response;
+        }
       });
   }
 }
