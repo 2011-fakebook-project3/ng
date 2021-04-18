@@ -11,16 +11,16 @@ export class LikeService {
 
   constructor(private http: HttpClient) {}
 
-  like(postId: number): any {
+  like(likeableId: number, likeableResource : string): any {
     return this.http
-      .post(`${this.url}Posts/${postId}/like/`, null)
+      .post(`${this.url}${likeableResource}/${likeableId}/like/`, null)
       .toPromise()
       .then((res) => console.log(JSON.stringify(res)));
   }
 
-  unlike(postId: number): any {
+  unlike(likeableId: number, likeableResource : string): any {
     return this.http
-      .post(`${this.url}Posts/${postId}/unlike/`, null)
+      .post(`${this.url}${likeableResource}/${likeableId}/unlike/`, null)
       .toPromise();
   }
 

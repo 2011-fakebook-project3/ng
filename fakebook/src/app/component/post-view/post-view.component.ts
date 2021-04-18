@@ -23,6 +23,10 @@ export class PostViewComponent implements OnInit {
   isEditing  = false;
   editContent  = "";
 
+  isLikedByUser = false;
+
+  readonly resourceCollection = "posts";
+
   constructor(
     private route: ActivatedRoute,
     public postService: PostService,
@@ -32,6 +36,7 @@ export class PostViewComponent implements OnInit {
   ngOnInit(): void {
     if (this.post && this.post.userEmail) {
       this.getUser(this.post.userEmail);
+      this.isLikedByUser = this.post.likes.includes(this.userEmail);
     }
   }
 
@@ -40,18 +45,6 @@ export class PostViewComponent implements OnInit {
       .GetProfile(email)
       .subscribe((user) => (this.user = user));
   }
-
-  // likePost(postId: number): void{
-  //   this.postService.likePost(postId).subscribe();
-  //   this.post?.likedByUserIds.push(postId);
-  // }
-
-  // unLikePost(postId: number): void {
-  //   if (this.post && this.post.likedByUserIds && this.post?.likedByUserIds.indexOf(postId) !== -1){
-  //     // this.post.likedByUserIds = this.post?.likedByUserIds.filter(element !== postId)
-  //     this.postService.unLikePost(postId).subscribe();
-  //   }
-  // }
 
   startEditPost(): void
   {
