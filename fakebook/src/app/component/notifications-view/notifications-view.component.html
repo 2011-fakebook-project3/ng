@@ -30,6 +30,15 @@
     z-index: 100;
   "
 >
+  <span>{{ this.notifications.length }} notifications</span>
+  <button
+    type="button"
+    class="btn btn-default"
+    (click)="markAllAsRead()"
+    style="padding: 5px 5px; border-radius: 5px"
+  >
+    Mark All As Read
+  </button>
   <div class="notification"
     *ngFor="let notif of this.notifications"
     style="
@@ -38,6 +47,7 @@
       align-items: center;
       border-bottom: 1px solid black;
     "
+    (click)="markAsRead(notif)"
   >
     <img
       id="profile-picture"

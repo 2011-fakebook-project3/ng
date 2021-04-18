@@ -50,7 +50,6 @@ describe('CommentFormComponent', () => {
     component = new CommentFormComponent(
       TestBed.inject(CommentService),
       TestBed.inject(ActivatedRoute),
-      TestBed.inject(OktaAuthService),
       TestBed.inject(NotificationsService)
     );
   });

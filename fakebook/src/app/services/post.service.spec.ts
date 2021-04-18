@@ -45,23 +45,12 @@ describe('PostService', () => {
       'post',
     ]);
 
-    service = new PostService(
-      httpClientSpy as any,
-      TestBed.inject(OktaAuthService)
-    );
+    service = new PostService(httpClientSpy as any);
   });
 
   it('should be created', () => {
-    service = new PostService(
-      TestBed.inject(HttpClient),
-      TestBed.inject(OktaAuthService)
-    );
+    service = new PostService(TestBed.inject(HttpClient));
     expect(service).toBeTruthy();
-  });
-
-  it('should have correct access token and headers', () => {
-    expect(service.headers.headers.Authorization).toBe('Bearer 0');
-    expect(service.headers.headers.Accept).toBe('application/json');
   });
 
   it('should have the correct urls', () => {

@@ -55,7 +55,6 @@ describe('PostViewComponent', () => {
     createdAt: new Date(2020, 12),
     likes: [],
     comments: [],
-    liked: false,
   };
 
   const fakeHTTPClient = {};

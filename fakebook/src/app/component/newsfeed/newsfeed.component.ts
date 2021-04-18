@@ -22,23 +22,29 @@ export class NewsfeedComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.getUser();
     this.route.params.subscribe((params) => {
-      if(params['id'] !== undefined) {
+      let loadUserFeed = params['id'] === undefined;
+      this.getPosts(loadUserFeed);
+      if(!loadUserFeed) {
         this.postId = +params['id'];
         if(this.postId !== undefined && !isNaN(this.postId)) {
           this.getPostById();
         }
-      } else {
-        this.getPosts();
-      }
+      } 
     });
   }
 
-  getPosts(): void {
+  getPosts(loadUserFeed : boolean): void {
     this.newsfeedService
-      .getPosts()
-      .subscribe((gotPosts) => (this.posts = gotPosts));
+      .getUser()
+      .subscribe((gotUser) => { 
+        this.user = gotUser;
+        if(loadUserFeed)
+         {
+          this.newsfeedService.getPosts(gotUser?.followers)
+            .subscribe((gotPosts) => (this.posts = gotPosts));
+        }
+      });
   }
 
   getPostById(): void {
@@ -47,12 +53,6 @@ export class NewsfeedComponent implements OnInit {
       .getPostById(this.postId)
       .subscribe((p) => this.posts = [p]);
     }
-  }
-
-  getUser(): void {
-    this.newsfeedService
-      .getUser()
-      .subscribe((gotUser) => (this.user = gotUser));
   }
 
   onNotifyComment(valueEmitted: any): any {

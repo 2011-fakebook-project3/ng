@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { OktaAuthService } from '@okta/okta-angular';
 
 import { FollowService } from './follow.service';
 
@@ -9,10 +8,7 @@ describe('FollowService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: HttpClient, useValue: {} },
-        { provide: OktaAuthService, useValue: {} },
-      ],
+      providers: [{ provide: HttpClient, useValue: {} }],
     });
     service = TestBed.inject(FollowService);
   });

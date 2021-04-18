@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LikeService } from 'src/app/services/like.service';
 import { LikeViewComponent } from './like-view.component';
-import { OktaAuthService } from '@okta/okta-angular';
 import { NewPost } from '../../model/newpost';
 
 describe('LikeViewComponent', () => {
@@ -14,7 +13,10 @@ describe('LikeViewComponent', () => {
     },
   };
   const FakeLikeService = {
-    like(postId: number): any {
+    like(resourceId: number, resourceCollection : string): any {
+      return 1;
+    },
+    unlike(resourceId: number, resourceCollection : string): any {
       return 1;
     },
   };
@@ -22,10 +24,7 @@ describe('LikeViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LikeViewComponent],
-      providers: [
-        { provide: LikeService, useValue: FakeLikeService },
-        { provide: OktaAuthService, useValue: FakeOktaAuthService },
-      ],
+      providers: [{ provide: LikeService, useValue: FakeLikeService }],
     }).compileComponents();
   });
 
@@ -37,5 +36,21 @@ describe('LikeViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set like to be true if previously false on submit()', () => {
+    component.count = 1;
+    component.postId = 1;
+    component.liked = false;
+    component.submit();
+    expect(component.liked).toBeTrue();
+  });
+
+  it('should set like to be false if previously true on submit()', () => {
+    component.count = 1;
+    component.postId = 1;
+    component.liked = true;
+    component.submit();
+    expect(component.liked).toBeFalse();
   });
 });
