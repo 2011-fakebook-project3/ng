@@ -8,5 +8,4 @@ export interface Post {
   createdAt: Date;
   likes: string[];
   comments: Comment[];
-  liked: boolean | false;
 }
