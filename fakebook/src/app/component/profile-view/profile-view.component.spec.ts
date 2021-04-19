@@ -123,7 +123,7 @@ describe('ProfileViewComponent', () => {
     component.user = userTest;
     fixture.detectChanges();
 
-    let button = fixture.debugElement.query(By.css('.btn'));
+    const button = fixture.debugElement.query(By.css('.btn'));
     button.triggerEventHandler('click', null);
 
     fixture.whenStable().then(() => {
