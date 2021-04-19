@@ -14,6 +14,21 @@
   <h2 class="d-flex justify-content-center">
     {{ user?.firstName }} {{ user?.lastName }}
   </h2>
+  <div *ngIf="user.email !== currentUserEmail" class="col text-center">
+    <button 
+      type="button" 
+      class="btn text-center" 
+      [class]="followStatus ? 'btn-success' : 'btn-primary'" 
+      (click)="followUser()"
+    >
+      <ng-container *ngIf="followStatus">
+        Following
+      </ng-container>
+      <ng-container *ngIf="!followStatus">
+        Follow
+      </ng-container>
+    </button>
+  </div>
 </div>
 <div class="container" *ngIf="user">
   <div class="row">

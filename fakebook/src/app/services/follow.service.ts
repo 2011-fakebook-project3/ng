@@ -8,19 +8,18 @@ import { User } from '../model/user';
 })
 export class FollowService {
   constructor(private http: HttpClient) {}
-  url = `${environment.baseUrls.posts}/api`;
+  url = `${environment.baseUrls.profile}/api/profiles`;
 
-  follow(follower: User, followee: User): any {
+  follow(follower: string): any {
     return this.http
-      .post(`${this.url}/follows/${follower.id}`, null)
+      .post(`${this.url}/follow/${follower}`, null)
       .toPromise();
   }
 
-  unfollow(follower: User, followee: User): any {
+  unfollow(follower: string): any {
     return this.http
-      .delete(`${this.url}/follows/${follower.id}`)
-      .toPromise()
-      .then((res) => console.log(JSON.stringify(res)));
+      .post(`${this.url}/unfollow/${follower}`, null)
+      .toPromise();
   }
 
   getFollowStatus(follower: User, followee: User): boolean {
