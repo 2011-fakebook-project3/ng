@@ -9,32 +9,32 @@ import { AuthService } from '../authentication/core/authentication/auth.service'
 })
 export class FollowService {
   constructor(private http: HttpClient, private auth: AuthService) {}
-  url = `${environment.baseUrls.posts}/api`;
+  url = `${environment.baseUrls.profile}/api/profiles`;
 
-  follow(follower: User, followee: User): any {
+  follow(follower: string): any {
     const headers = {
       Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
     return this.http
-      .post(`${this.url}/follows/${follower.id}`, null, { headers })
+      .post(`${this.url}/follow/${follower}`, null)
       .toPromise();
   }
 
-  unfollow(follower: User, followee: User): any {
-    const headers = {
+  unfollow(follower: string): any {
+
+     const headers = {
       Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
     return this.http
-      .delete(`${this.url}/follows/${follower.id}`, { headers })
-      .toPromise()
-      .then((res) => console.log(JSON.stringify(res)));
+      .post(`${this.url}/unfollow/${follower}`, null)
+      .toPromise();
   }
 
   getFollowStatus(follower: User, followee: User): boolean {
-    return followee.followers.some((user) => user.email === follower.email);
+    return followee.followers.some((user) => user === follower.email);
   }
 }

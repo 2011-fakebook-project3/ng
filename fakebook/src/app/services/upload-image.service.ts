@@ -21,8 +21,7 @@ export class UploadImageService {
     return this.http
       .post<{ path: string; userId: number }>(
         `${environment.baseUrls.profile}/api/ProfilePicture`,
-        formData,
-        headers
+        formData
       )
       .toPromise();
   }

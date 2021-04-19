@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { environment } from '../../environments/environment';
-import { OktaAuthService } from '@okta/okta-angular';
 import {
   HttpClient,
 } from '@angular/common/http';
@@ -51,10 +50,5 @@ describe('NewsfeedService', () => {
       TestBed.inject(AuthService)
     );
     expect(service).toBeTruthy();
-  });
-
-  it('should have correct access token and headers', () => {
-    expect(service.headers.Authorization).toBe('Bearer 0');
-    expect(service.headers.Accept).toBe('application/json');
   });
 });

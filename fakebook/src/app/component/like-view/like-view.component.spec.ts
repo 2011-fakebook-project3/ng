@@ -11,7 +11,10 @@ describe('LikeViewComponent', () => {
   const FakeAuthService = {
   };
   const FakeLikeService = {
-    like(postId: number): any {
+    like(resourceId: number, resourceCollection : string): any {
+      return 1;
+    },
+    unlike(resourceId: number, resourceCollection : string): any {
       return 1;
     },
   };
@@ -34,5 +37,21 @@ describe('LikeViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set like to be true if previously false on submit()', () => {
+    component.count = 1;
+    component.postId = 1;
+    component.liked = false;
+    component.submit();
+    expect(component.liked).toBeTrue();
+  });
+
+  it('should set like to be false if previously true on submit()', () => {
+    component.count = 1;
+    component.postId = 1;
+    component.liked = true;
+    component.submit();
+    expect(component.liked).toBeFalse();
   });
 });

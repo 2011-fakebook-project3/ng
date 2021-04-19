@@ -55,11 +55,6 @@ describe('PostService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should have correct access token and headers', () => {
-    expect(service.headers.headers.Authorization).toBe('Bearer 0');
-    expect(service.headers.headers.Accept).toBe('application/json');
-  });
-
   it('should have the correct urls', () => {
     expect(service.url).toBe(`${environment.baseUrls.posts}/api/posts`);
   });

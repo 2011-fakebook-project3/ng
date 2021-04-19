@@ -12,30 +12,29 @@ export class LikeService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  like(postId: number): any {
+
+  like(likeableId: number, likeableResource : string): any {
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: this.auth.authorizationHeaderValue,
         'Content-Type': 'application/json',
       }),
     };
-
     return this.http
-      .post(`${this.url}Posts/${postId}/like/`, null, httpOptions)
+      .post(`${this.url}${likeableResource}/${likeableId}/like/`, null)
       .toPromise()
       .then((res) => console.log(JSON.stringify(res)));
   }
 
-  unlike(postId: number): any {
+  unlike(likeableId: number, likeableResource : string): any {
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: this.auth.authorizationHeaderValue,
         'Content-Type': 'application/json',
       }),
     };
-
     return this.http
-      .post(`${this.url}Posts/${postId}/unlike/`, null, httpOptions)
+      .post(`${this.url}${likeableResource}/${likeableId}/unlike/`, null)
       .toPromise();
   }
 

@@ -40,7 +40,6 @@ export class CommentFormComponent implements OnInit {
   postComment(comment: CommentFormData): void {
     this.commentService
       .create({
-        id: 0,
         content: comment.content,
         postId: comment.postId,
         createdAt: undefined,

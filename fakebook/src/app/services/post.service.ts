@@ -27,23 +27,23 @@ export class PostService {
   }
 
   likePost(id: number): Observable<Post> {
-    return this.http.post<Post>(`${this.url}/${id}/like`, id, this.headers);
+    return this.http.post<Post>(`${this.url}/${id}/like`, id);
   }
 
   unLikePost(id: number): Observable<Post> {
-    return this.http.post<Post>(`${this.url}/${id}/unlike`, id, this.headers);
+    return this.http.post<Post>(`${this.url}/${id}/unlike`, id);
   }
 
   getById(id: number): Observable<Post> {
-    return this.http.get<Post>(`${this.url}/${id}`, this.headers);
+    return this.http.get<Post>(`${this.url}/${id}`);
   }
 
   getUserPosts(email: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.url}/user/${email}`, this.headers);
+    return this.http.get<Post[]>(`${this.url}/user/${email}`);
   }
 
   delete(postId: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${postId}`, this.headers);
+    return this.http.delete<void>(`${this.url}/${postId}`);
   }
   update(post: Post): Observable<Post> {
     return this.http.put<Post>(`${this.url}/${post.id}`, post, this.headers);

@@ -22,7 +22,6 @@ describe('NewsfeedComponent', () => {
       pictureUrl: '',
       likes: [],
       comments: [],
-      liked: false,
     },
     {
       id: 2,
@@ -32,7 +31,6 @@ describe('NewsfeedComponent', () => {
       pictureUrl: '',
       likes: [],
       comments: [],
-      liked: false,
     },
   ];
 
@@ -122,7 +120,6 @@ describe('NewsfeedComponent', () => {
       pictureUrl: '',
       likes: [],
       comments: [],
-      liked: false,
     },
     {
       id: 2,
@@ -132,7 +129,6 @@ describe('NewsfeedComponent', () => {
       pictureUrl: '',
       likes: [],
       comments: [],
-      liked: false,
     },
   ];
 

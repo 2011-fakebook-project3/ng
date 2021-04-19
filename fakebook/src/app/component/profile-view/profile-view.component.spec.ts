@@ -49,8 +49,14 @@ describe('ProfileViewComponent', () => {
 
     const fakeFollowService = {
       getFollowStatus(follower: User, followee: User): boolean {
+        return false;
+      },
+      follow(follower: string): any {
         return true;
       },
+      unfollow(follower: string): any {
+        return true;
+      }
     };
 
     const fakePostService = {
@@ -101,5 +107,25 @@ describe('ProfileViewComponent', () => {
     );
     component.getUser();
     expect('Adriver@test.com').toBe(userTest.email);
+  });
+
+  it('should first be unfollowed then followed', () => {
+    component.user = userTest;
+    expect(component.followStatus).toBe(false);
+    component.followUser();
+    expect(component.followStatus).toBe(true);
+  });
+
+  it('should expect followUser to be called after follow button click', () => {
+    spyOn(component, 'followUser');
+    component.user = userTest;
+    fixture.detectChanges();
+
+    const button = fixture.debugElement.query(By.css('.btn'));
+    button.triggerEventHandler('click', null);
+
+    fixture.whenStable().then(() => {
+      expect(component.followUser).toHaveBeenCalled();
+    });
   });
 });

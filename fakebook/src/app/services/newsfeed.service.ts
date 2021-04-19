@@ -16,15 +16,15 @@ export class NewsfeedService {
     Authorization: this.auth.authorizationHeaderValue,
     Accept: 'application/json',
   };
+  constructor(private http: HttpClient) {}
 
-  getPosts(postId?: number): Observable<Post[]> {
+  getPosts(followers : string[]): Observable<Post[]> {
     const headers = {
-      Authorization: this.auth.authorizationHeaderValue,
-      Accept: 'application/json',
-    };
-    return this.http.get<Post[]>(
-      `${environment.baseUrls.posts}/api/posts/newsfeed`,
-      { headers }
+          Authorization: this.auth.authorizationHeaderValue,
+          Accept: 'application/json',
+        };
+    return this.http.post<Post[]>(
+      `${environment.baseUrls.posts}/api/posts/newsfeed`, { emails: followers }
     );
   }
 
@@ -34,8 +34,7 @@ export class NewsfeedService {
       Accept: 'application/json',
     };
     return this.http.get<Post>(
-      `${environment.baseUrls.posts}/api/posts/${postId}`,
-      { headers }
+      `${environment.baseUrls.posts}/api/posts/${postId}`
     );
   }
 
@@ -44,8 +43,6 @@ export class NewsfeedService {
       Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
-    return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/` + this.auth.email, {
-      headers,
-    });
+    return this.http.get<User>(`${environment.baseUrls.profile}/api/profiles/`);
   }
 }

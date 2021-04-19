@@ -12,6 +12,7 @@ import { ProfileService } from '../../services/profile.service';
 import { NewPost } from '../../model/newpost';
 import { PostService } from '../../services/post.service';
 import { UploadService } from '../../services/upload.service';
+import { Post } from '../../model/post';
 
 @Component({
   selector: 'app-new-post-form',
@@ -23,13 +24,14 @@ export class PostFormComponent {
   submitted = false;
   file: File | null = null;
   imageSource = '';
-  newPost = new NewPost('', '', ''); // we'll initialize user id at onsubmit
+  @Input() newPost = new NewPost('', '', ''); // we'll initialize user id at onsubmit
 
   @ViewChild('fileInput') fileInputRef!: ElementRef;
 
   @Input() user: User | null = null;
 
   @Output() notify: EventEmitter<string> = new EventEmitter<string>();
+  @Output() updatePage: EventEmitter<Post> = new EventEmitter<Post>(); //
 
   constructor(
     private uploadService: UploadService,
@@ -48,7 +50,7 @@ export class PostFormComponent {
           this.newPost.userId = this.user?.email;
           this.submitted = true;
           this.httpPost.create(this.newPost).then((result) => {
-            return this.notify.emit('test value from child');
+            return this.updatePage.emit(result);
           });
 
           this.newPost.content = '';
@@ -63,7 +65,7 @@ export class PostFormComponent {
       this.submitted = true;
       this.httpPost
         .create(this.newPost)
-        .then((res) => this.notify.emit('test value from child'));
+        .then((res) => this.updatePage.emit(res));
     }
   }
 

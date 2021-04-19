@@ -69,7 +69,7 @@ export class NotificationsService {
     return notifs;
   }
 
-  // once the notifications view has expanded, will set all notifications to read on the database
+  // function that sets all loaded notifications to read on the database
   setRead(ids: string[]): void {
     this.hubConnection.invoke('MarkNotificationAsReadAsync', ids);
   }

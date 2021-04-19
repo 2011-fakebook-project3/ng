@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Comment } from 'src/app/model/comment';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../authentication/core/authentication/auth.service';
+import { NewComment } from '../model/newcomment';
+import { Post } from '../model/post';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +21,7 @@ export class CommentService {
       Accept: 'application/json',
     };
 
-    const targetUrl = `/${this.url}`;
-
-    return this.http
-      .post<Comment>(targetUrl, comment, { headers })
-      .toPromise();
+    return this.http.post<Comment>(targetUrl, comment).toPromise();
   }
 
   delete(comment: Comment): Promise<number> {
@@ -31,12 +29,9 @@ export class CommentService {
       Authorization: this.auth.authorizationHeaderValue,
       Accept: 'application/json',
     };
+    const targetUrl = `${this.url}/${comment.id}`;
 
-    const targetUrl = `/${this.url}/${comment.id}`;
-
-    return this.http
-      .delete<number>(targetUrl, { headers })
-      .toPromise();
+    return this.http.delete<number>(targetUrl).toPromise();
   }
 
   get(commentId: number): Promise<Comment> {
@@ -47,8 +42,6 @@ export class CommentService {
 
     const targetUrl = `/${this.url}/${commentId}`;
 
-    return this.http
-      .get<Comment>(targetUrl, { headers })
-      .toPromise();
+    return this.http.get<Comment>(targetUrl).toPromise();
   }
 }

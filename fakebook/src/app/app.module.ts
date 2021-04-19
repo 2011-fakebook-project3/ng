@@ -1,9 +1,10 @@
 import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { AuthInterceptor } from './auth.interceptor';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,7 +72,11 @@ const config = {
     ShellModule,   
     SharedModule 
   ],
-  providers: [{ provide: OKTA_CONFIG, useValue: config }, AuthGuard],
+  providers: [
+    { provide: OKTA_CONFIG, useValue: config },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthGuard
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
