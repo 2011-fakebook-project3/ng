@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpParamsOptions } from '@angular/common/http';
 import { OktaAuthService } from '@okta/okta-angular';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -36,7 +36,7 @@ export class ProfileService {
   public GetProfileWithNullRoute(): Observable<User> /* null route */ {
     return this.http.get<User>(this.baseUrl);
   }
-  public GetProfiles(emails: string[]): Observable<User> /* profile */ {
+  public GetProfilesByEmails(emails: string[]): Observable<User> /* profile */ {
     // make empty collection of profiles
     // emails={abc, 123, }
     return this.http.get<User>(this.baseUrl + 'selection/' + emails);
@@ -54,5 +54,17 @@ export class ProfileService {
     };
 
     return this.http.put<User>(this.baseUrl + email, profile, { headers });
+  }
+
+  public GetProfileByName(name: string): Observable<User[]>{
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    
+    return this.http.get<User[]>(`${this.baseUrl}` + 'search', {params: new HttpParams({fromObject: {
+      'name': name
+    }} as HttpParamsOptions), headers: headers});
   }
 }
