@@ -47,9 +47,8 @@ export class NotificationsViewComponent implements OnInit {
 
   markAsRead(notif: Notification): void {
     this.notifService.setRead([notif.id]);
-    this.notifications = this.notifications.filter((val) => {
-      return val.id != notif.id;
-    });
+    let index = this.notifications.indexOf(notif);
+    this.notifications.splice(index, 1);
     if (this.notifications.length == 0)
       this.unreadNotifications = false;
   }
