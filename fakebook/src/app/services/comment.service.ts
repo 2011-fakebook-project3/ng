@@ -15,19 +15,19 @@ export class CommentService {
   constructor(private http: HttpClient) {}
 
   create(comment: NewComment): Promise<NewComment> {
-    const targetUrl = `/${this.url}`;
+    const targetUrl = `${this.url}`;
 
     return this.http.post<Comment>(targetUrl, comment).toPromise();
   }
 
   delete(comment: Comment): Promise<number> {
-    const targetUrl = `/${this.url}/${comment.id}`;
+    const targetUrl = `${this.url}/${comment.id}`;
 
     return this.http.delete<number>(targetUrl).toPromise();
   }
 
   get(commentId: number): Promise<Comment> {
-    const targetUrl = `/${this.url}/${commentId}`;
+    const targetUrl = `${this.url}/${commentId}`;
 
     return this.http.get<Comment>(targetUrl).toPromise();
   }
