@@ -7,6 +7,10 @@ import { Injectable } from '@angular/core';
 })
 
 /**
+ * See https://fullstackmark.com/post/21/user-authentication-and-identity-with-angular-aspnet-core-and-identityserver
+ * for more details on the use of this shell component in regards to the IdentityServer implementation.
+ */
+/**
  * Provides helper methods to create routes.
  */
 export class Shell {

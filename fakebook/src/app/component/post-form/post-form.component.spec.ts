@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
-import { ConfigService } from 'src/app/authentication/shared/config.service';
 import { User } from 'src/app/model/user';
 import { PostService } from 'src/app/services/post.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -41,11 +40,6 @@ describe('PostFormComponent', () => {
         return "Bearer 1";
       }
     };
-    const mockConfigService = {
-      get authApiURI() {
-        return 'https://localhost:5001/api';
-      } 
-    }
 
     await TestBed.configureTestingModule({
       declarations: [PostFormComponent],
@@ -55,7 +49,6 @@ describe('PostFormComponent', () => {
         { provide: ProfileService, useValue: mockProfileService },
         { provide: HttpClient, useValue: {} },
         { provide: AuthService, useValue: mockAuthService },
-        { provide: ConfigService, useValue: mockConfigService }
       ],
     }).compileComponents();
   });
