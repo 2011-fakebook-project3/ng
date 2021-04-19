@@ -21,12 +21,12 @@
       [class]="followStatus ? 'btn-success' : 'btn-primary'" 
       (click)="followUser()"
     >
-      <div *ngIf="followStatus">
+      <ng-container *ngIf="followStatus">
         Following
-      </div>
-      <div *ngIf="!followStatus">
+      </ng-container>
+      <ng-container *ngIf="!followStatus">
         Follow
-      </div>
+      </ng-container>
     </button>
   </div>
 </div>
