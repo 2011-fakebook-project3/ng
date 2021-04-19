@@ -6,5 +6,6 @@ export const environment = {
     posts: clusterBaseUrl,
     notifications: clusterBaseUrl,
     profile: clusterBaseUrl,
+    auth: clusterBaseUrl,
   },
 };

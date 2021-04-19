@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { BaseService } from "../../shared/base.service";
 import { ConfigService } from '../../shared/config.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class AuthService extends BaseService  {
   }  
 
   register(userRegistration: any) {    
-    return this.http.post(this.configService.authApiURI + '/account', userRegistration).pipe(catchError(this.handleError));
+    return this.http.post(environment.baseUrls.auth + '/api/account', userRegistration).pipe(catchError(this.handleError));
   }
 
   isAuthenticated(): boolean {
@@ -71,7 +72,7 @@ export class AuthService extends BaseService  {
 
 export function getClientSettings(): UserManagerSettings {
   return {
-      authority: 'https://localhost:44374',
+      authority: environment.baseUrls.auth,
       client_id: 'angular_spa',
       redirect_uri: 'http://localhost:4200/auth-callback',
       post_logout_redirect_uri: 'http://localhost:4200/',
