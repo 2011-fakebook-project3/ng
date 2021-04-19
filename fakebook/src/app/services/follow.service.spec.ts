@@ -25,10 +25,14 @@ describe('FollowService', () => {
   });
 
   it('should expect follow to not throw error', () => {
-    expect(() => { service.follow('jwerner@revature.net'); }).not.toThrow();
+    expect(() => {
+      service.follow('jwerner@revature.net');
+    }).not.toThrow();
   });
 
   it('should expect unfollow to not throw error', () => {
-    expect(() => { service.unfollow('jwerner@revature.net'); }).not.toThrow();
+    expect(() => {
+      service.unfollow('jwerner@revature.net');
+    }).not.toThrow();
   });
 });
