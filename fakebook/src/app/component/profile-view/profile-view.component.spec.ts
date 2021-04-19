@@ -50,8 +50,14 @@ describe('ProfileViewComponent', () => {
 
     const fakeFollowService = {
       getFollowStatus(follower: User, followee: User): boolean {
+        return false;
+      },
+      follow(follower: string): any {
         return true;
       },
+      unfollow(follower: string): any {
+        return true;
+      }
     };
 
     const fakePostService = {
@@ -102,5 +108,12 @@ describe('ProfileViewComponent', () => {
     );
     component.getUser();
     expect('Adriver@test.com').toBe(userTest.email);
+  });
+
+  it('should first be unfollowed then followed', () => {
+    component.user = userTest;
+    expect(component.followStatus).toBe(false);
+    component.followUser();
+    expect(component.followStatus).toBe(true);
   });
 });
