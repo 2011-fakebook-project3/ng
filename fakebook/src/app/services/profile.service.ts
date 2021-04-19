@@ -52,14 +52,8 @@ export class ProfileService {
   }
 
   public GetProfileByName(name: string): Observable<User[]>{
-    const accessToken = this.oktaAuth.getAccessToken();
-    const headers = {
-      Authorization: 'Bearer ' + accessToken,
-      Accept: 'application/json',
-    };
-    
     return this.http.get<User[]>(`${this.baseUrl}` + 'search', {params: new HttpParams({fromObject: {
       'name': name
-    }} as HttpParamsOptions), headers: headers});
+    }} as HttpParamsOptions)});
   }
 }

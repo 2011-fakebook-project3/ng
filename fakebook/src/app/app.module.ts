@@ -63,7 +63,7 @@ const config = {
     CommentFormComponent,
     LikeViewComponent,
     PostFormComponent,
-    AuthCallbackComponent
+    AuthCallbackComponent,
     ProfileSearchComponent,
   ],
   imports: [
