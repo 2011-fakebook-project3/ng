@@ -23,6 +23,10 @@ export class PostViewComponent implements OnInit {
   isEditing = false;
   editContent = '';
 
+  isLikedByUser = false;
+
+  readonly resourceCollection = 'posts';
+
   constructor(
     private route: ActivatedRoute,
     public postService: PostService,
@@ -32,6 +36,7 @@ export class PostViewComponent implements OnInit {
   ngOnInit(): void {
     if (this.post && this.post.userEmail) {
       this.getUser(this.post.userEmail);
+      this.isLikedByUser = this.post.likes.includes(this.userEmail);
     }
   }
 
