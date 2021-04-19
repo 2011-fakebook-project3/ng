@@ -8,20 +8,19 @@ describe('UploadImageService', () => {
   let service: UploadImageService;
 
   beforeEach(() => {
-    const mockOktaAuthService = {
-      getAccessToken(): string {
-        return '';
-      },
-    };
     const mockHttpClient = {};
     TestBed.configureTestingModule({
-      providers: [{ provide: HttpClient, useValue: mockHttpClient }],
+      providers: [
+        { provide: HttpClient, useValue: mockHttpClient },
+      ],
     }).compileComponents();
     service = TestBed.inject(UploadImageService);
   });
 
   it('should be created', () => {
-    service = new UploadImageService(TestBed.inject(HttpClient));
+    service = new UploadImageService(
+      TestBed.inject(HttpClient),
+    );
     expect(service).toBeTruthy();
     expect(service.url).toBe(`${environment.baseUrls.profile}/api/profiles/`);
   });

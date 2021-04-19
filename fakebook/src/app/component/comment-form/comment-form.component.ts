@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 import { CommentFormData } from 'src/app/model/comment-form-data';
 import { CommentService } from 'src/app/services/comment.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
@@ -12,7 +13,6 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 export class CommentFormComponent implements OnInit {
   @Input() postId!: number;
   @Input() parentCommentId!: number;
-  email = '';
 
   comment: CommentFormData = {
     content: '',
@@ -25,6 +25,7 @@ export class CommentFormComponent implements OnInit {
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
+    private auth: AuthService,
     private notificationsService: NotificationsService
   ) {}
 
@@ -45,7 +46,7 @@ export class CommentFormComponent implements OnInit {
       .then((res) => this.notifyComment.emit(this.postId));
 
     this.notificationsService.createCommentNotification(
-      this.email,
+      this.auth.email,
       comment.postId
     );
 

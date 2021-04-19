@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { AuthService } from '../authentication/core/authentication/auth.service';
 import { Observable, of } from 'rxjs';
 
 import { FollowService } from './follow.service';
@@ -15,7 +16,10 @@ describe('FollowService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: HttpClient, useValue: mockHttpClient }],
+      providers: [
+        { provide: HttpClient, useValue: mockHttpClient },
+        { provide: AuthService, useValue: {} },
+      ],
     });
     service = TestBed.inject(FollowService);
   });

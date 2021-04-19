@@ -191,4 +191,3 @@ describe('NewsfeedComponent', () => {
     expect(component.posts.length).toBe(1);
   });
   });
-

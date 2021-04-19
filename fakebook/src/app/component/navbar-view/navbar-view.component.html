@@ -36,7 +36,14 @@
       <button
         class="ml-3 btn btn-outline-info"
         *ngIf="!isAuthenticated"
-        (click)="login()"
+        routerLink="/register"
+      >
+        Sign Up
+      </button>
+      <button
+        class="ml-3 btn btn-outline-info"
+        *ngIf="!isAuthenticated"
+        routerLink="/login"
       >
         Login
       </button>

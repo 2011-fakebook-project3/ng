@@ -8,8 +8,8 @@ import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Notification } from '../model/notification';
 import { ApiNotification } from '../model/api-notification';
-import { AuthService } from './auth.service';
 import { PostService } from './post.service';
+import { AuthService } from '../authentication/core/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,10 +20,10 @@ export class NotificationsService {
   >();
   private hubConnection: HubConnection;
   public notificationsObs = this.notifications.asObservable();
-  private token = this.authService.oktaAuth.getAccessToken();
+  private token = this.auth.authorizationHeaderValue.split("Bearer")[1].trimLeft();
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private postService: PostService
   ) {
     // initialize options so hub connection can use authorization

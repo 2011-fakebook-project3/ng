@@ -2,15 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LikeService } from 'src/app/services/like.service';
 import { LikeViewComponent } from './like-view.component';
 import { NewPost } from '../../model/newpost';
+import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 
 describe('LikeViewComponent', () => {
   let component: LikeViewComponent;
   let fixture: ComponentFixture<LikeViewComponent>;
   const newPost: NewPost = { content: '', userId: '', pictureUrl: '' }; // probably have to change for real testing
-  const FakeOktaAuthService = {
-    create(post: NewPost): Promise<NewPost> {
-      return Promise.resolve(newPost);
-    },
+  const FakeAuthService = {
   };
   const FakeLikeService = {
     like(resourceId: number, resourceCollection : string): any {
@@ -24,7 +22,10 @@ describe('LikeViewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LikeViewComponent],
-      providers: [{ provide: LikeService, useValue: FakeLikeService }],
+      providers: [
+        { provide: LikeService, useValue: FakeLikeService },
+        { provide: AuthService, useValue: FakeAuthService },
+      ],
     }).compileComponents();
   });
 
