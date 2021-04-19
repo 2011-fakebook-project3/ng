@@ -10,6 +10,9 @@ export const environment = {
     profile: 'https://localhost:44362',
     auth: 'https://localhost:44374'
   },
+  redirect_uri: 'http://localhost:4200/auth-callback',
+  post_logout_redirect_uri: 'http://localhost:4200',
+  silent_redirect_uri: 'http://localhost:4200/silent-refresh.html'
 };
 
 /*
