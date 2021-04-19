@@ -58,6 +58,27 @@ spec:
             name: fakebook-profile-api
             port:
               number: 80
+      - path: /api/account
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-auth
+            port:
+              number: 80
+      - path: /Account/Login
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-auth
+            port:
+              number: 80
+      - path: /connect/authorize
+        pathType: Prefix
+        backend:
+          service:
+            name: fakebook-auth
+            port:
+              number: 80
   tls:
   - hosts:
     - fakebook.revaturelabs.com
