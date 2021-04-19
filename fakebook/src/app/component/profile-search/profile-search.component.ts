@@ -10,16 +10,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   templateUrl: './profile-search.component.html',
   styleUrls: ['./profile-search.component.css']
 })
-export class ProfileSearchComponent implements OnInit {
-  @Output() onSelectedOption = new EventEmitter();
+export class ProfileSearchComponent {
+  onSelectedOption = new EventEmitter();
   searchProfile= new FormControl('');
   profileList: User[] = [];
   searchView = false;
 
   constructor(private profileService: ProfileService) { }
-
-  ngOnInit(): void {
-  }
 
   //getProfiles(): void {
   //  this.profileService
