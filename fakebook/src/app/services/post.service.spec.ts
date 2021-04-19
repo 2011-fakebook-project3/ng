@@ -7,7 +7,6 @@ import {
 
 import { PostService } from './post.service';
 import { environment } from 'src/environments/environment';
-import { AuthService } from '../authentication/core/authentication/auth.service';
 
 describe('PostService', () => {
   let service: PostService;
@@ -20,17 +19,11 @@ describe('PostService', () => {
   const url = `https://fakebook.revaturelabs.com/api/Posts`; // test base url
 
   beforeEach(() => {
-    const mockAuthService = {
-      get authorizationHeaderValue(): string {
-        return "Bearer 0";
-      }
-    };
     const mockHttpClient = {};
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
         { provide: HttpClient, useValue: mockHttpClient },
-        { provide: AuthService, useValue: mockAuthService },
       ],
     }).compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -43,14 +36,12 @@ describe('PostService', () => {
 
     service = new PostService(
       httpClientSpy as any,
-      TestBed.inject(AuthService)
     );
   });
 
   it('should be created', () => {
     service = new PostService(
       TestBed.inject(HttpClient),
-      TestBed.inject(AuthService)
     );
     expect(service).toBeTruthy();
   });

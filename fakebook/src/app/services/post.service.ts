@@ -4,25 +4,17 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Post } from '../model/post';
 import { NewPost } from '../model/newpost';
-import { AuthService } from '../authentication/core/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
   url = `${environment.baseUrls.posts}/api/posts`;
 
-  headers = {
-    headers: {
-      Authorization: this.auth.authorizationHeaderValue,
-      Accept: 'application/json',
-    },
-  };
-
-  create(post: NewPost): Promise<NewPost> {
+  create(post: NewPost): Promise<Post> {
     return this.http
-      .post<NewPost>(`${this.url}`, post, this.headers)
+      .post<Post>(`${this.url}`, post)
       .toPromise();
   }
 
@@ -46,6 +38,6 @@ export class PostService {
     return this.http.delete<void>(`${this.url}/${postId}`);
   }
   update(post: Post): Observable<Post> {
-    return this.http.put<Post>(`${this.url}/${post.id}`, post, this.headers);
+    return this.http.put<Post>(`${this.url}/${post.id}`, post);
   }
 }

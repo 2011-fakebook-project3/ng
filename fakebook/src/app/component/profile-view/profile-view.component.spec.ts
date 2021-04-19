@@ -15,6 +15,7 @@ import { FollowService } from 'src/app/services/follow.service';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post';
 import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
+import { By } from '@angular/platform-browser';
 
 describe('ProfileViewComponent', () => {
   let component: ProfileViewComponent;

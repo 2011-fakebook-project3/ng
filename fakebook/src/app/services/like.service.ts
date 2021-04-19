@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AuthService } from '../authentication/core/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +9,10 @@ import { AuthService } from '../authentication/core/authentication/auth.service'
 export class LikeService {
   url = `${environment.baseUrls.posts}/api/`;
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient) {}
 
 
   like(likeableId: number, likeableResource : string): any {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: this.auth.authorizationHeaderValue,
-        'Content-Type': 'application/json',
-      }),
-    };
     return this.http
       .post(`${this.url}${likeableResource}/${likeableId}/like/`, null)
       .toPromise()
@@ -27,12 +20,6 @@ export class LikeService {
   }
 
   unlike(likeableId: number, likeableResource : string): any {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: this.auth.authorizationHeaderValue,
-        'Content-Type': 'application/json',
-      }),
-    };
     return this.http
       .post(`${this.url}${likeableResource}/${likeableId}/unlike/`, null)
       .toPromise();

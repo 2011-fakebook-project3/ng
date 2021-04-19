@@ -42,8 +42,6 @@ export class CommentFormComponent implements OnInit {
       .create({
         content: comment.content,
         postId: comment.postId,
-        createdAt: undefined,
-        userEmail: this.auth.email,
       })
       .then((res) => this.notifyComment.emit(this.postId));
 

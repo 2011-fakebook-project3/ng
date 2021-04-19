@@ -30,49 +30,23 @@ export class ProfileService {
           + uploads an image via a form (input type='file')
   */
   public GetProfile(email: string): Observable<User> /* profile */ {
-    const headers = {
-      Authorization: this.auth.authorizationHeaderValue,
-      Accept: 'application/json',
-    };
-
-    return this.http.get<User>(this.baseUrl + email, { headers });
+    return this.http.get<User>(this.baseUrl + email);
   }
 
   public GetProfileWithNullRoute(): Observable<User> /* null route */ {
-    const headers = {
-      Authorization: this.auth.authorizationHeaderValue,
-      Accept: 'application/json',
-    };
-    return this.http.get<User>(this.baseUrl + this.auth.email, { headers });
+    return this.http.get<User>(this.baseUrl + this.auth.email);
   }
   public GetProfiles(emails: string[]): Observable<User> /* profile */ {
     // make empty collection of profiles
     // emails={abc, 123, }
-    const headers = {
-      Authorization: this.auth.authorizationHeaderValue,
-      Accept: 'application/json',
-    };
-
-    return this.http.get<User>(this.baseUrl + 'selection/' + emails, {
-      headers,
-    });
+    return this.http.get<User>(this.baseUrl + 'selection/' + emails);
   }
 
   public createProfile(profile: User): Observable<User> {
-    const headers = {
-      Authorization: this.auth.authorizationHeaderValue,
-      Accept: 'application/json',
-    };
-
-    return this.http.post<User>(`${this.baseUrl}`, profile, { headers });
+    return this.http.post<User>(`${this.baseUrl}`, profile);
   }
 
   public UpdateProfile(email: string, profile: User): Observable<User> {
-    const headers = {
-      Authorization: this.auth.authorizationHeaderValue,
-      Accept: 'application/json',
-    };
-
-    return this.http.put<User>(this.baseUrl + email, profile, { headers });
+    return this.http.put<User>(this.baseUrl + email, profile);
   }
 }
