@@ -5,7 +5,6 @@ import { UserManager, UserManagerSettings, User } from 'oidc-client';
 import { BehaviorSubject } from 'rxjs'; 
 
 import { BaseService } from "../../shared/base.service";
-import { ConfigService } from '../../shared/config.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,7 +20,7 @@ export class AuthService extends BaseService  {
   private manager = new UserManager(getClientSettings());
   private user: User | null = null;
 
-  constructor(private http: HttpClient, private configService: ConfigService) { 
+  constructor(private http: HttpClient) { 
     super();     
     
     this.manager.getUser().then(user => { 
