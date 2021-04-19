@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+
+import { HttpClient, HttpParams, HttpParamsOptions } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
@@ -36,7 +37,7 @@ export class ProfileService {
   public GetProfileWithNullRoute(): Observable<User> /* null route */ {
     return this.http.get<User>(this.baseUrl + "?email=" + this.auth.email);
   }
-  public GetProfiles(emails: string[]): Observable<User> /* profile */ {
+  public GetProfilesByEmails(emails: string[]): Observable<User> /* profile */ {
     // make empty collection of profiles
     // emails={abc, 123, }
     return this.http.get<User>(this.baseUrl + 'selection/' + emails);
@@ -48,5 +49,17 @@ export class ProfileService {
 
   public UpdateProfile(email: string, profile: User): Observable<User> {
     return this.http.put<User>(this.baseUrl + email, profile);
+  }
+
+  public GetProfileByName(name: string): Observable<User[]>{
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    
+    return this.http.get<User[]>(`${this.baseUrl}` + 'search', {params: new HttpParams({fromObject: {
+      'name': name
+    }} as HttpParamsOptions), headers: headers});
   }
 }
