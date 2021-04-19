@@ -2,7 +2,7 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { AuthInterceptor } from './auth.interceptor';
 import { OktaAuthModule, OKTA_CONFIG } from '@okta/okta-angular';
@@ -18,6 +18,12 @@ import { NavbarViewComponent } from './component/navbar-view/navbar-view.compone
 import { MainViewComponent } from './component/main-view/main-view.component';
 import { ProfileViewComponent } from './component/profile-view/profile-view.component';
 import { PostFormComponent } from './component/post-form/post-form.component';
+import { ProfileSearchComponent } from './component/profile-search/profile-search.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @Pipe({
   name: 'timeAgo',
@@ -50,6 +56,7 @@ const config = {
     CommentFormComponent,
     LikeViewComponent,
     PostFormComponent,
+    ProfileSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +65,12 @@ const config = {
     OktaAuthModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatIconModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: OKTA_CONFIG, useValue: config },
