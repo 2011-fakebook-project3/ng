@@ -64,7 +64,7 @@ describe('PostViewComponent', () => {
   }
   beforeEach(async () => {
     const mockPostService = {
-      delete(id: number): void {},
+      delete(id: number): Subscribable { return new Subscribable(); },
       update(post : Post): Subscribable { return new Subscribable(); },
     };
 
@@ -94,7 +94,7 @@ describe('PostViewComponent', () => {
   });
 
   it('should delete a post on deletePost()', () => {
-    spyOn(component.postService, 'delete');
+    component.postService.delete = jasmine.createSpy().and.returnValue(new Subscribable());
     component.deletePost(testPost);
     expect(component.post).toBeNull();
     expect(component.postService.delete).toHaveBeenCalled();
