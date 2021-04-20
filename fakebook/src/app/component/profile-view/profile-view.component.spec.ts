@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { ProfileViewComponent } from './profile-view.component';
 import {
@@ -8,13 +9,13 @@ import {
   convertToParamMap,
   RouterModule,
 } from '@angular/router';
+import { OktaAuthService } from '@okta/okta-angular';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { ProfileService } from 'src/app/services/profile.service';
 import { FollowService } from 'src/app/services/follow.service';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/model/post';
-import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 import { By } from '@angular/platform-browser';
 
 describe('ProfileViewComponent', () => {
@@ -35,7 +36,7 @@ describe('ProfileViewComponent', () => {
   const posts: Post[] = [];
 
   beforeEach(async () => {
-    const FakeAuthService = {
+    const FakeOktaAuthService = {
       getAccessToken(): string {
         return '1';
       },
@@ -70,7 +71,7 @@ describe('ProfileViewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProfileViewComponent],
       providers: [
-        { provide: AuthService, useValue: FakeAuthService },
+        { provide: OktaAuthService, useValue: FakeOktaAuthService },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -100,7 +101,7 @@ describe('ProfileViewComponent', () => {
 
   it('should get a user and store in the user field', () => {
     component = new ProfileViewComponent(
-      TestBed.inject(AuthService),
+      TestBed.inject(OktaAuthService),
       TestBed.inject(ProfileService),
       TestBed.inject(ActivatedRoute),
       TestBed.inject(FollowService),

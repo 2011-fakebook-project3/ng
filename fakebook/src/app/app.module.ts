@@ -25,13 +25,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { CoreModule } from './authentication/core/core.module';
-import { AccountModule }  from './authentication/account/account.module';
-import { ShellModule } from './authentication/shell/shell.module';
-import { SharedModule }   from './authentication/shared/shared.module';
-import { AuthGuard } from './authentication/core/authentication/auth.guard';
-import { AuthCallbackComponent } from './authentication/auth-callback/auth-callback.component';
-
 @Pipe({
   name: 'timeAgo',
   pure: false,
@@ -63,7 +56,6 @@ const config = {
     CommentFormComponent,
     LikeViewComponent,
     PostFormComponent,
-    AuthCallbackComponent,
     ProfileSearchComponent,
   ],
   imports: [
@@ -73,11 +65,6 @@ const config = {
     OktaAuthModule,
     CommonModule,
     FormsModule,
-    CoreModule,
-    AccountModule,
-    AppRoutingModule,
-    ShellModule,   
-    SharedModule, 
     ReactiveFormsModule,
     MatSelectModule,
     MatIconModule,
@@ -88,7 +75,6 @@ const config = {
   providers: [
     { provide: OKTA_CONFIG, useValue: config },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    AuthGuard
   ],
   bootstrap: [AppComponent],
 })

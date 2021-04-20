@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from '../authentication/core/authentication/auth.service';
+import { OktaAuthService } from '@okta/okta-angular';
 
 import { CommentService } from './comment.service';
 
@@ -11,7 +11,7 @@ describe('CommentService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [{ provide: AuthService, useValue: fakeAuthService }],
+      providers: [{ provide: OktaAuthService, useValue: fakeAuthService }],
     });
     service = TestBed.inject(CommentService);
   });

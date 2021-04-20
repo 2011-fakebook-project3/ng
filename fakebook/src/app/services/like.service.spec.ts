@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { AuthService } from '../authentication/core/authentication/auth.service';
 
 import { LikeService } from './like.service';
 
@@ -9,10 +8,7 @@ describe('LikeService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: HttpClient, useValue: {} },
-        { provide: AuthService, useValue: {} },
-      ],
+      providers: [{ provide: HttpClient, useValue: {} }],
     });
     service = TestBed.inject(LikeService);
   });
