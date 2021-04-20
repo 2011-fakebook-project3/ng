@@ -64,7 +64,7 @@ describe('PostViewComponent', () => {
   }
   beforeEach(async () => {
     const mockPostService = {
-      delete(id: number): void {},
+      delete(id: number): Subscribable { return new Subscribable(); },
       update(post : Post): Subscribable { return new Subscribable(); },
     };
 
