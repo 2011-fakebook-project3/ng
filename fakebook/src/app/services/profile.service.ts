@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpParams, HttpParamsOptions } from '@angular/common/http';
+import { OktaAuthService } from '@okta/okta-angular';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
-import { AuthService } from '../authentication/core/authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +11,7 @@ import { AuthService } from '../authentication/core/authentication/auth.service'
 export class ProfileService {
   baseUrl = `${environment.baseUrls.profile}/api/profiles/`;
 
-  constructor(public http: HttpClient, private auth: AuthService) {}
+  constructor(public http: HttpClient, private oktaAuth: OktaAuthService) {}
 
   /*
     endpoints:
@@ -31,11 +30,11 @@ export class ProfileService {
           + uploads an image via a form (input type='file')
   */
   public GetProfile(email: string): Observable<User> /* profile */ {
-    return this.http.get<User>(this.baseUrl + "?email=" + email);
+    return this.http.get<User>(this.baseUrl + email);
   }
 
   public GetProfileWithNullRoute(): Observable<User> /* null route */ {
-    return this.http.get<User>(this.baseUrl + "?email=" + this.auth.email);
+    return this.http.get<User>(this.baseUrl);
   }
   public GetProfilesByEmails(emails: string[]): Observable<User> /* profile */ {
     // make empty collection of profiles
@@ -48,12 +47,24 @@ export class ProfileService {
   }
 
   public UpdateProfile(email: string, profile: User): Observable<User> {
-    return this.http.put<User>(this.baseUrl + email, profile);
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+
+    return this.http.put<User>(this.baseUrl + email, profile, { headers });
   }
 
   public GetProfileByName(name: string): Observable<User[]>{
+    const accessToken = this.oktaAuth.getAccessToken();
+    const headers = {
+      Authorization: 'Bearer ' + accessToken,
+      Accept: 'application/json',
+    };
+    
     return this.http.get<User[]>(`${this.baseUrl}` + 'search', {params: new HttpParams({fromObject: {
       'name': name
-    }} as HttpParamsOptions)});
+    }} as HttpParamsOptions), headers: headers});
   }
 }

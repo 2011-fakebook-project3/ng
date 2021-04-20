@@ -3,17 +3,20 @@ import { Injectable } from '@angular/core';
 import { Comment } from 'src/app/model/comment';
 import { environment } from 'src/environments/environment';
 import { NewComment } from '../model/newcomment';
+import { Post } from '../model/post';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentService {
   private readonly url = `${environment.baseUrls.posts}/api/comments`;
+  private readonly acceptHeader = 'application/json';
 
   constructor(private http: HttpClient) {}
 
-  create(comment: NewComment): Promise<Comment> {
+  create(comment: NewComment): Promise<NewComment> {
     const targetUrl = `${this.url}`;
+
     return this.http.post<Comment>(targetUrl, comment).toPromise();
   }
 
@@ -24,7 +27,7 @@ export class CommentService {
   }
 
   get(commentId: number): Promise<Comment> {
-    const targetUrl = `/${this.url}/${commentId}`;
+    const targetUrl = `${this.url}/${commentId}`;
 
     return this.http.get<Comment>(targetUrl).toPromise();
   }
