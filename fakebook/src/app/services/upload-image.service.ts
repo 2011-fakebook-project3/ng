@@ -11,7 +11,6 @@ export class UploadImageService {
   constructor(private http: HttpClient) {}
 
   public UploadImage(formData: FormData): Promise<any> {
-
     return this.http
       .post<{ path: string; userId: number }>(
         `${environment.baseUrls.profile}/api/ProfilePicture`,

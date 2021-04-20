@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { OktaAuthService } from '@okta/okta-angular';
 import { Observable, of } from 'rxjs';
-import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 import { User } from 'src/app/model/user';
 import { PostService } from 'src/app/services/post.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -35,12 +35,14 @@ describe('PostFormComponent', () => {
       },
     };
     const newPostObject: NewPost = { content: '', userId: '', pictureUrl: '' };
-    const mockAuthService = {
-      get authorizationHeaderValue(): string {
-        return "Bearer 1";
-      }
+    const FakeOktaAuthService = {
+      create(post: NewPost): Promise<NewPost> {
+        return Promise.resolve(newPostObject);
+      },
+      getAccessToken(): string {
+        return '1';
+      },
     };
-
     await TestBed.configureTestingModule({
       declarations: [PostFormComponent],
       providers: [
@@ -48,7 +50,7 @@ describe('PostFormComponent', () => {
         { provide: PostService, useValue: mockPostService },
         { provide: ProfileService, useValue: mockProfileService },
         { provide: HttpClient, useValue: {} },
-        { provide: AuthService, useValue: mockAuthService },
+        { provide: OktaAuthService, useValue: FakeOktaAuthService },
       ],
     }).compileComponents();
   });

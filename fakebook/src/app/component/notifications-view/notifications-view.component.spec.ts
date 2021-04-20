@@ -1,11 +1,17 @@
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotificationsService } from '../../services/notifications.service';
+import { Type } from '@angular/core';
 import { Notification } from '../../model/notification';
 
 import { NotificationsViewComponent } from './notifications-view.component';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
+import { environment } from 'src/environments/environment';
+import { AuthService } from '../../services/auth.service';
+import { NEVER, Observable } from 'rxjs';
 
 describe('NotificationsViewComponent', () => {
   let component: NotificationsViewComponent;
