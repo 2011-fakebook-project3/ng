@@ -94,7 +94,7 @@ describe('PostViewComponent', () => {
   });
 
   it('should delete a post on deletePost()', () => {
-    spyOn(component.postService, 'delete');
+    component.postService.delete = jasmine.createSpy().and.returnValue(new Subscribable());
     component.deletePost(testPost);
     expect(component.post).toBeNull();
     expect(component.postService.delete).toHaveBeenCalled();
