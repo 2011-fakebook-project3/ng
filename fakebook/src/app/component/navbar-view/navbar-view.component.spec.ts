@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { NEVER } from 'rxjs';
-import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
 
 import { NavbarViewComponent } from './navbar-view.component';
 
@@ -10,20 +10,26 @@ describe('NavbarViewComponent', () => {
   let fixture: ComponentFixture<NavbarViewComponent>;
 
   beforeEach(async () => {
-    const mockAuthService = {
-      authNavStatus$: NEVER,
-      isAuthenticated(): boolean {
-        return false;
+    const mockOktaAuthService = {
+      $authenticationState: NEVER,
+      isAuthenticated(): Promise<boolean> {
+        return Promise.resolve(false);
       },
+      signInWithRedirect(): void {},
+      subscribeAuthStateChange(): void {},
       login(): void {},
-      signout(): void {},
+      logout(): void {},
+      signOut(): void {},
+      tokenManager: {
+        clear(): void {},
+      },
     };
 
     await TestBed.configureTestingModule({
       declarations: [NavbarViewComponent],
       providers: [
         { provide: Router, useValue: {} },
-        { provide: AuthService, useValue: mockAuthService },
+        { provide: AuthService, useValue: mockOktaAuthService },
       ],
     }).compileComponents();
   });
@@ -43,17 +49,17 @@ describe('NavbarViewComponent', () => {
   });
 
   it('should call login', () => {
-    spyOn(component.auth, 'login');
+    spyOn(component.oktaAuth, 'login');
     component.login();
 
-    expect(component.auth.login).toHaveBeenCalled();
+    expect(component.oktaAuth.login).toHaveBeenCalled();
   });
 
-  it('should call signout', () => {
-    spyOn(component.auth, 'signout');
+  it('should call logout', () => {
+    spyOn(component.oktaAuth, 'logout');
     component.logout();
 
-    expect(component.auth.signout).toHaveBeenCalled();
+    expect(component.oktaAuth.logout).toHaveBeenCalled();
   });
 
   it('should have a empty search name', () => {

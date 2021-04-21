@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NavigationBehaviorOptions, Router } from '@angular/router';
-import { AuthService } from 'src/app/authentication/core/authentication/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { MainViewComponent } from './main-view.component';
 
 describe('MainViewComponent', () => {
@@ -12,7 +12,7 @@ describe('MainViewComponent', () => {
 
   const FakeAuthService = {
     isAuth: false,
-    isAuthenticated(): boolean {
+    get isAuthenticated(): boolean {
       return this.isAuth;
     },
   };
@@ -50,8 +50,7 @@ describe('MainViewComponent', () => {
   });
 
   it('should not route if user is not logged in (default value)', () => {
-    // const spy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get');
-    FakeAuthService.isAuth = false;
+    const spy = spyOnProperty(FakeAuthService, 'isAuthenticated', 'get');
 
     component.checkAuthentication();
 
@@ -59,12 +58,11 @@ describe('MainViewComponent', () => {
   });
 
   it('should route if user is logged in', () => {
-    // const authSpy = spyOnProperty(
-    //   FakeAuthService,
-    //   'isAuthenticated',
-    //   'get'
-    // ).and.returnValue(true);
-    FakeAuthService.isAuth = true;
+    const authSpy = spyOnProperty(
+      FakeAuthService,
+      'isAuthenticated',
+      'get'
+    ).and.returnValue(true);
 
     component.checkAuthentication();
 

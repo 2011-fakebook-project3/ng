@@ -51,5 +51,8 @@
         </div>
       </div>
     </div>
+    <div *ngFor="let p of posts">
+      <app-post-view [post]="p"></app-post-view>
+    </div>
   </div>
 </div>
