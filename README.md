@@ -1,6 +1,3 @@
-# ng
-The Angular Front end for 2011-Fakebook Project 3
-
 # Start up documentation
 Steps
 <ol>
@@ -9,6 +6,7 @@ Steps
 Clone each repo from [here](https://github.com/2011-fakebook-project3)
 
 <li>
+
 Run the following dotnet commands to set up the connection strings to the posts database and profile database
 
 ```
@@ -58,7 +56,7 @@ cd ..
  
 <li>
 
-Run each seperately in new terminal in base organization folder to start each project:
+Run each project seperately in new terminal window in base organization folder to start each project:
 
 ```
 cd ng/fakebook
