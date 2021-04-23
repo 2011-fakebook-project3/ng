@@ -20,12 +20,12 @@ export class PostViewComponent implements OnInit {
 
   user: User | null = null;
   comments: Comment[] | null = null;
-  isEditing  = false;
-  editContent  = "";
+  isEditing = false;
+  editContent = '';
 
   isLikedByUser = false;
 
-  readonly resourceCollection = "posts";
+  readonly resourceCollection = 'posts';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,18 +46,26 @@ export class PostViewComponent implements OnInit {
       .subscribe((user) => (this.user = user));
   }
 
-  startEditPost(): void
-  {
+  // likePost(postId: number): void{
+  //   this.postService.likePost(postId).subscribe();
+  //   this.post?.likedByUserIds.push(postId);
+  // }
+
+  // unLikePost(postId: number): void {
+  //   if (this.post && this.post.likedByUserIds && this.post?.likedByUserIds.indexOf(postId) !== -1){
+  //     // this.post.likedByUserIds = this.post?.likedByUserIds.filter(element !== postId)
+  //     this.postService.unLikePost(postId).subscribe();
+  //   }
+  // }
+
+  startEditPost(): void {
     this.isEditing = true;
-    if(this.post)
-      this.editContent = this.post?.content;
+    if (this.post) this.editContent = this.post?.content;
   }
 
-  endEditPost() : void
-  {
-    if(!this.post)
-    {
-      alert("Cannot edit a null post!");
+  endEditPost(): void {
+    if (!this.post) {
+      alert('Cannot edit a null post!');
       return;
     }
 
@@ -66,8 +74,7 @@ export class PostViewComponent implements OnInit {
     this.isEditing = false;
   }
 
-  cancelEditPost() : void
-  {
+  cancelEditPost(): void {
     this.isEditing = false;
   }
 
